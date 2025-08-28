@@ -21,7 +21,7 @@ export const TypewriterDots: React.FC<TypewriterDotsProps> = ({ className = '' }
   }, []);
 
   return (
-    <span className={`inline-block w-6 text-left ${className}`}>
+    <span className={`inline-block w-6 text-left drop-shadow-md ${className}`}>
       {dots}
     </span>
   );
