@@ -71,7 +71,7 @@ export default function Index() {
               </div>
               <div className="text-azura-text-muted font-cartograph text-base leading-[140.628%] mb-10">
                 <span className="text-azura-white">{'|'} </span>
-                Sync account with Angel...
+                Sync account with Angel<TypewriterDots className="text-azura-text-muted" />
               </div>
             </div>
 
