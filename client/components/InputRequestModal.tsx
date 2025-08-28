@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { SoundEffects } from '@/lib/soundEffects';
+import React, { useState } from "react";
+import { SoundEffects } from "@/lib/soundEffects";
 
 interface InputRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: { type: 'funding' | 'events'; content: string }) => void;
+  onSave: (data: { type: "funding" | "events"; content: string }) => void;
 }
 
 export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   isOpen,
   onClose,
-  onSave
+  onSave,
 }) => {
-  const [activeTab, setActiveTab] = useState<'funding' | 'events'>('funding');
-  const [content, setContent] = useState('');
+  const [activeTab, setActiveTab] = useState<"funding" | "events">("funding");
+  const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
     if (!content.trim()) return;
-    
+
     setIsSaving(true);
     SoundEffects.playGenerateSound();
-    
+
     // Simulate save delay
     setTimeout(() => {
       onSave({ type: activeTab, content: content.trim() });
       setIsSaving(false);
-      setContent('');
+      setContent("");
       onClose();
     }, 1500);
   };
@@ -50,9 +50,27 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             onClick={onClose}
             className="text-white/70 hover:text-white transition-colors"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M6 6l12 12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
         </div>
@@ -60,21 +78,21 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         {/* Tabs */}
         <div className="flex border-b border-white/20 bg-white/5 backdrop-blur-sm">
           <button
-            onClick={() => setActiveTab('funding')}
+            onClick={() => setActiveTab("funding")}
             className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
-              activeTab === 'funding'
-                ? 'text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
+              activeTab === "funding"
+                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
+                : "text-white/70 hover:text-white hover:bg-white/10"
             }`}
           >
             Funding
           </button>
           <button
-            onClick={() => setActiveTab('events')}
+            onClick={() => setActiveTab("events")}
             className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
-              activeTab === 'events'
-                ? 'text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50'
-                : 'text-white/70 hover:text-white hover:bg-white/10'
+              activeTab === "events"
+                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
+                : "text-white/70 hover:text-white hover:bg-white/10"
             }`}
           >
             Events
@@ -85,13 +103,12 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         <div className="p-6 bg-white/5 backdrop-blur-sm">
           <div className="mb-4">
             <label className="block text-white font-sf-pro text-sm font-medium mb-2">
-              {activeTab === 'funding' ? 'Funding Request' : 'Event Request'}
+              {activeTab === "funding" ? "Funding Request" : "Event Request"}
             </label>
             <div className="text-white/70 font-sf-pro text-xs mb-3">
-              {activeTab === 'funding'
-                ? 'Describe your funding proposal, amount needed, and how funds will be used.'
-                : 'Describe your event details, requirements, and expected outcomes.'
-              }
+              {activeTab === "funding"
+                ? "Describe your funding proposal, amount needed, and how funds will be used."
+                : "Describe your event details, requirements, and expected outcomes."}
             </div>
           </div>
 
@@ -103,10 +120,10 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
               className="w-full h-48 bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl p-4 text-white font-cartograph text-sm resize-none focus:border-white/50 focus:bg-white/15 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
             />
-            
+
             {/* Terminal cursor effect */}
             <div className="absolute bottom-4 right-4 text-white/50 font-cartograph text-xs">
-              {'>'} Type here...
+              {">"} Type here...
             </div>
           </div>
 
@@ -124,7 +141,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
               disabled={!content.trim() || isSaving}
               className="flex-1 py-3 px-6 bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-xl border border-white/30 text-white font-sf-pro text-sm font-medium rounded-2xl hover:from-white/30 hover:via-white/20 hover:to-white/30 hover:border-white/50 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSaving ? 'Saving...' : 'Save Request'}
+              {isSaving ? "Saving..." : "Save Request"}
             </button>
           </div>
         </div>

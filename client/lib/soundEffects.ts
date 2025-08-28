@@ -4,7 +4,8 @@ export class SoundEffects {
 
   private static getAudioContext(): AudioContext {
     if (!this.audioContext) {
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      this.audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
     }
     return this.audioContext;
   }
@@ -21,15 +22,18 @@ export class SoundEffects {
 
       // Terminal-like click sound (high frequency, short duration)
       oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.05);
-      
+      oscillator.frequency.exponentialRampToValueAtTime(
+        600,
+        ctx.currentTime + 0.05,
+      );
+
       gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
 
       oscillator.start(ctx.currentTime);
       oscillator.stop(ctx.currentTime + 0.05);
     } catch (error) {
-      console.log('Sound effect not available:', error);
+      console.log("Sound effect not available:", error);
     }
   }
 
@@ -47,7 +51,7 @@ export class SoundEffects {
       oscillator.frequency.setValueAtTime(200, ctx.currentTime);
       oscillator.frequency.linearRampToValueAtTime(300, ctx.currentTime + 0.5);
       oscillator.frequency.linearRampToValueAtTime(180, ctx.currentTime + 1.0);
-      
+
       gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
       gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.3);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
@@ -55,7 +59,7 @@ export class SoundEffects {
       oscillator.start(ctx.currentTime);
       oscillator.stop(ctx.currentTime + 1.0);
     } catch (error) {
-      console.log('Sound effect not available:', error);
+      console.log("Sound effect not available:", error);
     }
   }
 
@@ -73,21 +77,25 @@ export class SoundEffects {
       oscillator.frequency.setValueAtTime(440, ctx.currentTime);
       oscillator.frequency.setValueAtTime(550, ctx.currentTime + 0.1);
       oscillator.frequency.setValueAtTime(660, ctx.currentTime + 0.2);
-      
+
       gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
 
       oscillator.start(ctx.currentTime);
       oscillator.stop(ctx.currentTime + 0.3);
     } catch (error) {
-      console.log('Sound effect not available:', error);
+      console.log("Sound effect not available:", error);
     }
   }
 
   // Type text with sound effects
-  static typeWithSound(text: string, callback: (char: string, isComplete: boolean) => void, delay: number = 50): void {
+  static typeWithSound(
+    text: string,
+    callback: (char: string, isComplete: boolean) => void,
+    delay: number = 50,
+  ): void {
     let index = 0;
-    
+
     const typeNext = () => {
       if (index < text.length) {
         const char = text[index];
@@ -97,7 +105,7 @@ export class SoundEffects {
         setTimeout(typeNext, delay);
       } else {
         this.playCompleteSound();
-        callback('', true);
+        callback("", true);
       }
     };
 

@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { usePrivy, useWallets } from '@privy-io/react-auth';
-import { FallbackWalletConnect } from './FallbackWalletConnect';
+import React, { useEffect, useState } from "react";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
+import { FallbackWalletConnect } from "./FallbackWalletConnect";
 
 interface PrivyWalletConnectProps {
-  onConnectionChange?: (isConnected: boolean, address?: string, hasToken?: boolean) => void;
+  onConnectionChange?: (
+    isConnected: boolean,
+    address?: string,
+    hasToken?: boolean,
+  ) => void;
 }
 
-const ACADEMIC_ANGEL_CONTRACT = '0x39f259B58A9aB02d42bC3DF5836bA7fc76a8880F';
-const BASE_RPC_URL = 'https://mainnet.base.org';
+const ACADEMIC_ANGEL_CONTRACT = "0x39f259B58A9aB02d42bC3DF5836bA7fc76a8880F";
+const BASE_RPC_URL = "https://mainnet.base.org";
 
-export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnectionChange }) => {
+export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({
+  onConnectionChange,
+}) => {
   const { login, logout, authenticated, user, ready } = usePrivy();
   const { wallets } = useWallets();
   const [isCheckingToken, setIsCheckingToken] = useState(false);
@@ -26,23 +32,23 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
 
       // Create a simple RPC request to check token balance
       const response = await fetch(BASE_RPC_URL, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           id: 1,
-          jsonrpc: '2.0',
-          method: 'eth_call',
+          jsonrpc: "2.0",
+          method: "eth_call",
           params: [
             {
               to: ACADEMIC_ANGEL_CONTRACT,
-              data: `0x70a08231000000000000000000000000${address.slice(2)}` // balanceOf(address)
+              data: `0x70a08231000000000000000000000000${address.slice(2)}`, // balanceOf(address)
             },
-            'latest'
-          ]
+            "latest",
+          ],
         }),
-        signal: controller.signal
+        signal: controller.signal,
       });
 
       clearTimeout(timeoutId);
@@ -54,7 +60,7 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
       const data = await response.json();
 
       if (data.error) {
-        console.error('RPC error:', data.error);
+        console.error("RPC error:", data.error);
         return false;
       }
 
@@ -67,10 +73,10 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
 
       return false;
     } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
-        console.error('Token check timed out');
+      if (error instanceof Error && error.name === "AbortError") {
+        console.error("Token check timed out");
       } else {
-        console.error('Error checking token ownership:', error);
+        console.error("Error checking token ownership:", error);
       }
       return false;
     } finally {
@@ -80,11 +86,11 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
 
   // Set a timeout for Privy loading
   useEffect(() => {
-    console.log('Privy ready state:', ready);
+    console.log("Privy ready state:", ready);
 
     const timeout = setTimeout(() => {
       if (!ready) {
-        console.warn('Privy taking too long to initialize, showing fallback');
+        console.warn("Privy taking too long to initialize, showing fallback");
         setLoadingTimeout(true);
       }
     }, 3000); // 3 second timeout
@@ -129,14 +135,14 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
 
   // Fallback when Privy fails to load
   if (!ready && loadingTimeout) {
-    console.log('Using fallback wallet connector');
+    console.log("Using fallback wallet connector");
     return <FallbackWalletConnect onConnectionChange={onConnectionChange} />;
   }
 
   if (authenticated && user) {
     const wallet = wallets[0];
     const address = wallet?.address;
-    
+
     return (
       <div className="flex flex-col items-end">
         <div className="text-green-300 font-sf-pro text-xs font-medium leading-[22px] mb-1">

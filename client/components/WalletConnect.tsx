@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import React, { useEffect, useState } from "react";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 interface WalletConnectProps {
   onConnectionChange?: (isConnected: boolean, address?: string) => void;
 }
 
-export const WalletConnect: React.FC<WalletConnectProps> = ({ onConnectionChange }) => {
+export const WalletConnect: React.FC<WalletConnectProps> = ({
+  onConnectionChange,
+}) => {
   const { address, isConnected } = useAccount();
   const { connect, connectors, isPending } = useConnect();
   const { disconnect } = useDisconnect();
@@ -60,7 +62,7 @@ export const WalletConnect: React.FC<WalletConnectProps> = ({ onConnectionChange
             disabled={isPending}
             className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px] group-hover:text-white transition-colors duration-300 hover:underline disabled:opacity-50"
           >
-            {isPending ? 'Connecting...' : 'Connect'}
+            {isPending ? "Connecting..." : "Connect"}
           </button>
         ))
       ) : (
@@ -68,8 +70,10 @@ export const WalletConnect: React.FC<WalletConnectProps> = ({ onConnectionChange
           className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px] group-hover:text-white transition-colors duration-300"
           onClick={() => {
             // Fallback for MiniApp environment
-            if (typeof window !== 'undefined' && (window as any).ethereum) {
-              (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+            if (typeof window !== "undefined" && (window as any).ethereum) {
+              (window as any).ethereum.request({
+                method: "eth_requestAccounts",
+              });
             }
           }}
         >
