@@ -46,7 +46,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-azura-black text-azura-white font-cartograph">
-      <div className="max-w-md mx-auto min-h-screen relative">
+      <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
         {/* Corner decorations */}
         <div className="absolute top-24 left-4 w-6 h-6">
           <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
