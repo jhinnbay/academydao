@@ -69,6 +69,40 @@ export default function Index() {
     SoundEffects.playCompleteSound();
   };
 
+  const handleWalletConnectionChange = (isConnected: boolean, address?: string, hasToken?: boolean) => {
+    setIsWalletConnected(isConnected);
+    setWalletAddress(address || '');
+
+    if (isConnected && hasToken !== undefined) {
+      setHasAcademicAngel(hasToken);
+
+      // Start typing animation for connection message
+      setIsTypingConnection(true);
+      setConnectionMessage('');
+
+      const message = hasToken
+        ? '😇 Congratulations, you made it. Prompt Azura your next request.'
+        : '❌ Find a real Academic Angel.';
+
+      // Type out the message with sound effects
+      SoundEffects.typeWithSound(
+        message,
+        (char, isComplete) => {
+          if (!isComplete) {
+            setConnectionMessage(prev => prev + char);
+          } else {
+            setIsTypingConnection(false);
+          }
+        },
+        hasToken ? 40 : 60 // Slower typing for success message
+      );
+    } else if (!isConnected) {
+      setHasAcademicAngel(null);
+      setConnectionMessage('');
+      setIsTypingConnection(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-mwa-gradient-start via-mwa-primary-blue to-mwa-gradient-end text-mwa-text-primary font-cartograph">
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl animate-glow">
