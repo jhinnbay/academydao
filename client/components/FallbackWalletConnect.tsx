@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+// Type declaration for ethereum object
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
+
 interface FallbackWalletConnectProps {
   onConnectionChange?: (isConnected: boolean, address?: string, hasToken?: boolean) => void;
 }
