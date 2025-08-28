@@ -125,17 +125,17 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-mwa-gradient-start via-mwa-primary-blue to-mwa-gradient-end text-mwa-text-primary font-cartograph">
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl animate-glow">
-        {/* Corner decorations */}
-        <div className="absolute top-24 left-4 w-6 h-6 sm:left-6 md:left-8 lg:left-12">
+        {/* Corner decorations - made subtle for glassmorphism */}
+        <div className="absolute top-24 left-4 w-6 h-6 sm:left-6 md:left-8 lg:left-12 opacity-20">
           <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M23 0H1V3H23V0Z" fill="#FFFFFF"/>
-            <path d="M3 23V0L0 3.57741e-08V23H3Z" fill="#FFFFFF"/>
+            <path d="M23 0H1V3H23V0Z" fill="rgba(255,255,255,0.3)"/>
+            <path d="M3 23V0L0 3.57741e-08V23H3Z" fill="rgba(255,255,255,0.3)"/>
           </svg>
         </div>
-        <div className="absolute top-24 right-4 w-6 h-6 sm:right-6 md:right-8 lg:right-12">
+        <div className="absolute top-24 right-4 w-6 h-6 sm:right-6 md:right-8 lg:right-12 opacity-20">
           <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0H22V3H0V0Z" fill="#FFFFFF"/>
-            <path d="M20 23V0L23 3.57741e-08V23H20Z" fill="#FFFFFF"/>
+            <path d="M0 0H22V3H0V0Z" fill="rgba(255,255,255,0.3)"/>
+            <path d="M20 23V0L23 3.57741e-08V23H20Z" fill="rgba(255,255,255,0.3)"/>
           </svg>
         </div>
 
