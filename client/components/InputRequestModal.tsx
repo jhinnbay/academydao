@@ -39,8 +39,8 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white border-2 border-mwa-border-light rounded-xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-float">
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b border-mwa-border-light bg-gradient-to-r from-mwa-primary-blue to-mwa-secondary-blue">
           <h2 className="text-white font-sf-pro-display text-xl font-bold">
