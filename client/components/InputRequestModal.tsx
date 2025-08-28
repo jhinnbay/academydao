@@ -58,23 +58,23 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-mwa-border-light bg-mwa-soft-gray">
+        <div className="flex border-b border-white/20 bg-white/5 backdrop-blur-sm">
           <button
             onClick={() => setActiveTab('funding')}
-            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-colors ${
+            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
               activeTab === 'funding'
-                ? 'text-mwa-primary-blue bg-white border-b-2 border-mwa-primary-blue'
-                : 'text-mwa-text-secondary hover:text-mwa-primary-blue'
+                ? 'text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50'
+                : 'text-white/70 hover:text-white hover:bg-white/10'
             }`}
           >
             Funding
           </button>
           <button
             onClick={() => setActiveTab('events')}
-            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-colors ${
+            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
               activeTab === 'events'
-                ? 'text-mwa-primary-blue bg-white border-b-2 border-mwa-primary-blue'
-                : 'text-mwa-text-secondary hover:text-mwa-primary-blue'
+                ? 'text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50'
+                : 'text-white/70 hover:text-white hover:bg-white/10'
             }`}
           >
             Events
@@ -82,12 +82,12 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 bg-white">
+        <div className="p-6 bg-white/5 backdrop-blur-sm">
           <div className="mb-4">
-            <label className="block text-mwa-text-primary font-sf-pro text-sm font-medium mb-2">
+            <label className="block text-white font-sf-pro text-sm font-medium mb-2">
               {activeTab === 'funding' ? 'Funding Request' : 'Event Request'}
             </label>
-            <div className="text-mwa-text-secondary font-sf-pro text-xs mb-3">
+            <div className="text-white/70 font-sf-pro text-xs mb-3">
               {activeTab === 'funding'
                 ? 'Describe your funding proposal, amount needed, and how funds will be used.'
                 : 'Describe your event details, requirements, and expected outcomes.'
@@ -100,12 +100,12 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
               value={content}
               onChange={handleInputChange}
               placeholder={`Type your ${activeTab} request to Azura Model Daemon...`}
-              className="w-full h-48 bg-mwa-soft-gray border-2 border-mwa-border-light rounded-lg p-4 text-mwa-text-primary font-cartograph text-sm resize-none focus:border-mwa-primary-blue focus:outline-none placeholder-mwa-text-secondary"
+              className="w-full h-48 bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl p-4 text-white font-cartograph text-sm resize-none focus:border-white/50 focus:bg-white/15 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
             />
             
             {/* Terminal cursor effect */}
-            <div className="absolute bottom-4 right-4 text-mwa-text-secondary font-cartograph text-xs">
+            <div className="absolute bottom-4 right-4 text-white/50 font-cartograph text-xs">
               {'>'} Type here...
             </div>
           </div>
@@ -114,7 +114,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
           <div className="flex gap-3 mt-6">
             <button
               onClick={onClose}
-              className="flex-1 py-3 px-6 border border-mwa-border-light bg-transparent text-mwa-text-primary font-sf-pro text-sm font-medium rounded-lg hover:bg-mwa-soft-gray transition-colors"
+              className="flex-1 py-3 px-6 border border-white/30 bg-white/10 backdrop-blur-md text-white font-sf-pro text-sm font-medium rounded-2xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
               disabled={isSaving}
             >
               Cancel
@@ -122,7 +122,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             <button
               onClick={handleSave}
               disabled={!content.trim() || isSaving}
-              className="flex-1 py-3 px-6 bg-gradient-to-r from-mwa-primary-blue to-mwa-secondary-blue text-white font-sf-pro text-sm font-medium rounded-lg hover:from-mwa-secondary-blue hover:to-mwa-accent-purple transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 py-3 px-6 bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-xl border border-white/30 text-white font-sf-pro text-sm font-medium rounded-2xl hover:from-white/30 hover:via-white/20 hover:to-white/30 hover:border-white/50 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? 'Saving...' : 'Save Request'}
             </button>
