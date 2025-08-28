@@ -136,7 +136,7 @@ export default function Index() {
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                      savedRequest ? 'bg-green-600' : 'bg-gray-600'
+                      savedRequest ? 'bg-gradient-to-r from-green-400 to-green-500' : 'bg-gradient-to-r from-mwa-accent-purple to-mwa-secondary-blue'
                     }`}>
                       {savedRequest ? (
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,17 +153,17 @@ export default function Index() {
                       )}
                     </div>
                     <div>
-                      <div className="text-azura-white font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-mwa-text-primary font-sf-pro text-sm font-medium leading-[22px]">
                         Input Request Form
                       </div>
-                      <div className="text-azura-text-muted-dark font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-mwa-text-secondary font-sf-pro text-sm font-medium leading-[22px]">
                         {savedRequest ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request` : '0xc12c...484F2'}
                       </div>
                     </div>
                   </div>
                   <div className="px-2.5 py-2.5">
-                    <div className={`font-sf-pro text-sm font-medium leading-[22px] group-hover:text-white transition-colors duration-300 ${
-                      savedRequest ? 'text-green-400' : 'text-azura-accent-blue'
+                    <div className={`font-sf-pro text-sm font-medium leading-[22px] group-hover:text-mwa-primary-blue transition-colors duration-300 ${
+                      savedRequest ? 'text-green-500' : 'text-mwa-secondary-blue'
                     }`}>
                       {savedRequest ? 'Saved' : 'Open'}
                     </div>
