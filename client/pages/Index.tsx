@@ -13,6 +13,13 @@ export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [savedRequest, setSavedRequest] = useState<{ type: 'funding' | 'events'; content: string } | null>(null);
 
+  // Wallet connection states
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState<string>('');
+  const [hasAcademicAngel, setHasAcademicAngel] = useState<boolean | null>(null);
+  const [connectionMessage, setConnectionMessage] = useState('');
+  const [isTypingConnection, setIsTypingConnection] = useState(false);
+
   const daemonResponse = "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
   const handleGenerate = () => {
