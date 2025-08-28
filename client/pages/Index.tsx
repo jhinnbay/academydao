@@ -185,13 +185,13 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div className="border border-mwa-border-light bg-mwa-bright-white min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-lg rounded-lg">
             <div className="text-center">
-              <h2 className="text-azura-white font-sf-pro-display text-base font-bold leading-[140.628%] mb-5">
+              <h2 className="text-mwa-primary-blue font-sf-pro-display text-base font-bold leading-[140.628%] mb-5">
                 Daemon Response
               </h2>
-              
+
               {showResponse && (
-                <div className="border border-dashed border-azura-white p-5 mb-5">
-                  <div className="bg-azura-black p-4 text-azura-text-muted font-cartograph text-sm leading-[140.628%] text-left">
+                <div className="border border-dashed border-mwa-primary-blue p-5 mb-5 bg-mwa-soft-gray rounded-lg">
+                  <div className="bg-mwa-bright-white p-4 text-mwa-text-secondary font-cartograph text-sm leading-[140.628%] text-left rounded border border-mwa-border-light">
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">Generating response...</span>
