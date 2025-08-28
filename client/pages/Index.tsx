@@ -183,7 +183,7 @@ export default function Index() {
           </div>
 
           {/* Daemon Response Section */}
-          <div className="border border-mwa-border-light bg-mwa-bright-white min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-lg rounded-lg">
+          <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl animate-float">
             <div className="text-center">
               <h2 className="text-mwa-primary-blue font-sf-pro-display text-base font-bold leading-[140.628%] mb-5">
                 Daemon Response
