@@ -87,7 +87,7 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
         console.warn('Privy taking too long to initialize, showing fallback');
         setLoadingTimeout(true);
       }
-    }, 5000); // 5 second timeout
+    }, 3000); // 3 second timeout
 
     return () => clearTimeout(timeout);
   }, [ready]);
