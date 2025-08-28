@@ -61,7 +61,7 @@ export default function Index() {
           </svg>
         </div>
 
-        <div className="pt-24 px-4 pb-4">
+        <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
           {/* Terminal Header Section */}
           <div className="border border-azura-gray-border bg-azura-black mb-4">
             <div className="p-5 pb-0">
