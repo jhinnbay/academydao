@@ -175,7 +175,7 @@ export default function Index() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || isTyping}
-                className="w-full h-14 px-16 py-4 bg-gradient-to-r from-mwa-primary-blue to-mwa-secondary-blue rounded-lg text-white font-sf-pro-display text-lg sm:text-xl font-semibold leading-[140.628%] hover:from-mwa-secondary-blue hover:to-mwa-accent-purple transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed sm:h-16 md:h-18 shadow-lg"
+                className="w-full h-14 px-16 py-4 bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-xl border border-white/30 rounded-2xl text-white font-sf-pro-display text-lg sm:text-xl font-semibold leading-[140.628%] hover:from-white/30 hover:via-white/20 hover:to-white/30 hover:border-white/50 hover:shadow-2xl hover:animate-glow transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed sm:h-16 md:h-18 shadow-2xl relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-mwa-primary-blue/20 before:to-mwa-secondary-blue/20 before:rounded-2xl"
               >
                 {isGenerating ? 'Generating...' : isTyping ? 'Processing...' : 'Generate 0.008 ETH'}
               </button>
