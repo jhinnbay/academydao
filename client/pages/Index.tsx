@@ -10,6 +10,8 @@ export default function Index() {
   const [currentMessage, setCurrentMessage] = useState('');
   const [showResponse, setShowResponse] = useState(true);
   const [displayedResponse, setDisplayedResponse] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [savedRequest, setSavedRequest] = useState<{ type: 'funding' | 'events'; content: string } | null>(null);
 
   const daemonResponse = "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
