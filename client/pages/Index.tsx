@@ -134,7 +134,10 @@ export default function Index() {
 
               {/* Connection Status Message */}
               {(isWalletConnected && (connectionMessage || isTypingConnection)) && (
-                <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-10">
+                <div className={`font-cartograph text-base leading-[140.628%] mb-10 ${
+                  hasAcademicAngel === true ? 'text-green-300' :
+                  hasAcademicAngel === false ? 'text-red-300' : 'text-white/80'
+                }`}>
                   <span className="text-white">{'|'} </span>
                   {connectionMessage}
                   {isTypingConnection && <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>}
