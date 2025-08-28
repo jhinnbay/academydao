@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SoundEffects } from '@/lib/soundEffects';
 import { TypewriterDots } from '@/components/TypewriterDots';
-import { WalletConnect } from '@/components/WalletConnect';
+import { PrivyWalletConnect } from '@/components/PrivyWalletConnect';
 import { InputRequestModal } from '@/components/InputRequestModal';
 
 export default function Index() {
