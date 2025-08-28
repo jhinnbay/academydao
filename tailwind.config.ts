@@ -99,6 +99,22 @@ export default {
             height: "0",
           },
         },
+        "float": {
+          "0%, 100%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
+        "glow": {
+          "0%": {
+            boxShadow: "0 0 20px rgba(99, 102, 241, 0.3)",
+          },
+          "100%": {
+            boxShadow: "0 0 30px rgba(139, 92, 246, 0.4), 0 0 40px rgba(99, 102, 241, 0.1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
