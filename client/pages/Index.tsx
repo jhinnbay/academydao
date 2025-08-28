@@ -164,7 +164,7 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="px-2.5 py-2.5">
-                    <WalletConnect />
+                    <PrivyWalletConnect onConnectionChange={handleWalletConnectionChange} />
                   </div>
                 </div>
               </div>
