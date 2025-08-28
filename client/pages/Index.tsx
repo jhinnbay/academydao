@@ -73,29 +73,48 @@ export default function Index() {
     setIsWalletConnected(isConnected);
     setWalletAddress(address || '');
 
-    if (isConnected && hasToken !== undefined) {
-      setHasAcademicAngel(hasToken);
+    if (isConnected && address) {
+      if (hasToken !== undefined) {
+        setHasAcademicAngel(hasToken);
 
-      // Start typing animation for connection message
-      setIsTypingConnection(true);
-      setConnectionMessage('');
+        // Start typing animation for connection message
+        setIsTypingConnection(true);
+        setConnectionMessage('');
 
-      const message = hasToken
-        ? '😇 Congratulations, you made it. Prompt Azura your next request.'
-        : '❌ Find a real Academic Angel.';
+        const message = hasToken
+          ? '😇 Congratulations, you made it. Prompt Azura your next request.'
+          : '❌ Find a real Academic Angel.';
 
-      // Type out the message with sound effects
-      SoundEffects.typeWithSound(
-        message,
-        (char, isComplete) => {
-          if (!isComplete) {
-            setConnectionMessage(prev => prev + char);
-          } else {
-            setIsTypingConnection(false);
-          }
-        },
-        hasToken ? 40 : 60 // Slower typing for success message
-      );
+        // Type out the message with sound effects
+        SoundEffects.typeWithSound(
+          message,
+          (char, isComplete) => {
+            if (!isComplete) {
+              setConnectionMessage(prev => prev + char);
+            } else {
+              setIsTypingConnection(false);
+            }
+          },
+          hasToken ? 40 : 60 // Slower typing for success message
+        );
+      } else {
+        // Show loading state while checking tokens
+        setIsTypingConnection(true);
+        setConnectionMessage('');
+        setHasAcademicAngel(null);
+
+        SoundEffects.typeWithSound(
+          'Checking Academic Angel credentials...',
+          (char, isComplete) => {
+            if (!isComplete) {
+              setConnectionMessage(prev => prev + char);
+            } else {
+              setIsTypingConnection(false);
+            }
+          },
+          30
+        );
+      }
     } else if (!isConnected) {
       setHasAcademicAngel(null);
       setConnectionMessage('');
