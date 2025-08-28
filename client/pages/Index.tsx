@@ -191,7 +191,7 @@ export default function Index() {
               
               {showResponse && (
                 <div className="border border-dashed border-azura-white p-5 mb-5">
-                  <div className="bg-azura-black p-4 text-azura-light-gray font-sf-pro-display text-lg font-bold leading-[140.628%] text-left">
+                  <div className="bg-azura-black p-4 text-azura-text-muted font-cartograph text-sm leading-[140.628%] text-left">
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">Generating response...</span>
