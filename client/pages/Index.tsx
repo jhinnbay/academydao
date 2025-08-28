@@ -49,10 +49,10 @@ export default function Index() {
           <div className="border border-azura-gray-border bg-azura-black mb-4">
             <div className="p-5 pb-0">
               <div className="text-azura-white font-cartograph text-base leading-[140.628%] mb-2.5">
-                > AZURA MODEL DAEMON
+                {'>'} AZURA MODEL DAEMON
               </div>
               <div className="text-azura-text-muted font-cartograph text-base leading-[140.628%] mb-10">
-                <span className="text-azura-white">| </span>
+                <span className="text-azura-white">{'|'} </span>
                 Sync account with Angel...
               </div>
             </div>
@@ -60,8 +60,8 @@ export default function Index() {
             {/* Username Section */}
             <div className="border-t border-b border-azura-gray-medium px-2.5 py-2.5">
               <div className="text-azura-white font-cartograph text-base leading-[140.628%]">
-                > Username: 0x192FSDF324342<br />
-                > Username: jhinnbay.eth
+                {'>'} Username: 0x192FSDF324342<br />
+                {'>'} Username: jhinnbay.eth
               </div>
             </div>
 
