@@ -5,26 +5,39 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider, createConfig } from 'wagmi';
-import { base, baseSepolia } from 'wagmi/chains';
-import { http } from 'viem';
+import { PrivyProvider } from '@privy-io/react-auth';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Create Wagmi config for wallet integration
-const wagmiConfig = createConfig({
-  chains: [base, baseSepolia],
-  transports: {
-    [base.id]: http(),
-    [baseSepolia.id]: http(),
-  },
-});
-
 const App = () => (
-  <WagmiProvider config={wagmiConfig}>
+  <PrivyProvider
+    appId={import.meta.env.VITE_PRIVY_APP_ID || "clpispdty00lu11pf5keb4tvb"}
+    config={{
+      appearance: {
+        theme: 'dark',
+        accentColor: '#6366F1',
+        logo: undefined
+      },
+      embeddedWallets: {
+        createOnLogin: 'users-without-wallets'
+      },
+      loginMethods: ['wallet', 'email'],
+      supportedChains: [
+        {
+          id: 8453, // Base mainnet
+          name: 'Base',
+          network: 'base-mainnet',
+          nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+          rpcUrls: {
+            default: { http: ['https://mainnet.base.org'] }
+          }
+        }
+      ]
+    }}
+  >
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -38,7 +51,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
-  </WagmiProvider>
+  </PrivyProvider>
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
