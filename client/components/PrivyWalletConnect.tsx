@@ -77,16 +77,28 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
     }
   };
 
+  // Set a timeout for Privy loading
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!ready) {
+        console.warn('Privy taking too long to initialize, showing fallback');
+        setLoadingTimeout(true);
+      }
+    }, 5000); // 5 second timeout
+
+    return () => clearTimeout(timeout);
+  }, [ready]);
+
   useEffect(() => {
     const checkConnection = async () => {
       if (authenticated && user && wallets.length > 0) {
         const wallet = wallets[0];
         const address = wallet.address;
-        
+
         if (address) {
           const tokenOwnership = await checkTokenOwnership(address);
           setHasToken(tokenOwnership);
-          
+
           if (onConnectionChange) {
             onConnectionChange(true, address, tokenOwnership);
           }
