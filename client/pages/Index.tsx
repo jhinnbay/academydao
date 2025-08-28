@@ -200,7 +200,7 @@ export default function Index() {
                     ) : (
                       <div>
                         {displayedResponse}
-                        {isTyping && <span className="w-2 h-5 bg-azura-white animate-pulse inline-block ml-1"></span>}
+                        {isTyping && <span className="w-2 h-5 bg-mwa-primary-blue animate-pulse inline-block ml-1"></span>}
                       </div>
                     )}
                   </div>
