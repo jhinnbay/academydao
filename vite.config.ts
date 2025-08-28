@@ -15,6 +15,15 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // Suppress warnings about comments that Rollup can't interpret
+        if (warning.code === 'INVALID_ANNOTATION') {
+          return;
+        }
+        warn(warning);
+      }
+    }
   },
   plugins: [react(), expressPlugin()],
   resolve: {
