@@ -13,6 +13,7 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
   const { wallets } = useWallets();
   const [isCheckingToken, setIsCheckingToken] = useState(false);
   const [hasToken, setHasToken] = useState<boolean | null>(null);
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
 
   const checkTokenOwnership = async (address: string): Promise<boolean> => {
     try {
