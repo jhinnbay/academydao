@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SoundEffects } from '@/lib/soundEffects';
+import { TypewriterDots } from '@/components/TypewriterDots';
 
 export default function Index() {
   const [isTyping, setIsTyping] = useState(false);
