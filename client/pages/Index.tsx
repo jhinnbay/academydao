@@ -106,7 +106,7 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="px-2.5 py-2.5">
-                    <div className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px]">
+                    <div className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px] group-hover:text-white transition-colors duration-300">
                       Connect
                     </div>
                   </div>
@@ -136,7 +136,7 @@ export default function Index() {
                     </div>
                   </div>
                   <div className="px-2.5 py-2.5">
-                    <div className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px]">
+                    <div className="text-azura-accent-blue font-sf-pro text-sm font-medium leading-[22px] group-hover:text-white transition-colors duration-300">
                       Open
                     </div>
                   </div>
