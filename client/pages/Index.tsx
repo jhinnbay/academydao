@@ -207,17 +207,19 @@ export default function Index() {
                 </div>
               )}
               
-              {/* Action Buttons */}
-              <div className="flex w-full flex-col sm:flex-row gap-1 sm:gap-0">
-                <button className="flex-1 h-12 sm:h-8 px-4 sm:px-16 py-2 sm:py-4 border border-azura-light-gray bg-azura-black text-azura-white font-sf-pro-display text-xs sm:text-xs font-medium leading-[140.628%] hover:bg-azura-gray-border/20 transition-colors">
-                  DECISION
-                </button>
-                <button className="flex-1 h-12 sm:h-8 px-4 sm:px-16 py-2 sm:py-4 border border-azura-light-gray bg-azura-black text-azura-white font-sf-pro-display text-xs sm:text-xs font-medium leading-[140.628%] hover:bg-azura-gray-border/20 transition-colors">
-                  VIEW PROP
-                </button>
-                <button className="flex-1 h-12 sm:h-8 px-4 sm:px-16 py-2 sm:py-4 border border-azura-light-gray bg-azura-black text-azura-white font-sf-pro-display text-xs sm:text-xs font-medium leading-[140.628%] hover:bg-azura-gray-border/20 transition-colors">
-                  SHARE PROP
-                </button>
+              {/* Terminal-style Action Buttons */}
+              <div className="border border-azura-gray-border bg-azura-black p-3">
+                <div className="text-azura-white font-cartograph text-sm leading-[140.628%] space-y-1">
+                  <button className="block w-full text-left hover:text-azura-accent-blue transition-colors">
+                    {'>'} DECISION
+                  </button>
+                  <button className="block w-full text-left hover:text-azura-accent-blue transition-colors">
+                    {'>'} VIEW PROP
+                  </button>
+                  <button className="block w-full text-left hover:text-azura-accent-blue transition-colors">
+                    {'>'} SHARE PROP
+                  </button>
+                </div>
               </div>
             </div>
           </div>
