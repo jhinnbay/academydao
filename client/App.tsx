@@ -19,12 +19,15 @@ const App = () => (
       appearance: {
         theme: 'dark',
         accentColor: '#6366F1',
-        logo: undefined
+        logo: undefined,
+        walletChainType: 'ethereum-only',
+        showWalletLoginFirst: true
       },
       embeddedWallets: {
-        createOnLogin: 'users-without-wallets'
+        createOnLogin: 'users-without-wallets',
+        requireUserPasswordOnCreate: false
       },
-      loginMethods: ['wallet', 'email'],
+      loginMethods: ['wallet', 'email', 'sms'],
       supportedChains: [
         {
           id: 8453, // Base mainnet
@@ -35,7 +38,10 @@ const App = () => (
             default: { http: ['https://mainnet.base.org'] }
           }
         }
-      ]
+      ],
+      mfa: {
+        noPromptOnMfaRequired: false
+      }
     }}
   >
     <QueryClientProvider client={queryClient}>
