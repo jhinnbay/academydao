@@ -114,10 +114,10 @@ export default function Index() {
                       </svg>
                     </div>
                     <div>
-                      <div className="text-mwa-text-primary font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white font-sf-pro text-sm font-medium leading-[22px] drop-shadow-md">
                         Sync Account
                       </div>
-                      <div className="text-mwa-text-secondary font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white/70 font-sf-pro text-sm font-medium leading-[22px]">
                         Can use another device
                       </div>
                     </div>
