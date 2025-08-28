@@ -49,6 +49,19 @@ export default function Index() {
     setDisplayedResponse(daemonResponse);
   }, []);
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSaveRequest = (data: { type: 'funding' | 'events'; content: string }) => {
+    setSavedRequest(data);
+    SoundEffects.playCompleteSound();
+  };
+
   return (
     <div className="min-h-screen bg-azura-black text-azura-white font-cartograph">
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
