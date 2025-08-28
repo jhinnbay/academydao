@@ -190,8 +190,8 @@ export default function Index() {
               </h2>
 
               {showResponse && (
-                <div className="border border-dashed border-mwa-primary-blue p-5 mb-5 bg-mwa-soft-gray rounded-lg">
-                  <div className="bg-mwa-bright-white p-4 text-mwa-text-secondary font-cartograph text-sm leading-[140.628%] text-left rounded border border-mwa-border-light">
+                <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-2xl">
+                  <div className="bg-white/10 backdrop-blur-md p-4 text-white font-cartograph text-sm leading-[140.628%] text-left rounded-xl border border-white/20 shadow-lg">
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">Generating response...</span>
