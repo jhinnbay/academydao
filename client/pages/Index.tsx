@@ -143,11 +143,12 @@ export default function Index() {
               </div>
 
               {/* Generate Button */}
-              <button 
+              <button
                 onClick={handleGenerate}
-                className="w-full h-14 px-16 py-4 border border-azura-light-gray bg-azura-light-gray rounded text-azura-black font-sf-pro-display text-xl font-semibold leading-[140.628%] hover:bg-azura-light-gray/90 transition-colors"
+                disabled={isGenerating || isTyping}
+                className="w-full h-14 px-16 py-4 border border-azura-light-gray bg-azura-light-gray rounded text-azura-black font-sf-pro-display text-xl font-semibold leading-[140.628%] hover:bg-azura-light-gray/90 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {isTyping ? 'Generating...' : 'Generate 0.008 ETH'}
+                {isGenerating ? 'Generating...' : isTyping ? 'Processing...' : 'Generate 0.008 ETH'}
               </button>
             </div>
           </div>
