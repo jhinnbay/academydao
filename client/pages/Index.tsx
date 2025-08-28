@@ -63,7 +63,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-azura-black text-azura-white font-cartograph">
+    <div className="min-h-screen bg-gradient-to-br from-mwa-gradient-start via-mwa-primary-blue to-mwa-gradient-end text-mwa-text-primary font-cartograph">
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
         {/* Corner decorations */}
         <div className="absolute top-24 left-4 w-6 h-6 sm:left-6 md:left-8 lg:left-12">
