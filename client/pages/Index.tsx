@@ -154,7 +154,7 @@ export default function Index() {
           </div>
 
           {/* Daemon Response Section */}
-          <div className="border border-azura-gray-border bg-cover bg-center bg-azura-black min-h-[400px] p-8">
+          <div className="border border-azura-gray-border bg-cover bg-center bg-azura-black min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px]">
             <div className="text-center">
               <h2 className="text-azura-white font-sf-pro-display text-base font-bold leading-[140.628%] mb-5">
                 Daemon Response
