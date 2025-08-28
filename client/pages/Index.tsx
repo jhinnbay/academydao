@@ -127,10 +127,24 @@ export default function Index() {
               <div className="text-white font-cartograph text-base leading-[140.628%] mb-2.5 font-bold drop-shadow-lg">
                 {'>'} AZURA MODEL DAEMON
               </div>
-              <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-10">
+              <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-2.5">
                 <span className="text-white">{'|'} </span>
                 Sync account with Angel<TypewriterDots className="text-white/80" />
               </div>
+
+              {/* Connection Status Message */}
+              {(isWalletConnected && (connectionMessage || isTypingConnection)) && (
+                <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-10">
+                  <span className="text-white">{'|'} </span>
+                  {connectionMessage}
+                  {isTypingConnection && <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>}
+                </div>
+              )}
+
+              {/* Default spacing when no connection message */}
+              {!(isWalletConnected && (connectionMessage || isTypingConnection)) && (
+                <div className="mb-8"></div>
+              )}
             </div>
 
             {/* Username Section */}
