@@ -81,7 +81,7 @@ export default function Index() {
 
         <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
           {/* Terminal Header Section */}
-          <div className="border border-mwa-border-light bg-mwa-bright-white mb-4 shadow-lg">
+          <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
             <div className="p-5 pb-0">
               <div className="text-mwa-primary-blue font-cartograph text-base leading-[140.628%] mb-2.5 font-bold">
                 {'>'} AZURA MODEL DAEMON
