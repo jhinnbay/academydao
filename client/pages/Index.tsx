@@ -83,12 +83,12 @@ export default function Index() {
           {/* Terminal Header Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
             <div className="p-5 pb-0">
-              <div className="text-mwa-primary-blue font-cartograph text-base leading-[140.628%] mb-2.5 font-bold">
+              <div className="text-white font-cartograph text-base leading-[140.628%] mb-2.5 font-bold drop-shadow-lg">
                 {'>'} AZURA MODEL DAEMON
               </div>
-              <div className="text-mwa-text-secondary font-cartograph text-base leading-[140.628%] mb-10">
-                <span className="text-mwa-primary-blue">{'|'} </span>
-                Sync account with Angel<TypewriterDots className="text-mwa-text-secondary" />
+              <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-10">
+                <span className="text-white">{'|'} </span>
+                Sync account with Angel<TypewriterDots className="text-white/80" />
               </div>
             </div>
 
