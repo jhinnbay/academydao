@@ -57,17 +57,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Azura design colors
-        azura: {
-          black: "#000000",
-          white: "#FFFFFF",
-          "gray-border": "#9E9E9E",
-          "gray-light": "#B5B5B5",
-          "gray-medium": "#9A9A9A",
-          "text-muted": "#979797",
-          "text-muted-dark": "#878787",
-          "accent-blue": "#ABABF9",
-          "light-gray": "#ECECEC",
+        // Mental Wealth Academy bright colors
+        mwa: {
+          "primary-blue": "#4F46E5", // Bright indigo
+          "secondary-blue": "#6366F1", // Vibrant purple-blue
+          "accent-purple": "#8B5CF6", // Bright purple
+          "light-blue": "#93C5FD", // Light sky blue
+          "bright-white": "#FFFFFF",
+          "soft-gray": "#F8FAFC", // Very light gray
+          "text-primary": "#1E293B", // Dark blue-gray for text
+          "text-secondary": "#475569", // Medium gray for secondary text
+          "border-light": "#E2E8F0", // Light border
+          "gradient-start": "#6366F1", // Gradient start
+          "gradient-end": "#8B5CF6", // Gradient end
         },
       },
       fontFamily: {
