@@ -153,17 +153,17 @@ export default function Index() {
                       )}
                     </div>
                     <div>
-                      <div className="text-mwa-text-primary font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white font-sf-pro text-sm font-medium leading-[22px] drop-shadow-md">
                         Input Request Form
                       </div>
-                      <div className="text-mwa-text-secondary font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white/70 font-sf-pro text-sm font-medium leading-[22px]">
                         {savedRequest ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request` : '0xc12c...484F2'}
                       </div>
                     </div>
                   </div>
                   <div className="px-2.5 py-2.5">
-                    <div className={`font-sf-pro text-sm font-medium leading-[22px] group-hover:text-mwa-primary-blue transition-colors duration-300 ${
-                      savedRequest ? 'text-green-500' : 'text-mwa-secondary-blue'
+                    <div className={`font-sf-pro text-sm font-medium leading-[22px] transition-colors duration-300 drop-shadow-md ${
+                      savedRequest ? 'text-green-300 group-hover:text-green-200' : 'text-white/80 group-hover:text-white'
                     }`}>
                       {savedRequest ? 'Saved' : 'Open'}
                     </div>
