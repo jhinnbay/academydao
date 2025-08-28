@@ -132,7 +132,7 @@ export default function Index() {
               <div className="mb-5">
                 <div
                   onClick={handleOpenModal}
-                  className="flex items-center justify-between h-24 px-6 border-2 border-mwa-border-light rounded-xl bg-mwa-soft-gray sm:h-28 md:h-32 hover:border-mwa-secondary-blue hover:bg-mwa-bright-white transition-all duration-300 cursor-pointer group shadow-md"
+                  className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/10 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/20 hover:shadow-xl hover:animate-glow transition-all duration-500 cursor-pointer group shadow-2xl"
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
