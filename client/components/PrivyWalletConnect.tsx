@@ -129,22 +129,8 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
 
   // Fallback when Privy fails to load
   if (!ready && loadingTimeout) {
-    return (
-      <div className="flex flex-col items-end">
-        <div className="text-red-300 font-sf-pro text-xs font-medium leading-[22px] mb-1">
-          Connection Error
-        </div>
-        <button
-          onClick={() => {
-            // Try to initialize Privy again or show alternative
-            window.location.reload();
-          }}
-          className="text-white/80 font-sf-pro text-sm font-medium leading-[22px] hover:text-white transition-colors hover:underline"
-        >
-          Retry
-        </button>
-      </div>
-    );
+    console.log('Using fallback wallet connector');
+    return <FallbackWalletConnect onConnectionChange={onConnectionChange} />;
   }
 
   if (authenticated && user) {
