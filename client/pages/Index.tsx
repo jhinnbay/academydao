@@ -222,6 +222,13 @@ export default function Index() {
             </div>
           </div>
         </div>
+
+        {/* Input Request Modal */}
+        <InputRequestModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onSave={handleSaveRequest}
+        />
       </div>
     </div>
   );
