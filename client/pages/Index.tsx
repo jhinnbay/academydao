@@ -163,13 +163,16 @@ export default function Index() {
               {showResponse && (
                 <div className="border border-dashed border-azura-white p-5 mb-5">
                   <div className="bg-azura-black p-4 text-azura-light-gray font-sf-pro-display text-lg font-bold leading-[140.628%] text-left">
-                    {isTyping ? (
+                    {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">Generating response...</span>
                         <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
                       </div>
                     ) : (
-                      daemonResponse
+                      <div>
+                        {displayedResponse}
+                        {isTyping && <span className="w-2 h-5 bg-azura-white animate-pulse inline-block ml-1"></span>}
+                      </div>
                     )}
                   </div>
                 </div>
