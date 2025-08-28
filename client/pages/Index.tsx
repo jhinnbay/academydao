@@ -208,15 +208,15 @@ export default function Index() {
               )}
               
               {/* Terminal-style Action Buttons */}
-              <div className="border border-mwa-border-light bg-mwa-soft-gray p-3 rounded-lg shadow-md">
-                <div className="text-mwa-text-primary font-cartograph text-sm leading-[140.628%] space-y-1">
-                  <button className="block w-full text-left hover:text-mwa-primary-blue transition-colors">
+              <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-2xl shadow-2xl">
+                <div className="text-white font-cartograph text-sm leading-[140.628%] space-y-1">
+                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
                     {'>'} DECISION
                   </button>
-                  <button className="block w-full text-left hover:text-mwa-secondary-blue transition-colors">
+                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
                     {'>'} VIEW PROP
                   </button>
-                  <button className="block w-full text-left hover:text-mwa-accent-purple transition-colors">
+                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
                     {'>'} SHARE PROP
                   </button>
                 </div>
