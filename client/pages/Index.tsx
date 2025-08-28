@@ -94,7 +94,7 @@ export default function Index() {
 
             {/* Username Section */}
             <div className="border-t border-b border-white/30 px-2.5 py-2.5 bg-white/5 backdrop-blur-sm">
-              <div className="text-mwa-text-primary font-cartograph text-base leading-[140.628%]">
+              <div className="text-white/90 font-cartograph text-base leading-[140.628%] drop-shadow-md">
                 {'>'} Username: 0x192FSDF324342<br />
                 {'>'} Username: jhinnbay.eth
               </div>
