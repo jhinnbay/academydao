@@ -104,7 +104,7 @@ export default function Index() {
             <div className="p-4 sm:p-6">
               {/* Sync Account Card */}
               <div className="mb-5">
-                <div className="flex items-center justify-between h-24 px-6 border-2 border-mwa-border-light rounded-xl bg-mwa-bright-white sm:h-28 md:h-32 hover:border-mwa-primary-blue hover:bg-mwa-soft-gray transition-all duration-300 cursor-pointer group shadow-md">
+                <div className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/15 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/25 hover:shadow-xl hover:animate-glow transition-all duration-500 cursor-pointer group shadow-2xl">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-mwa-primary-blue to-mwa-secondary-blue flex items-center justify-center">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
