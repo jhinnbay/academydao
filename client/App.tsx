@@ -14,33 +14,15 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <PrivyProvider
-    appId={import.meta.env.VITE_PRIVY_APP_ID || "clpispdty00lu11pf5keb4tvb"}
+    appId="clpispdty00lu11pf5keb4tvb"
     config={{
       appearance: {
         theme: 'dark',
-        accentColor: '#6366F1',
-        logo: undefined,
-        walletChainType: 'ethereum-only',
-        showWalletLoginFirst: true
+        accentColor: '#6366F1'
       },
+      loginMethods: ['wallet', 'email'],
       embeddedWallets: {
-        createOnLogin: 'users-without-wallets',
-        requireUserPasswordOnCreate: false
-      },
-      loginMethods: ['wallet', 'email', 'sms'],
-      supportedChains: [
-        {
-          id: 8453, // Base mainnet
-          name: 'Base',
-          network: 'base-mainnet',
-          nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-          rpcUrls: {
-            default: { http: ['https://mainnet.base.org'] }
-          }
-        }
-      ],
-      mfa: {
-        noPromptOnMfaRequired: false
+        createOnLogin: 'users-without-wallets'
       }
     }}
   >
