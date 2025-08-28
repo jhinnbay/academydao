@@ -57,6 +57,23 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Azura design colors
+        azura: {
+          black: "#000000",
+          white: "#FFFFFF",
+          "gray-border": "#9E9E9E",
+          "gray-light": "#B5B5B5",
+          "gray-medium": "#9A9A9A",
+          "text-muted": "#979797",
+          "text-muted-dark": "#878787",
+          "accent-blue": "#ABABF9",
+          "light-gray": "#ECECEC",
+        },
+      },
+      fontFamily: {
+        'cartograph': ['Cartograph CF', 'monospace'],
+        'sf-pro': ['SF Pro', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        'sf-pro-display': ['SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
