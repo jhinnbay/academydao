@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { SoundEffects } from '@/lib/soundEffects';
 
 export default function Index() {
   const [isTyping, setIsTyping] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState('');
   const [showResponse, setShowResponse] = useState(true);
+  const [displayedResponse, setDisplayedResponse] = useState('');
 
   const daemonResponse = "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
-  const playTypingSound = () => {
-    // TODO: Implement typing sound effect
-    console.log('Playing typing sound...');
-  };
-
-  const playGenerateSound = () => {
-    // TODO: Implement generate sound effect
-    console.log('Playing generate sound...');
-  };
-
   const handleGenerate = () => {
-    setIsTyping(true);
-    playGenerateSound();
-    
+    setIsGenerating(true);
+    setIsTyping(false);
+    setDisplayedResponse('');
+    setShowResponse(true);
+
+    // Play generation sound
+    SoundEffects.playGenerateSound();
+
+    // Simulate generation delay
     setTimeout(() => {
-      setIsTyping(false);
-      setShowResponse(true);
-    }, 2000);
+      setIsGenerating(false);
+      setIsTyping(true);
+
+      // Type out the response with sound effects
+      SoundEffects.typeWithSound(
+        daemonResponse,
+        (char, isComplete) => {
+          if (!isComplete) {
+            setDisplayedResponse(prev => prev + char);
+          } else {
+            setIsTyping(false);
+          }
+        },
+        30 // typing speed
+      );
+    }, 1500);
   };
+
+  // Initialize with the response already displayed
+  useEffect(() => {
+    setDisplayedResponse(daemonResponse);
+  }, []);
 
   return (
     <div className="min-h-screen bg-azura-black text-azura-white font-cartograph">
