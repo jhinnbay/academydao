@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { usePrivy, useWallets } from '@privy-io/react-auth';
+import { FallbackWalletConnect } from './FallbackWalletConnect';
 
 interface PrivyWalletConnectProps {
   onConnectionChange?: (isConnected: boolean, address?: string, hasToken?: boolean) => void;
