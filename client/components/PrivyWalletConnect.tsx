@@ -17,7 +17,11 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
   const checkTokenOwnership = async (address: string): Promise<boolean> => {
     try {
       setIsCheckingToken(true);
-      
+
+      // Add timeout to prevent hanging
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       // Create a simple RPC request to check token balance
       const response = await fetch(BASE_RPC_URL, {
         method: 'POST',
@@ -35,20 +39,37 @@ export const PrivyWalletConnect: React.FC<PrivyWalletConnectProps> = ({ onConnec
             },
             'latest'
           ]
-        })
+        }),
+        signal: controller.signal
       });
 
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
-      
+
+      if (data.error) {
+        console.error('RPC error:', data.error);
+        return false;
+      }
+
       if (data.result) {
         // Convert hex to number and check if balance > 0
         const balance = parseInt(data.result, 16);
+        console.log(`Token balance for ${address}: ${balance}`);
         return balance > 0;
       }
-      
+
       return false;
     } catch (error) {
-      console.error('Error checking token ownership:', error);
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.error('Token check timed out');
+      } else {
+        console.error('Error checking token ownership:', error);
+      }
       return false;
     } finally {
       setIsCheckingToken(false);
