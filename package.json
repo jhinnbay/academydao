@@ -22,12 +22,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@wagmi/connectors": "^5.9.8",
-    "@wagmi/core": "^2.20.2",
+    "@farcaster/auth-kit": "^0.8.1",
+    "@privy-io/react-auth": "^2.23.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "viem": "^2.36.0",
-    "wagmi": "^2.16.8",
     "zod": "^3.25.76"
   },
   "devDependencies": {

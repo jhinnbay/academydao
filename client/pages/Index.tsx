@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
+<<<<<<< HEAD
 import { FallbackWalletConnect } from "@/components/FallbackWalletConnect";
+=======
+import { PrivyAuth } from "@/components/PrivyAuth";
+import { usePrivy } from "@privy-io/react-auth";
+import { LoginScreen } from "@/components/LoginScreen";
+>>>>>>> refs/remotes/origin/main
 import { InputRequestModal } from "@/components/InputRequestModal";
 
 export default function Index() {
+  const { ready, authenticated } = usePrivy();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -31,6 +38,84 @@ export default function Index() {
   const [tooltipPosition, setTooltipPosition] = useState<{
     [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
+
+  // Authentication check
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-black text-white font-cartograph relative overflow-hidden">
+        {/* Grainy texture background */}
+        <div
+          className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
+            filter:
+              "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
+          }}
+        ></div>
+
+        {/* Matrix-style grid overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="grid grid-cols-12 h-full">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="border-r border-cyan-500/20"></div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            {/* Terminal-style loading */}
+            <div className="bg-black/80 backdrop-blur-md border border-cyan-400/30 rounded-lg p-8 shadow-2xl shadow-cyan-500/20">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse mr-2"></div>
+                <div className="text-cyan-400 font-cartograph text-sm">
+                  SYSTEM_INIT
+                </div>
+              </div>
+
+              <div className="font-cartograph text-white/80 mb-4">
+                {">"} Initializing Mental Wealth Academy
+              </div>
+
+              <div className="flex items-center justify-center">
+                <span className="text-cyan-400 font-cartograph mr-2">
+                  Loading
+                </span>
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+                  <div
+                    className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.1s" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.2s" }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Scanning lines effect */}
+              <div className="mt-4 text-xs text-cyan-300/60 font-cartograph">
+                <div className="animate-pulse">
+                  Connecting to Privy authentication...
+                </div>
+                <div
+                  className="animate-pulse"
+                  style={{ animationDelay: "0.5s" }}
+                >
+                  Establishing secure connection...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!authenticated) {
+    return <LoginScreen />;
+  }
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -437,7 +522,9 @@ export default function Index() {
                       fontWeight: "500",
                     }}
                   >
-                    jhinnbay.eth
+                    {isWalletConnected && walletAddress
+                      ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                      : "Connect Wallet"}
                   </span>
                 </div>
 
@@ -593,6 +680,7 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
+<<<<<<< HEAD
                 <FallbackWalletConnect
                   onConnectionChange={handleWalletConnectionChange}
                   buttonText="Get Started"
@@ -609,6 +697,9 @@ export default function Index() {
                   }}
                   showConnectionStatus={false}
                 />
+=======
+                <PrivyAuth onConnectionChange={handleWalletConnectionChange} />
+>>>>>>> refs/remotes/origin/main
                 {isWalletConnected && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -619,7 +710,9 @@ export default function Index() {
                         fontWeight: "500",
                       }}
                     >
-                      Wallet Connected
+                      Connected{" "}
+                      {walletAddress &&
+                        `(${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)})`}
                     </span>
                   </div>
                 )}
@@ -896,7 +989,10 @@ export default function Index() {
                   fontWeight: "400",
                 }}
               >
-                {">"} Username: jhinnbay.eth
+                {">"} Username:{" "}
+                {isWalletConnected && walletAddress
+                  ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                  : "Not Connected"}
               </div>
             </div>
 
@@ -1018,7 +1114,7 @@ export default function Index() {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating || isTyping}
-                  className="w-full bg-gradient-to-r from-gray-800/50 via-black/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-800/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl hover:shadow-black/30 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl"
+                  className="w-full bg-gradient-to-r from-cyan-600/80 via-blue-600/70 to-cyan-600/80 backdrop-blur-xl border border-cyan-400/50 rounded-2xl font-sans font-semibold hover:from-cyan-500/90 hover:via-blue-500/80 hover:to-cyan-500/90 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
                   style={{
                     fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                     lineHeight: "1.6",
@@ -1030,11 +1126,14 @@ export default function Index() {
                     paddingRight: "32px",
                   }}
                 >
-                  {isGenerating
-                    ? "Funding..."
-                    : isTyping
-                      ? "Processing..."
-                      : "Send Request (0.008 ETH)"}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+                  <span className="relative z-10 drop-shadow-sm">
+                    {isGenerating
+                      ? "Calculating decision-matrix...."
+                      : isTyping
+                        ? "Please bear with me, processing..."
+                        : "Send Request (0.008 ETH)"}
+                  </span>
                 </button>
                 <div className="text-center">
                   <p
