@@ -800,7 +800,7 @@ export default function Index() {
           </div>
 
           {/* Terminal Header Section */}
-          <div className="border border-white/20 bg-black backdrop-blur-md mb-4 shadow-2xl rounded-2xl">
+          <div className="border border-white/20 bg-black backdrop-blur-md mb-4 shadow-2xl overflow-hidden">
             <div className="p-5 pb-0">
               <div
                 className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg"
@@ -910,7 +910,7 @@ export default function Index() {
             </div>
 
             {/* Main Action Section */}
-            <div className="p-6 sm:p-8 space-y-6">
+            <div className="p-6 sm:p-8 space-y-6 overflow-hidden">
               {/* Primary Input Request Form Card - Main Focal Point */}
               <div className="relative">
                 <div className="text-center p-6 sm:p-8">
