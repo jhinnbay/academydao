@@ -10,28 +10,51 @@ export class SoundEffects {
     return this.audioContext;
   }
 
-  // Generate a typing sound effect using Web Audio API
+  // Generate a cyberpunk typing sound effect with digital glitch
   static playTypingSound(): void {
     try {
       const ctx = this.getAudioContext();
-      const oscillator = ctx.createOscillator();
-      const gainNode = ctx.createGain();
 
-      oscillator.connect(gainNode);
+      // Create multiple oscillators for layered digital sound
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const filter = ctx.createBiquadFilter();
+      const gainNode = ctx.createGain();
+      const noiseGain = ctx.createGain();
+
+      // Configure filter for digital edge
+      filter.type = 'highpass';
+      filter.frequency.setValueAtTime(1200, ctx.currentTime);
+      filter.Q.setValueAtTime(15, ctx.currentTime);
+
+      // Connect oscillators through filter
+      osc1.connect(filter);
+      osc2.connect(noiseGain);
+      filter.connect(gainNode);
+      noiseGain.connect(gainNode);
       gainNode.connect(ctx.destination);
 
-      // Terminal-like click sound (high frequency, short duration)
-      oscillator.frequency.setValueAtTime(800, ctx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(
-        600,
-        ctx.currentTime + 0.05,
-      );
+      // Sharp digital click frequencies
+      osc1.frequency.setValueAtTime(2400, ctx.currentTime);
+      osc1.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 0.03);
 
-      gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
+      // Add digital noise burst
+      osc2.frequency.setValueAtTime(4800, ctx.currentTime);
+      osc2.type = 'square';
+      osc1.type = 'sawtooth';
 
-      oscillator.start(ctx.currentTime);
-      oscillator.stop(ctx.currentTime + 0.05);
+      // Sharp attack, quick decay for digital precision
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.002);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+
+      noiseGain.gain.setValueAtTime(0.02, ctx.currentTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.01);
+
+      osc1.start(ctx.currentTime);
+      osc2.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.03);
+      osc2.stop(ctx.currentTime + 0.01);
     } catch (error) {
       console.log("Sound effect not available:", error);
     }
