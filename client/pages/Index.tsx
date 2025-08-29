@@ -800,7 +800,7 @@ export default function Index() {
               <div className="relative">
                 <div
                   onClick={handleOpenModal}
-                  className="border-2 border-cyan-400/40 rounded-3xl bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl hover:border-cyan-400/60 hover:from-white/20 hover:to-white/10 hover:shadow-2xl hover:shadow-cyan-400/10 transition-all duration-500 cursor-pointer group shadow-2xl p-6 sm:p-8"
+                  className="border border-white/20 rounded-2xl bg-gradient-to-br from-white/5 to-black/20 backdrop-blur-xl hover:border-white/30 hover:from-white/10 hover:to-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
@@ -831,12 +831,12 @@ export default function Index() {
                         </div>
                       </div>
                     </div>
-                    <div className="px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                    <div className="px-4 py-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/30">
                       <div
                         className={`font-sans font-semibold transition-colors duration-300 drop-shadow-md ${
                           savedRequest
                             ? "text-green-300 group-hover:text-green-200"
-                            : "text-cyan-300 group-hover:text-cyan-200"
+                            : "text-white/80 group-hover:text-white"
                         }`}
                         style={{
                           fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
@@ -856,7 +856,7 @@ export default function Index() {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating || isTyping}
-                  className="w-full bg-gradient-to-r from-cyan-600/20 via-cyan-500/10 to-cyan-600/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl font-sans font-semibold hover:from-cyan-500/30 hover:via-cyan-400/20 hover:to-cyan-500/30 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
+                  className="w-full bg-gradient-to-r from-gray-800/50 via-black/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-800/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl hover:shadow-black/30 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl"
                   style={{
                     fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                     lineHeight: "1.6",
