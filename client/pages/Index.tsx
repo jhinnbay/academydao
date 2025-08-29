@@ -677,7 +677,7 @@ export default function Index() {
                     color: "#ffffff",
                   }}
                 >
-                  008
+                  000
                 </span>
                 {tooltipVisible === "angels" && (
                   <div
@@ -913,7 +913,7 @@ export default function Index() {
                             color: "#ffffff",
                           }}
                         >
-                          Request Form
+                          Schedule Request
                         </div>
                         <div
                           className="font-sans"
@@ -943,7 +943,7 @@ export default function Index() {
                           fontWeight: "600",
                         }}
                       >
-                        {savedRequest ? "Edit" : "Open"}
+                        {savedRequest ? "Edit" : "View"}
                       </div>
                     </div>
                   </div>
