@@ -58,19 +58,38 @@ export default function Index() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrollLocked]);
 
-  // Prevent auto-scroll to top on state changes - with debouncing
+  // Completely prevent scroll during state changes
   useEffect(() => {
-    if (scrollPosition > 0 && (isGenerating || isTyping)) {
-      // Use a timeout to avoid conflicts with other scroll operations
-      const timeoutId = setTimeout(() => {
-        if (window.scrollY !== scrollPosition) {
-          window.scrollTo({ top: scrollPosition, behavior: "instant" });
-        }
-      }, 16); // Next frame
+    let scrollTop = scrollPosition;
 
-      return () => clearTimeout(timeoutId);
+    const preventScroll = (e: Event) => {
+      if (isScrollLocked || isGenerating || isTyping) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.scrollTo({ top: scrollTop, behavior: 'instant' });
+        return false;
+      }
+    };
+
+    if (isGenerating || isTyping) {
+      scrollTop = window.scrollY;
+      // Prevent all scroll events during critical operations
+      window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('keydown', (e) => {
+        if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) {
+          e.preventDefault();
+        }
+      });
     }
-  }, [isGenerating, isTyping, scrollPosition]);
+
+    return () => {
+      window.removeEventListener('scroll', preventScroll);
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+    };
+  }, [isGenerating, isTyping, scrollPosition, isScrollLocked]);
 
   // Calculate tooltip position based on viewport bounds
   const calculateTooltipPosition = (
@@ -293,7 +312,7 @@ export default function Index() {
         className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
-          filter: "grayscale(100%) brightness(0.3) contrast(2)",
+          filter: "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
         }}
       ></div>
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
