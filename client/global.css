@@ -331,168 +331,117 @@ body {
     z-index: -1;
   }
 
-  /* Custom animated request button styles */
-  .custom-request-button {
+  /* btn-70 button styles */
+  .btn-70,
+  .btn-70 *,
+  .btn-70 :after,
+  .btn-70 :before,
+  .btn-70:after,
+  .btn-70:before {
+    border: 0 solid;
+    box-sizing: border-box;
+  }
+  .btn-70 {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: #000;
+    background-image: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+      Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 100%;
+    line-height: 1.5;
+    margin: 0;
+    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+    padding: 0;
+  }
+  .btn-70:disabled {
+    cursor: default;
+  }
+  .btn-70:-moz-focusring {
+    outline: auto;
+  }
+  .btn-70 svg {
+    display: block;
+    vertical-align: middle;
+  }
+  .btn-70 [hidden] {
+    display: none;
+  }
+  .btn-70 {
+    box-shadow: inset 0 0 0 2px #fff;
+    box-sizing: border-box;
+    display: block;
+    font-weight: 900;
+    padding: 1.2rem 3rem;
     position: relative;
-    width: 11em;
-    height: 4em;
-    outline: none;
-    transition: 0.1s;
-    background-color: transparent;
-    border: none;
-    font-size: 13px;
-    font-weight: bold;
-    color: #ddebf0;
+    text-transform: uppercase;
+    transition: color 0.1s linear;
   }
-
-  #clip {
-    --color: #2761c3;
+  .btn-70:after,
+  .btn-70:before {
+    content: "";
     position: absolute;
-    top: 0;
-    overflow: hidden;
-    width: 100%;
+  }
+  .btn-70:before {
+    border-bottom: var(--border);
+    border-top: var(--border);
     height: 100%;
-    border: 5px double var(--color);
-    box-shadow: inset 0px 0px 15px #195480;
-    -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
   }
-
-  .arrow {
-    position: absolute;
-    transition: 0.2s;
-    background-color: #2761c3;
-    top: 35%;
-    width: 11%;
-    height: 30%;
+  .btn-70:hover:before {
+    --border: 4px solid #000;
+    -webkit-animation: border-top-and-bottom 1s forwards;
+    animation: border-top-and-bottom 1s forwards;
   }
-
-  #leftArrow {
-    left: -13.5%;
-    -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  .btn-70:after {
+    border-left: var(--border);
+    border-right: var(--border);
+    bottom: 50%;
+    right: 0;
+    transform: translateY(50%);
+    width: 100%;
+    z-index: -1;
   }
-
-  #rightArrow {
-    -webkit-clip-path: polygon(100% 49%, 0 0, 0 100%);
-    left: 102%;
+  .btn-70:hover:after {
+    --border: 4px solid #000;
+    -webkit-animation: border-right-and-left 1s forwards;
+    animation: border-right-and-left 1s forwards;
   }
-
-  button:hover #rightArrow {
-    background-color: #27c39f;
-    left: -15%;
-    animation: 0.6s ease-in-out both infinite alternate rightArrow8;
-  }
-
-  button:hover #leftArrow {
-    background-color: #27c39f;
-    left: 103%;
-    animation: 0.6s ease-in-out both infinite alternate leftArrow8;
-  }
-
-  .corner {
-    position: absolute;
-    width: 4em;
-    height: 4em;
-    background-color: #2761c3;
-    box-shadow: inset 1px 1px 8px #2781c3;
-    transform: scale(1) rotate(45deg);
-    transition: 0.2s;
-  }
-
-  #rightTop {
-    top: -1.98em;
-    left: 91%;
-  }
-
-  #leftTop {
-    top: -1.96em;
-    left: -3.0em;
-  }
-
-  #leftBottom {
-    top: 2.10em;
-    left: -2.15em;
-  }
-
-  #rightBottom {
-    top: 45%;
-    left: 88%;
-  }
-
-  button:hover #leftTop {
-    animation: 0.1s ease-in-out 0.05s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
-  }
-
-  button:hover #rightTop {
-    animation: 0.1s ease-in-out 0.15s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
-  }
-
-  button:hover #rightBottom {
-    animation: 0.1s ease-in-out 0.25s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
-  }
-
-  button:hover #leftBottom {
-    animation: 0.1s ease-in-out 0.35s both changeColor8,
-    0.2s linear 0.4s both lightEffect8;
-  }
-
-  button:hover .corner {
-    transform: scale(1.25) rotate(45deg);
-  }
-
-  button:hover #clip {
-    animation: 0.2s ease-in-out 0.55s both greenLight8;
-    --color: #27c39f;
-  }
-
-  @keyframes changeColor8 {
-    from {
-      background-color: #2781c3;
+  @-webkit-keyframes border-top-and-bottom {
+    0% {
+      width: 0;
     }
-
     to {
-      background-color: #27c39f;
+      width: 100%;
     }
   }
-
-  @keyframes lightEffect8 {
-    from {
-      box-shadow: 1px 1px 5px #27c39f;
+  @keyframes border-top-and-bottom {
+    0% {
+      width: 0;
     }
-
     to {
-      box-shadow: 0 0 2px #27c39f;
+      width: 100%;
     }
   }
-
-  @keyframes greenLight8 {
-    from {
+  @-webkit-keyframes border-right-and-left {
+    0% {
+      height: 0;
     }
-
     to {
-      box-shadow: inset 0px 0px 32px #27c39f;
+      height: 100%;
     }
   }
-
-  @keyframes leftArrow8 {
-    from {
-      transform: translate(0px);
+  @keyframes border-right-and-left {
+    0% {
+      height: 0;
     }
-
     to {
-      transform: translateX(10px);
-    }
-  }
-
-  @keyframes rightArrow8 {
-    from {
-      transform: translate(0px);
-    }
-
-    to {
-      transform: translateX(-10px);
+      height: 100%;
     }
   }
 }
