@@ -178,11 +178,61 @@ export default function Index() {
         </div>
 
         <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
-          {/* Main Title */}
-          <div className="text-center mb-8">
-            <h1 className="text-white font-space-grotesk text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
-              AcademyOS Organization Funding & Event Management System
-            </h1>
+          {/* Hero Section */}
+          <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 pb-8 mb-8 gap-8">
+            <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
+              <h1 className="text-white font-sf-pro-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[140.628%] tracking-wider">
+                Hello! I'm Azura... Running Decision-Matrix Analysis.
+              </h1>
+              <p className="text-white font-sf-pro-display text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-[140.628%] tracking-wide">
+                Welcome to the Mental Wealth Academy simulation core! Let's initiate your first governance protocol. Your Move—draft a proposal through my interface. I'll run neural coherence diagnostics and, if it resonates with our institutional frequency, add alignment tokens. Ready to architect reality?
+              </p>
+              <button className="flex justify-center items-center px-16 py-4 border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300">
+                <span className="text-white font-sf-pro-display text-xl lg:text-2xl font-medium">
+                  Let's Begin
+                </span>
+              </button>
+            </div>
+            <div className="flex justify-center items-end flex-shrink-0">
+              <img
+                src="https://api.builder.io/api/v1/image/assets/TEMP/e3f7f6cc6250b9b9fd8f122c0daa6cb32f09b1eb?width=970"
+                alt="Azura AI Avatar"
+                className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Header Stats */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
+            <div className="flex items-center gap-6">
+              <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z" stroke="#ECECEC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span className="text-white font-sf-pro-display text-lg font-medium">
+                DAIMON / Proposals
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-6 sm:gap-8">
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-white font-cartograph text-sm">Proposals Created</span>
+                <span className="text-white font-cartograph text-sm">003</span>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-white font-cartograph text-sm">Angels Inventory</span>
+                <span className="text-white font-cartograph text-sm">008</span>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-white font-cartograph text-sm">Daemon Model</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span className="text-white font-cartograph text-sm">Online</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-end gap-1">
+                <span className="text-white font-cartograph text-sm">USED TOKENS</span>
+                <span className="text-white font-cartograph text-sm">234/34.000</span>
+              </div>
+            </div>
           </div>
 
           {/* Terminal Header Section */}
