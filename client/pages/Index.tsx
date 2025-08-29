@@ -1008,7 +1008,7 @@ export default function Index() {
           </div>
 
           {/* Daemon Response Section */}
-          <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl">
+          <div className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden" style={{ backgroundColor: 'rgba(30, 30, 30, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
             <div className="text-center">
               <h2
                 className="text-white font-sans font-bold mb-5 drop-shadow-lg"
@@ -1022,9 +1022,9 @@ export default function Index() {
               </h2>
 
               {showResponse && (
-                <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-2xl">
+                <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
                   <div
-                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded-xl border border-white/20 shadow-lg"
+                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded border border-white/20 shadow-lg overflow-hidden"
                     style={{
                       fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                       lineHeight: "1.6",
@@ -1052,7 +1052,7 @@ export default function Index() {
               )}
 
               {/* Terminal-style Action Buttons */}
-              <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-2xl shadow-2xl">
+              <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-lg shadow-2xl overflow-hidden">
                 <div
                   className="font-cartograph space-y-1"
                   style={{
