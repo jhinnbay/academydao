@@ -7,7 +7,7 @@ export const PrivyAuth: React.FC = () => {
   if (!ready) {
     return (
       <button
-        className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black transition-colors duration-300"
+        className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-white/10 to-white/10 bg-black transition-colors duration-300"
         style={{
           paddingTop: "8px",
           paddingBottom: "8px",
@@ -49,7 +49,7 @@ export const PrivyAuth: React.FC = () => {
   return (
     <button
       onClick={login}
-      className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+      className="flex justify-center items-center gap-2 border border-white/20 bg-gradient-to-b from-white/10 to-white/10 bg-black hover:bg-gray-900 transition-colors duration-300"
       style={{
         paddingTop: "8px",
         paddingBottom: "8px",
@@ -61,6 +61,12 @@ export const PrivyAuth: React.FC = () => {
         color: "#ffffff",
       }}
     >
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F0c9076778bee4070892566189ad8c894?format=webp&width=800"
+        alt="Atom Icon"
+        className="w-4 h-4 object-contain"
+        style={{ filter: 'brightness(0) invert(1)' }}
+      />
       Get Started
     </button>
   );
