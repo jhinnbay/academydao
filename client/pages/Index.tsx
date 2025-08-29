@@ -987,7 +987,7 @@ export default function Index() {
                   >
                     Fees power the engine and validate
                     <br />
-                    &nbsp;your submission on-chain.
+                    {"\u00A0"}your submission on-chain.
                   </p>
                 </div>
               </div>
