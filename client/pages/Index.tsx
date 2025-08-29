@@ -999,7 +999,7 @@ export default function Index() {
                     ? "Calculating decision-matrix...."
                     : isTyping
                       ? "Combining elements..."
-                      : "Send Azura Your Request"}
+                      : "send"}
                 </span>
               </button>
               <div className="text-center">
