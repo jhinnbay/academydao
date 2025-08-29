@@ -391,16 +391,19 @@ export default function Index() {
                  }}>
                 Request a meeting with our team to get initiated. I'm Azura, your optimized decision-making model matrix funding and collaboration assistant. Setup the perfect team meeting or aide for your next breakthrough, I'll analyze and connect you with the right resources.
               </p>
-              <button className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300" style={{paddingTop: '8px', paddingBottom: '8px', paddingLeft: '12px', paddingRight: '12px'}}>
-                <span className="font-sans" style={{
-                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                  lineHeight: '1.6',
-                  fontWeight: '500',
-                  color: '#ffffff'
-                }}>
-                  Get Started
-                </span>
-              </button>
+              <div className="flex items-center gap-3">
+                <FallbackWalletConnect
+                  onConnectionChange={handleWalletConnectionChange}
+                />
+                {isWalletConnected && (
+                  <span className="font-sans text-green-300" style={{
+                    fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                    fontWeight: '500'
+                  }}>
+                    Connected: {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
               <img
@@ -523,59 +526,6 @@ export default function Index() {
 
             {/* Action Cards Section */}
             <div className="p-4 sm:p-6">
-              {/* Sync Account Card */}
-              <div className="mb-5">
-                <div className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/15 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/25 hover:shadow-xl transition-all duration-500 cursor-pointer group shadow-2xl">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12 2L2 7v10l10 5 10-5V7l-10-5z"
-                          stroke="white"
-                          strokeWidth="2"
-                          strokeLinejoin="round"
-                        />
-                        <path d="M12 22V12" stroke="white" strokeWidth="2" />
-                        <path
-                          d="M2 7l10 5 10-5"
-                          stroke="white"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="font-sans font-medium drop-shadow-md" style={{
-                        fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '500',
-                        color: '#ffffff'
-                      }}>
-                        Sync Account
-                      </div>
-                      <div className="font-sans font-medium" style={{
-                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '400',
-                        color: '#888888'
-                      }}>
-                        Can use another device
-                      </div>
-                    </div>
-                  </div>
-                  <div className="px-2.5 py-2.5">
-                    <FallbackWalletConnect
-                      onConnectionChange={handleWalletConnectionChange}
-                    />
-                  </div>
-                </div>
-              </div>
-
               {/* Input Request Form Card */}
               <div className="mb-5">
                 <div
