@@ -160,6 +160,41 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
     checkConnection();
   }, [onConnectionChange]);
 
+  if (showMobileOptions) {
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-sm w-full">
+          <div className="text-center mb-4">
+            <h3 className="text-white font-sans text-lg font-bold mb-2">Choose a Wallet</h3>
+            <p className="text-white/80 font-sans text-sm">Connect with one of these mobile wallets:</p>
+          </div>
+
+          <div className="space-y-3 mb-4">
+            {mobileWallets.map((wallet) => (
+              <a
+                key={wallet.name}
+                href={wallet.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between p-3 bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 transition-colors duration-300"
+              >
+                <span className="text-white font-sans font-medium">{wallet.name}</span>
+                <span className="text-white/60 font-sans text-sm">Install</span>
+              </a>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setShowMobileOptions(false)}
+            className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white font-sans font-medium hover:bg-white/10 transition-colors duration-300"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (isConnected && showConnectionStatus) {
     return (
       <div className="flex flex-col items-end">
