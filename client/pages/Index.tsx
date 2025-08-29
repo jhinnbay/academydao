@@ -736,7 +736,13 @@ export default function Index() {
                 </span>
                 {tooltipVisible === "angels" && (
                   <div
-                    className={`absolute ${tooltipPosition.angels?.top === false ? "top-full mt-2" : "bottom-full mb-2"} ${tooltipPosition.angels?.left ? "left-0" : "right-0"} w-72 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
+                    className={`absolute ${tooltipPosition.angels?.top ? "top-full mt-2" : "bottom-full mb-2"} ${
+                      tooltipPosition.angels?.center
+                        ? "left-1/2 -translate-x-1/2"
+                        : tooltipPosition.angels?.left
+                          ? "right-full mr-2"
+                          : "left-full ml-2"
+                    } w-72 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
                   >
                     <div className="font-medium mb-1">Angels</div>
                     <div className="text-white/80">
@@ -745,7 +751,13 @@ export default function Index() {
                       chances.
                     </div>
                     <div
-                      className={`absolute ${tooltipPosition.angels?.top === false ? "bottom-full" : "top-full"} ${tooltipPosition.angels?.left ? "left-4" : "right-4"} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.angels?.top === false ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
+                      className={`absolute ${tooltipPosition.angels?.top ? "bottom-full" : "top-full"} ${
+                        tooltipPosition.angels?.center
+                          ? "left-1/2 -translate-x-1/2"
+                          : tooltipPosition.angels?.left
+                            ? "right-4"
+                            : "left-4"
+                      } w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.angels?.top ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
                     ></div>
                   </div>
                 )}
