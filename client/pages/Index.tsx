@@ -144,7 +144,7 @@ export default function Index() {
           backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F75149dff047b4596b3ef77b927034fb6?format=webp&width=800')`
         }}
       ></div>
-      <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl animate-glow z-10">
+      <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
         {/* Corner decorations - made subtle for glassmorphism */}
         <div className="absolute top-24 left-4 w-6 h-6 sm:left-6 md:left-8 lg:left-12 opacity-20">
           <svg
@@ -235,7 +235,7 @@ export default function Index() {
             <div className="p-4 sm:p-6">
               {/* Sync Account Card */}
               <div className="mb-5">
-                <div className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/15 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/25 hover:shadow-xl hover:animate-glow transition-all duration-500 cursor-pointer group shadow-2xl">
+                <div className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/15 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/25 hover:shadow-xl transition-all duration-500 cursor-pointer group shadow-2xl">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
                       <svg
@@ -280,7 +280,7 @@ export default function Index() {
               <div className="mb-5">
                 <div
                   onClick={handleOpenModal}
-                  className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/10 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/20 hover:shadow-xl hover:animate-glow transition-all duration-500 cursor-pointer group shadow-2xl"
+                  className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/10 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/20 hover:shadow-xl transition-all duration-500 cursor-pointer group shadow-2xl"
                 >
                   <div className="flex items-center gap-4">
                     <div
