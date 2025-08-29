@@ -1046,45 +1046,47 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Submit Request Button */}
-            <button
-              onClick={handleGenerate}
-              disabled={isGenerating || isTyping}
-              className="w-full bg-gradient-to-r from-cyan-600/40 via-black to-cyan-600/40 backdrop-blur-xl border border-cyan-400/50 cyberpunk-button font-sans font-semibold hover:from-cyan-500/45 hover:via-black hover:to-cyan-500/45 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
-              style={{
-                fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                lineHeight: "1.6",
-                fontWeight: "600",
-                color: "#ffffff",
-                paddingTop: "20px",
-                paddingBottom: "20px",
-                paddingLeft: "32px",
-                paddingRight: "32px",
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-              <span className="relative z-10 drop-shadow-sm">
-                {isGenerating
-                  ? "Calculating decision-matrix...."
-                  : isTyping
-                    ? "Please bear with me, processing..."
-                    : "Submit Request"}
-              </span>
-            </button>
-            <p
-              className="font-sans text-white/70 text-center mt-4"
-              style={{
-                fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                lineHeight: "1.5",
-                fontWeight: "400",
-              }}
-            >
-              Fees power the engine and validate
-              <br />
-              {"\u00A0"}your submission on-chain.
-            </p>
+              {/* Submit Request Button */}
+              <button
+                onClick={handleGenerate}
+                disabled={isGenerating || isTyping}
+                className="w-full bg-gradient-to-r from-cyan-600/40 via-black to-cyan-600/40 backdrop-blur-xl border border-cyan-400/50 cyberpunk-button font-sans font-semibold hover:from-cyan-500/45 hover:via-black hover:to-cyan-500/45 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
+                style={{
+                  fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                  lineHeight: "1.6",
+                  fontWeight: "600",
+                  color: "#ffffff",
+                  paddingTop: "20px",
+                  paddingBottom: "20px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+                <span className="relative z-10 drop-shadow-sm">
+                  {isGenerating
+                    ? "Calculating decision-matrix...."
+                    : isTyping
+                      ? "Please bear with me, processing..."
+                      : "Submit Request"}
+                </span>
+              </button>
+              <div className="text-center">
+                <p
+                  className="font-sans text-white/70"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.5",
+                    fontWeight: "400",
+                  }}
+                >
+                  Fees power the engine and validate
+                  <br />
+                  {"\u00A0"}your submission on-chain.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Daemon Response Section */}
