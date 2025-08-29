@@ -48,14 +48,12 @@ export default function Index() {
   // Preserve scroll position during state updates
   useEffect(() => {
     const handleScroll = () => {
-      if (!isScrollLocked) {
-        setScrollPosition(window.scrollY);
-      }
+      setScrollPosition(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrollLocked]);
+  }, []);
 
   // Simple scroll position preservation - only restore once after button click
   useEffect(() => {
