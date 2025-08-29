@@ -22,6 +22,19 @@ interface FallbackWalletConnectProps {
 const ACADEMIC_ANGEL_CONTRACT = "0x39f259B58A9aB02d42bC3DF5836bA7fc76a8880F";
 const BASE_RPC_URL = "https://mainnet.base.org";
 
+// Mobile detection utility
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+// Popular mobile wallet apps
+const mobileWallets = [
+  { name: "Coinbase Wallet", url: "https://www.coinbase.com/wallet" },
+  { name: "Trust Wallet", url: "https://trustwallet.com" },
+  { name: "MetaMask Mobile", url: "https://metamask.io/download/" },
+  { name: "Rainbow", url: "https://rainbow.me" }
+];
+
 export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
   onConnectionChange,
   buttonText = "Connect",
