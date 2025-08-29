@@ -272,7 +272,9 @@ export default function Index() {
               <div className="hidden md:flex items-center gap-8">
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -284,7 +286,9 @@ export default function Index() {
                 </button>
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -296,7 +300,9 @@ export default function Index() {
                 </button>
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -308,7 +314,9 @@ export default function Index() {
                 </button>
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
