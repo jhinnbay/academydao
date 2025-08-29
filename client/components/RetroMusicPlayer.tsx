@@ -60,20 +60,18 @@ const RetroMusicPlayer = () => {
     };
   }, [audioSrc, volume]);
 
-  const playPause = () => {
-    setIsPlaying(!isPlaying);
-    // Simulate playback
-    if (!isPlaying) {
-      const interval = setInterval(() => {
-        setCurrentTime(prev => {
-          if (prev >= duration) {
-            clearInterval(interval);
-            setIsPlaying(false);
-            return 0;
-          }
-          return prev + 1;
-        });
-      }, 1000);
+  const playPause = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    try {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        await audio.play();
+      }
+    } catch (error) {
+      console.log('Playback failed:', error);
     }
   };
 
