@@ -35,6 +35,19 @@ export default function Index() {
     [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
 
+  // Authentication check
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="animate-pulse text-white">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!authenticated) {
+    return <LoginScreen />;
+  }
+
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
