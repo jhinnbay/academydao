@@ -103,12 +103,12 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         <div className="p-6 bg-white/5 backdrop-blur-sm">
           <div className="mb-4">
             <label className="block text-white font-sf-pro text-sm font-medium mb-2">
-              {activeTab === "funding" ? "Funding Request" : "Event Request"}
+              {activeTab === "events" ? "Event Request" : "Funding Request"}
             </label>
             <div className="text-white/70 font-sf-pro text-xs mb-3">
-              {activeTab === "funding"
-                ? "Describe your funding proposal, amount needed, and how funds will be used."
-                : "Describe your event details, requirements, and expected outcomes."}
+              {activeTab === "events"
+                ? "Describe your event details, requirements, and expected outcomes."
+                : "Describe your funding proposal, amount needed, and how funds will be used."}
             </div>
           </div>
 
