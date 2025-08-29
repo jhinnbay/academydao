@@ -86,6 +86,12 @@ export default {
           "BlinkMacSystemFont",
           "sans-serif",
         ],
+        "space-grotesk": [
+          "Space Grotesk",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       borderRadius: {
         lg: "var(--radius)",
