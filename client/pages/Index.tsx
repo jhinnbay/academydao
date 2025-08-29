@@ -694,159 +694,161 @@ export default function Index() {
               ) && <div className="mb-8"></div>}
             </div>
 
-            {/* Username Section */}
-            <div
-              className="border-t border-b border-white/30 px-2.5 bg-white/5 backdrop-blur-sm"
-              style={{ height: "250px" }}
-            >
+            {/* Username Section - Secondary/Smaller */}
+            <div className="border-t border-b border-white/20 px-4 py-3 bg-white/5 backdrop-blur-sm">
               <div
-                className="text-white/90 font-cartograph leading-[140.628%] drop-shadow-md flex items-center h-full"
-                style={{ fontSize: "16px" }}
+                className="text-white/70 font-cartograph drop-shadow-md"
+                style={{
+                  fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                  fontWeight: "400"
+                }}
               >
                 {">"} Username: jhinnbay.eth
               </div>
             </div>
 
-            {/* Action Cards Section */}
-            <div className="p-4 sm:p-6">
-              {/* Input Request Form Card */}
-              <div className="mb-5">
+            {/* Main Action Section */}
+            <div className="p-6 sm:p-8 space-y-6">
+              {/* Primary Input Request Form Card - Main Focal Point */}
+              <div className="relative">
                 <div
                   onClick={handleOpenModal}
-                  className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/10 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/20 hover:shadow-xl transition-all duration-500 cursor-pointer group shadow-2xl"
+                  className="border-2 border-cyan-400/40 rounded-3xl bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl hover:border-cyan-400/60 hover:from-white/20 hover:to-white/10 hover:shadow-2xl hover:shadow-cyan-400/10 transition-all duration-500 cursor-pointer group shadow-2xl p-6 sm:p-8"
                 >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                        savedRequest
-                          ? "bg-gradient-to-r from-green-400 to-green-500"
-                          : "bg-gradient-to-r from-gray-600 to-gray-800"
-                      }`}
-                    >
-                      {savedRequest ? (
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M20 6L9 17l-5-5"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                          />
-                          <polyline
-                            points="14,2 14,8 20,8"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                          />
-                          <line
-                            x1="16"
-                            y1="13"
-                            x2="8"
-                            y2="13"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                          <line
-                            x1="16"
-                            y1="17"
-                            x2="8"
-                            y2="17"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                          <polyline
-                            points="10,9 9,9 8,9"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                    <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-6">
                       <div
-                        className="font-sans font-medium drop-shadow-md"
+                        className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg ${
+                          savedRequest
+                            ? "bg-gradient-to-r from-green-400 to-green-500"
+                            : "bg-gradient-to-r from-cyan-500 to-cyan-600"
+                        }`}
+                      >
+                        {savedRequest ? (
+                          <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M20 6L9 17l-5-5"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinejoin="round"
+                            />
+                            <polyline
+                              points="14,2 14,8 20,8"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinejoin="round"
+                            />
+                            <line
+                              x1="16"
+                              y1="13"
+                              x2="8"
+                              y2="13"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <line
+                              x1="16"
+                              y1="17"
+                              x2="8"
+                              y2="17"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                            <polyline
+                              points="10,9 9,9 8,9"
+                              stroke="white"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        )}
+                      </div>
+                      <div>
+                        <div
+                          className="font-sans font-bold drop-shadow-md mb-2"
+                          style={{
+                            fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
+                            lineHeight: "1.3",
+                            fontWeight: "700",
+                            color: "#ffffff",
+                          }}
+                        >
+                          Input Request Form
+                        </div>
+                        <div
+                          className="font-sans"
+                          style={{
+                            fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                            lineHeight: "1.5",
+                            fontWeight: "400",
+                            color: "#b0b0b0",
+                          }}
+                        >
+                          {savedRequest
+                            ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request Saved`
+                            : "Create your funding or event proposal"}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20">
+                      <div
+                        className={`font-sans font-semibold transition-colors duration-300 drop-shadow-md ${
+                          savedRequest
+                            ? "text-green-300 group-hover:text-green-200"
+                            : "text-cyan-300 group-hover:text-cyan-200"
+                        }`}
                         style={{
                           fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                          lineHeight: "1.6",
-                          fontWeight: "500",
-                          color: "#ffffff",
+                          lineHeight: "1.4",
+                          fontWeight: "600",
                         }}
                       >
-                        Input Request Form
+                        {savedRequest ? "Edit" : "Open"}
                       </div>
-                      <div
-                        className="font-sans font-medium"
-                        style={{
-                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                          lineHeight: "1.6",
-                          fontWeight: "400",
-                          color: "#888888",
-                        }}
-                      >
-                        {savedRequest
-                          ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request`
-                          : "0xc12c...484F2"}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="px-2.5 py-2.5">
-                    <div
-                      className={`font-sans font-medium transition-colors duration-300 drop-shadow-md ${
-                        savedRequest
-                          ? "text-green-300 group-hover:text-green-200"
-                          : "text-white/80 group-hover:text-white"
-                      }`}
-                      style={{
-                        fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                        lineHeight: "1.6",
-                        fontWeight: "500",
-                      }}
-                    >
-                      {savedRequest ? "Saved" : "Open"}
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Fund Proposal Button */}
-              <div className="space-y-3">
+              {/* CTA Button Section */}
+              <div className="space-y-4">
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating || isTyping}
                   className="w-full bg-gradient-to-r from-cyan-600/20 via-cyan-500/10 to-cyan-600/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl font-sans font-semibold hover:from-cyan-500/30 hover:via-cyan-400/20 hover:to-cyan-500/30 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
                   style={{
-                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                     lineHeight: "1.6",
                     fontWeight: "600",
                     color: "#ffffff",
-                    paddingTop: "16px",
-                    paddingBottom: "16px",
-                    paddingLeft: "24px",
-                    paddingRight: "24px",
+                    paddingTop: "20px",
+                    paddingBottom: "20px",
+                    paddingLeft: "32px",
+                    paddingRight: "32px",
                   }}
                 >
                   {isGenerating
@@ -859,7 +861,7 @@ export default function Index() {
                   <p
                     className="font-sans text-white/70"
                     style={{
-                      fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                       lineHeight: "1.5",
                       fontWeight: "400",
                     }}
