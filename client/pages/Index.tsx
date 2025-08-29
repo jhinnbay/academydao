@@ -181,14 +181,14 @@ export default function Index() {
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 pb-8 mb-8 gap-8">
             <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
-              <h1 className="text-white font-sf-pro-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-[140.628%] tracking-wider">
+              <h1 className="text-white font-sf-pro-display font-extrabold leading-[140.628%] tracking-wider" style={{fontSize: '36px'}}>
                 Hello! I'm Azura... Running Decision-Matrix Analysis.
               </h1>
-              <p className="text-white font-sf-pro-display text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-[140.628%] tracking-wide">
+              <p className="text-white font-sf-pro-display font-normal leading-[140.628%] tracking-wide" style={{fontSize: '24px'}}>
                 Welcome to the Mental Wealth Academy simulation core! Let's initiate your first governance protocol. Your Move—draft a proposal through my interface. I'll run neural coherence diagnostics and, if it resonates with our institutional frequency, add alignment tokens. Ready to architect reality?
               </p>
-              <button className="flex justify-center items-center px-16 py-4 border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300">
-                <span className="text-white font-sf-pro-display text-xl lg:text-2xl font-medium">
+              <button className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300" style={{paddingTop: '8px', paddingBottom: '8px', paddingLeft: '12px', paddingRight: '12px'}}>
+                <span className="text-white font-sf-pro-display font-medium" style={{fontSize: '16px'}}>
                   Let's Begin
                 </span>
               </button>
