@@ -129,6 +129,9 @@ export default function Index() {
     // Store current scroll position before state changes
     const currentScroll = window.scrollY;
 
+    // Lock scroll during state updates
+    setIsScrollLocked(true);
+
     // Batch state updates to minimize re-renders
     React.startTransition(() => {
       setRequestCount((prev) => prev + 1);
@@ -141,10 +144,11 @@ export default function Index() {
     // Play generation sound
     SoundEffects.playGenerateSound();
 
-    // Restore scroll position after state updates
+    // Restore scroll position after state updates and unlock
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: currentScroll, behavior: 'instant' });
+        setIsScrollLocked(false);
       });
     });
 
