@@ -590,7 +590,7 @@ export default function Index() {
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
               <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/e3f7f6cc6250b9b9fd8f122c0daa6cb32f09b1eb?width=970"
+                src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F09b3add61e4743578148e0c14c5158fa"
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
               />
