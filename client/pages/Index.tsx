@@ -5,7 +5,6 @@ import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { usePrivy } from "@privy-io/react-auth";
 import { ScrollPreservation, createDebouncedUpdater } from "@/lib/scrollPreservation";
-import { scrollGuard } from "@/lib/scrollGuard";
 
 export default function Index() {
   const { ready, authenticated, user } = usePrivy();
