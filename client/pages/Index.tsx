@@ -28,6 +28,9 @@ export default function Index() {
   const [requestCount, setRequestCount] = useState(3);
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [tooltipPosition, setTooltipPosition] = useState<{
+    [key: string]: { top?: boolean; left?: boolean }
+  }>({});
 
   // Close mobile menu when clicking outside
   useEffect(() => {
