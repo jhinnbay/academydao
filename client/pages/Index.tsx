@@ -224,6 +224,9 @@ export default function Index() {
             setIsTyping(false);
             // Ensure scroll lock is released when typing completes
             setIsScrollLocked(false);
+            // Restore body scrolling
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
           }
         },
         30, // typing speed
