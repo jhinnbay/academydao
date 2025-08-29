@@ -1008,7 +1008,13 @@ export default function Index() {
           </div>
 
           {/* Daemon Response Section */}
-          <div className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden" style={{ backgroundColor: 'rgba(30, 30, 30, 0.1)', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
+          <div
+            className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden"
+            style={{
+              backgroundColor: "rgba(30, 30, 30, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+            }}
+          >
             <div className="text-center">
               <h2
                 className="text-white font-sans font-bold mb-5 drop-shadow-lg"
