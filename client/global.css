@@ -8,26 +8,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Comprehensive scroll jump prevention */
+/* NUCLEAR SCROLL JUMP PREVENTION */
 html {
   scroll-behavior: auto !important;
   overflow-x: hidden;
+  scroll-snap-type: none !important;
 }
 
 body {
   overflow-x: hidden;
   scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
 }
 
-/* Prevent scroll restoration on history navigation */
+/* Prevent ALL scroll restoration and smooth scrolling */
 * {
-  overscroll-behavior: none;
+  overscroll-behavior: none !important;
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+  scroll-margin: 0 !important;
+  scroll-padding: 0 !important;
 }
 
 /* Prevent layout shifts from causing scroll jumps */
 img, video, iframe, object, embed {
   max-width: 100%;
   height: auto;
+}
+
+/* Prevent any focus behavior that could cause scrolling */
+*:focus {
+  scroll-margin: 0 !important;
+  scroll-behavior: auto !important;
+  outline-offset: 0;
+}
+
+/* Disable ALL anchor link jumping */
+a[href^="#"]:not([href="#"]) {
+  scroll-behavior: auto !important;
+}
+
+/* Prevent ANY element from triggering scroll changes */
+button, input, textarea, select, a {
+  scroll-margin: 0 !important;
+  scroll-behavior: auto !important;
 }
 
 /* Ensure fixed positioning doesn't cause scroll issues */
@@ -37,14 +61,9 @@ img, video, iframe, object, embed {
 
 /* Prevent touch scroll momentum on mobile */
 html, body {
-  -webkit-overflow-scrolling: auto;
-  overscroll-behavior-y: none;
-}
-
-/* Prevent focus-related scroll jumping */
-:focus {
-  scroll-margin: 0;
-  scroll-behavior: auto !important;
+  -webkit-overflow-scrolling: auto !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
 }
 
 /* Modal overlay scroll lock helper */
