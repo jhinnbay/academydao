@@ -132,6 +132,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
               placeholder={`Type your ${activeTab} request to Azura Model Daemon...`}
               className="w-full h-48 bg-gray-900 backdrop-blur-md border border-white/30 rounded-2xl p-4 text-white font-cartograph text-sm resize-none focus:border-white/50 focus:bg-gray-800 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
+              autoFocus={false}
             />
 
             {/* Terminal cursor effect */}
