@@ -983,26 +983,16 @@ export default function Index() {
               {/* Send Azura Your Request Button */}
               <div className="flex justify-center">
                 <button
-                onClick={handleGenerate}
-                disabled={isGenerating || isTyping}
-                className="custom-request-button disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <div id="clip">
-                  <div id="leftArrow" className="arrow"></div>
-                  <div id="rightArrow" className="arrow"></div>
-                  <div id="rightTop" className="corner"></div>
-                  <div id="leftTop" className="corner"></div>
-                  <div id="leftBottom" className="corner"></div>
-                  <div id="rightBottom" className="corner"></div>
-                </div>
-                <span style={{ position: 'relative', zIndex: 10 }}>
+                  onClick={handleGenerate}
+                  disabled={isGenerating || isTyping}
+                  className="btn-70 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   {isGenerating
                     ? "Calculating decision-matrix...."
                     : isTyping
                       ? "Combining elements..."
                       : "send"}
-                </span>
-              </button>
+                </button>
               </div>
               <div className="text-center">
                 <p
