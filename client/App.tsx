@@ -20,6 +20,25 @@ const App = () => (
         theme: "dark",
         accentColor: "#06b6d4",
         logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+        walletList: {
+          style: {
+            "--privy-color-background": "#000000",
+            "--privy-color-foreground": "#ffffff",
+          },
+        },
+      },
+      customAuth: {
+        css: `
+          .privy-modal img[src*="builder.io"] {
+            border-radius: 0.5rem !important;
+          }
+          .privy-dialog-content img[src*="builder.io"] {
+            border-radius: 0.5rem !important;
+          }
+          [data-testid="privy-modal"] img[src*="builder.io"] {
+            border-radius: 0.5rem !important;
+          }
+        `,
       },
       loginMethods: ["wallet", "email", "sms", "farcaster"],
       embeddedWallets: {
