@@ -212,7 +212,6 @@ export default function Index() {
     SoundEffects.playCompleteSound();
   };
 
-
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
       {/* Grainy texture background */}
@@ -793,7 +792,8 @@ export default function Index() {
               </div>
 
               {/* Connection Status Message */}
-              {ready && authenticated &&
+              {ready &&
+                authenticated &&
                 (connectionMessage || isTypingConnection) && (
                   <div
                     className={`font-cartograph leading-[140.628%] mb-10 ${
@@ -815,7 +815,8 @@ export default function Index() {
 
               {/* Default spacing when no connection message */}
               {!(
-                ready && authenticated &&
+                ready &&
+                authenticated &&
                 (connectionMessage || isTypingConnection)
               ) && <div className="mb-8"></div>}
             </div>
