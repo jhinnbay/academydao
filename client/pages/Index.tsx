@@ -38,8 +38,56 @@ export default function Index() {
   // Authentication check
   if (!ready) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="animate-pulse text-white">Loading...</div>
+      <div className="min-h-screen bg-black text-white font-cartograph relative overflow-hidden">
+        {/* Grainy texture background */}
+        <div
+          className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
+            filter:
+              "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
+          }}
+        ></div>
+
+        {/* Matrix-style grid overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="grid grid-cols-12 h-full">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="border-r border-cyan-500/20"></div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            {/* Terminal-style loading */}
+            <div className="bg-black/80 backdrop-blur-md border border-cyan-400/30 rounded-lg p-8 shadow-2xl shadow-cyan-500/20">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse mr-2"></div>
+                <div className="text-cyan-400 font-cartograph text-sm">SYSTEM_INIT</div>
+              </div>
+
+              <div className="font-cartograph text-white/80 mb-4">
+                {">"} Initializing Mental Wealth Academy
+              </div>
+
+              <div className="flex items-center justify-center">
+                <span className="text-cyan-400 font-cartograph mr-2">Loading</span>
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                </div>
+              </div>
+
+              {/* Scanning lines effect */}
+              <div className="mt-4 text-xs text-cyan-300/60 font-cartograph">
+                <div className="animate-pulse">Connecting to Privy authentication...</div>
+                <div className="animate-pulse" style={{animationDelay: '0.5s'}}>Establishing secure connection...</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
