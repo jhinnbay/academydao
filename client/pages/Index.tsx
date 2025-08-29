@@ -967,7 +967,7 @@ export default function Index() {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                           <button
-                            className="flex-1 bg-black border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:bg-amber-900/20 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
+                            className="flex-1 bg-black border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-white/80 hover:bg-amber-900/20 hover:border-amber-400/60 hover:text-white transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
