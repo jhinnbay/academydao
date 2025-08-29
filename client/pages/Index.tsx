@@ -29,7 +29,7 @@ export default function Index() {
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [tooltipPosition, setTooltipPosition] = useState<{
-    [key: string]: { top?: boolean; left?: boolean };
+    [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
 
   // Close mobile menu when clicking outside
