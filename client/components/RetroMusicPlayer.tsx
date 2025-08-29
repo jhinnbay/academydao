@@ -76,9 +76,14 @@ const RetroMusicPlayer = () => {
   };
 
   const seek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
     const rect = e.currentTarget.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
     const newTime = percent * duration;
+
+    audio.currentTime = newTime;
     setCurrentTime(newTime);
   };
 
