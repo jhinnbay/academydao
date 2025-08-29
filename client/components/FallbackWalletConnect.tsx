@@ -45,6 +45,7 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
   const [isConnected, setIsConnected] = useState(false);
   const [address, setAddress] = useState<string>("");
   const [isConnecting, setIsConnecting] = useState(false);
+  const [showMobileOptions, setShowMobileOptions] = useState(false);
 
   const checkTokenOwnership = async (
     walletAddress: string,
