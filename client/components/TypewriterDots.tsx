@@ -4,7 +4,7 @@ interface TypewriterDotsProps {
   className?: string;
 }
 
-export const TypewriterDots: React.FC<TypewriterDotsProps> = ({
+export const TypewriterDots: React.FC<TypewriterDotsProps> = React.memo(({
   className = "",
 }) => {
   const [dots, setDots] = useState("");
@@ -27,4 +27,4 @@ export const TypewriterDots: React.FC<TypewriterDotsProps> = ({
       {dots}
     </span>
   );
-};
+});
