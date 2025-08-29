@@ -872,7 +872,7 @@ export default function Index() {
                     ? "Funding..."
                     : isTyping
                       ? "Processing..."
-                      : "Fund Proposal (0.008 ETH)"}
+                      : "Send Request (0.008 ETH)"}
                 </button>
                 <div className="text-center">
                   <p
