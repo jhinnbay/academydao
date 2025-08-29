@@ -151,19 +151,38 @@
 
   /* Cyberpunk button styling */
   .cyberpunk-button {
-    clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
+    clip-path: polygon(
+      15px 0%,
+      100% 0%,
+      100% calc(100% - 15px),
+      calc(100% - 15px) 100%,
+      0% 100%,
+      0% 15px
+    );
     position: relative;
   }
 
   .cyberpunk-button::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(34, 211, 238, 0.3) 0%, transparent 50%, rgba(34, 211, 238, 0.3) 100%);
-    clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
+    background: linear-gradient(
+      135deg,
+      rgba(34, 211, 238, 0.3) 0%,
+      transparent 50%,
+      rgba(34, 211, 238, 0.3) 100%
+    );
+    clip-path: polygon(
+      15px 0%,
+      100% 0%,
+      100% calc(100% - 15px),
+      calc(100% - 15px) 100%,
+      0% 100%,
+      0% 15px
+    );
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -173,14 +192,21 @@
   }
 
   .cyberpunk-button::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 2px;
     left: 2px;
     right: 2px;
     bottom: 2px;
     background: inherit;
-    clip-path: polygon(13px 0%, 100% 0%, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0% 100%, 0% 13px);
+    clip-path: polygon(
+      13px 0%,
+      100% 0%,
+      100% calc(100% - 13px),
+      calc(100% - 13px) 100%,
+      0% 100%,
+      0% 13px
+    );
     z-index: -1;
   }
 }

@@ -894,8 +894,8 @@ export default function Index() {
                         alt="Document Icon"
                         className="w-6 h-6 object-contain group-hover:brightness-110 transition-all duration-500"
                         style={{
-                          filter: 'brightness(0) invert(1)',
-                          aspectRatio: '1'
+                          filter: "brightness(0) invert(1)",
+                          aspectRatio: "1",
                         }}
                       />
                       {/* Content */}
@@ -945,7 +945,6 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-
 
               {/* Angel Guidance Section */}
               <div className="border border-amber-400/30 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 backdrop-blur-lg p-6 shadow-xl">
