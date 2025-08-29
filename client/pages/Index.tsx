@@ -803,77 +803,7 @@ export default function Index() {
                   className="border-2 border-cyan-400/40 rounded-3xl bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl hover:border-cyan-400/60 hover:from-white/20 hover:to-white/10 hover:shadow-2xl hover:shadow-cyan-400/10 transition-all duration-500 cursor-pointer group shadow-2xl p-6 sm:p-8"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-6">
-                      <div
-                        className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg ${
-                          savedRequest
-                            ? "bg-gradient-to-r from-green-400 to-green-500"
-                            : "bg-gradient-to-r from-cyan-500 to-cyan-600"
-                        }`}
-                      >
-                        {savedRequest ? (
-                          <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M20 6L9 17l-5-5"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        ) : (
-                          <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinejoin="round"
-                            />
-                            <polyline
-                              points="14,2 14,8 20,8"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinejoin="round"
-                            />
-                            <line
-                              x1="16"
-                              y1="13"
-                              x2="8"
-                              y2="13"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <line
-                              x1="16"
-                              y1="17"
-                              x2="8"
-                              y2="17"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                            <polyline
-                              points="10,9 9,9 8,9"
-                              stroke="white"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        )}
-                      </div>
+                    <div className="flex-1">
                       <div>
                         <div
                           className="font-sans font-bold drop-shadow-md mb-2"
@@ -961,22 +891,8 @@ export default function Index() {
 
               {/* Angel Guidance Section */}
               <div className="border border-amber-400/30 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 backdrop-blur-lg p-6 shadow-xl">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 flex items-center justify-center flex-shrink-0">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                        fill="white"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
+                <div className="mb-4">
+                  <div>
                     <h3
                       className="font-sans font-bold text-amber-200 mb-2"
                       style={{
@@ -1039,7 +955,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          Not enough Angels yet? → Invite an Angel to review
+                          Not enough Angels yet? �� Invite an Angel to review
                           your request
                         </p>
 
