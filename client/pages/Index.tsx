@@ -141,7 +141,7 @@ export default function Index() {
       <div
         className="absolute inset-0 opacity-50 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F75149dff047b4596b3ef77b927034fb6?format=webp&width=800')`
+          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`
         }}
       ></div>
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
