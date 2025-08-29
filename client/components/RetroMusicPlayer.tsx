@@ -16,20 +16,49 @@ const RetroMusicPlayer = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
+    // Set audio source
+    audio.src = audioSrc;
+    audio.volume = volume;
+
     const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration || 180);
-        
+    const updateDuration = () => setDuration(audio.duration);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setCurrentTime(0);
+    };
+
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
 
-    // Simulate track duration
-    setDuration(180);
+    // Autoplay when component mounts
+    const playAudio = async () => {
+      try {
+        await audio.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.log('Autoplay failed:', error);
+      }
+    };
+
+    if (audio.readyState >= 3) {
+      playAudio();
+    } else {
+      audio.addEventListener('canplaythrough', playAudio, { once: true });
+    }
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [audioSrc, volume]);
 
   const playPause = () => {
     setIsPlaying(!isPlaying);
