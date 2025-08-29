@@ -27,7 +27,6 @@ export default function Index() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [requestCount, setRequestCount] = useState(3);
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [tooltipPosition, setTooltipPosition] = useState<{
     [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
@@ -45,17 +44,6 @@ export default function Index() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Only capture scroll position when needed, don't interfere with normal scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isGenerating && !isTyping) {
-        setScrollPosition(window.scrollY);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isGenerating, isTyping]);
 
   // Calculate tooltip position based on viewport bounds
   const calculateTooltipPosition = (
@@ -139,17 +127,6 @@ export default function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
-  // Minimal browser scroll restoration management
-  useEffect(() => {
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
-    }
-    return () => {
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "auto";
-      }
-    };
-  }, []);
 
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
