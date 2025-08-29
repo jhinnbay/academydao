@@ -49,9 +49,8 @@ export const PrivyAuth: React.FC = () => {
   return (
     <button
       onClick={login}
-      className="flex justify-center items-center gap-2 border border-white/20 bg-gradient-to-b from-white/10 to-white/10 transition-colors duration-300"
+      className="flex justify-center items-center gap-2 border border-white/20 bg-gradient-to-b from-white/10 to-white/10 bg-black hover:bg-gray-900 transition-colors duration-300"
       style={{
-        backgroundColor: "rgba(34, 75, 184, 1)",
         paddingTop: "8px",
         paddingBottom: "8px",
         paddingLeft: "12px",
