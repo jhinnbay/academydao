@@ -45,6 +45,60 @@ embed {
 a[href^="#"]:not([href="#"]) {
   scroll-behavior: smooth;
 }
+
+/* Custom animated button styles */
+.animated-request-button {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid #fefefe;
+  text-transform: uppercase;
+  color: #fefefe;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: #212121;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.animated-request-button::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% - 12px);
+  background-color: #212121;
+  transition: 0.3s ease-in-out;
+  transform: scaleY(1);
+}
+
+.animated-request-button:hover::before {
+  transform: scaleY(0);
+}
+
+.animated-request-button::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% - 12px);
+  background-color: #212121;
+  transition: 0.3s ease-in-out;
+  transform: scaleX(1);
+  transition-delay: 0.5s;
+}
+
+.animated-request-button:hover::after {
+  transform: scaleX(0);
+}
+
+.animated-request-button span {
+  position: relative;
+  z-index: 3;
+}
 button,
 input,
 textarea,
