@@ -45,6 +45,9 @@ export default function Index() {
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
   const handleGenerate = () => {
+    // Increment request counter
+    setRequestCount(prev => prev + 1);
+
     setIsGenerating(true);
     setIsTyping(false);
     setDisplayedResponse("");
