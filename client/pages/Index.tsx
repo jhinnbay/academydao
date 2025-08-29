@@ -303,7 +303,6 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -317,7 +316,6 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -331,7 +329,6 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -345,7 +342,6 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    e.stopImmediatePropagation();
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -456,8 +452,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      e.stopImmediatePropagation();
+                    e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -471,8 +466,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      e.stopImmediatePropagation();
+                    e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -486,8 +480,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      e.stopImmediatePropagation();
+                    e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -501,8 +494,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                      e.stopPropagation();
-                      e.stopImmediatePropagation();
+                    e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
