@@ -561,22 +561,7 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-                <FallbackWalletConnect
-                  onConnectionChange={handleWalletConnectionChange}
-                  buttonText="Get Started"
-                  buttonClassName="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
-                  buttonStyle={{
-                    paddingTop: "8px",
-                    paddingBottom: "8px",
-                    paddingLeft: "12px",
-                    paddingRight: "12px",
-                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                    lineHeight: "1.6",
-                    fontWeight: "500",
-                    color: "#ffffff",
-                  }}
-                  showConnectionStatus={false}
-                />
+                <WalletConnect onConnectionChange={handleWalletConnectionChange} />
                 {isWalletConnected && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
