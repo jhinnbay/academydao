@@ -208,29 +208,29 @@ export default function Index() {
               <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z" stroke="#ECECEC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="text-white font-sf-pro-display text-lg font-medium">
+              <span className="text-white font-sf-pro-display font-medium" style={{fontSize: '16px'}}>
                 DAIMON / Proposals
               </span>
             </div>
             <div className="flex flex-wrap gap-6 sm:gap-8">
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph text-sm">Proposals Created</span>
-                <span className="text-white font-cartograph text-sm">003</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Proposals Created</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>003</span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph text-sm">Angels Inventory</span>
-                <span className="text-white font-cartograph text-sm">008</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Angels Inventory</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>008</span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph text-sm">Daemon Model</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Daemon Model</span>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-white font-cartograph text-sm">Online</span>
+                  <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Online</span>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph text-sm">USED TOKENS</span>
-                <span className="text-white font-cartograph text-sm">234/34.000</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>USED TOKENS</span>
+                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>234/34.000</span>
               </div>
             </div>
           </div>
