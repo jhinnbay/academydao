@@ -311,10 +311,10 @@ export default function Index() {
                       </svg>
                     </div>
                     <div>
-                      <div className="text-white font-sf-pro text-sm font-medium leading-[22px] drop-shadow-md">
+                      <div className="text-white font-sans font-medium drop-shadow-md" style={{fontSize: '16px', lineHeight: '1.6'}}>
                         Sync Account
                       </div>
-                      <div className="text-white/70 font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white/70 font-sans font-medium" style={{fontSize: '16px', lineHeight: '1.6'}}>
                         Can use another device
                       </div>
                     </div>
