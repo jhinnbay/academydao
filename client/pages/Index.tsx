@@ -864,7 +864,7 @@ export default function Index() {
               </div>
 
               {/* Connection Status Message */}
-              {isWalletConnected &&
+              {ready && authenticated &&
                 (connectionMessage || isTypingConnection) && (
                   <div
                     className={`font-cartograph leading-[140.628%] mb-10 ${
@@ -886,7 +886,7 @@ export default function Index() {
 
               {/* Default spacing when no connection message */}
               {!(
-                isWalletConnected &&
+                ready && authenticated &&
                 (connectionMessage || isTypingConnection)
               ) && <div className="mb-8"></div>}
             </div>
