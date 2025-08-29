@@ -122,6 +122,18 @@ export default function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
+  // Cleanup scroll lock when generation/typing completes
+  useEffect(() => {
+    if (!isGenerating && !isTyping && isScrollLocked) {
+      // Small delay to ensure all DOM updates are complete
+      const timeoutId = setTimeout(() => {
+        setIsScrollLocked(false);
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isGenerating, isTyping, isScrollLocked]);
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
