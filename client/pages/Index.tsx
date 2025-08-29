@@ -610,6 +610,7 @@ export default function Index() {
               {/* Requests with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
+                data-tooltip="requests"
                 onMouseEnter={(e) => handleTooltipShow("requests", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
@@ -648,6 +649,7 @@ export default function Index() {
               {/* Angels with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
+                data-tooltip="angels"
                 onMouseEnter={(e) => handleTooltipShow("angels", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
@@ -687,6 +689,7 @@ export default function Index() {
               {/* Daemon Model with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
+                data-tooltip="daemon"
                 onMouseEnter={(e) => handleTooltipShow("daemon", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
