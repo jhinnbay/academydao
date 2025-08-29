@@ -837,7 +837,7 @@ export default function Index() {
           </div>
 
           {/* Terminal Header Section */}
-          <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl">
+          <div className="border border-white/20 bg-black backdrop-blur-md mb-4 shadow-2xl rounded-2xl">
             <div className="p-5 pb-0">
               <div
                 className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg"
@@ -888,7 +888,7 @@ export default function Index() {
             </div>
 
             {/* Username Section - Secondary/Smaller */}
-            <div className="border-t border-b border-white/20 px-4 py-3 bg-white/5 backdrop-blur-sm">
+            <div className="border-t border-b border-white/20 px-4 py-3 bg-black backdrop-blur-sm">
               <div
                 className="text-white/70 font-cartograph drop-shadow-md"
                 style={{
@@ -906,12 +906,12 @@ export default function Index() {
               <div className="relative">
                 <div
                   onClick={handleOpenModal}
-                  className="border border-white/20 rounded-2xl bg-gradient-to-br from-white/5 to-black/20 backdrop-blur-xl hover:border-white/30 hover:from-white/10 hover:to-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
+                  className="border border-white/20 rounded-2xl bg-black backdrop-blur-xl hover:border-white/30 hover:bg-gray-900 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-6">
                       {/* Notebook Icon */}
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover:from-white/15 group-hover:to-white/10 transition-all duration-500">
+                      <div className="w-12 h-12 rounded-xl bg-black border border-white/20 flex items-center justify-center flex-shrink-0 group-hover:bg-gray-900 transition-all duration-500">
                         <svg
                           width="24"
                           height="24"
@@ -1067,7 +1067,7 @@ export default function Index() {
                     </h3>
                     <div className="space-y-3">
                       {/* Gamification Progress */}
-                      <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 border border-amber-400/20">
+                      <div className="bg-black backdrop-blur-sm rounded-lg p-4 border border-amber-400/20">
                         <div className="flex items-center justify-between mb-2">
                           <span
                             className="font-sans text-white/90"
@@ -1089,7 +1089,7 @@ export default function Index() {
                             0/3
                           </span>
                         </div>
-                        <div className="w-full bg-white/10 rounded-full h-2 mb-3">
+                        <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
                           <div
                             className="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-500"
                             style={{ width: "0%" }}
@@ -1123,7 +1123,7 @@ export default function Index() {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                           <button
-                            className="flex-1 bg-gradient-to-r from-amber-600/30 to-amber-500/20 backdrop-blur-sm border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:from-amber-500/40 hover:to-amber-400/30 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
+                            className="flex-1 bg-black border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:bg-amber-900/20 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
@@ -1133,7 +1133,7 @@ export default function Index() {
                             Invite Angel Reviewer
                           </button>
                           <button
-                            className="flex-1 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/50 hover:text-white transition-all duration-300"
+                            className="flex-1 bg-black backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
