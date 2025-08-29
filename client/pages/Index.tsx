@@ -941,7 +941,7 @@ export default function Index() {
                 <div className="mb-4">
                   <div>
                     <h3
-                      className="font-sans font-bold text-amber-200 mb-2"
+                      className="font-sans font-bold text-white mb-2"
                       style={{
                         fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                         lineHeight: "1.3",
