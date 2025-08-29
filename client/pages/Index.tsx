@@ -475,10 +475,20 @@ export default function Index() {
                       )}
                     </div>
                     <div>
-                      <div className="text-white font-sans font-medium drop-shadow-md" style={{fontSize: '16px', lineHeight: '1.6'}}>
+                      <div className="font-sans font-medium drop-shadow-md" style={{
+                        fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                        lineHeight: '1.6',
+                        fontWeight: '500',
+                        color: '#ffffff'
+                      }}>
                         Input Request Form
                       </div>
-                      <div className="text-white/70 font-sans font-medium" style={{fontSize: '16px', lineHeight: '1.6'}}>
+                      <div className="font-sans font-medium" style={{
+                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                        lineHeight: '1.6',
+                        fontWeight: '400',
+                        color: '#888888'
+                      }}>
                         {savedRequest
                           ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request`
                           : "0xc12c...484F2"}
