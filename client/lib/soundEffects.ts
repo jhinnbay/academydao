@@ -10,180 +10,181 @@ export class SoundEffects {
     return this.audioContext;
   }
 
-  // Generate a cyberpunk typing sound effect with digital glitch
+  // Generate a smooth cyberpunk typing sound - like mechanical keyboard with bass
   static playTypingSound(): void {
     try {
       const ctx = this.getAudioContext();
 
-      // Create multiple oscillators for layered digital sound
-      const osc1 = ctx.createOscillator();
-      const osc2 = ctx.createOscillator();
+      // Bass click with subtle harmonics
+      const bassOsc = ctx.createOscillator();
+      const harmonic = ctx.createOscillator();
       const filter = ctx.createBiquadFilter();
       const gainNode = ctx.createGain();
-      const noiseGain = ctx.createGain();
+      const harmonicGain = ctx.createGain();
 
-      // Configure filter for digital edge
-      filter.type = 'highpass';
-      filter.frequency.setValueAtTime(1200, ctx.currentTime);
-      filter.Q.setValueAtTime(15, ctx.currentTime);
+      // Low-pass filter for warmth
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(800, ctx.currentTime);
+      filter.Q.setValueAtTime(2, ctx.currentTime);
 
-      // Connect oscillators through filter
-      osc1.connect(filter);
-      osc2.connect(noiseGain);
+      bassOsc.connect(filter);
+      harmonic.connect(harmonicGain);
       filter.connect(gainNode);
-      noiseGain.connect(gainNode);
+      harmonicGain.connect(gainNode);
       gainNode.connect(ctx.destination);
 
-      // Sharp digital click frequencies
-      osc1.frequency.setValueAtTime(2400, ctx.currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 0.03);
+      // Deep bass click (like mechanical switch)
+      bassOsc.frequency.setValueAtTime(120, ctx.currentTime);
+      bassOsc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.08);
+      bassOsc.type = 'triangle';
 
-      // Add digital noise burst
-      osc2.frequency.setValueAtTime(4800, ctx.currentTime);
-      osc2.type = 'square';
-      osc1.type = 'sawtooth';
+      // Subtle harmonic for character
+      harmonic.frequency.setValueAtTime(360, ctx.currentTime);
+      harmonic.type = 'sine';
 
-      // Sharp attack, quick decay for digital precision
+      // Smooth envelope
       gainNode.gain.setValueAtTime(0, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.002);
-      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.03);
+      gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.005);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
 
-      noiseGain.gain.setValueAtTime(0.02, ctx.currentTime);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.01);
+      harmonicGain.gain.setValueAtTime(0.02, ctx.currentTime);
+      harmonicGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
 
-      osc1.start(ctx.currentTime);
-      osc2.start(ctx.currentTime);
-      osc1.stop(ctx.currentTime + 0.03);
-      osc2.stop(ctx.currentTime + 0.01);
+      bassOsc.start(ctx.currentTime);
+      harmonic.start(ctx.currentTime);
+      bassOsc.stop(ctx.currentTime + 0.08);
+      harmonic.stop(ctx.currentTime + 0.04);
     } catch (error) {
       console.log("Sound effect not available:", error);
     }
   }
 
-  // Generate a futuristic processing sound with modulated synthesis
+  // Generate a warm, atmospheric processing sound - like servers humming
   static playGenerateSound(): void {
     try {
       const ctx = this.getAudioContext();
 
-      // Create complex synthesis chain for futuristic processing sound
-      const carrier = ctx.createOscillator();
-      const modulator = ctx.createOscillator();
-      const modulatorGain = ctx.createGain();
+      // Deep atmospheric drone with gentle modulation
+      const drone1 = ctx.createOscillator();
+      const drone2 = ctx.createOscillator();
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
       const filter = ctx.createBiquadFilter();
-      const distortion = ctx.createWaveShaper();
       const mainGain = ctx.createGain();
-      const reverbGain = ctx.createGain();
+      const drone2Gain = ctx.createGain();
 
-      // Setup modulation (FM synthesis for digital texture)
-      modulator.frequency.setValueAtTime(7, ctx.currentTime);
-      modulatorGain.gain.setValueAtTime(50, ctx.currentTime);
+      // LFO for gentle modulation
+      lfo.frequency.setValueAtTime(0.3, ctx.currentTime);
+      lfoGain.gain.setValueAtTime(8, ctx.currentTime);
+      lfo.connect(lfoGain);
+      lfoGain.connect(drone1.frequency);
 
-      modulator.connect(modulatorGain);
-      modulatorGain.connect(carrier.frequency);
+      // Warm low frequencies
+      drone1.frequency.setValueAtTime(60, ctx.currentTime);
+      drone1.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.8);
+      drone1.frequency.linearRampToValueAtTime(55, ctx.currentTime + 1.5);
+      drone1.type = 'triangle';
 
-      // Carrier signal with sweeping frequency
-      carrier.frequency.setValueAtTime(120, ctx.currentTime);
-      carrier.frequency.exponentialRampToValueAtTime(280, ctx.currentTime + 0.4);
-      carrier.frequency.exponentialRampToValueAtTime(160, ctx.currentTime + 0.8);
-      carrier.frequency.exponentialRampToValueAtTime(90, ctx.currentTime + 1.2);
-      carrier.type = 'sawtooth';
+      drone2.frequency.setValueAtTime(90, ctx.currentTime);
+      drone2.frequency.linearRampToValueAtTime(110, ctx.currentTime + 1.2);
+      drone2.type = 'sine';
 
-      // Low-pass filter with resonance sweep
+      // Gentle low-pass filtering
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(400, ctx.currentTime);
-      filter.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.6);
-      filter.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 1.2);
-      filter.Q.setValueAtTime(8, ctx.currentTime);
+      filter.frequency.setValueAtTime(200, ctx.currentTime);
+      filter.frequency.linearRampToValueAtTime(400, ctx.currentTime + 0.8);
+      filter.frequency.linearRampToValueAtTime(150, ctx.currentTime + 1.5);
+      filter.Q.setValueAtTime(1, ctx.currentTime);
 
-      // Subtle distortion for digital edge
-      const curve = new Float32Array(256);
-      for (let i = 0; i < 256; i++) {
-        const x = (i - 128) / 128;
-        curve[i] = Math.tanh(x * 2) * 0.8;
-      }
-      distortion.curve = curve;
-
-      // Connect the chain
-      carrier.connect(filter);
-      filter.connect(distortion);
-      distortion.connect(mainGain);
+      // Connect everything
+      drone1.connect(filter);
+      drone2.connect(drone2Gain);
+      filter.connect(mainGain);
+      drone2Gain.connect(mainGain);
       mainGain.connect(ctx.destination);
 
-      // Dynamic gain envelope
+      // Smooth fade in and out
       mainGain.gain.setValueAtTime(0, ctx.currentTime);
-      mainGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
-      mainGain.gain.setValueAtTime(0.08, ctx.currentTime + 0.4);
-      mainGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.8);
-      mainGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+      mainGain.gain.linearRampToValueAtTime(0.04, ctx.currentTime + 0.3);
+      mainGain.gain.setValueAtTime(0.05, ctx.currentTime + 1.0);
+      mainGain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 1.5);
 
-      modulator.start(ctx.currentTime);
-      carrier.start(ctx.currentTime);
-      modulator.stop(ctx.currentTime + 1.2);
-      carrier.stop(ctx.currentTime + 1.2);
+      drone2Gain.gain.setValueAtTime(0.02, ctx.currentTime);
+      drone2Gain.gain.linearRampToValueAtTime(0.03, ctx.currentTime + 0.8);
+      drone2Gain.gain.linearRampToValueAtTime(0.001, ctx.currentTime + 1.5);
+
+      lfo.start(ctx.currentTime);
+      drone1.start(ctx.currentTime);
+      drone2.start(ctx.currentTime);
+      lfo.stop(ctx.currentTime + 1.5);
+      drone1.stop(ctx.currentTime + 1.5);
+      drone2.stop(ctx.currentTime + 1.5);
     } catch (error) {
       console.log("Sound effect not available:", error);
     }
   }
 
-  // Generate a cyberpunk completion sound with digital harmony
+  // Generate a satisfying completion sound - like a synth power-down
   static playCompleteSound(): void {
     try {
       const ctx = this.getAudioContext();
 
-      // Create multiple layers for rich cyberpunk completion sound
-      const createTone = (freq: number, delay: number, duration: number) => {
+      // Create warm, descending synth tones
+      const createSynthTone = (freq: number, delay: number, duration: number, volume: number) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         const filter = ctx.createBiquadFilter();
 
-        // Digital filtering
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(freq * 2, ctx.currentTime + delay);
-        filter.Q.setValueAtTime(5, ctx.currentTime + delay);
+        // Warm low-pass filter
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(freq * 3, ctx.currentTime + delay);
+        filter.Q.setValueAtTime(2, ctx.currentTime + delay);
 
         osc.connect(filter);
         filter.connect(gain);
         gain.connect(ctx.destination);
 
-        osc.type = 'square';
+        osc.type = 'triangle';  // Warmer than square wave
         osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.7, ctx.currentTime + delay + duration);
 
-        // Sharp attack with digital decay
+        // Smooth envelope
         gain.gain.setValueAtTime(0, ctx.currentTime + delay);
-        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + delay + 0.01);
+        gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + delay + 0.02);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
 
         osc.start(ctx.currentTime + delay);
         osc.stop(ctx.currentTime + delay + duration);
       };
 
-      // Cyberpunk chord progression with digital glitch timing
-      createTone(440, 0, 0.2);      // Base frequency
-      createTone(554, 0.05, 0.18);  // Perfect fourth (slightly delayed)
-      createTone(659, 0.08, 0.15);  // Major third (more delayed)
-      createTone(880, 0.12, 0.12);  // Octave (final high note)
+      // Descending bass chord - satisfying resolution
+      createSynthTone(130, 0, 0.4, 0.06);      // Bass note (C3)
+      createSynthTone(165, 0.05, 0.35, 0.04);  // E3
+      createSynthTone(196, 0.08, 0.3, 0.03);   // G3
+      createSynthTone(262, 0.12, 0.25, 0.02);  // C4 (octave)
 
-      // Add digital artifact burst
-      const noise = ctx.createOscillator();
-      const noiseGain = ctx.createGain();
-      const noiseFilter = ctx.createBiquadFilter();
+      // Add subtle bass drop for satisfaction
+      const bassOsc = ctx.createOscillator();
+      const bassGain = ctx.createGain();
+      const bassFilter = ctx.createBiquadFilter();
 
-      noiseFilter.type = 'highpass';
-      noiseFilter.frequency.setValueAtTime(2000, ctx.currentTime + 0.15);
+      bassFilter.type = 'lowpass';
+      bassFilter.frequency.setValueAtTime(100, ctx.currentTime + 0.2);
 
-      noise.connect(noiseFilter);
-      noiseFilter.connect(noiseGain);
-      noiseGain.connect(ctx.destination);
+      bassOsc.connect(bassFilter);
+      bassFilter.connect(bassGain);
+      bassGain.connect(ctx.destination);
 
-      noise.type = 'sawtooth';
-      noise.frequency.setValueAtTime(1760, ctx.currentTime + 0.15);
+      bassOsc.type = 'sine';
+      bassOsc.frequency.setValueAtTime(65, ctx.currentTime + 0.2);
+      bassOsc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.5);
 
-      noiseGain.gain.setValueAtTime(0, ctx.currentTime + 0.15);
-      noiseGain.gain.linearRampToValueAtTime(0.04, ctx.currentTime + 0.16);
-      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+      bassGain.gain.setValueAtTime(0, ctx.currentTime + 0.2);
+      bassGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.25);
+      bassGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
 
-      noise.start(ctx.currentTime + 0.15);
-      noise.stop(ctx.currentTime + 0.22);
+      bassOsc.start(ctx.currentTime + 0.2);
+      bassOsc.stop(ctx.currentTime + 0.5);
 
     } catch (error) {
       console.log("Sound effect not available:", error);
