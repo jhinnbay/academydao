@@ -147,11 +147,23 @@ export default function Index() {
       // Small delay to ensure all DOM updates are complete
       const timeoutId = setTimeout(() => {
         setIsScrollLocked(false);
+        // Ensure body overflow is restored
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
       }, 100);
 
       return () => clearTimeout(timeoutId);
     }
   }, [isGenerating, isTyping, isScrollLocked]);
+
+  // Emergency cleanup to ensure overflow is always restored
+  useEffect(() => {
+    return () => {
+      // Cleanup on unmount
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, []);
 
   // Override browser's scroll restoration
   useEffect(() => {
