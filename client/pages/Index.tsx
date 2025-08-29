@@ -981,7 +981,8 @@ export default function Index() {
               </div>
 
               {/* Send Azura Your Request Button */}
-              <button
+              <div className="flex justify-center">
+                <button
                 onClick={handleGenerate}
                 disabled={isGenerating || isTyping}
                 className="custom-request-button disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1002,6 +1003,7 @@ export default function Index() {
                       : "send"}
                 </span>
               </button>
+              </div>
               <div className="text-center">
                 <p
                   className="font-sans text-white/70"
