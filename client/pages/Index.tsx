@@ -913,22 +913,13 @@ export default function Index() {
             <div className="p-6 sm:p-8 space-y-6">
               {/* Primary Input Request Form Card - Main Focal Point */}
               <div className="relative">
-                <div
-                  onClick={handleOpenModal}
-                  className="border border-white/20 rounded-2xl bg-black backdrop-blur-xl hover:border-white/30 hover:bg-gray-900 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
-                >
-                  <div
-                    className="font-sans font-bold drop-shadow-md mb-2"
-                    style={{
-                      fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
-                      lineHeight: "1.3",
-                      fontWeight: "700",
-                      color: "#ffffff",
-                    }}
+                <div className="text-center p-6 sm:p-8">
+                  <button
+                    onClick={handleOpenModal}
+                    className="animated-request-button"
                   >
-                    Submit a request
-                  </div>
-                  <div className="flex-1"></div>
+                    <span>Submit a request</span>
+                  </button>
                 </div>
               </div>
 
