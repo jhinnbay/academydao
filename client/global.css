@@ -8,6 +8,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Comprehensive scroll jump prevention */
+html {
+  scroll-behavior: auto !important;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: auto !important;
+}
+
+/* Prevent scroll restoration on history navigation */
+* {
+  overscroll-behavior: none;
+}
+
+/* Prevent layout shifts from causing scroll jumps */
+img, video, iframe, object, embed {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure fixed positioning doesn't cause scroll issues */
+.fixed {
+  transform: translateZ(0);
+}
+
+/* Prevent touch scroll momentum on mobile */
+html, body {
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior-y: none;
+}
+
+/* Prevent focus-related scroll jumping */
+:focus {
+  scroll-margin: 0;
+  scroll-behavior: auto !important;
+}
+
+/* Modal overlay scroll lock helper */
+.scroll-locked {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 @layer base {
   /**
    * Tailwind CSS theme
