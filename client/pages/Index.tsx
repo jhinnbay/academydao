@@ -156,7 +156,7 @@ export default function Index() {
         className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
-          filter: 'grayscale(100%) brightness(0.3) contrast(2)',
+          filter: "grayscale(100%) brightness(0.3) contrast(2)",
         }}
       ></div>
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
