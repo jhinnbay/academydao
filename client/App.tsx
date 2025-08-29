@@ -1,16 +1,20 @@
 import "./global.css";
 
+import "./global.css";
+
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Providers } from "@/lib/providers";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
+const queryClient = new QueryClient();
+
 const App = () => (
-  <Providers>
+  <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -22,7 +26,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
-  </Providers>
+  </QueryClientProvider>
 );
 
 // Ensure root is only created once
