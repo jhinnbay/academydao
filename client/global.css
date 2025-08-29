@@ -420,6 +420,7 @@ body {
     right: 0;
     transform: translateY(50%);
     width: 100%;
+    height: 0;
     z-index: -1;
   }
   .btn-70:hover:after {
