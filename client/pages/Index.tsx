@@ -171,6 +171,13 @@ export default function Index() {
         </div>
 
         <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
+          {/* Main Title */}
+          <div className="text-center mb-8">
+            <h1 className="text-white font-sf-pro-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent animate-glow">
+              Onchain Event Planner
+            </h1>
+          </div>
+
           {/* Terminal Header Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
             <div className="p-5 pb-0">
