@@ -1,15 +1,15 @@
-// Comprehensive scroll preservation utility
+// Smooth scroll preservation utility for modals
 export class ScrollPreservation {
   private static scrollPosition = 0;
   private static isPreserving = false;
 
   static preserve(): void {
     if (this.isPreserving) return;
-    
+
     this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
     this.isPreserving = true;
-    
-    // Lock scroll position
+
+    // Gentle scroll lock with smooth restoration
     document.documentElement.style.setProperty('--scroll-y', `${this.scrollPosition}px`);
     document.body.style.position = 'fixed';
     document.body.style.top = `calc(var(--scroll-y) * -1)`;
@@ -19,20 +19,27 @@ export class ScrollPreservation {
 
   static restore(): void {
     if (!this.isPreserving) return;
-    
+
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
     document.body.style.overflowY = '';
-    
-    window.scrollTo(0, this.scrollPosition);
+
+    // Smooth restoration
+    window.scrollTo({
+      top: this.scrollPosition,
+      behavior: 'smooth'
+    });
     this.isPreserving = false;
   }
 
   static forceScrollTo(position: number): void {
     this.scrollPosition = position;
     if (!this.isPreserving) {
-      window.scrollTo(0, position);
+      window.scrollTo({
+        top: position,
+        behavior: 'smooth'
+      });
     }
   }
 }
