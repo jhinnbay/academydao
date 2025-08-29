@@ -592,7 +592,7 @@ export default function Index() {
               {/* Requests with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible("requests")}
+                onMouseEnter={(e) => handleTooltipShow("requests", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -616,13 +616,13 @@ export default function Index() {
                   {requestCount.toString().padStart(3, "0")}
                 </span>
                 {tooltipVisible === "requests" && (
-                  <div className="absolute bottom-full right-0 mb-2 w-56 sm:w-64 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50 transform -translate-x-1/2 sm:translate-x-0 sm:right-0">
+                  <div className={`absolute ${tooltipPosition.requests?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.requests?.left ? 'left-0' : 'right-0'} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
                     <div className="font-medium mb-1">Request Counter</div>
                     <div className="text-white/80">
                       Track how many requests have been made. This counter
                       increments when you click the Generate button.
                     </div>
-                    <div className="absolute top-full right-1/2 sm:right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20 transform translate-x-1/2 sm:translate-x-0"></div>
+                    <div className={`absolute ${tooltipPosition.requests?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.requests?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.requests?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
                   </div>
                 )}
               </div>
@@ -630,7 +630,7 @@ export default function Index() {
               {/* Angels with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible("angels")}
+                onMouseEnter={(e) => handleTooltipShow("angels", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -654,14 +654,14 @@ export default function Index() {
                   008
                 </span>
                 {tooltipVisible === "angels" && (
-                  <div className="absolute bottom-full right-0 mb-2 w-60 sm:w-72 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50 transform -translate-x-1/2 sm:translate-x-0 sm:right-0">
+                  <div className={`absolute ${tooltipPosition.angels?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.angels?.left ? 'left-0' : 'right-0'} w-72 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
                     <div className="font-medium mb-1">Angels</div>
                     <div className="text-white/80">
                       Angels are senior members who review and support your
                       proposals. Gain their backing to strengthen your approval
                       chances.
                     </div>
-                    <div className="absolute top-full right-1/2 sm:right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20 transform translate-x-1/2 sm:translate-x-0"></div>
+                    <div className={`absolute ${tooltipPosition.angels?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.angels?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.angels?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
                   </div>
                 )}
               </div>
@@ -669,7 +669,7 @@ export default function Index() {
               {/* Daemon Model with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible("daemon")}
+                onMouseEnter={(e) => handleTooltipShow("daemon", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -696,13 +696,13 @@ export default function Index() {
                   </span>
                 </div>
                 {tooltipVisible === "daemon" && (
-                  <div className="absolute bottom-full right-0 mb-2 w-56 sm:w-64 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50 transform -translate-x-1/2 sm:translate-x-0 sm:right-0">
+                  <div className={`absolute ${tooltipPosition.daemon?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.daemon?.left ? 'left-0' : 'right-0'} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
                     <div className="font-medium mb-1">Daemon Model</div>
                     <div className="text-white/80">
                       Academy's customer AI Azura - your optimized
                       decision-making assistant for funding and collaboration.
                     </div>
-                    <div className="absolute top-full right-1/2 sm:right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20 transform translate-x-1/2 sm:translate-x-0"></div>
+                    <div className={`absolute ${tooltipPosition.daemon?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.daemon?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.daemon?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
                   </div>
                 )}
               </div>
