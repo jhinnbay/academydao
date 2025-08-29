@@ -125,26 +125,66 @@ export class SoundEffects {
     }
   }
 
-  // Generate a response completion sound
+  // Generate a cyberpunk completion sound with digital harmony
   static playCompleteSound(): void {
     try {
       const ctx = this.getAudioContext();
-      const oscillator = ctx.createOscillator();
-      const gainNode = ctx.createGain();
 
-      oscillator.connect(gainNode);
-      gainNode.connect(ctx.destination);
+      // Create multiple layers for rich cyberpunk completion sound
+      const createTone = (freq: number, delay: number, duration: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
 
-      // Success chime (ascending notes)
-      oscillator.frequency.setValueAtTime(440, ctx.currentTime);
-      oscillator.frequency.setValueAtTime(550, ctx.currentTime + 0.1);
-      oscillator.frequency.setValueAtTime(660, ctx.currentTime + 0.2);
+        // Digital filtering
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(freq * 2, ctx.currentTime + delay);
+        filter.Q.setValueAtTime(5, ctx.currentTime + delay);
 
-      gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
 
-      oscillator.start(ctx.currentTime);
-      oscillator.stop(ctx.currentTime + 0.3);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+
+        // Sharp attack with digital decay
+        gain.gain.setValueAtTime(0, ctx.currentTime + delay);
+        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + delay + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + duration);
+      };
+
+      // Cyberpunk chord progression with digital glitch timing
+      createTone(440, 0, 0.2);      // Base frequency
+      createTone(554, 0.05, 0.18);  // Perfect fourth (slightly delayed)
+      createTone(659, 0.08, 0.15);  // Major third (more delayed)
+      createTone(880, 0.12, 0.12);  // Octave (final high note)
+
+      // Add digital artifact burst
+      const noise = ctx.createOscillator();
+      const noiseGain = ctx.createGain();
+      const noiseFilter = ctx.createBiquadFilter();
+
+      noiseFilter.type = 'highpass';
+      noiseFilter.frequency.setValueAtTime(2000, ctx.currentTime + 0.15);
+
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+
+      noise.type = 'sawtooth';
+      noise.frequency.setValueAtTime(1760, ctx.currentTime + 0.15);
+
+      noiseGain.gain.setValueAtTime(0, ctx.currentTime + 0.15);
+      noiseGain.gain.linearRampToValueAtTime(0.04, ctx.currentTime + 0.16);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+
+      noise.start(ctx.currentTime + 0.15);
+      noise.stop(ctx.currentTime + 0.22);
+
     } catch (error) {
       console.log("Sound effect not available:", error);
     }
