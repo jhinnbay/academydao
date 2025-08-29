@@ -16,8 +16,16 @@
       "dest": "/dist/server/node-build.mjs"
     },
     {
-      "src": "/(.*)",
+      "src": "/assets/(.*)",
+      "dest": "/dist/spa/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
       "dest": "/dist/spa/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/spa/index.html"
     }
   ],
   "outputDirectory": "dist"
