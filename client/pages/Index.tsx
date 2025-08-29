@@ -235,7 +235,7 @@ export default function Index() {
       <div
         className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
+          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F8e9f72a9d4a246798983ea682efbc588?format=webp&width=800')`,
           filter:
             "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
         }}
