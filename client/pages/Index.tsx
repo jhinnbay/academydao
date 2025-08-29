@@ -887,7 +887,10 @@ export default function Index() {
                   fontWeight: "400",
                 }}
               >
-                {">"} Username: jhinnbay.eth
+                {">"} Username: {isWalletConnected && walletAddress
+                  ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                  : "Not Connected"
+                }
               </div>
             </div>
 
