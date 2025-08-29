@@ -18,7 +18,7 @@ export default function Index() {
 
   // Debounced updater for typing animation to prevent scroll jumping
   const debouncedSetDisplayedResponse = useMemo(
-    () => createDebouncedUpdater(setDisplayedResponse, 50),
+    () => createDebouncedUpdater(setDisplayedResponse, 16),
     []
   );
   const [savedRequest, setSavedRequest] = useState<{
