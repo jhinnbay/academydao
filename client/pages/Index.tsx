@@ -381,8 +381,8 @@ export default function Index() {
                       fontWeight: "500",
                     }}
                   >
-                    {isWalletConnected && walletAddress
-                      ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+                    {ready && authenticated && user?.wallet?.address
+                      ? `${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}`
                       : "Connect Wallet"}
                   </span>
                 </div>
