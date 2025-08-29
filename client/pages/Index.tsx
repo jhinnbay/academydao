@@ -921,7 +921,7 @@ export default function Index() {
               </div>
 
               {/* Angel Guidance Section */}
-              <div className="border border-white/30 rounded-2xl bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl">
+              <div className="border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
                 <div className="mb-4">
                   <div>
                     <h3
@@ -945,23 +945,13 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          No Angels detected? Mint to boost.
+                          No Angel(s) found, buy one to boost.
                         </p>
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                           <button
-                            className="flex-1 bg-black border border-white/40 rounded-xl px-4 py-3 font-sans font-semibold text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "600",
-                            }}
-                          >
-                            Purchase a Membership Token
-                          </button>
-                          <button
-                            className="flex-1 bg-black backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300"
+                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
@@ -969,6 +959,16 @@ export default function Index() {
                             }}
                           >
                             Learn More
+                          </button>
+                          <button
+                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300 overflow-hidden"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Buy Angel
                           </button>
                         </div>
                       </div>
@@ -1000,7 +1000,7 @@ export default function Index() {
                     fontWeight: "400",
                   }}
                 >
-                  Fees power the agent and member's time
+                  Skip submission fee by grabbing an angel
                   <br />
                 </p>
               </div>
