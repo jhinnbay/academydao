@@ -655,7 +655,7 @@ export default function Index() {
                 Academy Initiation Tests
               </span>
             </div>
-            <div className="flex flex-wrap gap-6 sm:gap-8">
+            <div className="flex justify-between items-center w-full">
               {/* Requests with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
