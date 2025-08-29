@@ -911,7 +911,7 @@ export default function Index() {
                             color: "#ffffff",
                           }}
                         >
-                          Schedule Request
+                          Create a Proposal
                         </div>
                         <div
                           className="font-sans"
@@ -924,7 +924,7 @@ export default function Index() {
                         >
                           {savedRequest
                             ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request Saved`
-                            : "Create your request"}
+                            : "Submit your request"}
                         </div>
                       </div>
                     </div>
