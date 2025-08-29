@@ -174,6 +174,9 @@ export default function Index() {
 
   // NUCLEAR SCROLL JUMP PREVENTION
   useEffect(() => {
+    // Start ultimate scroll guard
+    scrollGuard.start();
+
     let currentScrollPosition = window.scrollY;
 
     // Capture and restore scroll position on ANY scroll event
@@ -182,8 +185,10 @@ export default function Index() {
       if (Math.abs(newPosition - currentScrollPosition) > 100) {
         // If scroll jumped more than 100px, restore position
         window.scrollTo(0, currentScrollPosition);
+        scrollGuard.updatePosition();
       } else {
         currentScrollPosition = newPosition;
+        scrollGuard.updatePosition();
       }
     };
 
