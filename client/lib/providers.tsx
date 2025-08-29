@@ -20,7 +20,7 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
   return (
     <PrivyProvider
-      appId="cmex4tmt200k5ju0aorv4f5od"
+      appId={import.meta.env.VITE_PRIVY_APP_ID || "cmex4tmt200k5ju0aorv4f5od"}
       config={{
         loginMethods: ['wallet', 'email', 'google', 'twitter', 'farcaster'],
         appearance: {
