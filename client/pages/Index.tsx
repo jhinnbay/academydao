@@ -165,13 +165,9 @@ export default function Index() {
         daemonResponse,
         (char, isComplete) => {
           if (!isComplete) {
-            React.startTransition(() => {
-              setDisplayedResponse((prev) => prev + char);
-            });
+            debouncedSetDisplayedResponse((prev: string) => prev + char);
           } else {
-            React.startTransition(() => {
-              setIsTyping(false);
-            });
+            setIsTyping(false);
           }
         },
         30, // typing speed
