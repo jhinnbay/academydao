@@ -120,29 +120,7 @@ export default function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
-  // Cleanup scroll lock when generation/typing completes
-  useEffect(() => {
-    if (!isGenerating && !isTyping && isScrollLocked) {
-      // Small delay to ensure all DOM updates are complete
-      const timeoutId = setTimeout(() => {
-        setIsScrollLocked(false);
-        // Ensure body overflow is restored
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-      }, 100);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isGenerating, isTyping, isScrollLocked]);
-
-  // Emergency cleanup to ensure overflow is always restored
-  useEffect(() => {
-    return () => {
-      // Cleanup on unmount
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    };
-  }, []);
+  // No cleanup needed for simple approach
 
   // Override browser's scroll restoration
   useEffect(() => {
