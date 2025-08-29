@@ -181,14 +181,32 @@ export default function Index() {
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 pb-8 mb-8 gap-8">
             <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
-              <h1 className="text-white font-sf-pro-display font-extrabold leading-[140.628%] tracking-wider" style={{fontSize: '36px'}}>
+              <h1 className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
+                  style={{
+                    fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
+                    lineHeight: '1.1',
+                    letterSpacing: '-0.02em',
+                    fontWeight: '700',
+                    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1'
+                  }}>
                 Hello! I'm Azura... Running Decision-Matrix Analysis.
               </h1>
-              <p className="text-white font-sf-pro-display font-normal leading-[140.628%] tracking-wide" style={{fontSize: '24px'}}>
+              <p className="font-sans"
+                 style={{
+                   fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
+                   lineHeight: '1.6',
+                   fontWeight: '400',
+                   color: '#b0b0b0'
+                 }}>
                 Welcome to the Mental Wealth Academy simulation core! Let's initiate your first governance protocol. Your Move—draft a proposal through my interface. I'll run neural coherence diagnostics and, if it resonates with our institutional frequency, add alignment tokens. Ready to architect reality?
               </p>
               <button className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300" style={{paddingTop: '8px', paddingBottom: '8px', paddingLeft: '12px', paddingRight: '12px'}}>
-                <span className="text-white font-sf-pro-display font-medium" style={{fontSize: '16px'}}>
+                <span className="font-sans" style={{
+                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                  lineHeight: '1.6',
+                  fontWeight: '500',
+                  color: '#ffffff'
+                }}>
                   Let's Begin
                 </span>
               </button>
