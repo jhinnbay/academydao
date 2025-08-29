@@ -448,13 +448,13 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl animate-float">
             <div className="text-center">
-              <h2 className="text-white font-sf-pro-display text-base font-bold leading-[140.628%] mb-5 drop-shadow-lg">
+              <h2 className="text-white font-sans font-bold mb-5 drop-shadow-lg" style={{fontSize: '24px', lineHeight: '1.1', letterSpacing: '-0.02em'}}>
                 Daemon Response
               </h2>
 
               {showResponse && (
                 <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-2xl">
-                  <div className="bg-white/10 backdrop-blur-md p-4 text-white font-cartograph text-sm leading-[140.628%] text-left rounded-xl border border-white/20 shadow-lg">
+                  <div className="bg-white/10 backdrop-blur-md p-4 text-white font-cartograph text-left rounded-xl border border-white/20 shadow-lg" style={{fontSize: '16px', lineHeight: '1.6'}}>
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">
@@ -476,7 +476,7 @@ export default function Index() {
 
               {/* Terminal-style Action Buttons */}
               <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-2xl shadow-2xl">
-                <div className="text-white font-cartograph text-sm leading-[140.628%] space-y-1">
+                <div className="text-white font-cartograph space-y-1" style={{fontSize: '16px', lineHeight: '1.6'}}>
                   <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
                     {">"} DECISION
                   </button>
