@@ -199,6 +199,8 @@ export default function Index() {
             setDisplayedResponse((prev) => prev + char);
           } else {
             setIsTyping(false);
+            // Ensure scroll lock is released when typing completes
+            setIsScrollLocked(false);
           }
         },
         30, // typing speed
