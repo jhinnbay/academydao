@@ -550,7 +550,7 @@ export default function Index() {
                   fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
                 }}
               >
-                Align Your Academic Path
+                Welcome To The Horizon
               </h1>
               <p
                 className="font-sans"
@@ -561,11 +561,14 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                Request a meeting with our team to get initiated. I'm Azura,
-                your optimized decision-making model matrix funding and
-                collaboration assistant. Setup the perfect team meeting or aide
-                for your next breakthrough, I'll analyze and connect you with
-                the right resources.
+                <p>
+                  I'm Azura, your advanced augmented simulation designed to
+                  facilitate structure and growth within the Academy.
+                  Schedule the next team meeting and I'll send a proposal to
+                  create a Google Meet, or aide you with funds for your next
+                  breakthrough, whatever it is, I'll analyze and connect you
+                  with the right resources.
+                </p>
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
