@@ -39,8 +39,21 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-black backdrop-blur-2xl border border-white/30 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+    <div
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      style={{ top: '0', left: '0' }}
+      onMouseDown={(e) => {
+        // Prevent any scroll events from bubbling up
+        e.stopPropagation();
+      }}
+    >
+      <div
+        className="bg-black backdrop-blur-2xl border border-white/30 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl"
+        onMouseDown={(e) => {
+          // Prevent modal content clicks from affecting page scroll
+          e.stopPropagation();
+        }}
+      >
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/30 bg-black backdrop-blur-lg">
           <h2 className="text-white font-sf-pro-display text-xl font-bold">
