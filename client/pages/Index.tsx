@@ -935,7 +935,7 @@ export default function Index() {
                             color: "#ffffff",
                           }}
                         >
-                          Create a Proposal
+                          Submit a request
                         </div>
                         <div
                           className="font-sans"
@@ -948,7 +948,7 @@ export default function Index() {
                         >
                           {savedRequest
                             ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request Saved`
-                            : "Submit your request"}
+                            : "Just fill out the form"}
                         </div>
                       </div>
                     </div>
@@ -997,7 +997,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          No Angels detected? Mint to boost your cause.
+                          No Angels detected? Mint to boost.
                         </p>
 
                         {/* Action Buttons */}
@@ -1010,7 +1010,7 @@ export default function Index() {
                               fontWeight: "600",
                             }}
                           >
-                            Purchase Membership Token
+                            Purchase a Membership Token
                           </button>
                           <button
                             className="flex-1 bg-black backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300"
