@@ -713,7 +713,7 @@ export default function Index() {
 
               {/* Angels with Tooltip */}
               <div
-                className="flex flex-col items-end gap-1 relative cursor-help"
+                className="flex flex-col items-center gap-1 relative cursor-help"
                 data-tooltip="angels"
                 onMouseEnter={(e) => handleTooltipShow("angels", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
