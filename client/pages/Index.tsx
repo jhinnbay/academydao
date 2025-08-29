@@ -32,7 +32,6 @@ export default function Index() {
     [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
 
-
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
