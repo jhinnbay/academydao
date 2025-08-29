@@ -14,6 +14,12 @@ export default function Index() {
   const [showResponse, setShowResponse] = useState(true);
   const [displayedResponse, setDisplayedResponse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Debounced updater for typing animation to prevent scroll jumping
+  const debouncedSetDisplayedResponse = useMemo(
+    () => createDebouncedUpdater(setDisplayedResponse, 50),
+    []
+  );
   const [savedRequest, setSavedRequest] = useState<{
     type: "funding" | "events";
     content: string;
