@@ -296,8 +296,13 @@ export default function Index() {
               <div className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg" style={{fontSize: '16px'}}>
                 {">"} AZURA MODEL DAEMON
               </div>
-              <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-2.5">
-                <span className="text-white">{"|"} </span>
+              <div className="font-cartograph mb-2.5" style={{
+                fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                lineHeight: '1.6',
+                fontWeight: '400',
+                color: '#b0b0b0'
+              }}>
+                <span style={{color: '#ffffff'}}>{"|"} </span>
                 Sync account with Angel
                 <TypewriterDots className="text-white/80" />
               </div>
