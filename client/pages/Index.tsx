@@ -141,7 +141,7 @@ export default function Index() {
       <div
         className="absolute inset-0 opacity-50 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`
+          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
         }}
       ></div>
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
@@ -181,32 +181,51 @@ export default function Index() {
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 mb-8 gap-8">
             <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
-              <h1 className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
-                  style={{
-                    fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
-                    lineHeight: '1.1',
-                    letterSpacing: '-0.02em',
-                    fontWeight: '700',
-                    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1'
-                  }}>
+              <h1
+                className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
+                style={{
+                  fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                  fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+                }}
+              >
                 Align Your Academic Path
               </h1>
-              <p className="font-sans"
-                 style={{
-                   fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
-                   lineHeight: '1.6',
-                   fontWeight: '400',
-                   color: '#b0b0b0'
-                 }}>
-                Request a meeting with our team to get initiated. I'm Azura, your optimized decision-making model matrix funding and collaboration assistant. Setup the perfect team meeting or aide for your next breakthrough, I'll analyze and connect you with the right resources.
+              <p
+                className="font-sans"
+                style={{
+                  fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                  lineHeight: "1.6",
+                  fontWeight: "400",
+                  color: "#b0b0b0",
+                }}
+              >
+                Request a meeting with our team to get initiated. I'm Azura,
+                your optimized decision-making model matrix funding and
+                collaboration assistant. Setup the perfect team meeting or aide
+                for your next breakthrough, I'll analyze and connect you with
+                the right resources.
               </p>
-              <button className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300" style={{paddingTop: '8px', paddingBottom: '8px', paddingLeft: '12px', paddingRight: '12px'}}>
-                <span className="font-sans" style={{
-                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                  lineHeight: '1.6',
-                  fontWeight: '500',
-                  color: '#ffffff'
-                }}>
+              <button
+                className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+                style={{
+                  paddingTop: "8px",
+                  paddingBottom: "8px",
+                  paddingLeft: "12px",
+                  paddingRight: "12px",
+                }}
+              >
+                <span
+                  className="font-sans"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.6",
+                    fontWeight: "500",
+                    color: "#ffffff",
+                  }}
+                >
                   Get Started
                 </span>
               </button>
@@ -223,56 +242,101 @@ export default function Index() {
           {/* Header Stats */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">
-              <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z" stroke="#ECECEC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z"
+                  stroke="#ECECEC"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
-              <span className="font-sans" style={{
-                fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                lineHeight: '1.6',
-                fontWeight: '500',
-                color: '#ffffff'
-              }}>
+              <span
+                className="font-sans"
+                style={{
+                  fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                  lineHeight: "1.6",
+                  fontWeight: "500",
+                  color: "#ffffff",
+                }}
+              >
                 DAIMON / Proposals
               </span>
             </div>
             <div className="flex flex-wrap gap-6 sm:gap-8">
               <div className="flex flex-col items-end gap-1">
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#888888'
-                }}>Proposals Created</span>
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#ffffff'
-                }}>003</span>
+                <span
+                  className="font-cartograph"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontWeight: "400",
+                    color: "#888888",
+                  }}
+                >
+                  Proposals Created
+                </span>
+                <span
+                  className="font-cartograph"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontWeight: "400",
+                    color: "#ffffff",
+                  }}
+                >
+                  003
+                </span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#888888'
-                }}>Angels Inventory</span>
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#ffffff'
-                }}>008</span>
+                <span
+                  className="font-cartograph"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontWeight: "400",
+                    color: "#888888",
+                  }}
+                >
+                  Angels Inventory
+                </span>
+                <span
+                  className="font-cartograph"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontWeight: "400",
+                    color: "#ffffff",
+                  }}
+                >
+                  008
+                </span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#888888'
-                }}>Daemon Model</span>
+                <span
+                  className="font-cartograph"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontWeight: "400",
+                    color: "#888888",
+                  }}
+                >
+                  Daemon Model
+                </span>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="font-cartograph" style={{
-                    fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                    fontWeight: '400',
-                    color: '#ffffff'
-                  }}>Online</span>
+                  <span
+                    className="font-cartograph"
+                    style={{
+                      fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                      fontWeight: "400",
+                      color: "#ffffff",
+                    }}
+                  >
+                    Online
+                  </span>
                 </div>
               </div>
             </div>
@@ -281,16 +345,22 @@ export default function Index() {
           {/* Terminal Header Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
             <div className="p-5 pb-0">
-              <div className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg" style={{fontSize: '16px'}}>
+              <div
+                className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg"
+                style={{ fontSize: "16px" }}
+              >
                 {">"} AZURA MODEL DAEMON
               </div>
-              <div className="font-cartograph mb-2.5" style={{
-                fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                lineHeight: '1.6',
-                fontWeight: '400',
-                color: '#b0b0b0'
-              }}>
-                <span style={{color: '#ffffff'}}>{"|"} </span>
+              <div
+                className="font-cartograph mb-2.5"
+                style={{
+                  fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                  lineHeight: "1.6",
+                  fontWeight: "400",
+                  color: "#b0b0b0",
+                }}
+              >
+                <span style={{ color: "#ffffff" }}>{"|"} </span>
                 Sync account with Angel
                 <TypewriterDots className="text-white/80" />
               </div>
@@ -306,7 +376,7 @@ export default function Index() {
                           ? "text-red-300"
                           : "text-white/80"
                     }`}
-                    style={{fontSize: '16px'}}
+                    style={{ fontSize: "16px" }}
                   >
                     <span className="text-white">{"|"} </span>
                     {connectionMessage}
@@ -324,8 +394,14 @@ export default function Index() {
             </div>
 
             {/* Username Section */}
-            <div className="border-t border-b border-white/30 px-2.5 bg-white/5 backdrop-blur-sm" style={{height: '250px'}}>
-              <div className="text-white/90 font-cartograph leading-[140.628%] drop-shadow-md flex items-center h-full" style={{fontSize: '16px'}}>
+            <div
+              className="border-t border-b border-white/30 px-2.5 bg-white/5 backdrop-blur-sm"
+              style={{ height: "250px" }}
+            >
+              <div
+                className="text-white/90 font-cartograph leading-[140.628%] drop-shadow-md flex items-center h-full"
+                style={{ fontSize: "16px" }}
+              >
                 {">"} Username: jhinnbay.eth
               </div>
             </div>
@@ -359,20 +435,26 @@ export default function Index() {
                       </svg>
                     </div>
                     <div>
-                      <div className="font-sans font-medium drop-shadow-md" style={{
-                        fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '500',
-                        color: '#ffffff'
-                      }}>
+                      <div
+                        className="font-sans font-medium drop-shadow-md"
+                        style={{
+                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                          lineHeight: "1.6",
+                          fontWeight: "500",
+                          color: "#ffffff",
+                        }}
+                      >
                         Sync Account
                       </div>
-                      <div className="font-sans font-medium" style={{
-                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '400',
-                        color: '#888888'
-                      }}>
+                      <div
+                        className="font-sans font-medium"
+                        style={{
+                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                          lineHeight: "1.6",
+                          fontWeight: "400",
+                          color: "#888888",
+                        }}
+                      >
                         Can use another device
                       </div>
                     </div>
@@ -463,20 +545,26 @@ export default function Index() {
                       )}
                     </div>
                     <div>
-                      <div className="font-sans font-medium drop-shadow-md" style={{
-                        fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '500',
-                        color: '#ffffff'
-                      }}>
+                      <div
+                        className="font-sans font-medium drop-shadow-md"
+                        style={{
+                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                          lineHeight: "1.6",
+                          fontWeight: "500",
+                          color: "#ffffff",
+                        }}
+                      >
                         Input Request Form
                       </div>
-                      <div className="font-sans font-medium" style={{
-                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '400',
-                        color: '#888888'
-                      }}>
+                      <div
+                        className="font-sans font-medium"
+                        style={{
+                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                          lineHeight: "1.6",
+                          fontWeight: "400",
+                          color: "#888888",
+                        }}
+                      >
                         {savedRequest
                           ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request`
                           : "0xc12c...484F2"}
@@ -491,9 +579,9 @@ export default function Index() {
                           : "text-white/80 group-hover:text-white"
                       }`}
                       style={{
-                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                        lineHeight: '1.6',
-                        fontWeight: '500'
+                        fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                        lineHeight: "1.6",
+                        fontWeight: "500",
                       }}
                     >
                       {savedRequest ? "Saved" : "Open"}
@@ -508,14 +596,14 @@ export default function Index() {
                 disabled={isGenerating || isTyping}
                 className="w-full bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-600/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
                 style={{
-                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                  lineHeight: '1.6',
-                  fontWeight: '600',
-                  color: '#ffffff',
-                  paddingTop: '16px',
-                  paddingBottom: '16px',
-                  paddingLeft: '24px',
-                  paddingRight: '24px'
+                  fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                  lineHeight: "1.6",
+                  fontWeight: "600",
+                  color: "#ffffff",
+                  paddingTop: "16px",
+                  paddingBottom: "16px",
+                  paddingLeft: "24px",
+                  paddingRight: "24px",
                 }}
               >
                 {isGenerating
@@ -530,18 +618,28 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl animate-float">
             <div className="text-center">
-              <h2 className="text-white font-sans font-bold mb-5 drop-shadow-lg" style={{fontSize: '24px', lineHeight: '1.1', letterSpacing: '-0.02em'}}>
+              <h2
+                className="text-white font-sans font-bold mb-5 drop-shadow-lg"
+                style={{
+                  fontSize: "24px",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                }}
+              >
                 Daemon Response
               </h2>
 
               {showResponse && (
                 <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-2xl">
-                  <div className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded-xl border border-white/20 shadow-lg" style={{
-                    fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                    lineHeight: '1.6',
-                    fontWeight: '400',
-                    color: '#b0b0b0'
-                  }}>
+                  <div
+                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded-xl border border-white/20 shadow-lg"
+                    style={{
+                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                      lineHeight: "1.6",
+                      fontWeight: "400",
+                      color: "#b0b0b0",
+                    }}
+                  >
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">
@@ -563,28 +661,37 @@ export default function Index() {
 
               {/* Terminal-style Action Buttons */}
               <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-2xl shadow-2xl">
-                <div className="font-cartograph space-y-1" style={{
-                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
-                  lineHeight: '1.6',
-                  fontWeight: '400',
-                  color: '#b0b0b0'
-                }}>
-                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
-                          style={{color: '#b0b0b0'}}
-                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
+                <div
+                  className="font-cartograph space-y-1"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.6",
+                    fontWeight: "400",
+                    color: "#b0b0b0",
+                  }}
+                >
+                  <button
+                    className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                    style={{ color: "#b0b0b0" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
+                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                  >
                     {">"} DECISION
                   </button>
-                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
-                          style={{color: '#b0b0b0'}}
-                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
+                  <button
+                    className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                    style={{ color: "#b0b0b0" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
+                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                  >
                     {">"} VIEW PROP
                   </button>
-                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
-                          style={{color: '#b0b0b0'}}
-                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
-                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
+                  <button
+                    className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                    style={{ color: "#b0b0b0" }}
+                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
+                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                  >
                     {">"} SHARE PROP
                   </button>
                 </div>
