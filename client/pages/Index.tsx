@@ -27,6 +27,7 @@ export default function Index() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [requestCount, setRequestCount] = useState(3);
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -41,10 +42,30 @@ export default function Index() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  // Preserve scroll position during state updates
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Prevent auto-scroll to top on state changes
+  useEffect(() => {
+    if (scrollPosition > 0 && (isGenerating || isTyping)) {
+      window.scrollTo(0, scrollPosition);
+    }
+  }, [isGenerating, isTyping, scrollPosition]);
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
   const handleGenerate = () => {
+    // Store current scroll position before state changes
+    const currentScroll = window.scrollY;
+
     // Increment request counter
     setRequestCount((prev) => prev + 1);
 
@@ -55,6 +76,11 @@ export default function Index() {
 
     // Play generation sound
     SoundEffects.playGenerateSound();
+
+    // Restore scroll position immediately
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScroll);
+    });
 
     // Simulate generation delay
     setTimeout(() => {
@@ -654,7 +680,7 @@ export default function Index() {
           </div>
 
           {/* Terminal Header Section */}
-          <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
+          <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl">
             <div className="p-5 pb-0">
               <div
                 className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg"
@@ -998,7 +1024,7 @@ export default function Index() {
           </div>
 
           {/* Daemon Response Section */}
-          <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl animate-float">
+          <div className="border border-white/20 bg-white/10 backdrop-blur-md min-h-[400px] p-6 sm:p-8 md:p-10 lg:p-12 sm:min-h-[500px] md:min-h-[600px] shadow-2xl rounded-3xl">
             <div className="text-center">
               <h2
                 className="text-white font-sans font-bold mb-5 drop-shadow-lg"
