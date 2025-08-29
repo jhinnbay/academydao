@@ -69,7 +69,7 @@ a[href^="#"]:not([href="#"]) {
   left: -2px;
   width: calc(100% + 4px);
   height: calc(100% - 12px);
-  background-color: #212121;
+  background-color: rgba(0, 0, 0, 1);
   transition: 0.3s ease-in-out;
   transform: scaleY(1);
 }
