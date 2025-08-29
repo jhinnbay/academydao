@@ -518,7 +518,17 @@ export default function Index() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || isTyping}
-                className="w-full h-14 px-16 py-4 bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl text-white font-sf-pro-display text-lg sm:text-xl font-semibold leading-[140.628%] hover:from-gray-700/60 hover:via-gray-600/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed sm:h-16 md:h-18 shadow-2xl"
+                className="w-full bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-600/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
+                style={{
+                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                  lineHeight: '1.6',
+                  fontWeight: '600',
+                  color: '#ffffff',
+                  paddingTop: '16px',
+                  paddingBottom: '16px',
+                  paddingLeft: '24px',
+                  paddingRight: '24px'
+                }}
               >
                 {isGenerating
                   ? "Generating..."
