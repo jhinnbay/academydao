@@ -275,18 +275,6 @@ export default function Index() {
                   }}>Online</span>
                 </div>
               </div>
-              <div className="flex flex-col items-end gap-1">
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#888888'
-                }}>USED TOKENS</span>
-                <span className="font-cartograph" style={{
-                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                  fontWeight: '400',
-                  color: '#ffffff'
-                }}>234/34.000</span>
-              </div>
             </div>
           </div>
 
