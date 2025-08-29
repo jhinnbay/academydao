@@ -216,11 +216,11 @@ export default function Index() {
         const currentPos = window.scrollY;
         const diff = Math.abs(currentPos - preservedScrollPosition);
 
-        if (diff > 200) {
-          // Only prevent major jumps
+        if (diff > 50) {
+          // Prevent scroll jumps during generation/typing
           window.scrollTo({
             top: preservedScrollPosition,
-            behavior: "smooth",
+            behavior: "instant",
           });
         }
       } else {
