@@ -159,6 +159,8 @@ export default function Index() {
             currentText += char;
             debouncedSetDisplayedResponse(currentText);
           } else {
+            // Ensure final text is displayed immediately
+            setDisplayedResponse(daemonResponse);
             setIsTyping(false);
           }
         },
