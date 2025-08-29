@@ -45,27 +45,17 @@ export default function Index() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Preserve scroll position during state updates
+  // Only capture scroll position when needed, don't interfere with normal scrolling
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+      if (!isGenerating && !isTyping) {
+        setScrollPosition(window.scrollY);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Simple scroll position preservation - only restore once after button click
-  useEffect(() => {
-    if (scrollPosition > 0 && isGenerating && !isTyping) {
-      // Only restore position once at the start of generation, then allow normal scrolling
-      const timeoutId = setTimeout(() => {
-        window.scrollTo({ top: scrollPosition, behavior: 'instant' });
-      }, 100);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isGenerating, scrollPosition]);
+  }, [isGenerating, isTyping]);
 
   // Calculate tooltip position based on viewport bounds
   const calculateTooltipPosition = (
@@ -117,14 +107,11 @@ export default function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
-  // No cleanup needed for simple approach
-
-  // Keep browser scroll restoration disabled to prevent auto-restore
+  // Minimal browser scroll restoration management
   useEffect(() => {
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
-
     return () => {
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "auto";
@@ -136,24 +123,24 @@ export default function Index() {
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
   const handleGenerate = () => {
-    // Store current scroll position before state changes
-    const currentScroll = window.scrollY;
-    setScrollPosition(currentScroll);
-
-    // Simple state updates
-    setRequestCount((prev) => prev + 1);
-    setIsGenerating(true);
-    setIsTyping(false);
-    setDisplayedResponse("");
-    setShowResponse(true);
+    // Batch state updates to prevent multiple renders
+    React.startTransition(() => {
+      setRequestCount((prev) => prev + 1);
+      setIsGenerating(true);
+      setIsTyping(false);
+      setDisplayedResponse("");
+      setShowResponse(true);
+    });
 
     // Play generation sound
     SoundEffects.playGenerateSound();
 
     // Simulate generation delay
     setTimeout(() => {
-      setIsGenerating(false);
-      setIsTyping(true);
+      React.startTransition(() => {
+        setIsGenerating(false);
+        setIsTyping(true);
+      });
 
       // Type out the response with sound effects
       SoundEffects.typeWithSound(
@@ -162,7 +149,9 @@ export default function Index() {
           if (!isComplete) {
             setDisplayedResponse((prev) => prev + char);
           } else {
-            setIsTyping(false);
+            React.startTransition(() => {
+              setIsTyping(false);
+            });
           }
         },
         30, // typing speed
