@@ -212,62 +212,6 @@ export default function Index() {
     SoundEffects.playCompleteSound();
   };
 
-  const handleWalletConnectionChange = (
-    isConnected: boolean,
-    address?: string,
-    hasToken?: boolean,
-  ) => {
-    setIsWalletConnected(isConnected);
-    setWalletAddress(address || "");
-
-    if (isConnected && address) {
-      if (hasToken !== undefined) {
-        setHasAcademicAngel(hasToken);
-
-        // Start typing animation for connection message
-        setIsTypingConnection(true);
-        setConnectionMessage("");
-
-        const message = hasToken
-          ? "😇 Congratulations, you made it. Prompt Azura your next request."
-          : "❌ Find a real Academic Angel.";
-
-        // Type out the message with sound effects
-        SoundEffects.typeWithSound(
-          message,
-          (char, isComplete) => {
-            if (!isComplete) {
-              setConnectionMessage((prev) => prev + char);
-            } else {
-              setIsTypingConnection(false);
-            }
-          },
-          hasToken ? 40 : 60, // Slower typing for success message
-        );
-      } else {
-        // Show loading state while checking tokens
-        setIsTypingConnection(true);
-        setConnectionMessage("");
-        setHasAcademicAngel(null);
-
-        SoundEffects.typeWithSound(
-          "Checking Academic Angel credentials...",
-          (char, isComplete) => {
-            if (!isComplete) {
-              setConnectionMessage((prev) => prev + char);
-            } else {
-              setIsTypingConnection(false);
-            }
-          },
-          30,
-        );
-      }
-    } else if (!isConnected) {
-      setHasAcademicAngel(null);
-      setConnectionMessage("");
-      setIsTypingConnection(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
@@ -595,23 +539,8 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-                <FallbackWalletConnect
-                  onConnectionChange={handleWalletConnectionChange}
-                  buttonText="Get Started"
-                  buttonClassName="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
-                  buttonStyle={{
-                    paddingTop: "8px",
-                    paddingBottom: "8px",
-                    paddingLeft: "12px",
-                    paddingRight: "12px",
-                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                    lineHeight: "1.6",
-                    fontWeight: "500",
-                    color: "#ffffff",
-                  }}
-                  showConnectionStatus={false}
-                />
-                {isWalletConnected && (
+                <PrivyAuth />
+                {ready && authenticated && user?.wallet?.address && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                     <span
