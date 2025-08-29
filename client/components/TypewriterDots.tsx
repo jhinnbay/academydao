@@ -4,27 +4,29 @@ interface TypewriterDotsProps {
   className?: string;
 }
 
-export const TypewriterDots: React.FC<TypewriterDotsProps> = React.memo(({
-  className = "",
-}) => {
-  const [dots, setDots] = useState("");
+export const TypewriterDots: React.FC<TypewriterDotsProps> = React.memo(
+  ({ className = "" }) => {
+    const [dots, setDots] = useState("");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prev) => {
-        if (prev === "") return ".";
-        if (prev === ".") return "..";
-        if (prev === "..") return "...";
-        return "";
-      });
-    }, 500); // Change every 500ms for a smooth typewriter effect
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setDots((prev) => {
+          if (prev === "") return ".";
+          if (prev === ".") return "..";
+          if (prev === "..") return "...";
+          return "";
+        });
+      }, 500); // Change every 500ms for a smooth typewriter effect
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }, []);
 
-  return (
-    <span className={`inline-block w-6 text-left drop-shadow-md ${className}`}>
-      {dots}
-    </span>
-  );
-});
+    return (
+      <span
+        className={`inline-block w-6 text-left drop-shadow-md ${className}`}
+      >
+        {dots}
+      </span>
+    );
+  },
+);

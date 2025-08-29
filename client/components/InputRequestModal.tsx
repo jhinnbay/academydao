@@ -41,7 +41,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   return (
     <div
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      style={{ top: '0', left: '0' }}
+      style={{ top: "0", left: "0" }}
       onMouseDown={(e) => {
         // Prevent any scroll events from bubbling up
         e.stopPropagation();
