@@ -17,6 +17,22 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
+  // Lock/unlock scroll when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      ScrollLock.lock();
+    } else {
+      ScrollLock.unlock();
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (isOpen) {
+        ScrollLock.unlock();
+      }
+    };
+  }, [isOpen]);
+
   const handleSave = async () => {
     if (!content.trim()) return;
 
