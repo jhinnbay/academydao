@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
-<<<<<<< HEAD
 import { FallbackWalletConnect } from "@/components/FallbackWalletConnect";
-=======
-import { PrivyAuth } from "@/components/PrivyAuth";
-import { usePrivy } from "@privy-io/react-auth";
-import { LoginScreen } from "@/components/LoginScreen";
->>>>>>> refs/remotes/origin/main
 import { InputRequestModal } from "@/components/InputRequestModal";
 
 export default function Index() {
-  const { ready, authenticated } = usePrivy();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -680,7 +673,6 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-<<<<<<< HEAD
                 <FallbackWalletConnect
                   onConnectionChange={handleWalletConnectionChange}
                   buttonText="Get Started"
@@ -697,9 +689,6 @@ export default function Index() {
                   }}
                   showConnectionStatus={false}
                 />
-=======
-                <PrivyAuth onConnectionChange={handleWalletConnectionChange} />
->>>>>>> refs/remotes/origin/main
                 {isWalletConnected && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
