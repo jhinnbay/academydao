@@ -177,38 +177,6 @@ export default function Index() {
     setDisplayedResponse(daemonResponse);
   }, []);
 
-  // Comprehensive scroll jump prevention
-  useEffect(() => {
-    // Disable browser scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-
-    // Prevent scroll events from causing issues
-    const preventScrollJump = (e: Event) => {
-      if (isModalOpen) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-
-    // Add event listeners
-    document.addEventListener('scroll', preventScrollJump, { passive: false });
-    document.addEventListener('wheel', preventScrollJump, { passive: false });
-    document.addEventListener('touchmove', preventScrollJump, { passive: false });
-
-    return () => {
-      // Restore scroll restoration
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'auto';
-      }
-
-      // Remove event listeners
-      document.removeEventListener('scroll', preventScrollJump);
-      document.removeEventListener('wheel', preventScrollJump);
-      document.removeEventListener('touchmove', preventScrollJump);
-    };
-  }, [isModalOpen]);
 
   const handleOpenModal = (e?: React.MouseEvent) => {
     if (e) {
