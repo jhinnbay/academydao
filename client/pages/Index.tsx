@@ -832,28 +832,42 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Generate Button */}
-              <button
-                onClick={handleGenerate}
-                disabled={isGenerating || isTyping}
-                className="w-full bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-600/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
-                style={{
-                  fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                  lineHeight: "1.6",
-                  fontWeight: "600",
-                  color: "#ffffff",
-                  paddingTop: "16px",
-                  paddingBottom: "16px",
-                  paddingLeft: "24px",
-                  paddingRight: "24px",
-                }}
-              >
-                {isGenerating
-                  ? "Generating..."
-                  : isTyping
-                    ? "Processing..."
-                    : "Generate 0.008 ETH"}
-              </button>
+              {/* Fund Proposal Button */}
+              <div className="space-y-3">
+                <button
+                  onClick={handleGenerate}
+                  disabled={isGenerating || isTyping}
+                  className="w-full bg-gradient-to-r from-cyan-600/20 via-cyan-500/10 to-cyan-600/20 backdrop-blur-xl border border-cyan-400/30 rounded-2xl font-sans font-semibold hover:from-cyan-500/30 hover:via-cyan-400/20 hover:to-cyan-500/30 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-400/20 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.6",
+                    fontWeight: "600",
+                    color: "#ffffff",
+                    paddingTop: "16px",
+                    paddingBottom: "16px",
+                    paddingLeft: "24px",
+                    paddingRight: "24px",
+                  }}
+                >
+                  {isGenerating
+                    ? "Funding..."
+                    : isTyping
+                      ? "Processing..."
+                      : "Fund Proposal (0.008 ETH)"}
+                </button>
+                <div className="text-center">
+                  <p
+                    className="font-sans text-white/70"
+                    style={{
+                      fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                      lineHeight: "1.5",
+                      fontWeight: "400",
+                    }}
+                  >
+                    This fee powers the review engine and validates your submission on-chain.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
