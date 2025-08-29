@@ -1067,9 +1067,8 @@ export default function Index() {
                     fontWeight: "400",
                   }}
                 >
-                  Fees power the engine and validate
+                  Fees power the agent and member's time
                   <br />
-                  {"\u00A0"}your submission on-chain.
                 </p>
               </div>
             </div>
