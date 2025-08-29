@@ -24,7 +24,9 @@ const BASE_RPC_URL = "https://mainnet.base.org";
 
 // Mobile detection utility
 const isMobile = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
 };
 
 // Popular mobile wallet apps
@@ -32,7 +34,7 @@ const mobileWallets = [
   { name: "Coinbase Wallet", url: "https://www.coinbase.com/wallet" },
   { name: "Trust Wallet", url: "https://trustwallet.com" },
   { name: "MetaMask Mobile", url: "https://metamask.io/download/" },
-  { name: "Rainbow", url: "https://rainbow.me" }
+  { name: "Rainbow", url: "https://rainbow.me" },
 ];
 
 export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
@@ -90,7 +92,9 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
         setShowMobileOptions(true);
         return;
       } else {
-        alert("Please install a Web3 wallet extension like MetaMask for your browser");
+        alert(
+          "Please install a Web3 wallet extension like MetaMask for your browser",
+        );
         window.open("https://metamask.io/download/", "_blank");
         return;
       }
@@ -165,8 +169,12 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-sm w-full">
           <div className="text-center mb-4">
-            <h3 className="text-white font-sans text-lg font-bold mb-2">Choose a Wallet</h3>
-            <p className="text-white/80 font-sans text-sm">Connect with one of these mobile wallets:</p>
+            <h3 className="text-white font-sans text-lg font-bold mb-2">
+              Choose a Wallet
+            </h3>
+            <p className="text-white/80 font-sans text-sm">
+              Connect with one of these mobile wallets:
+            </p>
           </div>
 
           <div className="space-y-3 mb-4">
@@ -178,7 +186,9 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
                 rel="noopener noreferrer"
                 className="flex items-center justify-between p-3 bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 transition-colors duration-300"
               >
-                <span className="text-white font-sans font-medium">{wallet.name}</span>
+                <span className="text-white font-sans font-medium">
+                  {wallet.name}
+                </span>
                 <span className="text-white/60 font-sans text-sm">Install</span>
               </a>
             ))}
