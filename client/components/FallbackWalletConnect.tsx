@@ -24,6 +24,10 @@ const BASE_RPC_URL = "https://mainnet.base.org";
 
 export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
   onConnectionChange,
+  buttonText = "Connect",
+  buttonClassName = "text-white/80 font-sf-pro text-sm font-medium leading-[22px] hover:text-white transition-colors hover:underline disabled:opacity-50",
+  buttonStyle = {},
+  showConnectionStatus = true,
 }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [address, setAddress] = useState<string>("");
