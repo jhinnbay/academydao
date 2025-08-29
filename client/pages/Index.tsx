@@ -161,11 +161,13 @@ export default function Index() {
       });
 
       // Type out the response with sound effects
+      let currentText = "";
       SoundEffects.typeWithSound(
         daemonResponse,
         (char, isComplete) => {
           if (!isComplete) {
-            debouncedSetDisplayedResponse((prev: string) => prev + char);
+            currentText += char;
+            debouncedSetDisplayedResponse(currentText);
           } else {
             setIsTyping(false);
           }
