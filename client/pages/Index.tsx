@@ -176,89 +176,54 @@ export default function Index() {
     }
   }, []);
 
-  // NUCLEAR SCROLL JUMP PREVENTION
+  // Targeted scroll management - only prevent jumps during critical operations
   useEffect(() => {
-    // Start ultimate scroll guard
-    scrollGuard.start();
+    let isTypingActive = false;
+    let preservedScrollPosition = 0;
 
-    let currentScrollPosition = window.scrollY;
-
-    // Capture and restore scroll position on ANY scroll event
-    const preventScrollJump = () => {
-      const newPosition = window.scrollY;
-      if (Math.abs(newPosition - currentScrollPosition) > 100) {
-        // If scroll jumped more than 100px, restore position
-        window.scrollTo(0, currentScrollPosition);
-        scrollGuard.updatePosition();
-      } else {
-        currentScrollPosition = newPosition;
-        scrollGuard.updatePosition();
-      }
-    };
-
-    // Intercept ALL click events and prevent default navigation
-    const preventNavigation = (e: Event) => {
-      const target = e.target as HTMLElement;
-
-      // Prevent anchor link navigation
-      if (target.tagName === 'A' || target.closest('a')) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-      }
-
-      // Prevent form submission
-      if (target.tagName === 'FORM' || target.closest('form')) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-      }
-
-      // Prevent any element that might cause navigation
-      if (target.hasAttribute('href') || target.closest('[href]')) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-      }
-    };
-
-    // Prevent focus from causing scroll jumps
-    const preventFocusScroll = (e: Event) => {
-      const scrollBefore = window.scrollY;
-      requestAnimationFrame(() => {
-        if (window.scrollY !== scrollBefore) {
-          window.scrollTo(0, scrollBefore);
+    // Monitor typing state to prevent jumps during text animation
+    const handleTypingScroll = () => {
+      if (isTyping || isGenerating) {
+        if (!isTypingActive) {
+          // Start of typing - preserve current position
+          preservedScrollPosition = window.scrollY;
+          isTypingActive = true;
         }
-      });
+
+        // During typing, gently restore position if it jumps significantly
+        const currentPos = window.scrollY;
+        const diff = Math.abs(currentPos - preservedScrollPosition);
+
+        if (diff > 200) { // Only prevent major jumps
+          window.scrollTo({
+            top: preservedScrollPosition,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // Typing finished - allow normal scrolling
+        isTypingActive = false;
+      }
     };
 
-    // Add event listeners with capture phase
-    document.addEventListener('click', preventNavigation, true);
-    document.addEventListener('scroll', preventScrollJump, { passive: true });
-    document.addEventListener('focus', preventFocusScroll, true);
-    document.addEventListener('focusin', preventFocusScroll, true);
+    // Only add scroll listener during typing operations
+    if (isTyping || isGenerating) {
+      const scrollHandler = () => {
+        requestAnimationFrame(handleTypingScroll);
+      };
 
-    // Disable browser scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
+      document.addEventListener('scroll', scrollHandler, { passive: true });
+
+      return () => {
+        document.removeEventListener('scroll', scrollHandler);
+      };
     }
 
-    return () => {
-      // Stop scroll guard
-      scrollGuard.stop();
-
-      document.removeEventListener('click', preventNavigation, true);
-      document.removeEventListener('scroll', preventScrollJump);
-      document.removeEventListener('focus', preventFocusScroll, true);
-      document.removeEventListener('focusin', preventFocusScroll, true);
-
-      ScrollPreservation.restore();
-
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'auto';
-      }
-    };
-  }, []);
+    // Enable smooth scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'smooth';
+    }
+  }, [isTyping, isGenerating]);
 
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
@@ -268,7 +233,6 @@ export default function Index() {
     }
 
     ScrollPreservation.preserve();
-    scrollGuard.updatePosition();
     setIsModalOpen(true);
   }, []);
 
