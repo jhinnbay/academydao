@@ -27,6 +27,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "viem": "^2.36.0",
+    "wagmi": "^2.16.8",
     "zod": "^3.25.76"
   },
   "devDependencies": {
