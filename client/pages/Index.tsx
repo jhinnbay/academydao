@@ -889,78 +889,15 @@ export default function Index() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-6">
                       {/* Notebook Icon */}
-                      <div className="w-6 h-6 flex items-center justify-center">
-                        <svg
-                          viewBox="0 0 700 700"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-full h-full text-white group-hover:text-white transition-colors duration-500"
-                          style={{ filter: 'brightness(1)' }}
-                        >
-                          <path
-                            d="M87.5 350C87.5 350 87.5 87.5 131.25 87.5H393.75L481.25 175V350V525C481.25 525 481.25 612.5 437.5 612.5H131.25C87.5 612.5 87.5 350 87.5 350Z"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M393.75 87.5V175H481.25"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M175 262.5H350"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M175 350H393.75"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M175 437.5H350"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M175 525H306.25"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            fill="none"
-                          />
-                          <path
-                            d="M525 131.25H568.75C612.5 131.25 612.5 175 612.5 175V568.75C612.5 612.5 568.75 612.5 568.75 612.5H306.25"
-                            stroke="white"
-                            strokeWidth="14"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            fill="none"
-                          />
-                          <circle cx="175" cy="262.5" r="8.75" fill="white"/>
-                          <circle cx="175" cy="350" r="8.75" fill="white"/>
-                          <circle cx="175" cy="437.5" r="8.75" fill="white"/>
-                          <circle cx="175" cy="525" r="8.75" fill="white"/>
-                          <circle cx="525" cy="175" r="8.75" fill="white"/>
-                          <circle cx="525" cy="218.75" r="8.75" fill="white"/>
-                          <circle cx="525" cy="262.5" r="8.75" fill="white"/>
-                          <circle cx="525" cy="306.25" r="8.75" fill="white"/>
-                          <circle cx="525" cy="350" r="8.75" fill="white"/>
-                          <circle cx="525" cy="393.75" r="8.75" fill="white"/>
-                        </svg>
-                      </div>
+                      <img
+                        src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F2d2cddeaf9be426b9a3f3e323448383e?format=webp&width=800"
+                        alt="Document Icon"
+                        className="w-6 h-6 object-contain group-hover:brightness-110 transition-all duration-500"
+                        style={{
+                          filter: 'brightness(0) invert(1)',
+                          aspectRatio: '1'
+                        }}
+                      />
                       {/* Content */}
                       <div className="flex-1">
                         <div
