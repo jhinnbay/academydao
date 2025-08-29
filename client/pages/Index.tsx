@@ -171,10 +171,79 @@ export default function Index() {
     setDisplayedResponse(daemonResponse);
   }, []);
 
-  // Cleanup scroll preservation on unmount
+  // NUCLEAR SCROLL JUMP PREVENTION
   useEffect(() => {
+    let currentScrollPosition = window.scrollY;
+
+    // Capture and restore scroll position on ANY scroll event
+    const preventScrollJump = () => {
+      const newPosition = window.scrollY;
+      if (Math.abs(newPosition - currentScrollPosition) > 100) {
+        // If scroll jumped more than 100px, restore position
+        window.scrollTo(0, currentScrollPosition);
+      } else {
+        currentScrollPosition = newPosition;
+      }
+    };
+
+    // Intercept ALL click events and prevent default navigation
+    const preventNavigation = (e: Event) => {
+      const target = e.target as HTMLElement;
+
+      // Prevent anchor link navigation
+      if (target.tagName === 'A' || target.closest('a')) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      }
+
+      // Prevent form submission
+      if (target.tagName === 'FORM' || target.closest('form')) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      }
+
+      // Prevent any element that might cause navigation
+      if (target.hasAttribute('href') || target.closest('[href]')) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      }
+    };
+
+    // Prevent focus from causing scroll jumps
+    const preventFocusScroll = (e: Event) => {
+      const scrollBefore = window.scrollY;
+      requestAnimationFrame(() => {
+        if (window.scrollY !== scrollBefore) {
+          window.scrollTo(0, scrollBefore);
+        }
+      });
+    };
+
+    // Add event listeners with capture phase
+    document.addEventListener('click', preventNavigation, true);
+    document.addEventListener('scroll', preventScrollJump, { passive: true });
+    document.addEventListener('focus', preventFocusScroll, true);
+    document.addEventListener('focusin', preventFocusScroll, true);
+
+    // Disable browser scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
     return () => {
+      document.removeEventListener('click', preventNavigation, true);
+      document.removeEventListener('scroll', preventScrollJump);
+      document.removeEventListener('focus', preventFocusScroll, true);
+      document.removeEventListener('focusin', preventFocusScroll, true);
+
       ScrollPreservation.restore();
+
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'auto';
+      }
     };
   }, []);
 
