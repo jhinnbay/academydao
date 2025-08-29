@@ -189,7 +189,7 @@ export default function Index() {
                     fontWeight: '700',
                     fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1'
                   }}>
-                Hello! I'm Azura... Running Decision-Matrix Analysis.
+                Align Your Academic Path
               </h1>
               <p className="font-sans"
                  style={{
@@ -207,7 +207,7 @@ export default function Index() {
                   fontWeight: '500',
                   color: '#ffffff'
                 }}>
-                  Let's Begin
+                  Get Started
                 </span>
               </button>
             </div>
