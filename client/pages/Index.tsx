@@ -3,6 +3,7 @@ import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
+import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { usePrivy } from "@privy-io/react-auth";
 import { ScrollPreservation, createDebouncedUpdater } from "@/lib/scrollPreservation";
 
