@@ -49,12 +49,14 @@ export default function Index() {
   // Preserve scroll position during state updates
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+      if (!isScrollLocked) {
+        setScrollPosition(window.scrollY);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrollLocked]);
 
   // Prevent auto-scroll to top on state changes - with debouncing
   useEffect(() => {
