@@ -43,25 +43,10 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   return (
     <div
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-      style={{ top: "0", left: "0", position: "fixed" }}
-      onMouseDown={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
       onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
         if (e.target === e.currentTarget) {
           onClose();
         }
-      }}
-      onScroll={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-      onWheel={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
       }}
     >
       <div
