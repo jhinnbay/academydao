@@ -97,7 +97,7 @@ export default function Index() {
 
         const message = hasToken
           ? "😇 Congratulations, you made it. Prompt Azura your next request."
-          : "❌ Find a real Academic Angel.";
+          : "�� Find a real Academic Angel.";
 
         // Type out the message with sound effects
         SoundEffects.typeWithSound(
@@ -264,13 +264,94 @@ export default function Index() {
                 </div>
 
                 {/* Mobile Menu Button */}
-                <button className="md:hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300">
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="md:hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
+                >
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    {isMobileMenuOpen ? (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    ) : (
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    )}
                   </svg>
                 </button>
               </div>
             </div>
+
+            {/* Mobile Menu Dropdown */}
+            {isMobileMenuOpen && (
+              <div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-xl">
+                <div className="px-4 py-4 space-y-3">
+                  <a
+                    href="#research"
+                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                    style={{
+                      fontSize: 'clamp(0.875rem, 1.2vw, 1rem)',
+                      fontWeight: '500'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Research
+                  </a>
+                  <a
+                    href="#angels"
+                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                    style={{
+                      fontSize: 'clamp(0.875rem, 1.2vw, 1rem)',
+                      fontWeight: '500'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Angels
+                  </a>
+                  <a
+                    href="#facility"
+                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                    style={{
+                      fontSize: 'clamp(0.875rem, 1.2vw, 1rem)',
+                      fontWeight: '500'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Facility
+                  </a>
+                  <a
+                    href="#events"
+                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                    style={{
+                      fontSize: 'clamp(0.875rem, 1.2vw, 1rem)',
+                      fontWeight: '500'
+                    }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Events
+                  </a>
+
+                  {/* Mobile Search */}
+                  <div className="pt-3 border-t border-white/10">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Search..."
+                        className="w-full bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-colors duration-300"
+                        style={{
+                          fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)'
+                        }}
+                      />
+                      <svg
+                        className="absolute right-3 top-2.5 w-4 h-4 text-white/50"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </nav>
 
