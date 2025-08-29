@@ -551,8 +551,8 @@ export default function Index() {
                       }}
                     >
                       Connected{" "}
-                      {walletAddress &&
-                        `(${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)})`}
+                      {user?.wallet?.address &&
+                        `(${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)})`}
                     </span>
                   </div>
                 )}
