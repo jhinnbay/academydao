@@ -240,6 +240,9 @@ export default function Index() {
     }
 
     return () => {
+      // Stop scroll guard
+      scrollGuard.stop();
+
       document.removeEventListener('click', preventNavigation, true);
       document.removeEventListener('scroll', preventScrollJump);
       document.removeEventListener('focus', preventFocusScroll, true);
