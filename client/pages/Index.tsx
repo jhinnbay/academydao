@@ -441,50 +441,46 @@ export default function Index() {
             {isMobileMenuOpen && (
               <div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-xl">
                 <div className="px-4 py-4 space-y-3">
-                  <a
-                    href="#research"
-                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                  <button
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
                     style={{
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
                   >
                     Research
-                  </a>
-                  <a
-                    href="#angels"
-                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                  </button>
+                  <button
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
                     style={{
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
                   >
                     Angels
-                  </a>
-                  <a
-                    href="#facility"
-                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                  </button>
+                  <button
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
                     style={{
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
                   >
                     Facility
-                  </a>
-                  <a
-                    href="#events"
-                    className="block font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
+                  </button>
+                  <button
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
                     style={{
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
                   >
                     Events
-                  </a>
+                  </button>
 
                   {/* Mobile Search */}
                   <div className="pt-3 border-t border-white/10">
