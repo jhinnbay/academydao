@@ -55,10 +55,17 @@ export default function Index() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent auto-scroll to top on state changes
+  // Prevent auto-scroll to top on state changes - with debouncing
   useEffect(() => {
     if (scrollPosition > 0 && (isGenerating || isTyping)) {
-      window.scrollTo(0, scrollPosition);
+      // Use a timeout to avoid conflicts with other scroll operations
+      const timeoutId = setTimeout(() => {
+        if (window.scrollY !== scrollPosition) {
+          window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+        }
+      }, 16); // Next frame
+
+      return () => clearTimeout(timeoutId);
     }
   }, [isGenerating, isTyping, scrollPosition]);
 
@@ -119,20 +126,23 @@ export default function Index() {
     // Store current scroll position before state changes
     const currentScroll = window.scrollY;
 
-    // Increment request counter
-    setRequestCount((prev) => prev + 1);
-
-    setIsGenerating(true);
-    setIsTyping(false);
-    setDisplayedResponse("");
-    setShowResponse(true);
+    // Batch state updates to minimize re-renders
+    React.startTransition(() => {
+      setRequestCount((prev) => prev + 1);
+      setIsGenerating(true);
+      setIsTyping(false);
+      setDisplayedResponse("");
+      setShowResponse(true);
+    });
 
     // Play generation sound
     SoundEffects.playGenerateSound();
 
-    // Restore scroll position immediately
+    // Restore scroll position after state updates
     requestAnimationFrame(() => {
-      window.scrollTo(0, currentScroll);
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: currentScroll, behavior: 'instant' });
+      });
     });
 
     // Simulate generation delay
@@ -300,8 +310,8 @@ export default function Index() {
 
               {/* Navigation Links */}
               <div className="hidden md:flex items-center gap-8">
-                <a
-                  href="#research"
+                <button
+                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -309,9 +319,9 @@ export default function Index() {
                   }}
                 >
                   Research
-                </a>
-                <a
-                  href="#angels"
+                </button>
+                <button
+                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -319,9 +329,9 @@ export default function Index() {
                   }}
                 >
                   Angels
-                </a>
-                <a
-                  href="#facility"
+                </button>
+                <button
+                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -329,9 +339,9 @@ export default function Index() {
                   }}
                 >
                   Facility
-                </a>
-                <a
-                  href="#events"
+                </button>
+                <button
+                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -339,7 +349,7 @@ export default function Index() {
                   }}
                 >
                   Events
-                </a>
+                </button>
               </div>
 
               {/* Search Bar and User Profile */}
