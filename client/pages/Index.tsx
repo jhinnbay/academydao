@@ -179,21 +179,20 @@ export default function Index() {
   }, []);
 
 
-  const handleOpenModal = (e?: React.MouseEvent) => {
+  const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
+      e.stopPropagation();
     }
 
-    // Lock body scroll
-    document.body.style.overflow = 'hidden';
+    ScrollPreservation.preserve();
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
-    // Unlock body scroll
-    document.body.style.overflow = '';
+  const handleCloseModal = useCallback(() => {
+    ScrollPreservation.restore();
     setIsModalOpen(false);
-  };
+  }, []);
 
   const handleSaveRequest = (data: {
     type: "funding" | "events";
