@@ -205,7 +205,7 @@ export default function Index() {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         window.scrollTo({ top: currentScroll, behavior: "instant" });
-        setIsScrollLocked(false);
+        // Don't unlock scroll yet - keep it locked during typing animation
       });
     });
 
