@@ -827,7 +827,7 @@ export default function Index() {
                         >
                           {savedRequest
                             ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request Saved`
-                            : "Create your funding or event proposal"}
+                            : "Create your request"}
                         </div>
                       </div>
                     </div>
