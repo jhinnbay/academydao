@@ -841,7 +841,7 @@ export default function Index() {
                   Angels Connected
                 </span>
                 <span
-                  className="font-cartograph text-amber-300"
+                  className="font-cartograph text-white"
                   style={{
                     fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                     fontWeight: "600",
@@ -852,12 +852,12 @@ export default function Index() {
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
                 <div
-                  className="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-500"
+                  className="bg-gradient-to-r from-white/40 to-white/50 h-2 rounded-full transition-all duration-500"
                   style={{ width: "0%" }}
                 ></div>
               </div>
               <p
-                className="font-sans text-amber-200/80"
+                className="font-sans text-white/80"
                 style={{
                   fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
                   lineHeight: "1.5",
@@ -937,7 +937,7 @@ export default function Index() {
               </div>
 
               {/* Angel Guidance Section */}
-              <div className="border border-amber-400/30 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 backdrop-blur-lg p-6 shadow-xl">
+              <div className="border border-white/30 rounded-2xl bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl">
                 <div className="mb-4">
                   <div>
                     <h3
@@ -967,7 +967,7 @@ export default function Index() {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                           <button
-                            className="flex-1 bg-black border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-white/80 hover:bg-amber-900/20 hover:border-amber-400/60 hover:text-white transition-all duration-300"
+                            className="flex-1 bg-black border border-white/40 rounded-xl px-4 py-3 font-sans font-semibold text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
