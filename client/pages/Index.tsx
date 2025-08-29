@@ -171,6 +171,13 @@ export default function Index() {
     setDisplayedResponse(daemonResponse);
   }, []);
 
+  // Cleanup scroll preservation on unmount
+  useEffect(() => {
+    return () => {
+      ScrollPreservation.restore();
+    };
+  }, []);
+
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
