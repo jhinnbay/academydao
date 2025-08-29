@@ -129,7 +129,12 @@ export default function Index() {
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
-  const handleGenerate = () => {
+  const handleGenerate = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
     // Batch state updates to prevent multiple renders
     React.startTransition(() => {
       setRequestCount((prev) => prev + 1);
