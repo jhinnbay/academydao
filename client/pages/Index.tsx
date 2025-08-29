@@ -29,7 +29,7 @@ export default function Index() {
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [tooltipPosition, setTooltipPosition] = useState<{
-    [key: string]: { top?: boolean; left?: boolean }
+    [key: string]: { top?: boolean; left?: boolean };
   }>({});
 
   // Close mobile menu when clicking outside
@@ -63,11 +63,14 @@ export default function Index() {
   }, [isGenerating, isTyping, scrollPosition]);
 
   // Calculate tooltip position based on viewport bounds
-  const calculateTooltipPosition = (element: HTMLElement, tooltipKey: string) => {
+  const calculateTooltipPosition = (
+    element: HTMLElement,
+    tooltipKey: string,
+  ) => {
     const rect = element.getBoundingClientRect();
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const tooltipWidth = tooltipKey === 'angels' ? 288 : 256; // w-72 = 288px, w-64 = 256px
+    const tooltipWidth = tooltipKey === "angels" ? 288 : 256; // w-72 = 288px, w-64 = 256px
     const tooltipHeight = 120; // Approximate height
 
     const spaceRight = viewportWidth - rect.right;
@@ -77,10 +80,10 @@ export default function Index() {
 
     const position = {
       top: spaceTop > tooltipHeight, // Show above if enough space
-      left: spaceRight < tooltipWidth && spaceLeft > tooltipWidth / 2 // Show left-aligned if not enough space on right
+      left: spaceRight < tooltipWidth && spaceLeft > tooltipWidth / 2, // Show left-aligned if not enough space on right
     };
 
-    setTooltipPosition(prev => ({ ...prev, [tooltipKey]: position }));
+    setTooltipPosition((prev) => ({ ...prev, [tooltipKey]: position }));
   };
 
   const handleTooltipShow = (tooltipKey: string, event: React.MouseEvent) => {
@@ -95,7 +98,9 @@ export default function Index() {
       if (tooltipVisible) {
         // Small delay to ensure DOM has updated after resize
         setTimeout(() => {
-          const element = document.querySelector(`[data-tooltip="${tooltipVisible}"]`) as HTMLElement;
+          const element = document.querySelector(
+            `[data-tooltip="${tooltipVisible}"]`,
+          ) as HTMLElement;
           if (element) {
             calculateTooltipPosition(element, tooltipVisible);
           }
@@ -103,8 +108,8 @@ export default function Index() {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
   const daemonResponse =
@@ -635,13 +640,17 @@ export default function Index() {
                   {requestCount.toString().padStart(3, "0")}
                 </span>
                 {tooltipVisible === "requests" && (
-                  <div className={`absolute ${tooltipPosition.requests?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.requests?.left ? 'left-0' : 'right-0'} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
+                  <div
+                    className={`absolute ${tooltipPosition.requests?.top === false ? "top-full mt-2" : "bottom-full mb-2"} ${tooltipPosition.requests?.left ? "left-0" : "right-0"} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
+                  >
                     <div className="font-medium mb-1">Request Counter</div>
                     <div className="text-white/80">
                       Track how many requests have been made. This counter
                       increments when you click the Generate button.
                     </div>
-                    <div className={`absolute ${tooltipPosition.requests?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.requests?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.requests?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
+                    <div
+                      className={`absolute ${tooltipPosition.requests?.top === false ? "bottom-full" : "top-full"} ${tooltipPosition.requests?.left ? "left-4" : "right-4"} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.requests?.top === false ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
+                    ></div>
                   </div>
                 )}
               </div>
@@ -674,14 +683,18 @@ export default function Index() {
                   008
                 </span>
                 {tooltipVisible === "angels" && (
-                  <div className={`absolute ${tooltipPosition.angels?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.angels?.left ? 'left-0' : 'right-0'} w-72 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
+                  <div
+                    className={`absolute ${tooltipPosition.angels?.top === false ? "top-full mt-2" : "bottom-full mb-2"} ${tooltipPosition.angels?.left ? "left-0" : "right-0"} w-72 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
+                  >
                     <div className="font-medium mb-1">Angels</div>
                     <div className="text-white/80">
                       Angels are senior members who review and support your
                       proposals. Gain their backing to strengthen your approval
                       chances.
                     </div>
-                    <div className={`absolute ${tooltipPosition.angels?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.angels?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.angels?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
+                    <div
+                      className={`absolute ${tooltipPosition.angels?.top === false ? "bottom-full" : "top-full"} ${tooltipPosition.angels?.left ? "left-4" : "right-4"} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.angels?.top === false ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
+                    ></div>
                   </div>
                 )}
               </div>
@@ -717,13 +730,17 @@ export default function Index() {
                   </span>
                 </div>
                 {tooltipVisible === "daemon" && (
-                  <div className={`absolute ${tooltipPosition.daemon?.top === false ? 'top-full mt-2' : 'bottom-full mb-2'} ${tooltipPosition.daemon?.left ? 'left-0' : 'right-0'} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}>
+                  <div
+                    className={`absolute ${tooltipPosition.daemon?.top === false ? "top-full mt-2" : "bottom-full mb-2"} ${tooltipPosition.daemon?.left ? "left-0" : "right-0"} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
+                  >
                     <div className="font-medium mb-1">Daemon Model</div>
                     <div className="text-white/80">
                       Academy's customer AI Azura - your optimized
                       decision-making assistant for funding and collaboration.
                     </div>
-                    <div className={`absolute ${tooltipPosition.daemon?.top === false ? 'bottom-full' : 'top-full'} ${tooltipPosition.daemon?.left ? 'left-4' : 'right-4'} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.daemon?.top === false ? 'border-b-4 border-b-white/20' : 'border-t-4 border-t-white/20'} border-transparent`}></div>
+                    <div
+                      className={`absolute ${tooltipPosition.daemon?.top === false ? "bottom-full" : "top-full"} ${tooltipPosition.daemon?.left ? "left-4" : "right-4"} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.daemon?.top === false ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
+                    ></div>
                   </div>
                 )}
               </div>
