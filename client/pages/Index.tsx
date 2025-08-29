@@ -427,6 +427,8 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      e.stopImmediatePropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -440,6 +442,8 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      e.stopImmediatePropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -453,6 +457,8 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      e.stopImmediatePropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -466,6 +472,8 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
+                      e.stopImmediatePropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
