@@ -8,26 +8,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* NUCLEAR SCROLL JUMP PREVENTION */
+/* Smooth scroll with stability */
 html {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth;
   overflow-x: hidden;
-  scroll-snap-type: none !important;
+  scroll-padding-top: 0;
 }
 
 body {
   overflow-x: hidden;
-  scroll-behavior: auto !important;
-  scroll-snap-type: none !important;
+  scroll-behavior: smooth;
 }
 
-/* Prevent ALL scroll restoration and smooth scrolling */
+/* Prevent horizontal overflow issues */
 * {
-  overscroll-behavior: none !important;
-  scroll-behavior: auto !important;
-  scroll-snap-type: none !important;
-  scroll-margin: 0 !important;
-  scroll-padding: 0 !important;
+  overscroll-behavior-x: none;
 }
 
 /* Prevent layout shifts from causing scroll jumps */
@@ -36,19 +31,16 @@ img, video, iframe, object, embed {
   height: auto;
 }
 
-/* Prevent any focus behavior that could cause scrolling */
+/* Smooth focus scrolling with reasonable offset */
 *:focus {
-  scroll-margin: 0 !important;
-  scroll-behavior: auto !important;
-  outline-offset: 0;
+  scroll-margin-top: 20px;
+  outline-offset: 2px;
 }
 
-/* Disable ALL anchor link jumping */
+/* Smooth anchor link scrolling */
 a[href^="#"]:not([href="#"]) {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth;
 }
-
-/* Prevent ANY element from triggering scroll changes */
 button, input, textarea, select, a {
   scroll-margin: 0 !important;
   scroll-behavior: auto !important;
