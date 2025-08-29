@@ -101,7 +101,11 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1,
+      "ss01" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -115,8 +119,17 @@
   }
 
   /* Improve text contrast and readability */
-  h1, h2, h3, h4, h5, h6 {
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1,
+      "ss01" 1;
     text-rendering: optimizeLegibility;
   }
 
