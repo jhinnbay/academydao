@@ -198,55 +198,13 @@ export default function Index() {
     }
   }, []);
 
-  // Targeted scroll management - only prevent jumps during critical operations
+  // Simple scroll management - only prevent initial jump, allow normal scrolling during typing
   useEffect(() => {
-    let isTypingActive = false;
-    let preservedScrollPosition = 0;
-
-    // Monitor typing state to prevent jumps during text animation
-    const handleTypingScroll = () => {
-      if (isTyping || isGenerating) {
-        if (!isTypingActive) {
-          // Start of typing - preserve current position
-          preservedScrollPosition = window.scrollY;
-          isTypingActive = true;
-        }
-
-        // During typing, gently restore position if it jumps significantly
-        const currentPos = window.scrollY;
-        const diff = Math.abs(currentPos - preservedScrollPosition);
-
-        if (diff > 50) {
-          // Prevent scroll jumps during generation/typing
-          window.scrollTo({
-            top: preservedScrollPosition,
-            behavior: "instant",
-          });
-        }
-      } else {
-        // Typing finished - allow normal scrolling
-        isTypingActive = false;
-      }
-    };
-
-    // Only add scroll listener during typing operations
-    if (isTyping || isGenerating) {
-      const scrollHandler = () => {
-        requestAnimationFrame(handleTypingScroll);
-      };
-
-      document.addEventListener("scroll", scrollHandler, { passive: true });
-
-      return () => {
-        document.removeEventListener("scroll", scrollHandler);
-      };
-    }
-
     // Enable smooth scroll restoration
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "smooth";
     }
-  }, [isTyping, isGenerating]);
+  }, []);
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
