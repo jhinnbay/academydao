@@ -221,6 +221,8 @@ export default function Index() {
   };
 
   const handleCloseModal = () => {
+    // Unlock body scroll
+    document.body.style.overflow = '';
     setIsModalOpen(false);
   };
 
