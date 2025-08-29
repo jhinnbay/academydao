@@ -561,7 +561,7 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                I am Azura, an advanced augmented simulation designed to foster structure and growth within our organization. To initiate a new proposal, simply request a team meeting. I will handle the scheduling and provide a comprehensive analysis, ensuring you are connected with the precise resources needed for a productive discussion.
+                Let me help you build what's next. I'm Azura, an advanced simulation designed to facilitate your team's growth and structure. To get started, request a team meeting. I'll then schedule it, draft a proposal for the agenda, and use my analysis to connect you with the exact resources you'll need to succeed.
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
