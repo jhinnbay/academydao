@@ -973,7 +973,7 @@ export default function Index() {
                       ? "Calculating decision-matrix...."
                       : isTyping
                         ? "Please bear with me, processing..."
-                        : "Send Request (0.008 ETH)"}
+                        : "Send Azura Your Request"}
                   </span>
                 </button>
                 <div className="text-center">
@@ -985,8 +985,9 @@ export default function Index() {
                       fontWeight: "400",
                     }}
                   >
-                    This fee powers the review engine and validates your
-                    submission on-chain.
+                    Fees power the engine and validate
+                    <br />
+                    &nbsp;your submission on-chain.
                   </p>
                 </div>
               </div>
