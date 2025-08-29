@@ -3,6 +3,7 @@ import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { usePrivy } from "@privy-io/react-auth";
+import { LoginScreen } from "@/components/LoginScreen";
 import { InputRequestModal } from "@/components/InputRequestModal";
 
 export default function Index() {
