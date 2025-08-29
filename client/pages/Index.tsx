@@ -803,8 +803,64 @@ export default function Index() {
                   className="border border-white/20 rounded-2xl bg-gradient-to-br from-white/5 to-black/20 backdrop-blur-xl hover:border-white/30 hover:from-white/10 hover:to-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div>
+                    <div className="flex items-center gap-6">
+                      {/* Notebook Icon */}
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 group-hover:from-white/15 group-hover:to-white/10 transition-all duration-500">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="text-white/80 group-hover:text-white transition-colors duration-500"
+                        >
+                          <path
+                            d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2H6Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            fill="none"
+                          />
+                          <polyline
+                            points="14,2 14,8 20,8"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            fill="none"
+                          />
+                          <line
+                            x1="16"
+                            y1="13"
+                            x2="8"
+                            y2="13"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                          <line
+                            x1="16"
+                            y1="17"
+                            x2="8"
+                            y2="17"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                          <line
+                            x1="10"
+                            y1="9"
+                            x2="8"
+                            y2="9"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </div>
+                      {/* Content */}
+                      <div className="flex-1">
                         <div
                           className="font-sans font-bold drop-shadow-md mb-2"
                           style={{
