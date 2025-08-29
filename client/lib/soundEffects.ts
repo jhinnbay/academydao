@@ -60,27 +60,66 @@ export class SoundEffects {
     }
   }
 
-  // Generate a generation/processing sound effect
+  // Generate a futuristic processing sound with modulated synthesis
   static playGenerateSound(): void {
     try {
       const ctx = this.getAudioContext();
-      const oscillator = ctx.createOscillator();
-      const gainNode = ctx.createGain();
 
-      oscillator.connect(gainNode);
-      gainNode.connect(ctx.destination);
+      // Create complex synthesis chain for futuristic processing sound
+      const carrier = ctx.createOscillator();
+      const modulator = ctx.createOscillator();
+      const modulatorGain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+      const distortion = ctx.createWaveShaper();
+      const mainGain = ctx.createGain();
+      const reverbGain = ctx.createGain();
 
-      // Lower frequency humming sound for generation
-      oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-      oscillator.frequency.linearRampToValueAtTime(300, ctx.currentTime + 0.5);
-      oscillator.frequency.linearRampToValueAtTime(180, ctx.currentTime + 1.0);
+      // Setup modulation (FM synthesis for digital texture)
+      modulator.frequency.setValueAtTime(7, ctx.currentTime);
+      modulatorGain.gain.setValueAtTime(50, ctx.currentTime);
 
-      gainNode.gain.setValueAtTime(0.05, ctx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.3);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
+      modulator.connect(modulatorGain);
+      modulatorGain.connect(carrier.frequency);
 
-      oscillator.start(ctx.currentTime);
-      oscillator.stop(ctx.currentTime + 1.0);
+      // Carrier signal with sweeping frequency
+      carrier.frequency.setValueAtTime(120, ctx.currentTime);
+      carrier.frequency.exponentialRampToValueAtTime(280, ctx.currentTime + 0.4);
+      carrier.frequency.exponentialRampToValueAtTime(160, ctx.currentTime + 0.8);
+      carrier.frequency.exponentialRampToValueAtTime(90, ctx.currentTime + 1.2);
+      carrier.type = 'sawtooth';
+
+      // Low-pass filter with resonance sweep
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(400, ctx.currentTime);
+      filter.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.6);
+      filter.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 1.2);
+      filter.Q.setValueAtTime(8, ctx.currentTime);
+
+      // Subtle distortion for digital edge
+      const curve = new Float32Array(256);
+      for (let i = 0; i < 256; i++) {
+        const x = (i - 128) / 128;
+        curve[i] = Math.tanh(x * 2) * 0.8;
+      }
+      distortion.curve = curve;
+
+      // Connect the chain
+      carrier.connect(filter);
+      filter.connect(distortion);
+      distortion.connect(mainGain);
+      mainGain.connect(ctx.destination);
+
+      // Dynamic gain envelope
+      mainGain.gain.setValueAtTime(0, ctx.currentTime);
+      mainGain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
+      mainGain.gain.setValueAtTime(0.08, ctx.currentTime + 0.4);
+      mainGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 0.8);
+      mainGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+      modulator.start(ctx.currentTime);
+      carrier.start(ctx.currentTime);
+      modulator.stop(ctx.currentTime + 1.2);
+      carrier.stop(ctx.currentTime + 1.2);
     } catch (error) {
       console.log("Sound effect not available:", error);
     }
