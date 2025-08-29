@@ -158,8 +158,12 @@ const RetroMusicPlayer = () => {
         </div>
       </div>
       
-      {/* Hidden audio element for future functionality */}
-      <audio ref={audioRef} style={{ display: 'none' }} />
+      {/* Audio element */}
+      <audio
+        ref={audioRef}
+        preload="auto"
+        className="hidden"
+      />
     </div>
   );
 };
