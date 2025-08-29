@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
+import { ScrollLock } from "@/lib/scrollLock";
 
 interface InputRequestModalProps {
   isOpen: boolean;
