@@ -187,13 +187,13 @@ export default function Index() {
     setIsModalOpen(false);
   }, []);
 
-  const handleSaveRequest = (data: {
+  const handleSaveRequest = useCallback((data: {
     type: "funding" | "events";
     content: string;
   }) => {
     setSavedRequest(data);
     SoundEffects.playCompleteSound();
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
