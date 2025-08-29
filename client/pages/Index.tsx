@@ -175,8 +175,12 @@ export default function Index() {
     setDisplayedResponse(daemonResponse);
   }, []);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenModal = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    React.startTransition(() => {
+      setIsModalOpen(true);
+    });
   };
 
   const handleCloseModal = () => {
