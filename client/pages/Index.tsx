@@ -980,29 +980,26 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Submit Request Button */}
+              {/* Send Azura Your Request Button */}
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || isTyping}
-                className="w-full bg-gradient-to-r from-white/40 via-black to-white/40 backdrop-blur-xl border border-white/50 cyberpunk-button font-sans font-semibold hover:from-white/45 hover:via-black hover:to-white/45 hover:border-white/80 hover:shadow-2xl hover:shadow-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-white/20 relative overflow-hidden group"
-                style={{
-                  fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                  lineHeight: "1.6",
-                  fontWeight: "600",
-                  color: "#ffffff",
-                  paddingTop: "20px",
-                  paddingBottom: "20px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
-                }}
+                className="custom-request-button disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-                <span className="relative z-10 drop-shadow-sm">
+                <div id="clip">
+                  <div id="leftArrow" className="arrow"></div>
+                  <div id="rightArrow" className="arrow"></div>
+                  <div id="rightTop" className="corner"></div>
+                  <div id="leftTop" className="corner"></div>
+                  <div id="leftBottom" className="corner"></div>
+                  <div id="rightBottom" className="corner"></div>
+                </div>
+                <span style={{ position: 'relative', zIndex: 10 }}>
                   {isGenerating
                     ? "Calculating decision-matrix...."
                     : isTyping
                       ? "Combining elements..."
-                      : "Submit Request"}
+                      : "Send Azura Your Request"}
                 </span>
               </button>
               <div className="text-center">
