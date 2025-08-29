@@ -61,13 +61,13 @@ export const PrivyAuth: React.FC = () => {
         color: "#ffffff",
       }}
     >
+      Get Started
       <img
         src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F0c9076778bee4070892566189ad8c894?format=webp&width=800"
         alt="Atom Icon"
         className="w-4 h-4 object-contain"
         style={{ filter: 'brightness(0) invert(1)' }}
       />
-      Get Started
     </button>
   );
 };
