@@ -405,10 +405,10 @@ export default function Index() {
                       )}
                     </div>
                     <div>
-                      <div className="text-white font-sf-pro text-sm font-medium leading-[22px] drop-shadow-md">
+                      <div className="text-white font-sans font-medium drop-shadow-md" style={{fontSize: '16px', lineHeight: '1.6'}}>
                         Input Request Form
                       </div>
-                      <div className="text-white/70 font-sf-pro text-sm font-medium leading-[22px]">
+                      <div className="text-white/70 font-sans font-medium" style={{fontSize: '16px', lineHeight: '1.6'}}>
                         {savedRequest
                           ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request`
                           : "0xc12c...484F2"}
@@ -417,11 +417,12 @@ export default function Index() {
                   </div>
                   <div className="px-2.5 py-2.5">
                     <div
-                      className={`font-sf-pro text-sm font-medium leading-[22px] transition-colors duration-300 drop-shadow-md ${
+                      className={`font-sans font-medium transition-colors duration-300 drop-shadow-md ${
                         savedRequest
                           ? "text-green-300 group-hover:text-green-200"
                           : "text-white/80 group-hover:text-white"
                       }`}
+                      style={{fontSize: '16px', lineHeight: '1.6'}}
                     >
                       {savedRequest ? "Saved" : "Open"}
                     </div>
