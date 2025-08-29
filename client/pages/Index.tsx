@@ -66,7 +66,7 @@ export default function Index() {
       if (isScrollLocked || isGenerating || isTyping) {
         e.preventDefault();
         e.stopPropagation();
-        window.scrollTo({ top: scrollTop, behavior: 'instant' });
+        window.scrollTo({ top: scrollTop, behavior: "instant" });
         return false;
       }
     };
@@ -74,20 +74,33 @@ export default function Index() {
     if (isGenerating || isTyping) {
       scrollTop = window.scrollY;
       // Prevent all scroll events during critical operations
-      window.addEventListener('scroll', preventScroll, { passive: false, capture: true });
-      window.addEventListener('wheel', preventScroll, { passive: false });
-      window.addEventListener('touchmove', preventScroll, { passive: false });
-      window.addEventListener('keydown', (e) => {
-        if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) {
+      window.addEventListener("scroll", preventScroll, {
+        passive: false,
+        capture: true,
+      });
+      window.addEventListener("wheel", preventScroll, { passive: false });
+      window.addEventListener("touchmove", preventScroll, { passive: false });
+      window.addEventListener("keydown", (e) => {
+        if (
+          [
+            "ArrowDown",
+            "ArrowUp",
+            "PageDown",
+            "PageUp",
+            "Home",
+            "End",
+            " ",
+          ].includes(e.key)
+        ) {
           e.preventDefault();
         }
       });
     }
 
     return () => {
-      window.removeEventListener('scroll', preventScroll);
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener("scroll", preventScroll);
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
     };
   }, [isGenerating, isTyping, scrollPosition, isScrollLocked]);
 
@@ -148,8 +161,8 @@ export default function Index() {
       const timeoutId = setTimeout(() => {
         setIsScrollLocked(false);
         // Ensure body overflow is restored
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
       }, 100);
 
       return () => clearTimeout(timeoutId);
@@ -160,8 +173,8 @@ export default function Index() {
   useEffect(() => {
     return () => {
       // Cleanup on unmount
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -198,8 +211,8 @@ export default function Index() {
     setIsScrollLocked(true);
 
     // Prevent body scrolling entirely
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     // Batch state updates to minimize re-renders
     React.startTransition(() => {
@@ -237,8 +250,8 @@ export default function Index() {
             // Ensure scroll lock is released when typing completes
             setIsScrollLocked(false);
             // Restore body scrolling
-            document.body.style.overflow = '';
-            document.documentElement.style.overflow = '';
+            document.body.style.overflow = "";
+            document.documentElement.style.overflow = "";
           }
         },
         30, // typing speed
@@ -331,7 +344,8 @@ export default function Index() {
         className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd4a87124b9ed45468d4be9ac29f49116?format=webp&width=800')`,
-          filter: "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
+          filter:
+            "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
         }}
       ></div>
       <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl z-10">
