@@ -198,7 +198,7 @@ export default function Index() {
                    fontWeight: '400',
                    color: '#b0b0b0'
                  }}>
-                Welcome to the Mental Wealth Academy simulation core! Let's initiate your first governance protocol. Your Move—draft a proposal through my interface. I'll run neural coherence diagnostics and, if it resonates with our institutional frequency, add alignment tokens. Ready to architect reality?
+                Request a meeting with our team to get initiated. I'm Azura, your optimized decision-making model matrix funding and collaboration assistant. Orchestrate the perfect team meeting or aide for your next breakthrough, I'll analyze your needs and connect you with the right resources.
               </p>
               <button className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300" style={{paddingTop: '8px', paddingBottom: '8px', paddingLeft: '12px', paddingRight: '12px'}}>
                 <span className="font-sans" style={{
