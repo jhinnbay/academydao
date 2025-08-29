@@ -814,7 +814,7 @@ export default function Index() {
                             color: "#ffffff",
                           }}
                         >
-                          Input Request Form
+                          Request Form
                         </div>
                         <div
                           className="font-sans"
