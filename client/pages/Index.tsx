@@ -502,7 +502,11 @@ export default function Index() {
                           ? "text-green-300 group-hover:text-green-200"
                           : "text-white/80 group-hover:text-white"
                       }`}
-                      style={{fontSize: '16px', lineHeight: '1.6'}}
+                      style={{
+                        fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                        lineHeight: '1.6',
+                        fontWeight: '500'
+                      }}
                     >
                       {savedRequest ? "Saved" : "Open"}
                     </div>
