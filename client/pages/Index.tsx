@@ -264,11 +264,13 @@ export default function Index() {
     }
 
     ScrollPreservation.preserve();
+    scrollGuard.updatePosition();
     setIsModalOpen(true);
   }, []);
 
   const handleCloseModal = useCallback(() => {
     ScrollPreservation.restore();
+    scrollGuard.updatePosition();
     setIsModalOpen(false);
   }, []);
 
