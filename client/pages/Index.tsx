@@ -226,14 +226,27 @@ export default function Index() {
               <svg width="24" height="24" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z" stroke="#ECECEC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="text-white font-sf-pro-display font-medium" style={{fontSize: '16px'}}>
+              <span className="font-sans" style={{
+                fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                lineHeight: '1.6',
+                fontWeight: '500',
+                color: '#ffffff'
+              }}>
                 DAIMON / Proposals
               </span>
             </div>
             <div className="flex flex-wrap gap-6 sm:gap-8">
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Proposals Created</span>
-                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>003</span>
+                <span className="font-cartograph" style={{
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                  fontWeight: '400',
+                  color: '#888888'
+                }}>Proposals Created</span>
+                <span className="font-cartograph" style={{
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                  fontWeight: '400',
+                  color: '#ffffff'
+                }}>003</span>
               </div>
               <div className="flex flex-col items-end gap-1">
                 <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Angels Inventory</span>
