@@ -238,7 +238,7 @@ export default function Index() {
           {/* Terminal Header Section */}
           <div className="border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-2xl rounded-2xl animate-float">
             <div className="p-5 pb-0">
-              <div className="text-white font-cartograph text-base leading-[140.628%] mb-2.5 font-bold drop-shadow-lg">
+              <div className="text-white font-cartograph leading-[140.628%] mb-2.5 font-bold drop-shadow-lg" style={{fontSize: '16px'}}>
                 {">"} AZURA MODEL DAEMON
               </div>
               <div className="text-white/80 font-cartograph text-base leading-[140.628%] mb-2.5">
@@ -251,13 +251,14 @@ export default function Index() {
               {isWalletConnected &&
                 (connectionMessage || isTypingConnection) && (
                   <div
-                    className={`font-cartograph text-base leading-[140.628%] mb-10 ${
+                    className={`font-cartograph leading-[140.628%] mb-10 ${
                       hasAcademicAngel === true
                         ? "text-green-300"
                         : hasAcademicAngel === false
                           ? "text-red-300"
                           : "text-white/80"
                     }`}
+                    style={{fontSize: '16px'}}
                   >
                     <span className="text-white">{"|"} </span>
                     {connectionMessage}
@@ -276,7 +277,7 @@ export default function Index() {
 
             {/* Username Section */}
             <div className="border-t border-b border-white/30 px-2.5 bg-white/5 backdrop-blur-sm" style={{height: '250px'}}>
-              <div className="text-white/90 font-cartograph text-base leading-[140.628%] drop-shadow-md flex items-center h-full">
+              <div className="text-white/90 font-cartograph leading-[140.628%] drop-shadow-md flex items-center h-full" style={{fontSize: '16px'}}>
                 {">"} Username: jhinnbay.eth
               </div>
             </div>
