@@ -58,51 +58,17 @@ export default function Index() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrollLocked]);
 
-  // Completely prevent scroll during state changes
+  // Simple scroll position preservation - only restore once after button click
   useEffect(() => {
-    let scrollTop = scrollPosition;
+    if (scrollPosition > 0 && isGenerating && !isTyping) {
+      // Only restore position once at the start of generation, then allow normal scrolling
+      const timeoutId = setTimeout(() => {
+        window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+      }, 100);
 
-    const preventScroll = (e: Event) => {
-      if (isScrollLocked || isGenerating || isTyping) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.scrollTo({ top: scrollTop, behavior: "instant" });
-        return false;
-      }
-    };
-
-    if (isGenerating || isTyping) {
-      scrollTop = window.scrollY;
-      // Prevent all scroll events during critical operations
-      window.addEventListener("scroll", preventScroll, {
-        passive: false,
-        capture: true,
-      });
-      window.addEventListener("wheel", preventScroll, { passive: false });
-      window.addEventListener("touchmove", preventScroll, { passive: false });
-      window.addEventListener("keydown", (e) => {
-        if (
-          [
-            "ArrowDown",
-            "ArrowUp",
-            "PageDown",
-            "PageUp",
-            "Home",
-            "End",
-            " ",
-          ].includes(e.key)
-        ) {
-          e.preventDefault();
-        }
-      });
+      return () => clearTimeout(timeoutId);
     }
-
-    return () => {
-      window.removeEventListener("scroll", preventScroll);
-      window.removeEventListener("wheel", preventScroll);
-      window.removeEventListener("touchmove", preventScroll);
-    };
-  }, [isGenerating, isTyping, scrollPosition, isScrollLocked]);
+  }, [isGenerating, scrollPosition]);
 
   // Calculate tooltip position based on viewport bounds
   const calculateTooltipPosition = (
