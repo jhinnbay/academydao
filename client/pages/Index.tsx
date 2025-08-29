@@ -64,7 +64,7 @@ export default function Index() {
       // Use a timeout to avoid conflicts with other scroll operations
       const timeoutId = setTimeout(() => {
         if (window.scrollY !== scrollPosition) {
-          window.scrollTo({ top: scrollPosition, behavior: 'instant' });
+          window.scrollTo({ top: scrollPosition, behavior: "instant" });
         }
       }, 16); // Next frame
 
@@ -136,8 +136,8 @@ export default function Index() {
 
   // Override browser's scroll restoration
   useEffect(() => {
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
     }
 
     // Prevent hash navigation scroll jumps
@@ -146,13 +146,13 @@ export default function Index() {
       return false;
     };
 
-    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'auto';
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "auto";
       }
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
@@ -181,7 +181,7 @@ export default function Index() {
     // Restore scroll position after state updates and unlock
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        window.scrollTo({ top: currentScroll, behavior: 'instant' });
+        window.scrollTo({ top: currentScroll, behavior: "instant" });
         setIsScrollLocked(false);
       });
     });
@@ -354,7 +354,9 @@ export default function Index() {
               {/* Navigation Links */}
               <div className="hidden md:flex items-center gap-8">
                 <button
-                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
+                  onClick={(e) => {
+                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                  }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -364,7 +366,9 @@ export default function Index() {
                   Research
                 </button>
                 <button
-                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
+                  onClick={(e) => {
+                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                  }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -374,7 +378,9 @@ export default function Index() {
                   Angels
                 </button>
                 <button
-                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
+                  onClick={(e) => {
+                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                  }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -384,7 +390,9 @@ export default function Index() {
                   Facility
                 </button>
                 <button
-                  onClick={(e) => { e.preventDefault(); /* Add smooth scroll logic here if needed */ }}
+                  onClick={(e) => {
+                    e.preventDefault(); /* Add smooth scroll logic here if needed */
+                  }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -490,7 +498,10 @@ export default function Index() {
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     Research
                   </button>
@@ -500,7 +511,10 @@ export default function Index() {
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     Angels
                   </button>
@@ -510,7 +524,10 @@ export default function Index() {
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     Facility
                   </button>
@@ -520,7 +537,10 @@ export default function Index() {
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     Events
                   </button>
