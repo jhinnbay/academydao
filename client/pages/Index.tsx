@@ -185,6 +185,10 @@ export default function Index() {
     // Lock scroll during state updates
     setIsScrollLocked(true);
 
+    // Prevent body scrolling entirely
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
     // Batch state updates to minimize re-renders
     React.startTransition(() => {
       setRequestCount((prev) => prev + 1);
