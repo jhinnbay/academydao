@@ -1100,10 +1100,10 @@ export default function Index() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
                 <span className="relative z-10 drop-shadow-sm">
                   {isGenerating
-                    ? "Calculating decision-matrix...."
-                    : isTyping
-                      ? "Please bear with me, processing..."
-                      : "Submit Request"}
+                  ? "Calculating decision-matrix...."
+                  : isTyping
+                    ? "Combining elements..."
+                    : "Submit Request"}
                 </span>
               </button>
               <div className="text-center">
