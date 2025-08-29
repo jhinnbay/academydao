@@ -78,16 +78,6 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
         {/* Tabs */}
         <div className="flex border-b border-white/20 bg-white/5 backdrop-blur-sm">
           <button
-            onClick={() => setActiveTab("funding")}
-            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
-              activeTab === "funding"
-                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
-                : "text-white/70 hover:text-white hover:bg-white/10"
-            }`}
-          >
-            Funding
-          </button>
-          <button
             onClick={() => setActiveTab("events")}
             className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
               activeTab === "events"
@@ -96,6 +86,16 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             }`}
           >
             Events
+          </button>
+          <button
+            onClick={() => setActiveTab("funding")}
+            className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
+              activeTab === "funding"
+                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
+                : "text-white/70 hover:text-white hover:bg-white/10"
+            }`}
+          >
+            Funding
           </button>
         </div>
 
