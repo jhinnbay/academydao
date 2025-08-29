@@ -81,8 +81,8 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             onClick={() => setActiveTab("events")}
             className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
               activeTab === "events"
-                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
-                : "text-white/70 hover:text-white hover:bg-white/10"
+                ? "text-white bg-gray-900 backdrop-blur-md border-b-2 border-white/50"
+                : "text-white/70 hover:text-white hover:bg-gray-800"
             }`}
           >
             Events
@@ -91,8 +91,8 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             onClick={() => setActiveTab("funding")}
             className={`flex-1 py-4 px-6 font-sf-pro text-sm font-medium transition-all duration-300 ${
               activeTab === "funding"
-                ? "text-white bg-white/15 backdrop-blur-md border-b-2 border-white/50"
-                : "text-white/70 hover:text-white hover:bg-white/10"
+                ? "text-white bg-gray-900 backdrop-blur-md border-b-2 border-white/50"
+                : "text-white/70 hover:text-white hover:bg-gray-800"
             }`}
           >
             Funding
@@ -117,7 +117,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
               value={content}
               onChange={handleInputChange}
               placeholder={`Type your ${activeTab} request to Azura Model Daemon...`}
-              className="w-full h-48 bg-white/10 backdrop-blur-md border border-white/30 rounded-2xl p-4 text-white font-cartograph text-sm resize-none focus:border-white/50 focus:bg-white/15 focus:outline-none placeholder-white/50 transition-all duration-300"
+              className="w-full h-48 bg-gray-900 backdrop-blur-md border border-white/30 rounded-2xl p-4 text-white font-cartograph text-sm resize-none focus:border-white/50 focus:bg-gray-800 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
             />
 
@@ -131,7 +131,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
           <div className="flex gap-3 mt-6">
             <button
               onClick={onClose}
-              className="flex-1 py-3 px-6 border border-white/30 bg-white/10 backdrop-blur-md text-white font-sf-pro text-sm font-medium rounded-2xl hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              className="flex-1 py-3 px-6 border border-white/30 bg-black backdrop-blur-md text-white font-sf-pro text-sm font-medium rounded-2xl hover:bg-gray-900 hover:border-white/50 transition-all duration-300"
               disabled={isSaving}
             >
               Cancel
@@ -139,7 +139,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
             <button
               onClick={handleSave}
               disabled={!content.trim() || isSaving}
-              className="flex-1 py-3 px-6 bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-xl border border-white/30 text-white font-sf-pro text-sm font-medium rounded-2xl hover:from-white/30 hover:via-white/20 hover:to-white/30 hover:border-white/50 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 py-3 px-6 bg-gray-800 backdrop-blur-xl border border-white/30 text-white font-sf-pro text-sm font-medium rounded-2xl hover:bg-gray-700 hover:border-white/50 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSaving ? "Saving..." : "Save Request"}
             </button>
