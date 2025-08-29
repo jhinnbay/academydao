@@ -1,32 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/server/node-build.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/spa/**",
-      "use": "@vercel/static"
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/spa",
+  "functions": {
+    "netlify/functions/api.ts": {
+      "handler": "dist/server/node-build.mjs"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/server/node-build.mjs"
+      "source": "/api/(.*)",
+      "destination": "/api"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/spa/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
-      "dest": "/dist/spa/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/spa/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "outputDirectory": "dist"
+  ]
 }
