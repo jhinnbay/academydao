@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
-import { WalletConnect } from "@/components/WalletConnect";
+import { FallbackWalletConnect } from "@/components/FallbackWalletConnect";
 import { InputRequestModal } from "@/components/InputRequestModal";
 
 export default function Index() {
@@ -593,8 +593,21 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-                <WalletConnect
+                <FallbackWalletConnect
                   onConnectionChange={handleWalletConnectionChange}
+                  buttonText="Get Started"
+                  buttonClassName="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+                  buttonStyle={{
+                    paddingTop: "8px",
+                    paddingBottom: "8px",
+                    paddingLeft: "12px",
+                    paddingRight: "12px",
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.6",
+                    fontWeight: "500",
+                    color: "#ffffff",
+                  }}
+                  showConnectionStatus={false}
                 />
                 {isWalletConnected && (
                   <div className="flex items-center gap-2">
