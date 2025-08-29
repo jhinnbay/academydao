@@ -1005,7 +1005,7 @@ export default function Index() {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating || isTyping}
-                  className="w-full bg-gradient-to-r from-gray-800/50 via-black/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl font-sans font-semibold hover:from-gray-700/60 hover:via-gray-800/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl hover:shadow-black/30 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl"
+                  className="w-full bg-gradient-to-r from-cyan-600/80 via-blue-600/70 to-cyan-600/80 backdrop-blur-xl border border-cyan-400/50 rounded-2xl font-sans font-semibold hover:from-cyan-500/90 hover:via-blue-500/80 hover:to-cyan-500/90 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
                   style={{
                     fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                     lineHeight: "1.6",
@@ -1017,11 +1017,14 @@ export default function Index() {
                     paddingRight: "32px",
                   }}
                 >
-                  {isGenerating
-                    ? "Funding..."
-                    : isTyping
-                      ? "Processing..."
-                      : "Send Request (0.008 ETH)"}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
+                  <span className="relative z-10 drop-shadow-sm">
+                    {isGenerating
+                      ? "Calculating decision-matrix...."
+                      : isTyping
+                        ? "Please bear with me, processing..."
+                        : "Send Request (0.008 ETH)"}
+                  </span>
                 </button>
                 <div className="text-center">
                   <p
