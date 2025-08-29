@@ -122,25 +122,16 @@ export default function Index() {
 
   // No cleanup needed for simple approach
 
-  // Override browser's scroll restoration
+  // Keep browser scroll restoration disabled to prevent auto-restore
   useEffect(() => {
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
 
-    // Prevent hash navigation scroll jumps
-    const handleHashChange = (e: Event) => {
-      e.preventDefault();
-      return false;
-    };
-
-    window.addEventListener("hashchange", handleHashChange);
-
     return () => {
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "auto";
       }
-      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
