@@ -391,19 +391,22 @@ export default function Index() {
                  }}>
                 Request a meeting with our team to get initiated. I'm Azura, your optimized decision-making model matrix funding and collaboration assistant. Setup the perfect team meeting or aide for your next breakthrough, I'll analyze and connect you with the right resources.
               </p>
-              <div className="flex items-center gap-3">
-                <FallbackWalletConnect
-                  onConnectionChange={handleWalletConnectionChange}
-                />
-                {isWalletConnected && (
-                  <span className="font-sans text-green-300" style={{
-                    fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
-                    fontWeight: '500'
-                  }}>
-                    Connected: {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-                  </span>
-                )}
-              </div>
+              <FallbackWalletConnect
+                onConnectionChange={handleWalletConnectionChange}
+                buttonText="Get Started"
+                buttonClassName="flex justify-center items-center border border-white/20 bg-gradient-to-b from-cyan-400/10 to-cyan-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+                buttonStyle={{
+                  paddingTop: '8px',
+                  paddingBottom: '8px',
+                  paddingLeft: '12px',
+                  paddingRight: '12px',
+                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                  lineHeight: '1.6',
+                  fontWeight: '500',
+                  color: '#ffffff'
+                }}
+                showConnectionStatus={false}
+              />
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
               <img
