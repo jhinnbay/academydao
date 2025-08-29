@@ -249,14 +249,30 @@ export default function Index() {
                 }}>003</span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Angels Inventory</span>
-                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>008</span>
+                <span className="font-cartograph" style={{
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                  fontWeight: '400',
+                  color: '#888888'
+                }}>Angels Inventory</span>
+                <span className="font-cartograph" style={{
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                  fontWeight: '400',
+                  color: '#ffffff'
+                }}>008</span>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Daemon Model</span>
+                <span className="font-cartograph" style={{
+                  fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                  fontWeight: '400',
+                  color: '#888888'
+                }}>Daemon Model</span>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <span className="text-white font-cartograph" style={{fontSize: '16px'}}>Online</span>
+                  <span className="font-cartograph" style={{
+                    fontSize: 'clamp(0.75rem, 1.2vw, 0.875rem)',
+                    fontWeight: '400',
+                    color: '#ffffff'
+                  }}>Online</span>
                 </div>
               </div>
               <div className="flex flex-col items-end gap-1">
