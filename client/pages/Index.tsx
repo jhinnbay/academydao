@@ -870,6 +870,116 @@ export default function Index() {
                   </p>
                 </div>
               </div>
+
+              {/* Angel Guidance Section */}
+              <div className="border border-amber-400/30 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 backdrop-blur-lg p-6 shadow-xl">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 flex items-center justify-center flex-shrink-0">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        fill="white"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <h3
+                      className="font-sans font-bold text-amber-200 mb-2"
+                      style={{
+                        fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                        lineHeight: "1.3",
+                        fontWeight: "700",
+                      }}
+                    >
+                      Strengthen Your Proposal
+                    </h3>
+                    <div className="space-y-3">
+                      {/* Gamification Progress */}
+                      <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 border border-amber-400/20">
+                        <div className="flex items-center justify-between mb-2">
+                          <span
+                            className="font-sans text-white/90"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Angels Connected
+                          </span>
+                          <span
+                            className="font-cartograph text-amber-300"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              fontWeight: "600",
+                            }}
+                          >
+                            0/3
+                          </span>
+                        </div>
+                        <div className="w-full bg-white/10 rounded-full h-2 mb-3">
+                          <div
+                            className="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-500"
+                            style={{ width: "0%" }}
+                          ></div>
+                        </div>
+                        <p
+                          className="font-sans text-amber-200/80"
+                          style={{
+                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                            lineHeight: "1.5",
+                            fontWeight: "400",
+                          }}
+                        >
+                          Secure at least 1 Angel to boost proposal strength
+                        </p>
+                      </div>
+
+                      {/* Action Guidance */}
+                      <div className="space-y-3">
+                        <p
+                          className="font-sans text-white/80"
+                          style={{
+                            fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                            lineHeight: "1.5",
+                            fontWeight: "400",
+                          }}
+                        >
+                          Not enough Angels yet? → Invite an Angel to review your request
+                        </p>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <button className="flex-1 bg-gradient-to-r from-amber-600/30 to-amber-500/20 backdrop-blur-sm border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:from-amber-500/40 hover:to-amber-400/30 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Invite Angel Reviewer
+                          </button>
+                          <button className="flex-1 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/50 hover:text-white transition-all duration-300"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Learn More
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
