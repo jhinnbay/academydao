@@ -46,7 +46,7 @@ export default function Index() {
 
   const handleGenerate = () => {
     // Increment request counter
-    setRequestCount(prev => prev + 1);
+    setRequestCount((prev) => prev + 1);
 
     setIsGenerating(true);
     setIsTyping(false);
@@ -536,7 +536,7 @@ export default function Index() {
               {/* Requests with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible('requests')}
+                onMouseEnter={() => setTooltipVisible("requests")}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -557,12 +557,15 @@ export default function Index() {
                     color: "#ffffff",
                   }}
                 >
-                  {requestCount.toString().padStart(3, '0')}
+                  {requestCount.toString().padStart(3, "0")}
                 </span>
-                {tooltipVisible === 'requests' && (
+                {tooltipVisible === "requests" && (
                   <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50">
                     <div className="font-medium mb-1">Request Counter</div>
-                    <div className="text-white/80">Track how many requests have been made. This counter increments when you click the Generate button.</div>
+                    <div className="text-white/80">
+                      Track how many requests have been made. This counter
+                      increments when you click the Generate button.
+                    </div>
                     <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
                   </div>
                 )}
@@ -571,7 +574,7 @@ export default function Index() {
               {/* Angels with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible('angels')}
+                onMouseEnter={() => setTooltipVisible("angels")}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -594,10 +597,14 @@ export default function Index() {
                 >
                   008
                 </span>
-                {tooltipVisible === 'angels' && (
+                {tooltipVisible === "angels" && (
                   <div className="absolute bottom-full right-0 mb-2 w-72 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50">
                     <div className="font-medium mb-1">Angels</div>
-                    <div className="text-white/80">Angels are senior members who review and support your proposals. Gain their backing to strengthen your approval chances.</div>
+                    <div className="text-white/80">
+                      Angels are senior members who review and support your
+                      proposals. Gain their backing to strengthen your approval
+                      chances.
+                    </div>
                     <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
                   </div>
                 )}
@@ -606,7 +613,7 @@ export default function Index() {
               {/* Daemon Model with Tooltip */}
               <div
                 className="flex flex-col items-end gap-1 relative cursor-help"
-                onMouseEnter={() => setTooltipVisible('daemon')}
+                onMouseEnter={() => setTooltipVisible("daemon")}
                 onMouseLeave={() => setTooltipVisible(null)}
               >
                 <span
@@ -632,10 +639,13 @@ export default function Index() {
                     Online
                   </span>
                 </div>
-                {tooltipVisible === 'daemon' && (
+                {tooltipVisible === "daemon" && (
                   <div className="absolute bottom-full right-0 mb-2 w-64 p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50">
                     <div className="font-medium mb-1">Daemon Model</div>
-                    <div className="text-white/80">Academy's customer AI Azura - your optimized decision-making assistant for funding and collaboration.</div>
+                    <div className="text-white/80">
+                      Academy's customer AI Azura - your optimized
+                      decision-making assistant for funding and collaboration.
+                    </div>
                     <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
                   </div>
                 )}
@@ -700,7 +710,7 @@ export default function Index() {
                 className="text-white/70 font-cartograph drop-shadow-md"
                 style={{
                   fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                  fontWeight: "400"
+                  fontWeight: "400",
                 }}
               >
                 {">"} Username: jhinnbay.eth
@@ -866,7 +876,8 @@ export default function Index() {
                       fontWeight: "400",
                     }}
                   >
-                    This fee powers the review engine and validates your submission on-chain.
+                    This fee powers the review engine and validates your
+                    submission on-chain.
                   </p>
                 </div>
               </div>
@@ -951,12 +962,14 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          Not enough Angels yet? → Invite an Angel to review your request
+                          Not enough Angels yet? → Invite an Angel to review
+                          your request
                         </p>
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
-                          <button className="flex-1 bg-gradient-to-r from-amber-600/30 to-amber-500/20 backdrop-blur-sm border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:from-amber-500/40 hover:to-amber-400/30 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
+                          <button
+                            className="flex-1 bg-gradient-to-r from-amber-600/30 to-amber-500/20 backdrop-blur-sm border border-amber-400/40 rounded-xl px-4 py-3 font-sans font-semibold text-amber-200 hover:from-amber-500/40 hover:to-amber-400/30 hover:border-amber-400/60 hover:text-amber-100 transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
@@ -965,7 +978,8 @@ export default function Index() {
                           >
                             Invite Angel Reviewer
                           </button>
-                          <button className="flex-1 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/50 hover:text-white transition-all duration-300"
+                          <button
+                            className="flex-1 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/50 hover:text-white transition-all duration-300"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
