@@ -917,63 +917,18 @@ export default function Index() {
                   onClick={handleOpenModal}
                   className="border border-white/20 rounded-2xl bg-black backdrop-blur-xl hover:border-white/30 hover:bg-gray-900 hover:shadow-2xl hover:shadow-black/20 transition-all duration-500 cursor-pointer group shadow-xl p-6 sm:p-8"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-6">
-                      {/* Notebook Icon */}
-                      <img
-                        src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F2d2cddeaf9be426b9a3f3e323448383e?format=webp&width=800"
-                        alt="Document Icon"
-                        className="w-6 h-6 object-contain group-hover:brightness-110 transition-all duration-500"
-                        style={{
-                          filter: "brightness(0) invert(1)",
-                          aspectRatio: "1",
-                        }}
-                      />
-                      {/* Content */}
-                      <div className="flex-1">
-                        <div
-                          className="font-sans font-bold drop-shadow-md mb-2"
-                          style={{
-                            fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
-                            lineHeight: "1.3",
-                            fontWeight: "700",
-                            color: "#ffffff",
-                          }}
-                        >
-                          Submit a request
-                        </div>
-                        <div
-                          className="font-sans"
-                          style={{
-                            fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                            lineHeight: "1.5",
-                            fontWeight: "400",
-                            color: "#b0b0b0",
-                          }}
-                        >
-                          {savedRequest
-                            ? `${savedRequest.type.charAt(0).toUpperCase() + savedRequest.type.slice(1)} Request Saved`
-                            : "Just fill out the form"}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-4 py-3 rounded-xl bg-black/30 backdrop-blur-sm border border-white/30">
-                      <div
-                        className={`font-sans font-semibold transition-colors duration-300 drop-shadow-md ${
-                          savedRequest
-                            ? "text-green-300 group-hover:text-green-200"
-                            : "text-white/80 group-hover:text-white"
-                        }`}
-                        style={{
-                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                          lineHeight: "1.4",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {savedRequest ? "Edit" : "View"}
-                      </div>
-                    </div>
+                  <div
+                    className="font-sans font-bold drop-shadow-md mb-2"
+                    style={{
+                      fontSize: "clamp(1.125rem, 2vw, 1.5rem)",
+                      lineHeight: "1.3",
+                      fontWeight: "700",
+                      color: "#ffffff",
+                    }}
+                  >
+                    Submit a request
                   </div>
+                  <div className="flex-1"></div>
                 </div>
               </div>
 
