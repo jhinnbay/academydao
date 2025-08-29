@@ -2,22 +2,24 @@
 export class ScrollLock {
   private static isLocked = false;
   private static originalScrollPosition = 0;
-  private static originalBodyStyle = '';
-  private static originalHtmlStyle = '';
+  private static originalBodyStyle = "";
+  private static originalHtmlStyle = "";
 
   static lock(): void {
     if (this.isLocked) return;
 
     // Save current scroll position
-    this.originalScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
+    this.originalScrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop;
+
     // Save original styles
     this.originalBodyStyle = document.body.style.cssText;
     this.originalHtmlStyle = document.documentElement.style.cssText;
 
     // Apply scroll lock styles
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
     document.body.style.cssText += `
       position: fixed !important;
       top: -${this.originalScrollPosition}px !important;
@@ -28,7 +30,7 @@ export class ScrollLock {
       overflow: hidden !important;
       padding-right: ${scrollbarWidth}px !important;
     `;
-    
+
     document.documentElement.style.cssText += `
       overflow: hidden !important;
       height: 100% !important;
@@ -51,15 +53,21 @@ export class ScrollLock {
   }
 
   static forcePreventScroll(element: HTMLElement): void {
-    element.addEventListener('scroll', this.preventScrollHandler, { passive: false });
-    element.addEventListener('wheel', this.preventScrollHandler, { passive: false });
-    element.addEventListener('touchmove', this.preventScrollHandler, { passive: false });
+    element.addEventListener("scroll", this.preventScrollHandler, {
+      passive: false,
+    });
+    element.addEventListener("wheel", this.preventScrollHandler, {
+      passive: false,
+    });
+    element.addEventListener("touchmove", this.preventScrollHandler, {
+      passive: false,
+    });
   }
 
   static removePreventScroll(element: HTMLElement): void {
-    element.removeEventListener('scroll', this.preventScrollHandler);
-    element.removeEventListener('wheel', this.preventScrollHandler);
-    element.removeEventListener('touchmove', this.preventScrollHandler);
+    element.removeEventListener("scroll", this.preventScrollHandler);
+    element.removeEventListener("wheel", this.preventScrollHandler);
+    element.removeEventListener("touchmove", this.preventScrollHandler);
   }
 
   private static preventScrollHandler = (e: Event): void => {
