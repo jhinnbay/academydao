@@ -140,4 +140,12 @@
     --text-tertiary: #888888;
     --text-quaternary: #666666;
   }
+
+  /* Privy modal logo styling */
+  .privy-modal img[src*="builder.io"],
+  .privy-dialog img[src*="builder.io"],
+  [data-testid="privy-modal"] img[src*="builder.io"],
+  div[role="dialog"] img[src*="builder.io"] {
+    border-radius: 0.5rem !important;
+  }
 }
