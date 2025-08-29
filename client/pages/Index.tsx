@@ -67,15 +67,47 @@ export default function Index() {
     const viewportHeight = window.innerHeight;
     const tooltipWidth = tooltipKey === "angels" ? 288 : 256; // w-72 = 288px, w-64 = 256px
     const tooltipHeight = 120; // Approximate height
+    const margin = 8; // Minimum margin from viewport edges
 
     const spaceRight = viewportWidth - rect.right;
     const spaceLeft = rect.left;
     const spaceTop = rect.top;
     const spaceBottom = viewportHeight - rect.bottom;
 
+    // Determine vertical position (above or below)
+    let showAbove = spaceTop > tooltipHeight + margin;
+    if (!showAbove && spaceBottom < tooltipHeight + margin) {
+      // If neither position fits well, choose the one with more space
+      showAbove = spaceTop > spaceBottom;
+    }
+
+    // Determine horizontal alignment
+    let alignLeft = false;
+    let alignCenter = false;
+
+    // Try to center the tooltip under the element first
+    const elementCenter = rect.left + rect.width / 2;
+    const tooltipLeft = elementCenter - tooltipWidth / 2;
+    const tooltipRight = tooltipLeft + tooltipWidth;
+
+    if (tooltipLeft >= margin && tooltipRight <= viewportWidth - margin) {
+      // Center alignment works
+      alignCenter = true;
+    } else if (rect.right + tooltipWidth <= viewportWidth - margin) {
+      // Right alignment (tooltip starts at element's right edge)
+      alignLeft = false;
+    } else if (rect.left - tooltipWidth >= margin) {
+      // Left alignment (tooltip ends at element's left edge)
+      alignLeft = true;
+    } else {
+      // Force fit by aligning to the side with more space
+      alignLeft = spaceLeft > spaceRight;
+    }
+
     const position = {
-      top: spaceTop > tooltipHeight, // Show above if enough space
-      left: spaceRight < tooltipWidth && spaceLeft > tooltipWidth / 2, // Show left-aligned if not enough space on right
+      top: !showAbove, // true = below, false = above
+      left: alignLeft,
+      center: alignCenter,
     };
 
     setTooltipPosition((prev) => ({ ...prev, [tooltipKey]: position }));
