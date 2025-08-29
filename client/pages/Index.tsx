@@ -215,12 +215,9 @@ export default function Index() {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
-      e.stopImmediatePropagation();
     }
 
-    React.startTransition(() => {
-      setIsModalOpen(true);
-    });
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
