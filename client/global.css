@@ -26,7 +26,11 @@ body {
 }
 
 /* Prevent layout shifts from causing scroll jumps */
-img, video, iframe, object, embed {
+img,
+video,
+iframe,
+object,
+embed {
   max-width: 100%;
   height: auto;
 }
@@ -41,7 +45,11 @@ img, video, iframe, object, embed {
 a[href^="#"]:not([href="#"]) {
   scroll-behavior: smooth;
 }
-button, input, textarea, select, a {
+button,
+input,
+textarea,
+select,
+a {
   scroll-margin: 0 !important;
   scroll-behavior: auto !important;
 }
@@ -52,7 +60,8 @@ button, input, textarea, select, a {
 }
 
 /* Prevent touch scroll momentum on mobile */
-html, body {
+html,
+body {
   -webkit-overflow-scrolling: auto !important;
   overscroll-behavior-y: none !important;
   overscroll-behavior-x: none !important;

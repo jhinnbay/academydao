@@ -23,7 +23,7 @@ export class SoundEffects {
       const harmonicGain = ctx.createGain();
 
       // Low-pass filter for warmth
-      filter.type = 'lowpass';
+      filter.type = "lowpass";
       filter.frequency.setValueAtTime(800, ctx.currentTime);
       filter.Q.setValueAtTime(2, ctx.currentTime);
 
@@ -35,12 +35,15 @@ export class SoundEffects {
 
       // Deep bass click (like mechanical switch)
       bassOsc.frequency.setValueAtTime(120, ctx.currentTime);
-      bassOsc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.08);
-      bassOsc.type = 'triangle';
+      bassOsc.frequency.exponentialRampToValueAtTime(
+        80,
+        ctx.currentTime + 0.08,
+      );
+      bassOsc.type = "triangle";
 
       // Subtle harmonic for character
       harmonic.frequency.setValueAtTime(360, ctx.currentTime);
-      harmonic.type = 'sine';
+      harmonic.type = "sine";
 
       // Smooth envelope
       gainNode.gain.setValueAtTime(0, ctx.currentTime);
@@ -48,7 +51,10 @@ export class SoundEffects {
       gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
 
       harmonicGain.gain.setValueAtTime(0.02, ctx.currentTime);
-      harmonicGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      harmonicGain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 0.04,
+      );
 
       bassOsc.start(ctx.currentTime);
       harmonic.start(ctx.currentTime);
@@ -83,14 +89,14 @@ export class SoundEffects {
       drone1.frequency.setValueAtTime(60, ctx.currentTime);
       drone1.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.8);
       drone1.frequency.linearRampToValueAtTime(55, ctx.currentTime + 1.5);
-      drone1.type = 'triangle';
+      drone1.type = "triangle";
 
       drone2.frequency.setValueAtTime(90, ctx.currentTime);
       drone2.frequency.linearRampToValueAtTime(110, ctx.currentTime + 1.2);
-      drone2.type = 'sine';
+      drone2.type = "sine";
 
       // Gentle low-pass filtering
-      filter.type = 'lowpass';
+      filter.type = "lowpass";
       filter.frequency.setValueAtTime(200, ctx.currentTime);
       filter.frequency.linearRampToValueAtTime(400, ctx.currentTime + 0.8);
       filter.frequency.linearRampToValueAtTime(150, ctx.currentTime + 1.5);
@@ -130,13 +136,18 @@ export class SoundEffects {
       const ctx = this.getAudioContext();
 
       // Create warm, descending synth tones
-      const createSynthTone = (freq: number, delay: number, duration: number, volume: number) => {
+      const createSynthTone = (
+        freq: number,
+        delay: number,
+        duration: number,
+        volume: number,
+      ) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         const filter = ctx.createBiquadFilter();
 
         // Warm low-pass filter
-        filter.type = 'lowpass';
+        filter.type = "lowpass";
         filter.frequency.setValueAtTime(freq * 3, ctx.currentTime + delay);
         filter.Q.setValueAtTime(2, ctx.currentTime + delay);
 
@@ -144,38 +155,47 @@ export class SoundEffects {
         filter.connect(gain);
         gain.connect(ctx.destination);
 
-        osc.type = 'triangle';  // Warmer than square wave
+        osc.type = "triangle"; // Warmer than square wave
         osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
-        osc.frequency.exponentialRampToValueAtTime(freq * 0.7, ctx.currentTime + delay + duration);
+        osc.frequency.exponentialRampToValueAtTime(
+          freq * 0.7,
+          ctx.currentTime + delay + duration,
+        );
 
         // Smooth envelope
         gain.gain.setValueAtTime(0, ctx.currentTime + delay);
-        gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + delay + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+        gain.gain.linearRampToValueAtTime(
+          volume,
+          ctx.currentTime + delay + 0.02,
+        );
+        gain.gain.exponentialRampToValueAtTime(
+          0.001,
+          ctx.currentTime + delay + duration,
+        );
 
         osc.start(ctx.currentTime + delay);
         osc.stop(ctx.currentTime + delay + duration);
       };
 
       // Descending bass chord - satisfying resolution
-      createSynthTone(130, 0, 0.4, 0.06);      // Bass note (C3)
-      createSynthTone(165, 0.05, 0.35, 0.04);  // E3
-      createSynthTone(196, 0.08, 0.3, 0.03);   // G3
-      createSynthTone(262, 0.12, 0.25, 0.02);  // C4 (octave)
+      createSynthTone(130, 0, 0.4, 0.06); // Bass note (C3)
+      createSynthTone(165, 0.05, 0.35, 0.04); // E3
+      createSynthTone(196, 0.08, 0.3, 0.03); // G3
+      createSynthTone(262, 0.12, 0.25, 0.02); // C4 (octave)
 
       // Add subtle bass drop for satisfaction
       const bassOsc = ctx.createOscillator();
       const bassGain = ctx.createGain();
       const bassFilter = ctx.createBiquadFilter();
 
-      bassFilter.type = 'lowpass';
+      bassFilter.type = "lowpass";
       bassFilter.frequency.setValueAtTime(100, ctx.currentTime + 0.2);
 
       bassOsc.connect(bassFilter);
       bassFilter.connect(bassGain);
       bassGain.connect(ctx.destination);
 
-      bassOsc.type = 'sine';
+      bassOsc.type = "sine";
       bassOsc.frequency.setValueAtTime(65, ctx.currentTime + 0.2);
       bassOsc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.5);
 
@@ -185,7 +205,6 @@ export class SoundEffects {
 
       bassOsc.start(ctx.currentTime + 0.2);
       bassOsc.stop(ctx.currentTime + 0.5);
-
     } catch (error) {
       console.log("Sound effect not available:", error);
     }

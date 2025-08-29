@@ -6,29 +6,33 @@ export class ScrollPreservation {
   static preserve(): void {
     if (this.isPreserving) return;
 
-    this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    this.scrollPosition =
+      window.pageYOffset || document.documentElement.scrollTop;
     this.isPreserving = true;
 
     // Gentle scroll lock with smooth restoration
-    document.documentElement.style.setProperty('--scroll-y', `${this.scrollPosition}px`);
-    document.body.style.position = 'fixed';
+    document.documentElement.style.setProperty(
+      "--scroll-y",
+      `${this.scrollPosition}px`,
+    );
+    document.body.style.position = "fixed";
     document.body.style.top = `calc(var(--scroll-y) * -1)`;
-    document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll';
+    document.body.style.width = "100%";
+    document.body.style.overflowY = "scroll";
   }
 
   static restore(): void {
     if (!this.isPreserving) return;
 
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflowY = '';
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflowY = "";
 
     // Smooth restoration
     window.scrollTo({
       top: this.scrollPosition,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
     this.isPreserving = false;
   }
@@ -38,7 +42,7 @@ export class ScrollPreservation {
     if (!this.isPreserving) {
       window.scrollTo({
         top: position,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   }
@@ -47,7 +51,7 @@ export class ScrollPreservation {
 // Debounced state updater to prevent rapid re-renders
 export function createDebouncedUpdater<T>(
   setter: (value: T) => void,
-  delay: number = 16 // ~60fps
+  delay: number = 16, // ~60fps
 ): (value: T) => void {
   let timeoutId: NodeJS.Timeout;
   let latestValue: T;
@@ -55,7 +59,7 @@ export function createDebouncedUpdater<T>(
   return (value: T) => {
     latestValue = value;
     clearTimeout(timeoutId);
-    
+
     timeoutId = setTimeout(() => {
       setter(latestValue);
     }, delay);

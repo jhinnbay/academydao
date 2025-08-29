@@ -14,7 +14,7 @@ export class ScrollGuard {
 
   start(): void {
     if (this.isActive) return;
-    
+
     this.isActive = true;
     this.currentPosition = window.scrollY;
     this.monitor();
@@ -36,7 +36,7 @@ export class ScrollGuard {
     if (!this.isActive) return;
 
     const actualPosition = window.scrollY;
-    
+
     // If position changed unexpectedly, restore it
     if (Math.abs(actualPosition - this.currentPosition) > 5) {
       window.scrollTo(0, this.currentPosition);

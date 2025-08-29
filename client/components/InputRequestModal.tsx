@@ -16,7 +16,6 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-
   const handleSave = async () => {
     if (!content.trim()) return;
 

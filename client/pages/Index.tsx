@@ -5,7 +5,10 @@ import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { usePrivy } from "@privy-io/react-auth";
-import { ScrollPreservation, createDebouncedUpdater } from "@/lib/scrollPreservation";
+import {
+  ScrollPreservation,
+  createDebouncedUpdater,
+} from "@/lib/scrollPreservation";
 
 export default function Index() {
   const { ready, authenticated, user } = usePrivy();
@@ -19,7 +22,7 @@ export default function Index() {
   // Debounced updater for typing animation to prevent scroll jumping
   const debouncedSetDisplayedResponse = useMemo(
     () => createDebouncedUpdater(setDisplayedResponse, 16),
-    []
+    [],
   );
   const [savedRequest, setSavedRequest] = useState<{
     type: "funding" | "events";
@@ -108,11 +111,14 @@ export default function Index() {
     setTooltipPosition((prev) => ({ ...prev, [tooltipKey]: position }));
   };
 
-  const handleTooltipShow = useCallback((tooltipKey: string, event: React.MouseEvent) => {
-    const element = event.currentTarget as HTMLElement;
-    calculateTooltipPosition(element, tooltipKey);
-    setTooltipVisible(tooltipKey);
-  }, []);
+  const handleTooltipShow = useCallback(
+    (tooltipKey: string, event: React.MouseEvent) => {
+      const element = event.currentTarget as HTMLElement;
+      calculateTooltipPosition(element, tooltipKey);
+      setTooltipVisible(tooltipKey);
+    },
+    [],
+  );
 
   // Handle window resize to reposition tooltips (simplified)
   useEffect(() => {
@@ -129,45 +135,48 @@ export default function Index() {
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
-  const handleGenerate = useCallback((e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const handleGenerate = useCallback(
+    (e?: React.MouseEvent) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
 
-    // Batch state updates
-    setRequestCount((prev) => prev + 1);
-    setIsGenerating(true);
-    setIsTyping(false);
-    setDisplayedResponse("");
-    setShowResponse(true);
+      // Batch state updates
+      setRequestCount((prev) => prev + 1);
+      setIsGenerating(true);
+      setIsTyping(false);
+      setDisplayedResponse("");
+      setShowResponse(true);
 
-    // Play generation sound
-    SoundEffects.playGenerateSound();
+      // Play generation sound
+      SoundEffects.playGenerateSound();
 
-    // Simulate generation delay
-    setTimeout(() => {
-      setIsGenerating(false);
-      setIsTyping(true);
+      // Simulate generation delay
+      setTimeout(() => {
+        setIsGenerating(false);
+        setIsTyping(true);
 
-      // Type out the response with sound effects
-      let currentText = "";
-      SoundEffects.typeWithSound(
-        daemonResponse,
-        (char, isComplete) => {
-          if (!isComplete) {
-            currentText += char;
-            debouncedSetDisplayedResponse(currentText);
-          } else {
-            // Ensure final text is displayed immediately
-            setDisplayedResponse(daemonResponse);
-            setIsTyping(false);
-          }
-        },
-        30, // typing speed
-      );
-    }, 1500);
-  }, [debouncedSetDisplayedResponse, daemonResponse]);
+        // Type out the response with sound effects
+        let currentText = "";
+        SoundEffects.typeWithSound(
+          daemonResponse,
+          (char, isComplete) => {
+            if (!isComplete) {
+              currentText += char;
+              debouncedSetDisplayedResponse(currentText);
+            } else {
+              // Ensure final text is displayed immediately
+              setDisplayedResponse(daemonResponse);
+              setIsTyping(false);
+            }
+          },
+          30, // typing speed
+        );
+      }, 1500);
+    },
+    [debouncedSetDisplayedResponse, daemonResponse],
+  );
 
   // Initialize with the response already displayed only on mount if not actively processing
   useEffect(() => {
@@ -194,10 +203,11 @@ export default function Index() {
         const currentPos = window.scrollY;
         const diff = Math.abs(currentPos - preservedScrollPosition);
 
-        if (diff > 200) { // Only prevent major jumps
+        if (diff > 200) {
+          // Only prevent major jumps
           window.scrollTo({
             top: preservedScrollPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       } else {
@@ -212,19 +222,18 @@ export default function Index() {
         requestAnimationFrame(handleTypingScroll);
       };
 
-      document.addEventListener('scroll', scrollHandler, { passive: true });
+      document.addEventListener("scroll", scrollHandler, { passive: true });
 
       return () => {
-        document.removeEventListener('scroll', scrollHandler);
+        document.removeEventListener("scroll", scrollHandler);
       };
     }
 
     // Enable smooth scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'smooth';
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "smooth";
     }
   }, [isTyping, isGenerating]);
-
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
@@ -241,13 +250,13 @@ export default function Index() {
     setIsModalOpen(false);
   }, []);
 
-  const handleSaveRequest = useCallback((data: {
-    type: "funding" | "events";
-    content: string;
-  }) => {
-    setSavedRequest(data);
-    SoundEffects.playCompleteSound();
-  }, []);
+  const handleSaveRequest = useCallback(
+    (data: { type: "funding" | "events"; content: string }) => {
+      setSavedRequest(data);
+      SoundEffects.playCompleteSound();
+    },
+    [],
+  );
 
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
@@ -470,7 +479,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                    e.stopPropagation();
+                      e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -484,7 +493,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                    e.stopPropagation();
+                      e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -498,7 +507,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                    e.stopPropagation();
+                      e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -512,7 +521,7 @@ export default function Index() {
                     }}
                     onClick={(e) => {
                       e.preventDefault();
-                    e.stopPropagation();
+                      e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -1072,10 +1081,10 @@ export default function Index() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
                 <span className="relative z-10 drop-shadow-sm">
                   {isGenerating
-                  ? "Calculating decision-matrix...."
-                  : isTyping
-                    ? "Combining elements..."
-                    : "Submit Request"}
+                    ? "Calculating decision-matrix...."
+                    : isTyping
+                      ? "Combining elements..."
+                      : "Submit Request"}
                 </span>
               </button>
               <div className="text-center">
