@@ -128,29 +128,26 @@ export default function Index() {
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
-  const handleGenerate = (e?: React.MouseEvent) => {
+  const handleGenerate = useCallback((e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
-    // Batch state updates to prevent multiple renders
-    React.startTransition(() => {
-      setRequestCount((prev) => prev + 1);
-      setIsGenerating(true);
-      setIsTyping(false);
-      setDisplayedResponse("");
-      setShowResponse(true);
-    });
+
+    // Batch state updates
+    setRequestCount((prev) => prev + 1);
+    setIsGenerating(true);
+    setIsTyping(false);
+    setDisplayedResponse("");
+    setShowResponse(true);
 
     // Play generation sound
     SoundEffects.playGenerateSound();
 
     // Simulate generation delay
     setTimeout(() => {
-      React.startTransition(() => {
-        setIsGenerating(false);
-        setIsTyping(true);
-      });
+      setIsGenerating(false);
+      setIsTyping(true);
 
       // Type out the response with sound effects
       let currentText = "";
@@ -167,7 +164,7 @@ export default function Index() {
         30, // typing speed
       );
     }, 1500);
-  };
+  }, [debouncedSetDisplayedResponse, daemonResponse]);
 
   // Initialize with the response already displayed
   useEffect(() => {
