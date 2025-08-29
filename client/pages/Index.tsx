@@ -156,7 +156,9 @@ export default function Index() {
         daemonResponse,
         (char, isComplete) => {
           if (!isComplete) {
-            setDisplayedResponse((prev) => prev + char);
+            React.startTransition(() => {
+              setDisplayedResponse((prev) => prev + char);
+            });
           } else {
             React.startTransition(() => {
               setIsTyping(false);
