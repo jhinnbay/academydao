@@ -107,11 +107,11 @@ export default function Index() {
     setTooltipPosition((prev) => ({ ...prev, [tooltipKey]: position }));
   };
 
-  const handleTooltipShow = (tooltipKey: string, event: React.MouseEvent) => {
+  const handleTooltipShow = useCallback((tooltipKey: string, event: React.MouseEvent) => {
     const element = event.currentTarget as HTMLElement;
     calculateTooltipPosition(element, tooltipKey);
     setTooltipVisible(tooltipKey);
-  };
+  }, []);
 
   // Handle window resize to reposition tooltips (simplified)
   useEffect(() => {
