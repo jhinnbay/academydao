@@ -562,7 +562,7 @@ export default function Index() {
                 }}
               >
                 I'm Azura. Built to accelerate your vision. Call a team
-                meeting—I'll schedule, shape the agenda, and unlock the
+                meeting — I'll schedule, shape the agenda, and unlock the
                 exact resources you need to win. Let's build what's next.
               </p>
               <div className="flex flex-col items-start gap-2">
@@ -587,7 +587,7 @@ export default function Index() {
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F09b3add61e4743578148e0c14c5158fa"
+                src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
               />
