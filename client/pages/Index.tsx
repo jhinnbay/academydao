@@ -113,19 +113,11 @@ export default function Index() {
     setTooltipVisible(tooltipKey);
   };
 
-  // Handle window resize to reposition tooltips
+  // Handle window resize to reposition tooltips (simplified)
   useEffect(() => {
     const handleResize = () => {
       if (tooltipVisible) {
-        // Small delay to ensure DOM has updated after resize
-        setTimeout(() => {
-          const element = document.querySelector(
-            `[data-tooltip="${tooltipVisible}"]`,
-          ) as HTMLElement;
-          if (element) {
-            calculateTooltipPosition(element, tooltipVisible);
-          }
-        }, 10);
+        setTooltipVisible(null); // Just hide tooltip on resize
       }
     };
 
