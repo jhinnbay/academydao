@@ -213,9 +213,10 @@ export default function Index() {
   const handleOpenModal = (e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
-      e.stopPropagation();
     }
 
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
     setIsModalOpen(true);
   };
 
