@@ -548,7 +548,12 @@ export default function Index() {
 
               {showResponse && (
                 <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-2xl">
-                  <div className="bg-white/10 backdrop-blur-md p-4 text-white font-cartograph text-left rounded-xl border border-white/20 shadow-lg" style={{fontSize: '16px', lineHeight: '1.6'}}>
+                  <div className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded-xl border border-white/20 shadow-lg" style={{
+                    fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                    lineHeight: '1.6',
+                    fontWeight: '400',
+                    color: '#b0b0b0'
+                  }}>
                     {isGenerating ? (
                       <div className="flex items-center">
                         <span className="animate-pulse">
