@@ -178,8 +178,17 @@ export default function Index() {
   const handleOpenModal = (e?: React.MouseEvent) => {
     e?.preventDefault();
     e?.stopPropagation();
+
+    // Preserve scroll position
+    const currentScrollY = window.scrollY;
+
     React.startTransition(() => {
       setIsModalOpen(true);
+    });
+
+    // Restore scroll position after state update
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScrollY);
     });
   };
 
