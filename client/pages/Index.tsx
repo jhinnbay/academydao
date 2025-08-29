@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
-import { FallbackWalletConnect } from "@/components/FallbackWalletConnect";
+import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
+import { usePrivy } from "@privy-io/react-auth";
 
 export default function Index() {
+  const { ready, authenticated, user } = usePrivy();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -17,8 +19,6 @@ export default function Index() {
   } | null>(null);
 
   // Wallet connection states
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [walletAddress, setWalletAddress] = useState<string>("");
   const [hasAcademicAngel, setHasAcademicAngel] = useState<boolean | null>(
     null,
   );
