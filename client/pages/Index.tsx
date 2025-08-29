@@ -953,7 +953,7 @@ export default function Index() {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating || isTyping}
-                  className="w-full bg-gradient-to-r from-cyan-600/80 via-blue-600/70 to-cyan-600/80 backdrop-blur-xl border border-cyan-400/50 cyberpunk-button font-sans font-semibold hover:from-cyan-500/90 hover:via-blue-500/80 hover:to-cyan-500/90 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-cyan-600/80 via-blue-600/14 to-cyan-600/80 backdrop-blur-xl border border-cyan-400/50 cyberpunk-button font-sans font-semibold hover:from-cyan-500/90 hover:via-blue-500/16 hover:to-cyan-500/90 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
                   style={{
                     fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
                     lineHeight: "1.6",
