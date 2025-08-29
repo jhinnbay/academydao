@@ -551,7 +551,12 @@ export default function Index() {
           </div>
         </nav>
 
-        <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Music Player */}
+        <div className="fixed top-16 left-0 right-0 z-40">
+          <RetroMusicPlayer />
+        </div>
+
+        <div className="pt-32 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 mb-8 gap-8">
             <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
