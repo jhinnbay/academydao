@@ -58,7 +58,15 @@ const RetroMusicPlayer = () => {
       audio.removeEventListener('pause', handlePause);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [audioSrc, volume]);
+  }, [audioSrc]);
+
+  // Handle volume changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = volume;
+    }
+  }, [volume]);
 
   const playPause = async () => {
     const audio = audioRef.current;
