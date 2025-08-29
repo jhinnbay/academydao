@@ -7,6 +7,7 @@ import { LoginScreen } from "@/components/LoginScreen";
 import { InputRequestModal } from "@/components/InputRequestModal";
 
 export default function Index() {
+  const { ready, authenticated } = usePrivy();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
