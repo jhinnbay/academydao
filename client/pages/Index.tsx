@@ -537,7 +537,7 @@ export default function Index() {
                     color: "#888888",
                   }}
                 >
-                  Proposals Created
+                  Requests
                 </span>
                 <span
                   className="font-cartograph"
