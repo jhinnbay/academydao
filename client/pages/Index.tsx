@@ -64,7 +64,9 @@ export default function Index() {
             <div className="bg-black/80 backdrop-blur-md border border-cyan-400/30 rounded-lg p-8 shadow-2xl shadow-cyan-500/20">
               <div className="flex items-center justify-center mb-4">
                 <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse mr-2"></div>
-                <div className="text-cyan-400 font-cartograph text-sm">SYSTEM_INIT</div>
+                <div className="text-cyan-400 font-cartograph text-sm">
+                  SYSTEM_INIT
+                </div>
               </div>
 
               <div className="font-cartograph text-white/80 mb-4">
@@ -72,18 +74,33 @@ export default function Index() {
               </div>
 
               <div className="flex items-center justify-center">
-                <span className="text-cyan-400 font-cartograph mr-2">Loading</span>
+                <span className="text-cyan-400 font-cartograph mr-2">
+                  Loading
+                </span>
                 <div className="flex space-x-1">
                   <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  <div
+                    className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.1s" }}
+                  ></div>
+                  <div
+                    className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"
+                    style={{ animationDelay: "0.2s" }}
+                  ></div>
                 </div>
               </div>
 
               {/* Scanning lines effect */}
               <div className="mt-4 text-xs text-cyan-300/60 font-cartograph">
-                <div className="animate-pulse">Connecting to Privy authentication...</div>
-                <div className="animate-pulse" style={{animationDelay: '0.5s'}}>Establishing secure connection...</div>
+                <div className="animate-pulse">
+                  Connecting to Privy authentication...
+                </div>
+                <div
+                  className="animate-pulse"
+                  style={{ animationDelay: "0.5s" }}
+                >
+                  Establishing secure connection...
+                </div>
               </div>
             </div>
           </div>
@@ -503,8 +520,7 @@ export default function Index() {
                   >
                     {isWalletConnected && walletAddress
                       ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-                      : "Connect Wallet"
-                    }
+                      : "Connect Wallet"}
                   </span>
                 </div>
 
@@ -660,9 +676,7 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-                <PrivyAuth
-                  onConnectionChange={handleWalletConnectionChange}
-                />
+                <PrivyAuth onConnectionChange={handleWalletConnectionChange} />
                 {isWalletConnected && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -673,7 +687,9 @@ export default function Index() {
                         fontWeight: "500",
                       }}
                     >
-                      Connected {walletAddress && `(${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)})`}
+                      Connected{" "}
+                      {walletAddress &&
+                        `(${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)})`}
                     </span>
                   </div>
                 )}
@@ -950,10 +966,10 @@ export default function Index() {
                   fontWeight: "400",
                 }}
               >
-                {">"} Username: {isWalletConnected && walletAddress
+                {">"} Username:{" "}
+                {isWalletConnected && walletAddress
                   ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
-                  : "Not Connected"
-                }
+                  : "Not Connected"}
               </div>
             </div>
 

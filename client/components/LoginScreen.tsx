@@ -15,7 +15,7 @@ export function LoginScreen() {
             "grayscale(100%) brightness(0.05) contrast(3) saturate(0%) hue-rotate(0deg)",
         }}
       ></div>
-      
+
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 w-full max-w-md shadow-2xl">
           <div className="text-center mb-8">
