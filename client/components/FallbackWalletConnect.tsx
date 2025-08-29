@@ -140,7 +140,7 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
     checkConnection();
   }, [onConnectionChange]);
 
-  if (isConnected) {
+  if (isConnected && showConnectionStatus) {
     return (
       <div className="flex flex-col items-end">
         <div className="text-green-300 font-sf-pro text-xs font-medium leading-[22px] mb-1">
@@ -160,9 +160,10 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
     <button
       onClick={connectWallet}
       disabled={isConnecting}
-      className="text-white/80 font-sf-pro text-sm font-medium leading-[22px] hover:text-white transition-colors hover:underline disabled:opacity-50"
+      className={buttonClassName}
+      style={buttonStyle}
     >
-      {isConnecting ? "Connecting..." : "Connect"}
+      {isConnecting ? "Connecting..." : isConnected && !showConnectionStatus ? "Connected" : buttonText}
     </button>
   );
 };
