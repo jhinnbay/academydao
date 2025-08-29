@@ -142,6 +142,19 @@ export default function Index() {
         e.stopPropagation();
       }
 
+      // Immediately preserve scroll position before any state changes
+      const currentScrollPosition = window.scrollY;
+
+      // Prevent any scroll jumping during state updates
+      requestAnimationFrame(() => {
+        if (Math.abs(window.scrollY - currentScrollPosition) > 10) {
+          window.scrollTo({
+            top: currentScrollPosition,
+            behavior: 'instant'
+          });
+        }
+      });
+
       // Batch state updates
       setRequestCount((prev) => prev + 1);
       setIsGenerating(true);
