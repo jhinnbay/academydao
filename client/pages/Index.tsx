@@ -795,7 +795,13 @@ export default function Index() {
                 </div>
                 {tooltipVisible === "daemon" && (
                   <div
-                    className={`absolute ${tooltipPosition.daemon?.top === false ? "top-full mt-2" : "bottom-full mb-2"} ${tooltipPosition.daemon?.left ? "left-0" : "right-0"} w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
+                    className={`absolute ${tooltipPosition.daemon?.top ? "top-full mt-2" : "bottom-full mb-2"} ${
+                      tooltipPosition.daemon?.center
+                        ? "left-1/2 -translate-x-1/2"
+                        : tooltipPosition.daemon?.left
+                          ? "right-full mr-2"
+                          : "left-full ml-2"
+                    } w-64 max-w-[90vw] p-3 bg-black/90 backdrop-blur-md border border-white/20 rounded-lg text-white text-sm font-sans z-50`}
                   >
                     <div className="font-medium mb-1">Daemon Model</div>
                     <div className="text-white/80">
@@ -803,7 +809,13 @@ export default function Index() {
                       decision-making assistant for funding and collaboration.
                     </div>
                     <div
-                      className={`absolute ${tooltipPosition.daemon?.top === false ? "bottom-full" : "top-full"} ${tooltipPosition.daemon?.left ? "left-4" : "right-4"} w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.daemon?.top === false ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
+                      className={`absolute ${tooltipPosition.daemon?.top ? "bottom-full" : "top-full"} ${
+                        tooltipPosition.daemon?.center
+                          ? "left-1/2 -translate-x-1/2"
+                          : tooltipPosition.daemon?.left
+                            ? "right-4"
+                            : "left-4"
+                      } w-0 h-0 border-l-4 border-r-4 ${tooltipPosition.daemon?.top ? "border-b-4 border-b-white/20" : "border-t-4 border-t-white/20"} border-transparent`}
                     ></div>
                   </div>
                 )}
