@@ -955,8 +955,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          Not enough Angels yet? �� Invite an Angel to review
-                          your request
+                          No Angels yet? Invite to review your request.
                         </p>
 
                         {/* Action Buttons */}
