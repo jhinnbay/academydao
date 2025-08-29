@@ -89,6 +89,24 @@ export default function Index() {
     setTooltipVisible(tooltipKey);
   };
 
+  // Handle window resize to reposition tooltips
+  useEffect(() => {
+    const handleResize = () => {
+      if (tooltipVisible) {
+        // Small delay to ensure DOM has updated after resize
+        setTimeout(() => {
+          const element = document.querySelector(`[data-tooltip="${tooltipVisible}"]`) as HTMLElement;
+          if (element) {
+            calculateTooltipPosition(element, tooltipVisible);
+          }
+        }, 10);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [tooltipVisible]);
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
