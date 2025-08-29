@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { usePrivy } from "@privy-io/react-auth";
+import { ScrollPreservation, createDebouncedUpdater } from "@/lib/scrollPreservation";
 
 export default function Index() {
   const { ready, authenticated, user } = usePrivy();
