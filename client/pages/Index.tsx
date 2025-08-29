@@ -136,8 +136,15 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-mwa-gradient-start via-mwa-primary-blue to-mwa-gradient-end text-mwa-text-primary font-cartograph">
-      <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl animate-glow">
+    <div className="min-h-screen bg-black text-white font-cartograph relative">
+      {/* Grainy texture background */}
+      <div
+        className="absolute inset-0 opacity-50 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F75149dff047b4596b3ef77b927034fb6?format=webp&width=800')`
+        }}
+      ></div>
+      <div className="max-w-md mx-auto min-h-screen relative sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl animate-glow z-10">
         {/* Corner decorations - made subtle for glassmorphism */}
         <div className="absolute top-24 left-4 w-6 h-6 sm:left-6 md:left-8 lg:left-12 opacity-20">
           <svg
@@ -218,10 +225,8 @@ export default function Index() {
             </div>
 
             {/* Username Section */}
-            <div className="border-t border-b border-white/30 px-2.5 py-2.5 bg-white/5 backdrop-blur-sm">
-              <div className="text-white/90 font-cartograph text-base leading-[140.628%] drop-shadow-md">
-                {">"} Username: 0x192FSDF324342
-                <br />
+            <div className="border-t border-b border-white/30 px-2.5 bg-white/5 backdrop-blur-sm" style={{height: '250px'}}>
+              <div className="text-white/90 font-cartograph text-base leading-[140.628%] drop-shadow-md flex items-center h-full">
                 {">"} Username: jhinnbay.eth
               </div>
             </div>
@@ -232,7 +237,7 @@ export default function Index() {
               <div className="mb-5">
                 <div className="flex items-center justify-between h-24 px-6 border border-white/30 rounded-2xl bg-white/15 backdrop-blur-lg sm:h-28 md:h-32 hover:border-white/50 hover:bg-white/25 hover:shadow-xl hover:animate-glow transition-all duration-500 cursor-pointer group shadow-2xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-mwa-primary-blue to-mwa-secondary-blue flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
                       <svg
                         width="24"
                         height="24"
@@ -282,7 +287,7 @@ export default function Index() {
                       className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                         savedRequest
                           ? "bg-gradient-to-r from-green-400 to-green-500"
-                          : "bg-gradient-to-r from-mwa-accent-purple to-mwa-secondary-blue"
+                          : "bg-gradient-to-r from-gray-600 to-gray-800"
                       }`}
                     >
                       {savedRequest ? (
@@ -377,7 +382,7 @@ export default function Index() {
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || isTyping}
-                className="w-full h-14 px-16 py-4 bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-xl border border-white/30 rounded-2xl text-white font-sf-pro-display text-lg sm:text-xl font-semibold leading-[140.628%] hover:from-white/30 hover:via-white/20 hover:to-white/30 hover:border-white/50 hover:shadow-2xl hover:animate-glow transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed sm:h-16 md:h-18 shadow-2xl relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-mwa-primary-blue/20 before:to-mwa-secondary-blue/20 before:rounded-2xl"
+                className="w-full h-14 px-16 py-4 bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-xl border border-white/30 rounded-2xl text-white font-sf-pro-display text-lg sm:text-xl font-semibold leading-[140.628%] hover:from-gray-700/60 hover:via-gray-600/40 hover:to-gray-700/60 hover:border-white/50 hover:shadow-2xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed sm:h-16 md:h-18 shadow-2xl"
               >
                 {isGenerating
                   ? "Generating..."
@@ -409,7 +414,7 @@ export default function Index() {
                       <div>
                         {displayedResponse}
                         {isTyping && (
-                          <span className="w-2 h-5 bg-mwa-primary-blue animate-pulse inline-block ml-1"></span>
+                          <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
                         )}
                       </div>
                     )}
