@@ -12,7 +12,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   onClose,
   onSave,
 }) => {
-  const [activeTab, setActiveTab] = useState<"funding" | "events">("funding");
+  const [activeTab, setActiveTab] = useState<"funding" | "events">("events");
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
