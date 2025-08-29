@@ -13,6 +13,10 @@ interface FallbackWalletConnectProps {
     address?: string,
     hasToken?: boolean,
   ) => void;
+  buttonText?: string;
+  buttonClassName?: string;
+  buttonStyle?: React.CSSProperties;
+  showConnectionStatus?: boolean;
 }
 
 const ACADEMIC_ANGEL_CONTRACT = "0x39f259B58A9aB02d42bC3DF5836bA7fc76a8880F";
