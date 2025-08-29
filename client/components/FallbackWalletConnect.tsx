@@ -163,7 +163,11 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
       className={buttonClassName}
       style={buttonStyle}
     >
-      {isConnecting ? "Connecting..." : isConnected && !showConnectionStatus ? "Connected" : buttonText}
+      {isConnecting
+        ? "Connecting..."
+        : isConnected && !showConnectionStatus
+          ? "Connected"
+          : buttonText}
     </button>
   );
 };
