@@ -167,10 +167,12 @@ export default function Index() {
     }, 1500);
   }, [debouncedSetDisplayedResponse, daemonResponse]);
 
-  // Initialize with the response already displayed
+  // Initialize with the response already displayed only if not typing
   useEffect(() => {
-    setDisplayedResponse(daemonResponse);
-  }, []);
+    if (!isTyping && !isGenerating) {
+      setDisplayedResponse(daemonResponse);
+    }
+  }, [isTyping, isGenerating]);
 
   // NUCLEAR SCROLL JUMP PREVENTION
   useEffect(() => {
