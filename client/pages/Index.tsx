@@ -658,7 +658,7 @@ export default function Index() {
             <div className="flex justify-between items-center w-full">
               {/* Requests with Tooltip */}
               <div
-                className="flex flex-col items-end gap-1 relative cursor-help"
+                className="flex flex-col items-start gap-1 relative cursor-help"
                 data-tooltip="requests"
                 onMouseEnter={(e) => handleTooltipShow("requests", e)}
                 onMouseLeave={() => setTooltipVisible(null)}
