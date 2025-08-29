@@ -379,6 +379,7 @@ body {
     position: relative;
     text-transform: uppercase;
     transition: color 0.1s linear;
+    width: 100%;
   }
   .btn-70:after,
   .btn-70:before {
