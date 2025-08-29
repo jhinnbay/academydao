@@ -837,6 +837,47 @@ export default function Index() {
               </div>
             </div>
 
+            {/* Angels Connected Progress */}
+            <div className="border-t border-b border-white/20 px-4 py-3 bg-black backdrop-blur-sm">
+              <div className="flex items-center justify-between mb-2">
+                <span
+                  className="font-sans text-white/90"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.4",
+                    fontWeight: "500",
+                  }}
+                >
+                  Angels Connected
+                </span>
+                <span
+                  className="font-cartograph text-amber-300"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    fontWeight: "600",
+                  }}
+                >
+                  0/3
+                </span>
+              </div>
+              <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
+                <div
+                  className="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-500"
+                  style={{ width: "0%" }}
+                ></div>
+              </div>
+              <p
+                className="font-sans text-amber-200/80"
+                style={{
+                  fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                  lineHeight: "1.5",
+                  fontWeight: "400",
+                }}
+              >
+                Secure at least 1 Angel to boost proposal strength
+              </p>
+            </div>
+
             {/* Main Action Section */}
             <div className="p-6 sm:p-8 space-y-6">
               {/* Primary Input Request Form Card - Main Focal Point */}
@@ -948,47 +989,6 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* CTA Button Section */}
-              <div className="space-y-4">
-                <button
-                  onClick={handleGenerate}
-                  disabled={isGenerating || isTyping}
-                  className="w-full bg-gradient-to-r from-cyan-600/40 via-black to-cyan-600/40 backdrop-blur-xl border border-cyan-400/50 cyberpunk-button font-sans font-semibold hover:from-cyan-500/45 hover:via-black hover:to-cyan-500/45 hover:border-cyan-300/80 hover:shadow-2xl hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-xl shadow-cyan-900/20 relative overflow-hidden group"
-                  style={{
-                    fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                    lineHeight: "1.6",
-                    fontWeight: "600",
-                    color: "#ffffff",
-                    paddingTop: "20px",
-                    paddingBottom: "20px",
-                    paddingLeft: "32px",
-                    paddingRight: "32px",
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-300"></div>
-                  <span className="relative z-10 drop-shadow-sm">
-                    {isGenerating
-                      ? "Calculating decision-matrix...."
-                      : isTyping
-                        ? "Please bear with me, processing..."
-                        : "Submit Request"}
-                  </span>
-                </button>
-                <div className="text-center">
-                  <p
-                    className="font-sans text-white/70"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                      lineHeight: "1.5",
-                      fontWeight: "400",
-                    }}
-                  >
-                    Fees power the engine and validate
-                    <br />
-                    {"\u00A0"}your submission on-chain.
-                  </p>
-                </div>
-              </div>
 
               {/* Angel Guidance Section */}
               <div className="border border-amber-400/30 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-600/5 backdrop-blur-lg p-6 shadow-xl">
@@ -1005,47 +1005,6 @@ export default function Index() {
                       Strengthen Your Proposal
                     </h3>
                     <div className="space-y-3">
-                      {/* Gamification Progress */}
-                      <div className="bg-black backdrop-blur-sm rounded-lg p-4 border border-amber-400/20">
-                        <div className="flex items-center justify-between mb-2">
-                          <span
-                            className="font-sans text-white/90"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Angels Connected
-                          </span>
-                          <span
-                            className="font-cartograph text-amber-300"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              fontWeight: "600",
-                            }}
-                          >
-                            0/3
-                          </span>
-                        </div>
-                        <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
-                          <div
-                            className="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-500"
-                            style={{ width: "0%" }}
-                          ></div>
-                        </div>
-                        <p
-                          className="font-sans text-amber-200/80"
-                          style={{
-                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                            lineHeight: "1.5",
-                            fontWeight: "400",
-                          }}
-                        >
-                          Secure at least 1 Angel to boost proposal strength
-                        </p>
-                      </div>
-
                       {/* Action Guidance */}
                       <div className="space-y-3">
                         <p
@@ -1056,7 +1015,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          No Angels yet? Invite to review your request.
+                          No Angels detected? Mint to boost your cause.
                         </p>
 
                         {/* Action Buttons */}
@@ -1069,7 +1028,7 @@ export default function Index() {
                               fontWeight: "600",
                             }}
                           >
-                            Invite Angel Reviewer
+                            Purchase Membership Token
                           </button>
                           <button
                             className="flex-1 bg-black backdrop-blur-sm border border-white/30 rounded-xl px-4 py-3 font-sans font-medium text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300"
