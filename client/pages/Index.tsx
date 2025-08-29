@@ -133,7 +133,6 @@ export default function Index() {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
-      e.stopImmediatePropagation();
     }
     // Batch state updates to prevent multiple renders
     React.startTransition(() => {
