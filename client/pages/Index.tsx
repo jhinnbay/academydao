@@ -550,7 +550,7 @@ export default function Index() {
                   fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
                 }}
               >
-                Welcome To The Horizon
+                Welcome To The Academy
               </h1>
               <p
                 className="font-sans"
