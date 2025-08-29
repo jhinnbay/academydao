@@ -172,33 +172,17 @@ export default function Index() {
   const handleGenerate = () => {
     // Store current scroll position before state changes
     const currentScroll = window.scrollY;
+    setScrollPosition(currentScroll);
 
-    // Lock scroll during state updates
-    setIsScrollLocked(true);
-
-    // Prevent body scrolling entirely
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    // Batch state updates to minimize re-renders
-    React.startTransition(() => {
-      setRequestCount((prev) => prev + 1);
-      setIsGenerating(true);
-      setIsTyping(false);
-      setDisplayedResponse("");
-      setShowResponse(true);
-    });
+    // Simple state updates
+    setRequestCount((prev) => prev + 1);
+    setIsGenerating(true);
+    setIsTyping(false);
+    setDisplayedResponse("");
+    setShowResponse(true);
 
     // Play generation sound
     SoundEffects.playGenerateSound();
-
-    // Restore scroll position after state updates and unlock
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: currentScroll, behavior: "instant" });
-        // Don't unlock scroll yet - keep it locked during typing animation
-      });
-    });
 
     // Simulate generation delay
     setTimeout(() => {
@@ -213,11 +197,6 @@ export default function Index() {
             setDisplayedResponse((prev) => prev + char);
           } else {
             setIsTyping(false);
-            // Ensure scroll lock is released when typing completes
-            setIsScrollLocked(false);
-            // Restore body scrolling
-            document.body.style.overflow = "";
-            document.documentElement.style.overflow = "";
           }
         },
         30, // typing speed
