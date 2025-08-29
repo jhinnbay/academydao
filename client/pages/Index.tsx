@@ -575,14 +575,28 @@ export default function Index() {
 
               {/* Terminal-style Action Buttons */}
               <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-2xl shadow-2xl">
-                <div className="text-white font-cartograph space-y-1" style={{fontSize: '16px', lineHeight: '1.6'}}>
-                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
+                <div className="font-cartograph space-y-1" style={{
+                  fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+                  lineHeight: '1.6',
+                  fontWeight: '400',
+                  color: '#b0b0b0'
+                }}>
+                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                          style={{color: '#b0b0b0'}}
+                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
                     {">"} DECISION
                   </button>
-                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
+                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                          style={{color: '#b0b0b0'}}
+                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
                     {">"} VIEW PROP
                   </button>
-                  <button className="block w-full text-left hover:text-white hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300">
+                  <button className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                          style={{color: '#b0b0b0'}}
+                          onMouseEnter={(e) => e.target.style.color = '#ffffff'}
+                          onMouseLeave={(e) => e.target.style.color = '#b0b0b0'}>
                     {">"} SHARE PROP
                   </button>
                 </div>
