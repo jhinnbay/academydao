@@ -28,7 +28,6 @@ export default function Index() {
   const [requestCount, setRequestCount] = useState(3);
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState<{
     [key: string]: { top?: boolean; left?: boolean };
   }>({});
