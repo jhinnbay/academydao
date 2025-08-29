@@ -26,6 +26,19 @@ export default function Index() {
   const [isTypingConnection, setIsTypingConnection] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMobileMenuOpen && !target.closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
@@ -97,7 +110,7 @@ export default function Index() {
 
         const message = hasToken
           ? "😇 Congratulations, you made it. Prompt Azura your next request."
-          : "�� Find a real Academic Angel.";
+          : "❌ Find a real Academic Angel.";
 
         // Type out the message with sound effects
         SoundEffects.typeWithSound(
