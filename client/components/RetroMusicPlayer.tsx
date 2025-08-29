@@ -8,8 +8,9 @@ const RetroMusicPlayer = () => {
   const [volume, setVolume] = useState(0.7);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Mock track data
-  const currentTrack = "CYBERPUNK_AMBIENT.mp3";
+  // Real track data
+  const currentTrack = "Track 001";
+  const audioSrc = "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F5f2f2f4008d54f0eaeacbaa6a78b2cae?alt=media&token=b25a8acf-85d7-4e91-9e1d-53222d800270&apiKey=6f2aebc9bb734d979c603aa774a20c1a";
 
   useEffect(() => {
     const audio = audioRef.current;
