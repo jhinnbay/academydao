@@ -62,12 +62,10 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
       onMouseDown={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation();
       }}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation();
         if (e.target === e.currentTarget) {
           onClose();
         }
@@ -75,12 +73,10 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
       onScroll={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation();
       }}
       onWheel={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        e.stopImmediatePropagation();
       }}
     >
       <div
