@@ -594,7 +594,7 @@ export default function Index() {
                 the right resources.
               </p>
               <div className="flex flex-col items-start gap-2">
-                <WalletConnect
+                <PrivyAuth
                   onConnectionChange={handleWalletConnectionChange}
                 />
                 {isWalletConnected && (
