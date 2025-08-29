@@ -892,54 +892,73 @@ export default function Index() {
                       <svg
                         width="24"
                         height="24"
-                        viewBox="0 0 24 24"
+                        viewBox="0 0 700 700"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="text-white/80 group-hover:text-white transition-colors duration-500"
+                        className="text-white group-hover:text-white transition-colors duration-500"
                       >
                         <path
-                          d="M6 2C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2H6Z"
-                          stroke="currentColor"
-                          strokeWidth="2"
+                          d="M87.5 350C87.5 350 87.5 87.5 131.25 87.5H393.75L481.25 175V350V525C481.25 525 481.25 612.5 437.5 612.5H131.25C87.5 612.5 87.5 350 87.5 350Z"
+                          stroke="white"
+                          strokeWidth="14"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           fill="none"
                         />
-                        <polyline
-                          points="14,2 14,8 20,8"
-                          stroke="currentColor"
-                          strokeWidth="2"
+                        <path
+                          d="M393.75 87.5V175H481.25"
+                          stroke="white"
+                          strokeWidth="14"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           fill="none"
                         />
-                        <line
-                          x1="16"
-                          y1="13"
-                          x2="8"
-                          y2="13"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
+                        <path
+                          d="M175 262.5H350"
+                          stroke="white"
+                          strokeWidth="14"
                           strokeLinecap="round"
+                          fill="none"
                         />
-                        <line
-                          x1="16"
-                          y1="17"
-                          x2="8"
-                          y2="17"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
+                        <path
+                          d="M175 350H393.75"
+                          stroke="white"
+                          strokeWidth="14"
                           strokeLinecap="round"
+                          fill="none"
                         />
-                        <line
-                          x1="10"
-                          y1="9"
-                          x2="8"
-                          y2="9"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
+                        <path
+                          d="M175 437.5H350"
+                          stroke="white"
+                          strokeWidth="14"
                           strokeLinecap="round"
+                          fill="none"
                         />
+                        <path
+                          d="M175 525H306.25"
+                          stroke="white"
+                          strokeWidth="14"
+                          strokeLinecap="round"
+                          fill="none"
+                        />
+                        <path
+                          d="M525 131.25H568.75C612.5 131.25 612.5 175 612.5 175V568.75C612.5 612.5 568.75 612.5 568.75 612.5H306.25"
+                          stroke="white"
+                          strokeWidth="14"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                        <circle cx="175" cy="262.5" r="8.75" fill="white"/>
+                        <circle cx="175" cy="350" r="8.75" fill="white"/>
+                        <circle cx="175" cy="437.5" r="8.75" fill="white"/>
+                        <circle cx="175" cy="525" r="8.75" fill="white"/>
+                        <circle cx="525" cy="175" r="8.75" fill="white"/>
+                        <circle cx="525" cy="218.75" r="8.75" fill="white"/>
+                        <circle cx="525" cy="262.5" r="8.75" fill="white"/>
+                        <circle cx="525" cy="306.25" r="8.75" fill="white"/>
+                        <circle cx="525" cy="350" r="8.75" fill="white"/>
+                        <circle cx="525" cy="393.75" r="8.75" fill="white"/>
                       </svg>
                       {/* Content */}
                       <div className="flex-1">
