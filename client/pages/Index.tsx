@@ -134,6 +134,28 @@ export default function Index() {
     }
   }, [isGenerating, isTyping, isScrollLocked]);
 
+  // Override browser's scroll restoration
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    // Prevent hash navigation scroll jumps
+    const handleHashChange = (e: Event) => {
+      e.preventDefault();
+      return false;
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'auto';
+      }
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
