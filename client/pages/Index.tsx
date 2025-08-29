@@ -62,6 +62,33 @@ export default function Index() {
     }
   }, [isGenerating, isTyping, scrollPosition]);
 
+  // Calculate tooltip position based on viewport bounds
+  const calculateTooltipPosition = (element: HTMLElement, tooltipKey: string) => {
+    const rect = element.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const tooltipWidth = tooltipKey === 'angels' ? 288 : 256; // w-72 = 288px, w-64 = 256px
+    const tooltipHeight = 120; // Approximate height
+
+    const spaceRight = viewportWidth - rect.right;
+    const spaceLeft = rect.left;
+    const spaceTop = rect.top;
+    const spaceBottom = viewportHeight - rect.bottom;
+
+    const position = {
+      top: spaceTop > tooltipHeight, // Show above if enough space
+      left: spaceRight < tooltipWidth && spaceLeft > tooltipWidth / 2 // Show left-aligned if not enough space on right
+    };
+
+    setTooltipPosition(prev => ({ ...prev, [tooltipKey]: position }));
+  };
+
+  const handleTooltipShow = (tooltipKey: string, event: React.MouseEvent) => {
+    const element = event.currentTarget as HTMLElement;
+    calculateTooltipPosition(element, tooltipKey);
+    setTooltipVisible(tooltipKey);
+  };
+
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
