@@ -57,7 +57,7 @@ a[href^="#"]:not([href="#"]) {
   text-decoration: none;
   font-weight: 600;
   font-size: 20px;
-  background-color: #212121;
+  background-color: rgba(0, 0, 0, 1);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
