@@ -524,7 +524,7 @@ export default function Index() {
                   color: "#ffffff",
                 }}
               >
-                DAIMON / Proposals
+                Academy Initiation Tests
               </span>
             </div>
             <div className="flex flex-wrap gap-6 sm:gap-8">
@@ -559,7 +559,7 @@ export default function Index() {
                     color: "#888888",
                   }}
                 >
-                  Angels Inventory
+                  Angels
                 </span>
                 <span
                   className="font-cartograph"
