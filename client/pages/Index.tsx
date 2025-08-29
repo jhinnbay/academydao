@@ -200,9 +200,9 @@ export default function Index() {
 
   // Simple scroll management - only prevent initial jump, allow normal scrolling during typing
   useEffect(() => {
-    // Enable smooth scroll restoration
+    // Enable auto scroll restoration
     if ("scrollRestoration" in history) {
-      history.scrollRestoration = "smooth";
+      history.scrollRestoration = "auto";
     }
   }, []);
 
