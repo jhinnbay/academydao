@@ -86,8 +86,14 @@ export const FallbackWalletConnect: React.FC<FallbackWalletConnectProps> = ({
 
   const connectWallet = async () => {
     if (typeof window.ethereum === "undefined") {
-      alert("Please install a Web3 wallet like MetaMask");
-      return;
+      if (isMobile()) {
+        setShowMobileOptions(true);
+        return;
+      } else {
+        alert("Please install a Web3 wallet extension like MetaMask for your browser");
+        window.open("https://metamask.io/download/", "_blank");
+        return;
+      }
     }
 
     try {
