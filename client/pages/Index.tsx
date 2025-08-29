@@ -173,8 +173,8 @@ export default function Index() {
         <div className="pt-24 px-4 pb-4 sm:px-6 md:px-8 lg:px-12">
           {/* Main Title */}
           <div className="text-center mb-8">
-            <h1 className="text-white font-sf-pro-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent animate-glow">
-              Onchain Event Planner
+            <h1 className="text-white font-space-grotesk text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight drop-shadow-lg">
+              AcademyOS Organization Funding & Event Management System
             </h1>
           </div>
 
