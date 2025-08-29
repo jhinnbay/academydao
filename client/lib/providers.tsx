@@ -11,7 +11,8 @@ const connectors = [
   metaMask(),
   coinbaseWallet({
     appName: "Mental Wealth Academy",
-    appLogoUrl: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+    appLogoUrl:
+      "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
   }),
 ];
 

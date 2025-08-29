@@ -119,7 +119,11 @@ export const WalletConnect: React.FC<WalletConnectProps> = ({
                 <span className="text-white font-sans font-medium">
                   {connector.name}
                 </span>
-                {isPending && <span className="text-white/60 font-sans text-sm">Connecting...</span>}
+                {isPending && (
+                  <span className="text-white/60 font-sans text-sm">
+                    Connecting...
+                  </span>
+                )}
               </button>
             ))}
           </div>
