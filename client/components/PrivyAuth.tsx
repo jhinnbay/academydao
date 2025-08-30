@@ -6,7 +6,7 @@ export const PrivyAuth: React.FC = () => {
 
   // Get Farcaster account if available
   const farcasterAccount = user?.linkedAccounts?.find(
-    (account) => account.type === "farcaster"
+    (account) => account.type === "farcaster",
   );
 
   if (!ready) {
@@ -39,11 +39,15 @@ export const PrivyAuth: React.FC = () => {
             {/* Farcaster avatar */}
             <div className="w-8 h-8 rounded-full overflow-hidden">
               <img
-                src={farcasterAccount.pfp || "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC"}
+                src={
+                  farcasterAccount.pfp ||
+                  "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC"
+                }
                 alt="Profile"
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC";
+                  (e.target as HTMLImageElement).src =
+                    "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC";
                 }}
               />
             </div>

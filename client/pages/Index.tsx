@@ -384,7 +384,7 @@ export default function Index() {
                   {(() => {
                     // Get Farcaster account if available
                     const farcasterAccount = user?.linkedAccounts?.find(
-                      (account) => account.type === "farcaster"
+                      (account) => account.type === "farcaster",
                     );
 
                     if (ready && authenticated && farcasterAccount) {
@@ -393,11 +393,15 @@ export default function Index() {
                         <>
                           <div className="w-8 h-8 rounded-full overflow-hidden">
                             <img
-                              src={farcasterAccount.pfp || "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC"}
+                              src={
+                                farcasterAccount.pfp ||
+                                "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC"
+                              }
                               alt="Farcaster Profile"
                               className="w-full h-full object-cover"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC";
+                                (e.target as HTMLImageElement).src =
+                                  "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC";
                               }}
                             />
                           </div>
@@ -412,7 +416,11 @@ export default function Index() {
                           </span>
                         </>
                       );
-                    } else if (ready && authenticated && user?.wallet?.address) {
+                    } else if (
+                      ready &&
+                      authenticated &&
+                      user?.wallet?.address
+                    ) {
                       // Show wallet address
                       return (
                         <>
@@ -632,46 +640,50 @@ export default function Index() {
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
-                {ready && authenticated && user && (() => {
-                  // Get Farcaster account if available
-                  const farcasterAccount = user.linkedAccounts?.find(
-                    (account) => account.type === "farcaster"
-                  );
+                {ready &&
+                  authenticated &&
+                  user &&
+                  (() => {
+                    // Get Farcaster account if available
+                    const farcasterAccount = user.linkedAccounts?.find(
+                      (account) => account.type === "farcaster",
+                    );
 
-                  if (farcasterAccount) {
-                    return (
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                        <span
-                          className="font-sans text-purple-300"
-                          style={{
-                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                            fontWeight: "500",
-                          }}
-                        >
-                          Connected via Farcaster (@{farcasterAccount.username || "farcaster"})
-                        </span>
-                      </div>
-                    );
-                  } else if (user.wallet?.address) {
-                    return (
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                        <span
-                          className="font-sans text-green-300"
-                          style={{
-                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                            fontWeight: "500",
-                          }}
-                        >
-                          Connected{" "}
-                          {`(${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)})`}
-                        </span>
-                      </div>
-                    );
-                  }
-                  return null;
-                })()}
+                    if (farcasterAccount) {
+                      return (
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                          <span
+                            className="font-sans text-purple-300"
+                            style={{
+                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Connected via Farcaster (@
+                            {farcasterAccount.username || "farcaster"})
+                          </span>
+                        </div>
+                      );
+                    } else if (user.wallet?.address) {
+                      return (
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                          <span
+                            className="font-sans text-green-300"
+                            style={{
+                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Connected{" "}
+                            {`(${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)})`}
+                          </span>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
               </div>
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
@@ -1160,24 +1172,36 @@ export default function Index() {
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
+                    onMouseEnter={(e) =>
+                      ((e.target as HTMLElement).style.color = "#ffffff")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.target as HTMLElement).style.color = "#b0b0b0")
+                    }
                   >
                     {">"} DECISION
                   </button>
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
+                    onMouseEnter={(e) =>
+                      ((e.target as HTMLElement).style.color = "#ffffff")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.target as HTMLElement).style.color = "#b0b0b0")
+                    }
                   >
                     {">"} VIEW PROP
                   </button>
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
+                    onMouseEnter={(e) =>
+                      ((e.target as HTMLElement).style.color = "#ffffff")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.target as HTMLElement).style.color = "#b0b0b0")
+                    }
                   >
                     {">"} SHARE PROP
                   </button>

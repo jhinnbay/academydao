@@ -30,9 +30,7 @@ export function Providers({ children }: ProvidersProps) {
         },
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </PrivyProvider>
   );
 }
