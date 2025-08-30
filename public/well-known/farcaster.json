@@ -1,0 +1,13 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjEyNzczLCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4MzczNEZDNmRkNTA4Q2Y0ZGY0N0M4MTAyN0ZkMjllNTMyOEUwMjI1NyJ9",
+    "payload": "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
+    "signature": "MHhiMzY0YjZjNWEzMDY5N2FmZDhkZjc1NTFjZDJjOGMzYzU5MzY3NmIyZWNhZmFjYWY4MzJlNzIzZmY1ZWE2YTc0MWM"
+  },
+  "frame": {
+    "name": "Academy Event Planner",
+    "iconUrl": "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+    "homeUrl": "https://academydao.vercel.app",
+    "imageUrl": "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
+  }
+}
