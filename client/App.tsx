@@ -1,5 +1,5 @@
 import "./global.css";
-import "@neynar/react/dist/style.css";
+// import "@neynar/react/dist/style.css"; // Commented out due to Vite file system access issue
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
