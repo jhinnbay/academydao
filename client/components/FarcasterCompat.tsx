@@ -38,8 +38,19 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
         // Call sdk.actions.ready() to hide the splash screen
         console.log("✅ Calling sdk.actions.ready()");
         await sdk.actions.ready();
-        
+
         console.log("✅ Farcaster MiniKit initialized successfully");
+
+        // Additional ready call after a short delay to ensure it worked
+        setTimeout(async () => {
+          try {
+            console.log("🔄 Second ready() call for extra reliability");
+            await sdk.actions.ready();
+          } catch (error) {
+            console.warn("⚠️ Second ready() call failed (this is usually fine):", error);
+          }
+        }, 1000);
+
         setIsReady(true);
       } catch (error) {
         console.warn("⚠️ Farcaster SDK not available (probably not in Farcaster environment):", error);
