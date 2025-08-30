@@ -53,7 +53,12 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
 
         setIsReady(true);
       } catch (error) {
-        console.warn("⚠️ Farcaster SDK not available (probably not in Farcaster environment):", error);
+        console.warn("⚠️ Farcaster SDK error:", error);
+        console.log("ℹ️ This is normal if not running in a Farcaster Mini App environment");
+        console.log("ℹ️ If you ARE in Farcaster and seeing this, check:");
+        console.log("   1. Correct domain: https://academydao.vercel.app (not .dao)");
+        console.log("   2. Mini App is properly configured in Farcaster");
+        console.log("   3. Manifest file is accessible at /.well-known/farcaster.json");
         // Not in Farcaster environment, that's fine
         setIsReady(true);
       }
