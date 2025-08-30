@@ -9,41 +9,83 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrivyProvider } from "@privy-io/react-auth";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import React from "react";
 
 const queryClient = new QueryClient();
 
+// Error boundary for Privy provider
+class PrivyErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    console.warn("Privy provider error:", error);
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback UI without Privy
+      return (
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
 function App() {
   return (
-    <PrivyProvider
-      appId="cmex4tmt200k5ju0aorv4f5od"
-      config={{
-        appearance: {
-          theme: "dark",
-          accentColor: "#06b6d4",
-          logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
-        },
-        loginMethods: ["wallet", "email", "sms", "farcaster"],
-        embeddedWallets: {
-          createOnLogin: "users-without-wallets",
-        },
-        farcaster: {
-          enabled: true,
-        },
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </PrivyProvider>
+    <PrivyErrorBoundary>
+      <PrivyProvider
+        appId={import.meta.env.VITE_PRIVY_APP_ID || "cmex4tmt200k5ju0aorv4f5od"}
+        config={{
+          appearance: {
+            theme: "dark",
+            accentColor: "#06b6d4",
+            logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+          },
+          loginMethods: ["wallet", "email", "sms"],
+          embeddedWallets: {
+            createOnLogin: "users-without-wallets",
+          },
+          // Temporarily disable Farcaster to avoid fetch errors
+          // farcaster: {
+          //   enabled: true,
+          // },
+        }}
+      >
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </PrivyProvider>
+    </PrivyErrorBoundary>
   );
 }
 
