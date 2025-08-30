@@ -25,8 +25,15 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
           console.warn("Correct URL should be: https://academydao.vercel.app");
         }
 
-        // Wait a bit for the app to fully load
-        await new Promise(resolve => setTimeout(resolve, 500));
+        // Wait for the app to be fully loaded and mounted
+        await new Promise(resolve => {
+          // Wait for React to finish mounting
+          if (document.readyState === 'complete') {
+            setTimeout(resolve, 100);
+          } else {
+            window.addEventListener('load', () => setTimeout(resolve, 100));
+          }
+        });
 
         // Call sdk.actions.ready() to hide the splash screen
         console.log("✅ Calling sdk.actions.ready()");
