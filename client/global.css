@@ -8,6 +8,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Farcaster miniapp specific styles */
+.farcaster-miniapp {
+  /* Ensure the app fills the available space in Farcaster */
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Prevent any layout issues in iframe */
+  box-sizing: border-box;
+}
+
+/* Prevent iOS bounce in Farcaster */
+@media (max-width: 768px) {
+  .farcaster-miniapp body {
+    position: fixed;
+    overflow: hidden;
+  }
+}
+
 /* Smooth scroll with stability */
 html {
   scroll-behavior: smooth;
