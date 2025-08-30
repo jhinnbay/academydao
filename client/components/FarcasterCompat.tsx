@@ -32,7 +32,14 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
         // Check for Farcaster-specific window properties
         const hasFarcasterSDK = (window as any).parent?.postMessage;
 
-        setIsFarcaster(isFarcasterApp || isFramed || hasFarcasterSDK);
+        const isFarcasterEnv = isFarcasterApp || isFramed || hasFarcasterSDK;
+        setIsFarcaster(isFarcasterEnv);
+
+        // Call ready() if we're in a Farcaster environment
+        if (isFarcasterEnv && window.sdk?.actions?.ready) {
+          console.log("Calling sdk.actions.ready() for Farcaster MiniKit");
+          window.sdk.actions.ready();
+        }
       } catch (error) {
         console.warn("Error detecting Farcaster environment:", error);
         setIsFarcaster(false);
