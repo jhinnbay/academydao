@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { NeynarProvider } from "@neynar/react";
+import { FarcasterCompat } from "@/components/FarcasterCompat";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import React from "react";
