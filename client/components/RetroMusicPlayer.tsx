@@ -9,7 +9,7 @@ const RetroMusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Real track data
-  const currentTrack = "07 His Dream";
+  const currentTrack = "Your Dream";
   const audioSrc =
     "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a";
 
