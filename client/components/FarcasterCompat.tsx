@@ -54,6 +54,33 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
     return () => clearTimeout(timer);
   }, []);
 
+  // Additional effect to ensure ready() is called even if initial detection fails
+  useEffect(() => {
+    const ensureReady = () => {
+      if (window.sdk?.actions?.ready) {
+        console.log("Ensuring sdk.actions.ready() is called");
+        window.sdk.actions.ready();
+      } else {
+        // Retry after a short delay if SDK isn't available yet
+        setTimeout(() => {
+          if (window.sdk?.actions?.ready) {
+            console.log("Calling sdk.actions.ready() after retry");
+            window.sdk.actions.ready();
+          }
+        }, 500);
+      }
+    };
+
+    // Call immediately and also after a delay
+    const timer1 = setTimeout(ensureReady, 200);
+    const timer2 = setTimeout(ensureReady, 1000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
