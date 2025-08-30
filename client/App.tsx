@@ -31,8 +31,20 @@ window.fetch = function (...args) {
   });
 };
 
-// Error boundary for Privy
-class PrivyErrorBoundary extends React.Component<
+// Check if running in Farcaster environment
+const isFarcasterEnvironment = () => {
+  if (typeof window === 'undefined') return false;
+
+  // Check for Farcaster user agent or parent frame
+  const userAgent = window.navigator.userAgent;
+  const isFarcasterApp = userAgent.includes('farcaster') || userAgent.includes('Farcaster');
+  const isFramed = window.self !== window.top;
+
+  return isFarcasterApp || (isFramed && window.location !== window.parent.location);
+};
+
+// Error boundary for the app
+class AppErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean }
 > {
@@ -42,17 +54,29 @@ class PrivyErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error: Error) {
-    console.warn("Privy error caught:", error);
+    console.warn("App error caught:", error);
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    console.warn("Privy component error:", error, errorInfo);
+    console.warn("App component error:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      // Fallback without Privy
+      // Minimal fallback for Farcaster environment
+      if (isFarcasterEnvironment()) {
+        return (
+          <div className="min-h-screen bg-black text-white flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-2xl mb-4">Academy Event Planner</h1>
+              <p className="text-gray-400">Loading application...</p>
+            </div>
+          </div>
+        );
+      }
+
+      // Fallback without providers
       return (
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
