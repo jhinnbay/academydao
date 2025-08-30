@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
 
+declare global {
+  interface Window {
+    sdk?: {
+      actions?: {
+        ready: () => void;
+      };
+    };
+  }
+}
+
 interface FarcasterCompatProps {
   children: React.ReactNode;
 }
