@@ -1,1 +1,31 @@
-{"miniapp":{"version":"1","name":"AcademyOS Schedule","iconUrl":"https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800","homeUrl":"https://your-domain.com/","imageUrl":"https://your-domain.com/opengraph-image.png","buttonTitle":"📚 Start Learning","splashImageUrl":"https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800","splashBackgroundColor":"#000000","webhookUrl":"https://your-domain.com/api/webhook"}}
+{
+  "frame": {
+    "name": "Academy Event Planner",
+    "version": "1",
+    "iconUrl": "https://academydao.vercel.app/icon.png",
+    "homeUrl": "https://academydao.vercel.app",
+    "imageUrl": "https://academydao.vercel.app/image.png",
+    "buttonTitle": "Decrypt Daemon Model AI",
+    "splashImageUrl": "https://academydao.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "webhookUrl": "https://academydao.vercel.app/api/webhook",
+    "subtitle": "Connect & Battle Daemon",
+    "description": "Battle the Daemon Model AI, Azura. Using High-Tech Angelic Powers.",
+    "primaryCategory": "entertainment",
+    "tags": [
+      "community",
+      "entertainment",
+      "fun",
+      "social",
+      "ai"
+    ],
+    "tagline": "Battle Daemon Azura To Win",
+    "ogTitle": "Daemon Model Azura",
+    "ogDescription": "Battle AI to create real-life events and prizes"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjI4NjkyNCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU4RjBlMzlkOTI4MTgxNTk1ZTc4OTQ1MTdmQjI0MDUyMjA0RWIxM0MifQ",
+    "payload": "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
+    "signature": "MHg3ODE5ZDRhNzJiNGMwMzM4MTYwZTg4NjhjMTYwN2FkZDE3ZDQ1NGUwN2NjYjRiMTE5MjNiMzJlNTk5N2VjNTA2MWZjY2IzMWE0N2MwYzIwODAzMjgxZWE4YTE0MTdiZTRjNTZjY2M2N2IxMDJjYTIzMGIyOWU1OTJmMjQ0ZmFhMTFi"
+  }
+}
