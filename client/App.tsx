@@ -59,16 +59,19 @@ function App() {
   return (
     <PrivyErrorBoundary>
       <PrivyProvider
-        appId="demo-public"
+        appId="cmex4tmt200k5ju0aorv4f5od"
         config={{
           appearance: {
             theme: "dark",
             accentColor: "#06b6d4",
             logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
           },
-          loginMethods: ["wallet"],
+          loginMethods: ["wallet", "email", "sms", "farcaster"],
           embeddedWallets: {
-            createOnLogin: "off",
+            createOnLogin: "users-without-wallets",
+          },
+          farcaster: {
+            enabled: true,
           },
         }}
       >
