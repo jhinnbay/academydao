@@ -7,14 +7,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrivyProvider } from "@privy-io/react-auth";
-// import { MiniAppProvider } from "@neynar/react";
+import { MiniAppProvider } from "@neynar/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  // <MiniAppProvider analyticsEnabled={true}>
+  <MiniAppProvider analyticsEnabled={true}>
     <PrivyProvider
       appId="cmex4tmt200k5ju0aorv4f5od"
       config={{
@@ -43,7 +43,7 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </PrivyProvider>
-  // </MiniAppProvider>
+  </MiniAppProvider>
 );
 
 // Ensure root is only created once
