@@ -44,7 +44,7 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </PrivyProvider>
-  </MiniAppProvider>
+  // </MiniAppProvider>
 );
 
 // Ensure root is only created once
