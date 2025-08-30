@@ -1061,8 +1061,11 @@ export default function Index() {
                           >
                             Learn More
                           </button>
-                          <button
-                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300 overflow-hidden"
+                          <a
+                            href="https://www.scatter.art/collection/academic-angels"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300 overflow-hidden text-center block"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
@@ -1070,7 +1073,7 @@ export default function Index() {
                             }}
                           >
                             Buy Angel
-                          </button>
+                          </a>
                         </div>
                       </div>
                     </div>
