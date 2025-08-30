@@ -1,34 +1,59 @@
-console.log("JavaScript is executing!");
+import "./global.css";
 
-// Try to update DOM immediately when script loads
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM Content Loaded");
-  updateDOM();
-});
+import { Toaster } from "@/components/ui/toaster";
+import { createRoot } from "react-dom/client";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { PrivyProvider } from "@privy-io/react-auth";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
 
-// Also try updating immediately
-updateDOM();
+const queryClient = new QueryClient();
 
-function updateDOM() {
-  const rootElement = document.getElementById("root");
-  if (rootElement) {
-    rootElement.innerHTML = `
-      <div style="padding: 20px; color: white; background: black; min-height: 100vh;">
-        <h1>✅ Basic JavaScript Working!</h1>
-        <p>This means the script is loading and executing.</p>
-        <p>Timestamp: ${new Date().toISOString()}</p>
-        <p>Ready to add React back!</p>
-      </div>
-    `;
-    console.log("DOM updated successfully!");
-  } else {
-    console.error("Root element not found!");
-    // Try to create the content anyway
-    document.body.innerHTML += `
-      <div style="padding: 20px; color: white; background: red;">
-        <h1>⚠️ Root element not found!</h1>
-        <p>Script is running but can't find #root</p>
-      </div>
-    `;
-  }
+function App() {
+  return (
+    <PrivyProvider
+      appId="cmex4tmt200k5ju0aorv4f5od"
+      config={{
+        appearance: {
+          theme: "dark",
+          accentColor: "#06b6d4",
+          logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+        },
+        loginMethods: ["wallet", "email", "sms", "farcaster"],
+        embeddedWallets: {
+          createOnLogin: "users-without-wallets",
+        },
+        farcaster: {
+          enabled: true,
+        },
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </PrivyProvider>
+  );
 }
+
+// Ensure root is only created once
+const container = document.getElementById("root")!;
+let root = (container as any).__reactRoot;
+
+if (!root) {
+  root = createRoot(container);
+  (container as any).__reactRoot = root;
+}
+
+root.render(<App />);
