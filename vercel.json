@@ -1,6 +1,13 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
+  "redirects": [
+    {
+      "source": "/.well-known/farcaster.json",
+      "destination": "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47",
+      "statusCode": 307
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
