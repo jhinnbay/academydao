@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 interface FarcasterCompatProps {
   children: React.ReactNode;
 }
 
-export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({ children }) => {
+export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
+  children,
+}) => {
   const [isFarcaster, setIsFarcaster] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,15 +15,16 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({ children }) =>
     const detectFarcaster = () => {
       try {
         const userAgent = window.navigator.userAgent;
-        const isFarcasterApp = userAgent.includes('farcaster') || userAgent.includes('Farcaster');
+        const isFarcasterApp =
+          userAgent.includes("farcaster") || userAgent.includes("Farcaster");
         const isFramed = window.self !== window.top;
-        
+
         // Check for Farcaster-specific window properties
         const hasFarcasterSDK = (window as any).parent?.postMessage;
-        
+
         setIsFarcaster(isFarcasterApp || isFramed || hasFarcasterSDK);
       } catch (error) {
-        console.warn('Error detecting Farcaster environment:', error);
+        console.warn("Error detecting Farcaster environment:", error);
         setIsFarcaster(false);
       } finally {
         setIsLoading(false);
@@ -30,7 +33,7 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({ children }) =>
 
     // Add a small delay to allow Farcaster SDK to initialize
     const timer = setTimeout(detectFarcaster, 100);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -48,7 +51,7 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({ children }) =>
   // For Farcaster environment, add some specific styling
   if (isFarcaster) {
     return (
-      <div className="farcaster-miniapp" style={{ minHeight: '100vh' }}>
+      <div className="farcaster-miniapp" style={{ minHeight: "100vh" }}>
         {children}
       </div>
     );

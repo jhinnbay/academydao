@@ -33,14 +33,17 @@ window.fetch = function (...args) {
 
 // Check if running in Farcaster environment
 const isFarcasterEnvironment = () => {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false;
 
   // Check for Farcaster user agent or parent frame
   const userAgent = window.navigator.userAgent;
-  const isFarcasterApp = userAgent.includes('farcaster') || userAgent.includes('Farcaster');
+  const isFarcasterApp =
+    userAgent.includes("farcaster") || userAgent.includes("Farcaster");
   const isFramed = window.self !== window.top;
 
-  return isFarcasterApp || (isFramed && window.location !== window.parent.location);
+  return (
+    isFarcasterApp || (isFramed && window.location !== window.parent.location)
+  );
 };
 
 // Error boundary for the app
