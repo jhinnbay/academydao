@@ -1,17 +1,10 @@
 import React, { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PrivyProvider } from "@privy-io/react-auth";
-import { AuthKitProvider } from "@farcaster/auth-kit";
+// Removed AuthKitProvider to avoid conflicts with Privy's built-in Farcaster support
 
 // Create a QueryClient instance
 const queryClient = new QueryClient();
-
-// Farcaster configuration
-const farcasterConfig = {
-  rpcUrl: "https://mainnet.optimism.io",
-  domain: "mental-wealth-academy.app", // Replace with your actual domain
-  siweUri: "https://mental-wealth-academy.app/login",
-};
 
 interface ProvidersProps {
   children: ReactNode;
@@ -38,7 +31,7 @@ export function Providers({ children }: ProvidersProps) {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <AuthKitProvider config={farcasterConfig}>{children}</AuthKitProvider>
+        {children}
       </QueryClientProvider>
     </PrivyProvider>
   );
