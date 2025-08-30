@@ -58,7 +58,7 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
   // Listen for SDK script load
   useEffect(() => {
     const checkSDKLoaded = () => {
-      const sdkAvailable = !!(window.sdk?.actions?.ready);
+      const sdkAvailable = !!window.sdk?.actions?.ready;
       setSdkLoaded(sdkAvailable);
       if (sdkAvailable) {
         console.log("✅ Farcaster SDK detected and ready");
@@ -96,15 +96,20 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
       console.log("Current URL:", window.location.href);
 
       // Check if accessing wrong domain (.dao instead of .app)
-      if (window.location.hostname.includes('.dao')) {
-        console.warn("⚠️  Domain issue detected: accessing .dao instead of .app");
+      if (window.location.hostname.includes(".dao")) {
+        console.warn(
+          "⚠️  Domain issue detected: accessing .dao instead of .app",
+        );
         console.warn("Correct URL should be: https://academydao.vercel.app");
       }
 
       // Check for Farcaster SDK
       console.log("Window.sdk available:", !!window.sdk);
       console.log("Window.sdk.actions available:", !!window.sdk?.actions);
-      console.log("Window.sdk.actions.ready available:", !!window.sdk?.actions?.ready);
+      console.log(
+        "Window.sdk.actions.ready available:",
+        !!window.sdk?.actions?.ready,
+      );
 
       if (window.sdk?.actions?.ready) {
         console.log("✅ Calling sdk.actions.ready()");
@@ -122,7 +127,10 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
             try {
               window.sdk.actions.ready();
             } catch (error) {
-              console.error("❌ Error calling sdk.actions.ready() (retry):", error);
+              console.error(
+                "❌ Error calling sdk.actions.ready() (retry):",
+                error,
+              );
             }
           } else {
             console.warn("❌ Farcaster SDK still not available after retry");
