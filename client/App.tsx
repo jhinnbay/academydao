@@ -52,6 +52,29 @@ class PrivyErrorBoundary extends React.Component<
 }
 
 function App() {
+  // Check if Privy should be disabled due to network issues
+  const disablePrivy = import.meta.env.VITE_DISABLE_PRIVY === "true";
+
+  const AppContent = (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+
+  if (disablePrivy) {
+    console.log("Privy disabled via environment variable");
+    return AppContent;
+  }
+
   return (
     <PrivyErrorBoundary>
       <PrivyProvider
@@ -72,18 +95,7 @@ function App() {
           // },
         }}
       >
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </QueryClientProvider>
+        {AppContent}
       </PrivyProvider>
     </PrivyErrorBoundary>
   );
