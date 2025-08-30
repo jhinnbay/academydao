@@ -9,9 +9,9 @@ const RetroMusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Real track data
-  const currentTrack = "Forgotten Promises 432hz";
+  const currentTrack = "07 His Dream";
   const audioSrc =
-    "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F22645303a8c844b6958e84b8ad70d19c?alt=media&token=0963cd90-20bc-42f2-886f-1c17b88a5e58&apiKey=6f2aebc9bb734d979c603aa774a20c1a";
+    "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a";
 
   useEffect(() => {
     const audio = audioRef.current;
