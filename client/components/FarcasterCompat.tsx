@@ -19,6 +19,7 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
 }) => {
   const [isFarcaster, setIsFarcaster] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [sdkLoaded, setSdkLoaded] = useState(false);
 
   useEffect(() => {
     // Detect if we're running in a Farcaster environment
@@ -52,6 +53,39 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
     const timer = setTimeout(detectFarcaster, 100);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  // Listen for SDK script load
+  useEffect(() => {
+    const checkSDKLoaded = () => {
+      const sdkAvailable = !!(window.sdk?.actions?.ready);
+      setSdkLoaded(sdkAvailable);
+      if (sdkAvailable) {
+        console.log("✅ Farcaster SDK detected and ready");
+      }
+    };
+
+    // Check immediately
+    checkSDKLoaded();
+
+    // Listen for script load events
+    const handleScriptLoad = () => {
+      console.log("📜 Script load event detected");
+      setTimeout(checkSDKLoaded, 100);
+    };
+
+    // Add multiple event listeners
+    window.addEventListener("load", handleScriptLoad);
+    document.addEventListener("DOMContentLoaded", handleScriptLoad);
+
+    // Periodic checks
+    const interval = setInterval(checkSDKLoaded, 1000);
+
+    return () => {
+      window.removeEventListener("load", handleScriptLoad);
+      document.removeEventListener("DOMContentLoaded", handleScriptLoad);
+      clearInterval(interval);
+    };
   }, []);
 
   // Additional effect to ensure ready() is called and debug domain issues
