@@ -1,9 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+console.log("JavaScript is executing!");
 
-function App() {
-  return <div>Hello World - React is working!</div>;
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  rootElement.innerHTML = `
+    <div style="padding: 20px; color: white; background: black; min-height: 100vh;">
+      <h1>Basic JavaScript Working!</h1>
+      <p>This means the script is loading and executing.</p>
+      <p>Timestamp: ${new Date().toISOString()}</p>
+    </div>
+  `;
+  console.log("DOM updated successfully!");
+} else {
+  console.error("Root element not found!");
 }
-
-const root = ReactDOM.createRoot(document.getElementById("root")!);
-root.render(<App />);
