@@ -4,7 +4,20 @@ import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
-import { usePrivy } from "@privy-io/react-auth";
+// Mock Privy functionality when not available
+let usePrivy = () => ({
+  ready: true,
+  authenticated: false,
+  user: null,
+});
+
+try {
+  const privyModule = require("@privy-io/react-auth");
+  usePrivy = privyModule.usePrivy;
+} catch (error) {
+  console.log("Privy not available, using mock");
+}
+
 import {
   ScrollPreservation,
   createDebouncedUpdater,
