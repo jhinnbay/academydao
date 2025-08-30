@@ -99,7 +99,7 @@ class AppErrorBoundary extends React.Component<
 
 function App() {
   return (
-    <PrivyErrorBoundary>
+    <AppErrorBoundary>
       <NeynarProvider settings={{ farcasterDeveloperMnemonic: process.env.FARCASTER_DEVELOPER_MNEMONIC || "" }}>
         <PrivyProvider
           appId="cmex4tmt200k5ju0aorv4f5od"
@@ -139,7 +139,7 @@ function App() {
           </QueryClientProvider>
         </PrivyProvider>
       </NeynarProvider>
-    </PrivyErrorBoundary>
+    </AppErrorBoundary>
   );
 }
 
