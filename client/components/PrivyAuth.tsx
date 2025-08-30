@@ -1,8 +1,26 @@
 import React from "react";
-import { usePrivy } from "@privy-io/react-auth";
 
 export const PrivyAuth: React.FC = () => {
-  const { ready, authenticated, user, logout, login } = usePrivy();
+  // Mock Privy functionality when provider is not available
+  let ready = true;
+  let authenticated = false;
+  let user = null;
+  let logout = () => console.log("Logout clicked");
+  let login = () => console.log("Login clicked");
+  let farcasterAccount = null;
+
+  // Try to use Privy if available
+  try {
+    const { usePrivy } = require("@privy-io/react-auth");
+    const privyData = usePrivy();
+    ready = privyData.ready;
+    authenticated = privyData.authenticated;
+    user = privyData.user;
+    logout = privyData.logout;
+    login = privyData.login;
+  } catch (error) {
+    console.log("Privy not available, using mock authentication");
+  }
 
   // Get Farcaster account if available
   const farcasterAccount = user?.linkedAccounts?.find(
