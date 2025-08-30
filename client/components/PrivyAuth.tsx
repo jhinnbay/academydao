@@ -1,12 +1,8 @@
 import React from "react";
+import { usePrivy } from "@privy-io/react-auth";
 
 export const PrivyAuth: React.FC = () => {
-  // Mock authentication state when Privy is not available
-  const ready = true;
-  const authenticated = false;
-  const user = null;
-  const logout = () => console.log("Logout clicked");
-  const login = () => console.log("Login clicked");
+  const { ready, authenticated, user, logout, login } = usePrivy();
 
   if (!ready) {
     return (
