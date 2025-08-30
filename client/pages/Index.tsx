@@ -1071,24 +1071,24 @@ export default function Index() {
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
-                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
                   >
                     {">"} DECISION
                   </button>
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
-                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
                   >
                     {">"} VIEW PROP
                   </button>
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) => (e.target.style.color = "#ffffff")}
-                    onMouseLeave={(e) => (e.target.style.color = "#b0b0b0")}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#ffffff")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#b0b0b0")}
                   >
                     {">"} SHARE PROP
                   </button>
