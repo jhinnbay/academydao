@@ -14,8 +14,23 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Wrapper component to handle MiniAppProvider safely
+const MiniAppWrapper = ({ children }: { children: React.ReactNode }) => {
+  try {
+    return (
+      <MiniAppProvider analyticsEnabled={true}>
+        {children}
+      </MiniAppProvider>
+    );
+  } catch (error) {
+    console.error("MiniAppProvider error:", error);
+    // Fallback to children without MiniAppProvider if it fails
+    return <>{children}</>;
+  }
+};
+
 const App = () => (
-  <MiniAppProvider analyticsEnabled={true}>
+  <MiniAppWrapper>
     <PrivyProvider
       appId="cmex4tmt200k5ju0aorv4f5od"
       config={{
@@ -44,7 +59,7 @@ const App = () => (
         </TooltipProvider>
       </QueryClientProvider>
     </PrivyProvider>
-  // </MiniAppProvider>
+  </MiniAppWrapper>
 );
 
 // Ensure root is only created once
