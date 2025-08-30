@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-declare global {
-  interface Window {
-    sdk?: {
-      actions?: {
-        ready: () => void;
-      };
-    };
-  }
-}
+import { sdk } from "@farcaster/miniapp-sdk";
 
 interface FarcasterCompatProps {
   children: React.ReactNode;
