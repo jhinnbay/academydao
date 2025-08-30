@@ -101,45 +101,47 @@ class AppErrorBoundary extends React.Component<
 function App() {
   return (
     <AppErrorBoundary>
-      <NeynarProvider settings={{ farcasterDeveloperMnemonic: process.env.FARCASTER_DEVELOPER_MNEMONIC || "" }}>
-        <PrivyProvider
-          appId="cmex4tmt200k5ju0aorv4f5od"
-          config={{
-            appearance: {
-              theme: "dark",
-              accentColor: "#06b6d4",
-              logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
-            },
-            loginMethods: ["wallet", "email", "sms", "farcaster"],
-            embeddedWallets: {
-              createOnLogin: "users-without-wallets",
-            },
-            farcaster: {
-              enabled: true,
-            },
-            // Disable all analytics and external calls
-            clientAnalyticsEnabled: false,
-            serverAnalyticsEnabled: false,
-            mfaEnabled: false,
-            experimental: {
-              noConnectionModal: true,
-            },
-          }}
-        >
-          <QueryClientProvider client={queryClient}>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </TooltipProvider>
-          </QueryClientProvider>
-        </PrivyProvider>
-      </NeynarProvider>
+      <FarcasterCompat>
+        <NeynarProvider settings={{ farcasterDeveloperMnemonic: process.env.FARCASTER_DEVELOPER_MNEMONIC || "" }}>
+          <PrivyProvider
+            appId="cmex4tmt200k5ju0aorv4f5od"
+            config={{
+              appearance: {
+                theme: "dark",
+                accentColor: "#06b6d4",
+                logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+              },
+              loginMethods: ["wallet", "email", "sms", "farcaster"],
+              embeddedWallets: {
+                createOnLogin: "users-without-wallets",
+              },
+              farcaster: {
+                enabled: true,
+              },
+              // Disable all analytics and external calls
+              clientAnalyticsEnabled: false,
+              serverAnalyticsEnabled: false,
+              mfaEnabled: false,
+              experimental: {
+                noConnectionModal: true,
+              },
+            }}
+          >
+            <QueryClientProvider client={queryClient}>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </TooltipProvider>
+            </QueryClientProvider>
+          </PrivyProvider>
+        </NeynarProvider>
+      </FarcasterCompat>
     </AppErrorBoundary>
   );
 }
