@@ -623,7 +623,7 @@ export default function Index() {
                   fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
                 }}
               >
-                Welcome To The Academy
+                Ready To Test Your IQ?
               </h1>
               <p
                 className="font-sans"
