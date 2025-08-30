@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PrivyProvider } from "@privy-io/react-auth";
+import { NeynarProvider } from "@neynar/react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import React from "react";
