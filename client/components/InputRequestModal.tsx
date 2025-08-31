@@ -16,6 +16,7 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
+  // handling input data 
   const handleSave = async () => {
     if (!content.trim()) return;
 
@@ -23,24 +24,45 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
     SoundEffects.playGenerateSound();
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: activeTab, content: content.trim() }),
+      // 1. Send the request directly to your n8n webhook
+      const response = await fetch('https://jogibay.app.n8n.cloud/webhook/10207fda-f103-425e-9ab5-59950b3f5f9d/chat', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        // 2. Format the body exactly as n8n expects it
+        body: JSON.stringify([
+          {
+            "action": "sendMessage",
+            "chatInput": content.trim(), // Use the user's input
+            // Optional: Add type information if your workflow needs it
+            "type": activeTab // This sends "events" or "funding" to n8n
+          }
+        ]),
       });
 
-      if (!response.ok) throw new Error("Failed to save");
+      if (!response.ok) {
+        throw new Error(`n8n request failed with status: ${response.status}`);
+      }
 
-      const data = await response.json();
+      // 3. Parse the n8n response
+      const n8nData = await response.json();
 
-      // Pass data back up
-      onSave({ type: activeTab, content: data.content });
+      // 4. n8n's response is a JSON string inside the 'text' property, so parse it again
+      const parsedResponse = JSON.parse(n8nData.text);
+
+      // 5. Pass the parsed decision data back to the parent component
+      onSave({ 
+        type: activeTab, 
+        content: `Decision: ${parsedResponse.decision}\nReason: ${parsedResponse.reason}` 
+      });
 
       setContent("");
       onClose();
     } catch (err) {
-      console.error(err);
-      // maybe show error toast
+      console.error('Error sending to n8n:', err);
+      // Show error toast to user
+      // You might want to add: toast.error('Failed to process request');
     } finally {
       setIsSaving(false);
     }
