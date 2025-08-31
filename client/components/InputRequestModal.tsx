@@ -17,62 +17,20 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   const [isSaving, setIsSaving] = useState(false);
 
   // handling input data 
-  const handleSave = async () => {
-    if (!content.trim()) return;
+const handleSave = async () => {
+  if (!content.trim()) return;
 
-    setIsSaving(true);
-    SoundEffects.playGenerateSound();
+  setIsSaving(true);
+  SoundEffects.playGenerateSound();
 
-    try {
-    // Use the environment variable
-    const webhookUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
-    
-    if (!webhookUrl) {
-      throw new Error('Chat webhook URL is not configured');
-    }
-
-    const response = await fetch(webhookUrl, {  // Use the variable here
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-        },
-        // 2. Format the body exactly as n8n expects it
-        body: JSON.stringify([
-          {
-            "action": "sendMessage",
-            "chatInput": content.trim(), // Use the user's input
-            // Optional: Add type information if your workflow needs it
-            "type": activeTab // This sends "events" or "funding" to n8n
-          }
-        ]),
-      });
-
-      if (!response.ok) {
-        throw new Error(`n8n request failed with status: ${response.status}`);
-      }
-
-      // 3. Parse the n8n response
-      const n8nData = await response.json();
-
-      // 4. n8n's response is a JSON string inside the 'text' property, so parse it again
-      const parsedResponse = JSON.parse(n8nData.text);
-
-      // 5. Pass the parsed decision data back to the parent component
-      onSave({ 
-        type: activeTab, 
-        content: `Decision: ${parsedResponse.decision}\nReason: ${parsedResponse.reason}` 
-      });
-
-      setContent("");
-      onClose();
-    } catch (err) {
-      console.error('Error sending to n8n:', err);
-      // Show error toast to user
-      // You might want to add: toast.error('Failed to process request');
-    } finally {
-      setIsSaving(false);
-    }
-  };
+  // JUST prepare the data and pass it up to the parent
+  // DON'T try to fetch here anymore
+  onSave({ type: activeTab, content: content.trim() });
+  
+  setContent("");
+  onClose();
+  setIsSaving(false); // Move this here since we're not awaiting anything
+};
 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
