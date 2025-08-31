@@ -24,8 +24,14 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
     SoundEffects.playGenerateSound();
 
     try {
-      // 1. Send the request directly to your n8n webhook
-      const response = await fetch('https://jogibay.app.n8n.cloud/webhook/10207fda-f103-425e-9ab5-59950b3f5f9d/chat', {
+    // Use the environment variable
+    const webhookUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
+    
+    if (!webhookUrl) {
+      throw new Error('Chat webhook URL is not configured');
+    }
+
+    const response = await fetch(webhookUrl, {  // Use the variable here
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
