@@ -22,14 +22,30 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
     setIsSaving(true);
     SoundEffects.playGenerateSound();
 
-    // Simulate save delay
-    setTimeout(() => {
-      onSave({ type: activeTab, content: content.trim() });
-      setIsSaving(false);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: activeTab, content: content.trim() }),
+      });
+
+      if (!response.ok) throw new Error("Failed to save");
+
+      const data = await response.json();
+
+      // Pass data back up
+      onSave({ type: activeTab, content: data.content });
+
       setContent("");
       onClose();
-    }, 1500);
+    } catch (err) {
+      console.error(err);
+      // maybe show error toast
+    } finally {
+      setIsSaving(false);
+    }
   };
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
