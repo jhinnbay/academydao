@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 interface IQTestModalProps {
   isOpen: boolean;
