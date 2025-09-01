@@ -135,6 +135,54 @@ export default function Index() {
   const daemonResponse =
     "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
 
+  // Angels ownership state and fetch logic
+  const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f";
+  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+  const ANGELS_TARGET = 3;
+  const [angelsOwned, setAngelsOwned] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const fetchBalance = async () => {
+      try {
+        if (!(ready && authenticated && user?.wallet?.address)) {
+          setAngelsOwned(null);
+          return;
+        }
+        const address = user.wallet.address;
+        const selector = "70a08231"; // balanceOf(address)
+        const addr = address.replace(/^0x/, "").toLowerCase().padStart(64, "0");
+        const data = `0x${selector}${addr}`;
+        const res = await fetch(ALCHEMY_RPC, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            jsonrpc: "2.0",
+            id: 1,
+            method: "eth_call",
+            params: [{ to: ANGEL_CONTRACT, data }, "latest"],
+          }),
+        });
+        const json = await res.json();
+        const hex: string | undefined = json?.result;
+        const count = hex ? Number(BigInt(hex)) : 0;
+        if (!cancelled) {
+          setAngelsOwned(Number.isFinite(count) ? count : 0);
+          setHasAcademicAngel(count > 0);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setAngelsOwned(0);
+          setHasAcademicAngel(false);
+        }
+      }
+    };
+    fetchBalance();
+    return () => {
+      cancelled = true;
+    };
+  }, [ready, authenticated, user?.wallet?.address]);
+
   const handleGenerate = useCallback(
     (e?: React.MouseEvent) => {
       if (e) {
@@ -986,13 +1034,13 @@ export default function Index() {
                     fontWeight: "600",
                   }}
                 >
-                  0/3
+                  {`${Math.min(angelsOwned ?? 0, ANGELS_TARGET)}/${ANGELS_TARGET}`}
                 </span>
               </div>
               <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
                 <div
                   className="bg-gradient-to-r from-white/40 to-white/50 h-2 rounded-full transition-all duration-500"
-                  style={{ width: "0%" }}
+                  style={{ width: `${Math.min(((angelsOwned ?? 0) / ANGELS_TARGET) * 100, 100)}%` }}
                 ></div>
               </div>
               <p
