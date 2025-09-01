@@ -16,20 +16,22 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  const handleSave = async () => {
-    if (!content.trim()) return;
+  // handling input data 
+const handleSave = async () => {
+  if (!content.trim()) return;
 
-    setIsSaving(true);
-    SoundEffects.playGenerateSound();
+  setIsSaving(true);
+  SoundEffects.playGenerateSound();
 
-    // Simulate save delay
-    setTimeout(() => {
-      onSave({ type: activeTab, content: content.trim() });
-      setIsSaving(false);
-      setContent("");
-      onClose();
-    }, 1500);
-  };
+  // JUST prepare the data and pass it up to the parent
+  // DON'T try to fetch here anymore
+  onSave({ type: activeTab, content: content.trim() });
+  
+  setContent("");
+  onClose();
+  setIsSaving(false); // Move this here since we're not awaiting anything
+};
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);

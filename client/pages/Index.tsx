@@ -132,8 +132,9 @@ export default function Index() {
     return () => window.removeEventListener("resize", handleResize);
   }, [tooltipVisible]);
 
-  const daemonResponse =
-    "Based on your proposal and the rationale provided (points a, c, v), the current vote of 234,234 tokens represents 34% of the total. As a 40% approval threshold is required to release the funds, this proposal does not currently meet the requirement for execution. I recommend you consult another team member to strategize on securing additional support.";
+  // responses
+const [daemonResponse, setDaemonResponse] = useState("");
+const [isN8nLoading, setIsN8nLoading] = useState(false);
 
   const handleGenerate = useCallback(
     (e?: React.MouseEvent) => {
@@ -192,11 +193,12 @@ export default function Index() {
   );
 
   // Initialize with the response already displayed only on mount if not actively processing
+// modified to include daemonResponse
   useEffect(() => {
-    if (!isTyping && !isGenerating && showResponse) {
-      setDisplayedResponse(daemonResponse);
-    }
-  }, []);
+  if (!isTyping && !isGenerating && showResponse && daemonResponse) {
+    setDisplayedResponse(daemonResponse);
+  }
+}, [daemonResponse, isTyping, isGenerating, showResponse]);
 
   // Simple scroll management - only prevent initial jump, allow normal scrolling during typing
   useEffect(() => {
@@ -221,13 +223,52 @@ export default function Index() {
     setIsModalOpen(false);
   }, []);
 
-  const handleSaveRequest = useCallback(
-    (data: { type: "funding" | "events"; content: string }) => {
-      setSavedRequest(data);
-      SoundEffects.playCompleteSound();
-    },
-    [],
-  );
+const handleSaveRequest = useCallback(async (data: { type: "funding" | "events"; content: string }) => {
+  setSavedRequest(data);
+  SoundEffects.playCompleteSound();
+  setIsN8nLoading(true);
+  
+  try {
+    const webhookUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
+    
+    if (!webhookUrl) {
+      throw new Error('Chat webhook URL is not configured');
+    }
+
+    // Send the request to n8n
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([
+        {
+          "action": "sendMessage",
+          "chatInput": data.content,
+          "type": data.type
+        }
+      ]),
+    });
+
+    if (!response.ok) {
+      throw new Error(`n8n request failed with status: ${response.status}`);
+    }
+
+    const n8nData = await response.json();
+    const parsedResponse = JSON.parse(n8nData.text);
+
+    // Format the n8n response and update the state
+    const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${parsedResponse.decision}\n\nReasoning: ${parsedResponse.reason}`;
+    setDaemonResponse(formattedResponse);
+
+  } catch (err) {
+    console.error('Error sending to n8n:', err);
+    // Fallback error message
+    setDaemonResponse("❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.");
+  } finally {
+    setIsN8nLoading(false);
+  }
+}, []);
 
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
@@ -1085,14 +1126,16 @@ export default function Index() {
               <div className="flex justify-center">
                 <button
                   onClick={handleGenerate}
-                  disabled={isGenerating || isTyping}
+                  disabled={isGenerating || isTyping || isN8nLoading || !daemonResponse}
                   className="btn-70 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isGenerating
-                    ? "Calculating decision-matrix...."
-                    : isTyping
-                      ? "Combining elements..."
-                      : "send"}
+                  {isN8nLoading
+                    ? "Connecting to n8n..."
+                    : isGenerating
+                      ? "Calculating decision-matrix...."
+                      : isTyping
+                        ? "Combining elements..."
+                        : "send"}
                 </button>
               </div>
               <div className="text-center">
