@@ -864,10 +864,9 @@ export default function Index() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fafb28d4f57874d0095edfabeb1740763?format=webp&width=800"
-                alt="Four Stars Icon"
+                src="https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fbe32791417064eb18f7b5ad3866014b3?alt=media&token=d7349b27-4925-442c-976c-6588a596f039&apiKey=6f2aebc9bb734d979c603aa774a20c1a"
+                alt="Mascot Gif"
                 className="w-6 h-6"
-                style={{ filter: "brightness(0) invert(1)" }}
               />
               <span
                 className="font-sans"
