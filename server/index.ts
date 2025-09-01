@@ -22,7 +22,10 @@ export function createServer() {
   // Farcaster Mini App manifest: temporary redirect (307) to hosted manifest
   app.get("/.well-known/farcaster.json", (_req, res) => {
     res.set("Cache-Control", "no-store");
-    res.redirect(307, "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47");
+    res.redirect(
+      307,
+      "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47",
+    );
   });
 
   // posting form data to n8n webhook

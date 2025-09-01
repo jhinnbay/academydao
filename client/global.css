@@ -39,7 +39,9 @@ html.fc-miniapp {
   font-size: 14px;
 }
 @media (max-width: 420px) {
-  html.fc-miniapp { font-size: 13px; }
+  html.fc-miniapp {
+    font-size: 13px;
+  }
 }
 
 body {
