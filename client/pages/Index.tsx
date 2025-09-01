@@ -999,9 +999,11 @@ export default function Index() {
                 <span
                   className="font-cartograph"
                   style={{
-                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontSize: "10px",
+                    lineHeight: "15px",
                     fontWeight: "400",
                     color: "#ffffff",
+                    display: "block",
                   }}
                 >
                   {(angelsOwned ?? 0).toString().padStart(3, "0")}
