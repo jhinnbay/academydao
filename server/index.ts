@@ -19,42 +19,10 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Farcaster manifest: serve provided JSON
+  // Farcaster Mini App manifest: temporary redirect (307) to hosted manifest
   app.get("/.well-known/farcaster.json", (_req, res) => {
-    res.set("Cache-Control", "public, max-age=600, s-maxage=600");
-    res.type("application/json").send(
-      JSON.stringify(
-        {
-          frame: {
-            name: "AcademyOS",
-            version: "1",
-            iconUrl: "https://imgur.com/a/o2JtKzI",
-            homeUrl: "https://academydao.vercel.app",
-            imageUrl: "https://i.imgur.com/Ovxlwna.png",
-            buttonTitle: "Church Of Azura",
-            splashImageUrl: "https://i.imgur.com/907bTSF.png",
-            splashBackgroundColor: "#000000",
-            webhookUrl: "https://academydao.vercel.app/api/webhook",
-            subtitle: "Fight A Daemon Model AI",
-            description:
-              "Azura AI works with the Daemon Model, a new way of sharing governance where agents like her, work side by side with the people.",
-            primaryCategory: "entertainment",
-            heroImageUrl: "https://i.imgur.com/Ovxlwna.png",
-            ogTitle: "Take The Test",
-            ogImageUrl: "https://i.imgur.com/Ovxlwna.png",
-          },
-          accountAssociation: {
-            header:
-              "eyJmaWQiOjI4NjkyNCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU4RjBlMzlkOTI4MTgxNTk1ZTc4OTQ1MTdmQjI0MDUyMjA0RWIxM0MifQ",
-            payload: "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
-            signature:
-              "MHg3ODE5ZDRhNzJiNGMwMzM4MTYwZTg4NjhjMTYwN2FkZDE3ZDQ1NGUwN2NjYjRiMTE5MjNiMzJlNTk5N2VjNTA2MWZjY2IzMWE0N2MwYzIwODAzMjgxZWE4YTE0MTdiZTRjNTZjY2M2N2IxMDJjYTIzMGIyOWU1OTJmMjQ0ZmFhMTFi",
-          },
-        },
-        null,
-        2,
-      ),
-    );
+    res.set("Cache-Control", "no-store");
+    res.redirect(307, "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47");
   });
 
   // posting form data to n8n webhook
