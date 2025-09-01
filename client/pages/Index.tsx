@@ -802,10 +802,7 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                I'm Azura. Welcome to the Academy. We built to accelerate your
-                vision. Call a team meeting — I'll schedule, shape the agenda,
-                and unlock the exact resources you need to win. Let's build
-                what's next.
+                I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
@@ -956,7 +953,17 @@ export default function Index() {
                     color: "#888888",
                   }}
                 >
-                  Angels
+                  Angels&nbsp;
+                  <span
+                    style={{
+                      fontFamily: "Roboto, sans-serif",
+                      fontSize: "10px",
+                      textAlign: "center",
+                      whiteSpace: "pre",
+                    }}
+                  >
+                    ˚₊‧꒰ა ☆ ໒꒱ ‧₊˚
+                  </span>
                 </span>
                 <span
                   className="font-cartograph"
@@ -1012,7 +1019,7 @@ export default function Index() {
                     color: "#888888",
                   }}
                 >
-                  Daemon Model
+                  Daemon Model AI
                 </span>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
