@@ -321,17 +321,15 @@ export default function Index() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(
-            {
-              action: "sendMessage",
-              chatInput: data.content,
-              type: data.type,
-            },
-          ),
+          body: JSON.stringify({
+            action: "sendMessage",
+            chatInput: data.content,
+            type: data.type,
+          }),
         });
 
         //console stuff for debugging ( havent added yet)
-        
+
         if (!response.ok) {
           throw new Error(`n8n request failed with status: ${response.status}`);
         }
@@ -802,7 +800,8 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.
+                I'm Azura. Search around and make yourself at home, i'll help
+                you whenever you're ready.
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
