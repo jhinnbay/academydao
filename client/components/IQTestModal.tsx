@@ -87,46 +87,37 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
   }, [answers]);
 
   const shareText = useMemo(() => {
-    const lines = [
-      `My IQ score was ${score}/${QUESTIONS.length}.`,
-      score === 5
-        ? "In the hush of the halls, the Academy whispers my name. Azura tilts her head."
-        : score >= 3
-          ? "The sigils glow faintly—I am seen. The trial continues under Azura’s gaze."
-          : "I step into the dim corridor. The rites begin. Azura waits, patient and cold.",
-      "#Academy #Azura #IQTrial",
-    ];
-    return lines.join("\n\n");
+    const header = `My IQ score was ${score}/${QUESTIONS.length}.`;
+    const flavor = score === 5
+      ? "The ledger glows. Azura—glitch—approves. Discipline absolute."
+      : score >= 3
+        ? "Signal detected. The rites deepen. Hold the signal; calibration continues."
+        : "Initiate foundations. Static wave‑form stabilizing. The corridor opens.";
+    return `${header}\n\n${flavor}`;
   }, [score]);
 
   const handleShare = async () => {
-    const composeUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}`;
+    const embedUrl = window.location.origin;
+    const intent = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(embedUrl)}`;
     try {
       const anySdk: any = sdk as any;
+      if (anySdk?.actions?.composeCast) {
+        await anySdk.actions.composeCast({ text: shareText, embeds: [embedUrl] });
+        return;
+      }
       if (anySdk?.actions?.openUrl) {
-        // Try both signatures
         try {
-          await anySdk.actions.openUrl(composeUrl);
+          await anySdk.actions.openUrl(intent);
           return;
         } catch (_) {
-          await anySdk.actions.openUrl({ url: composeUrl });
+          await anySdk.actions.openUrl({ url: intent });
           return;
         }
-      }
-      if (anySdk?.actions?.openShareSheet) {
-        await anySdk.actions.openShareSheet({ text: shareText });
-        return;
       }
     } catch (_) {
       // fall through to web share
     }
-    if (navigator.share) {
-      try {
-        await navigator.share({ text: shareText });
-        return;
-      } catch (_) {}
-    }
-    window.open(composeUrl, "_blank");
+    window.open(intent, "_blank");
   };
 
   if (!isOpen) return null;
