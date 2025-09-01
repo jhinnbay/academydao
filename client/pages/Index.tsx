@@ -4,6 +4,7 @@ import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
+import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { usePrivy } from "@privy-io/react-auth";
 import {
@@ -20,6 +21,7 @@ export default function Index() {
   const [displayedResponse, setDisplayedResponse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
+  const [isIQOpen, setIsIQOpen] = useState(false);
 
   // Debounced updater for typing animation to prevent scroll jumping
   const debouncedSetDisplayedResponse = useMemo(
@@ -1212,19 +1214,17 @@ export default function Index() {
                           >
                             Learn More
                           </button>
-                          <a
-                            href="https://www.scatter.art/collection/academic-angels"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/50 hover:text-white transition-all duration-300 overflow-hidden text-center block"
+                          <button
+                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsIQOpen(true); }}
+                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
                               fontWeight: "600",
                             }}
                           >
-                            Buy Angel
-                          </a>
+                            Take The Test
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1380,6 +1380,8 @@ export default function Index() {
           isOpen={isMembershipOpen}
           onClose={() => setIsMembershipOpen(false)}
         />
+
+        <IQTestModal isOpen={isIQOpen} onClose={() => setIsIQOpen(false)} />
       </div>
     </div>
   );
