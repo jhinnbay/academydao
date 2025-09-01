@@ -143,6 +143,21 @@ export default function Index() {
 
   useEffect(() => {
     let cancelled = false;
+
+    const fetchViaNFTApi = async (address: string) => {
+      try {
+        const restBase = ALCHEMY_RPC.replace("/v2/", "/nft/v3/");
+        const url = `${restBase}/getNFTsForOwner?owner=${address}&contractAddresses[]=${ANGEL_CONTRACT}&withMetadata=false`;
+        const r = await fetch(url, { headers: { Accept: "application/json" } });
+        if (!r.ok) return null;
+        const j = await r.json();
+        const count = Array.isArray(j?.ownedNfts) ? j.ownedNfts.length : (typeof j?.totalCount === "number" ? j.totalCount : 0);
+        return Number(count) || 0;
+      } catch {
+        return null;
+      }
+    };
+
     const fetchBalance = async () => {
       try {
         if (!(ready && authenticated && user?.wallet?.address)) {
@@ -163,9 +178,16 @@ export default function Index() {
             params: [{ to: ANGEL_CONTRACT, data }, "latest"],
           }),
         });
-        const json = await res.json();
-        const hex: string | undefined = json?.result;
-        const count = hex ? Number(BigInt(hex)) : 0;
+        let count = 0;
+        if (res.ok) {
+          const json = await res.json();
+          const hex: string | undefined = json?.result;
+          count = hex ? Number(BigInt(hex)) : 0;
+        }
+        if ((!res.ok || count === 0)) {
+          const alt = await fetchViaNFTApi(address);
+          if (typeof alt === "number") count = alt;
+        }
         if (!cancelled) {
           setAngelsOwned(Number.isFinite(count) ? count : 0);
           setHasAcademicAngel(count > 0);
@@ -854,7 +876,7 @@ export default function Index() {
                     color: "#ffffff",
                   }}
                 >
-                  000
+                  {(angelsOwned ?? 0).toString().padStart(3, "0")}
                 </span>
                 {tooltipVisible === "angels" && (
                   <div
