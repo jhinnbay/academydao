@@ -993,7 +993,7 @@ export default function Index() {
                       display: "inline",
                     }}
                   >
-                    {" \u02DA\u208A\u{1F90B}\u20E3?"}
+                    ˚₊꒰ა ☆ ໒꒱ ‧₊˚
                   </span>
                 </span>
                 <span
