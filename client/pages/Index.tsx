@@ -500,7 +500,7 @@ export default function Index() {
                 </div>
 
                 {/* User Profile */}
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 hover:border-white/40 transition-colors duration-300">
+                <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} role="button" tabIndex={0} aria-haspopup="menu" aria-expanded={isMobileMenuOpen} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 hover:border-white/40 transition-colors duration-300 cursor-pointer">
                   {(() => {
                     // Get Farcaster account if available
                     const farcasterAccount = user?.linkedAccounts?.find(
@@ -603,7 +603,7 @@ export default function Index() {
                 {/* Mobile Menu Button */}
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="md:hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
+                  className="hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
                 >
                   <svg
                     className="w-5 h-5 text-white"
