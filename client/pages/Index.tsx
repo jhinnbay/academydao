@@ -346,11 +346,14 @@ export default function Index() {
             if ((!decision || !reason) && typeof obj.text === "string") {
               try {
                 const inner = JSON.parse(obj.text);
-                if (typeof inner.decision === "string") decision ||= inner.decision;
+                if (typeof inner.decision === "string")
+                  decision ||= inner.decision;
                 if (typeof inner.reason === "string") reason ||= inner.reason;
               } catch {
                 const m1 = obj.text.match(/decision\s*[:\-]\s*(.+)/i);
-                const m2 = obj.text.match(/reason(?:ing)?\s*[:\-]\s*([\s\S]+)/i);
+                const m2 = obj.text.match(
+                  /reason(?:ing)?\s*[:\-]\s*([\s\S]+)/i,
+                );
                 if (!decision && m1) decision = m1[1].trim();
                 if (!reason && m2) reason = m2[1].trim();
               }
@@ -1348,7 +1351,9 @@ export default function Index() {
                       >
                         {isGenerating ? (
                           <div className="flex items-center">
-                            <span className="animate-pulse">Generating response...</span>
+                            <span className="animate-pulse">
+                              Generating response...
+                            </span>
                             <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
                           </div>
                         ) : (
