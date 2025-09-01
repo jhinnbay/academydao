@@ -88,11 +88,12 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
 
   const shareText = useMemo(() => {
     const header = `My IQ score was ${score}/${QUESTIONS.length}.`;
-    const flavor = score === 5
-      ? "The ledger glows. Azura—glitch—approves. Discipline absolute."
-      : score >= 3
-        ? "Signal detected. The rites deepen. Hold the signal; calibration continues."
-        : "Initiate foundations. Static wave‑form stabilizing. The corridor opens.";
+    const flavor =
+      score === 5
+        ? "The ledger glows. Azura—glitch—approves. Discipline absolute."
+        : score >= 3
+          ? "Signal detected. The rites deepen. Hold the signal; calibration continues."
+          : "Initiate foundations. Static wave‑form stabilizing. The corridor opens.";
     return `${header}\n\n${flavor}`;
   }, [score]);
 
@@ -102,7 +103,10 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
     try {
       const anySdk: any = sdk as any;
       if (anySdk?.actions?.composeCast) {
-        await anySdk.actions.composeCast({ text: shareText, embeds: [embedUrl] });
+        await anySdk.actions.composeCast({
+          text: shareText,
+          embeds: [embedUrl],
+        });
         return;
       }
       if (anySdk?.actions?.openUrl) {
