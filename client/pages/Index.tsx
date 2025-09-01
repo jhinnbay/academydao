@@ -3,6 +3,7 @@ import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
 import { PrivyAuth } from "@/components/PrivyAuth";
 import { InputRequestModal } from "@/components/InputRequestModal";
+import { MembershipModal } from "@/components/MembershipModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { usePrivy } from "@privy-io/react-auth";
 import {
@@ -1373,6 +1374,11 @@ export default function Index() {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           onSave={handleSaveRequest}
+        />
+
+        <MembershipModal
+          isOpen={isMembershipOpen}
+          onClose={() => setIsMembershipOpen(false)}
         />
       </div>
     </div>
