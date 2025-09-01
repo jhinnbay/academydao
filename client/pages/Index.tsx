@@ -1065,16 +1065,6 @@ export default function Index() {
                   style={{ width: `${Math.min(((angelsOwned ?? 0) / ANGELS_TARGET) * 100, 100)}%` }}
                 ></div>
               </div>
-              <p
-                className="font-sans text-white/80"
-                style={{
-                  fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                  lineHeight: "1.5",
-                  fontWeight: "400",
-                }}
-              >
-                Secure at least 1 Angel to boost proposal strength
-              </p>
             </div>
 
             {/* Main Action Section */}
