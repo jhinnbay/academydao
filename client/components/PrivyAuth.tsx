@@ -60,8 +60,8 @@ export const PrivyAuth: React.FC = () => {
         fontWeight: "500",
         color: "#ffffff",
       }}
-    >
-      Connect Wallet (Demo Mode)
+>
+      Sync Account
       <img
         src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F0c9076778bee4070892566189ad8c894?format=webp&width=800"
         alt="Atom Icon"
