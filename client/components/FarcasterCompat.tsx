@@ -14,6 +14,12 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
     const initializeFarcaster = async () => {
       try {
         console.log("🚀 Initializing Farcaster MiniKit...");
+        const ua = window.navigator.userAgent || "";
+        const isFramed = window.self !== window.top;
+        const isFC = /farcaster/i.test(ua) || isFramed;
+        if (isFC) {
+          document.documentElement.classList.add("fc-miniapp");
+        }
 
         // Debug current domain
         console.log("Current domain:", window.location.hostname);
@@ -58,9 +64,11 @@ export const FarcasterCompat: React.FC<FarcasterCompatProps> = ({
 
         setIsReady(true);
       } catch (error) {
+        // Ensure class removal outside Mini App
+        document.documentElement.classList.remove("fc-miniapp");
         console.warn("⚠️ Farcaster SDK error:", error);
         console.log(
-          "ℹ️ This is normal if not running in a Farcaster Mini App environment",
+          "��️ This is normal if not running in a Farcaster Mini App environment",
         );
         console.log("ℹ️ If you ARE in Farcaster and seeing this, check:");
         console.log(
