@@ -539,7 +539,14 @@ export default function Index() {
                 </div>
 
                 {/* User Profile */}
-                <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} role="button" tabIndex={0} aria-haspopup="menu" aria-expanded={isMobileMenuOpen} className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 hover:border-white/40 transition-colors duration-300 cursor-pointer">
+                <div
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  role="button"
+                  tabIndex={0}
+                  aria-haspopup="menu"
+                  aria-expanded={isMobileMenuOpen}
+                  className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 hover:border-white/40 transition-colors duration-300 cursor-pointer"
+                >
                   {(() => {
                     // Get Farcaster account if available
                     const farcasterAccount = user?.linkedAccounts?.find(
@@ -1204,7 +1211,11 @@ export default function Index() {
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
                           <button
-                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsMembershipOpen(true); }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setIsMembershipOpen(true);
+                            }}
                             className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
@@ -1215,7 +1226,11 @@ export default function Index() {
                             Learn More
                           </button>
                           <button
-                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setIsIQOpen(true); }}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setIsIQOpen(true);
+                            }}
                             className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",

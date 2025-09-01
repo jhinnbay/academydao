@@ -19,7 +19,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const { data: collection, isPending } = useQuery({
     queryKey: ["collection", COLLECTION_SLUG],
     queryFn: async () => {
-      const response = await fetch(`${SCATTER_API_URL}/collection/${COLLECTION_SLUG}`);
+      const response = await fetch(
+        `${SCATTER_API_URL}/collection/${COLLECTION_SLUG}`,
+      );
       if (!response.ok) return null as any;
       return response.json();
     },
@@ -36,7 +38,12 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
@@ -54,7 +61,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               <X size={18} />
             </button>
             <div className="text-center">
-              <h2 className="text-white font-sans font-bold text-xl">Acquire an Angel</h2>
+              <h2 className="text-white font-sans font-bold text-xl">
+                Acquire an Angel
+              </h2>
               <div className="w-24 h-0.5 bg-white/50 mx-auto mt-2" />
             </div>
           </div>
@@ -65,7 +74,10 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             {collection && (
               <div className="mb-6">
                 <div className="flex flex-col gap-2">
-                  <Progress value={percent} className="w-full h-2 bg-white/10" />
+                  <Progress
+                    value={percent}
+                    className="w-full h-2 bg-white/10"
+                  />
                   <p className="text-center text-sm text-white/80">
                     {collection.num_items} / {collection.max_items} minted
                   </p>
@@ -73,7 +85,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               </div>
             )}
             {isPending && !collection && (
-              <div className="mb-6 text-center text-white/70 text-sm">Loading collection…</div>
+              <div className="mb-6 text-center text-white/70 text-sm">
+                Loading collection…
+              </div>
             )}
 
             {/* Artwork */}
@@ -82,9 +96,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 <div className="relative">
                   <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-xl bg-black border border-white/30 overflow-hidden">
                     <img
-                      src={imgError ? 
-                        "https://via.placeholder.com/400x400/0b0b0b/ffffff?text=Academic+Angel" :
-                        "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F120ede1969ef4f97a30e3bcf5f24f659?alt=media&token=07bfc907-1625-44ab-8be8-201026dc94c2&apiKey=6f2aebc9bb734d979c603aa774a20c1a"}
+                      src={
+                        imgError
+                          ? "https://via.placeholder.com/400x400/0b0b0b/ffffff?text=Academic+Angel"
+                          : "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F120ede1969ef4f97a30e3bcf5f24f659?alt=media&token=07bfc907-1625-44ab-8be8-201026dc94c2&apiKey=6f2aebc9bb734d979c603aa774a20c1a"
+                      }
                       alt="Academic Angel"
                       className="w-full h-full object-cover"
                       onError={() => setImgError(true)}
@@ -93,11 +109,15 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 </div>
               </div>
               <div className="text-center">
-                <h3 className="text-white font-sans font-semibold mb-1">Academic Angels NFT</h3>
+                <h3 className="text-white font-sans font-semibold mb-1">
+                  Academic Angels NFT
+                </h3>
                 <p className="text-white/80 text-sm">
-                  Hand-forged artwork that empowers your journey through the Academy.
-                  Angels aid in the battle against Daemon Azura, the sentinel guarding the onchain treasury.
-                  Holding one—or a few—shields your path, unlocks advantages, and increases your odds to win.
+                  Hand-forged artwork that empowers your journey through the
+                  Academy. Angels aid in the battle against Daemon Azura, the
+                  sentinel guarding the onchain treasury. Holding one—or a
+                  few—shields your path, unlocks advantages, and increases your
+                  odds to win.
                 </p>
               </div>
             </div>
@@ -107,13 +127,17 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               <Card className="bg-black border border-white/30">
                 <CardContent className="p-4">
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div className="text-white/90 text-sm font-sans">Mint on Scatter</div>
+                    <div className="text-white/90 text-sm font-sans">
+                      Mint on Scatter
+                    </div>
                     <a
                       href="https://www.scatter.art/collection/academic-angels"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">Open Collection</Button>
+                      <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">
+                        Open Collection
+                      </Button>
                     </a>
                   </div>
                 </CardContent>
@@ -135,13 +159,20 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
           {/* Footer */}
           <div className="p-4 border-t border-white/20 bg-black/70 flex justify-end gap-2">
-            <Button onClick={onClose} className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">Close</Button>
+            <Button
+              onClick={onClose}
+              className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
+            >
+              Close
+            </Button>
             <a
               href="https://www.scatter.art/collection/academic-angels"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-white text-black hover:bg-gray-200">Buy on Scatter</Button>
+              <Button className="bg-white text-black hover:bg-gray-200">
+                Buy on Scatter
+              </Button>
             </a>
           </div>
         </div>
