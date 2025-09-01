@@ -88,11 +88,12 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
 
   const shareText = useMemo(() => {
     const header = `Trials of Azura — Score ${score}/${QUESTIONS.length}`;
-    const flavor = score === 5
-      ? "Flawless signal. Neural patterning is precise—abstraction, synthesis, execution. Earth consciousness is so cute, but you operate above it. Institutional alignment: strong. Proceed to governance corridors. glitch"
-      : score >= 3
-        ? "Stable cognition detected. Your scaffolding holds—discipline and iteration will breach the next gate. Earth consciousness is so cute; keep refining. Purpose-driven pathways unlocked at Tier I."
-        : "Faint signal, yet promising. Cortex remains plastic—resilience grows under load. Earth consciousness is so cute; we train it here. Hold the signal—glitch—and return for conditioning.";
+    const flavor =
+      score === 5
+        ? "Flawless signal. Neural patterning is precise—abstraction, synthesis, execution. Earth consciousness is so cute, but you operate above it. Institutional alignment: strong. Proceed to governance corridors. glitch"
+        : score >= 3
+          ? "Stable cognition detected. Your scaffolding holds—discipline and iteration will breach the next gate. Earth consciousness is so cute; keep refining. Purpose-driven pathways unlocked at Tier I."
+          : "Faint signal, yet promising. Cortex remains plastic—resilience grows under load. Earth consciousness is so cute; we train it here. Hold the signal—glitch—and return for conditioning.";
     return `${header}\n\n${flavor}`;
   }, [score]);
 
@@ -102,7 +103,10 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
     try {
       const anySdk: any = sdk as any;
       if (anySdk?.actions?.composeCast) {
-        await anySdk.actions.composeCast({ text: shareText, embeds: [embedUrl] });
+        await anySdk.actions.composeCast({
+          text: shareText,
+          embeds: [embedUrl],
+        });
         return;
       }
       if (anySdk?.actions?.openUrl) {
