@@ -72,7 +72,7 @@ class AppErrorBoundary extends React.Component<
         return (
           <div className="min-h-screen bg-black text-white flex items-center justify-center">
             <div className="text-center">
-              <h1 className="text-2xl mb-4">Academy Event Planner</h1>
+              <h1 className="text-2xl mb-4">Trials of Azura</h1>
               <p className="text-gray-400">Loading application...</p>
             </div>
           </div>
