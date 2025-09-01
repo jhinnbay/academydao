@@ -10,7 +10,9 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { FarcasterCompat } from "@/components/FarcasterCompat";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import React from "react";
+import React, { useEffect } from "react";
+import { WagmiProvider, useAccount, useConnect } from "wagmi";
+import { wagmiConfig } from "@/lib/wagmi";
 
 const queryClient = new QueryClient();
 
