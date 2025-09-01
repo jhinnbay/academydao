@@ -709,9 +709,7 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                I'm Azura. Built to accelerate your vision. Call a team meeting
-                — I'll schedule, shape the agenda, and unlock the exact
-                resources you need to win. Let's build what's next.
+                I'm Azura. Welcome to the Academy. We built to accelerate your vision. Call a team meeting — I'll schedule, shape the agenda, and unlock the exact resources you need to win. Let's build what's next.
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
