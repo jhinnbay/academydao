@@ -1,7 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
