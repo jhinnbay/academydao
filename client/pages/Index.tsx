@@ -1328,30 +1328,39 @@ export default function Index() {
 
               {showResponse && (
                 <div className="border border-dashed border-white/40 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
-                  <div
-                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded border border-white/20 shadow-lg overflow-hidden"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                      lineHeight: "1.6",
-                      fontWeight: "400",
-                      color: "#b0b0b0",
-                    }}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center">
-                        <span className="animate-pulse">
-                          Generating response...
-                        </span>
-                        <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
-                      </div>
-                    ) : (
-                      <div>
-                        {displayedResponse}
-                        {isTyping && (
-                          <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 flex-shrink-0">
+                      <img
+                        src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
+                        alt="Azura Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div
+                        className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded border border-white/20 shadow-lg overflow-hidden"
+                        style={{
+                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                          lineHeight: "1.6",
+                          fontWeight: "400",
+                          color: "#b0b0b0",
+                        }}
+                      >
+                        {isGenerating ? (
+                          <div className="flex items-center">
+                            <span className="animate-pulse">Generating response...</span>
+                            <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
+                          </div>
+                        ) : (
+                          <div>
+                            {displayedResponse}
+                            {isTyping && (
+                              <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               )}
