@@ -867,21 +867,12 @@ export default function Index() {
           {/* Header Stats */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2.5L15.09 8.76L22 9.77L17 14.64L18.18 21.52L12 18.27L5.82 21.52L7 14.64L2 9.77L8.91 8.76L12 2.5Z"
-                  stroke="#ECECEC"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fafb28d4f57874d0095edfabeb1740763?format=webp&width=800"
+                alt="Four Stars Icon"
+                className="w-6 h-6"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
               <span
                 className="font-sans"
                 style={{
