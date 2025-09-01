@@ -42,6 +42,20 @@ const queryClient = new QueryClient();
         console.warn("Suppressed analytics network error:", url);
         return new Response("", { status: 204 });
       }
+
+      const isPrivyApi = /\bprivy\./i.test(url);
+      if (
+        isPrivyApi &&
+        isFarcasterEnvironment() &&
+        (error?.message === "Failed to fetch" || error?.name === "TypeError")
+      ) {
+        console.warn("Stubbed Privy API response in Mini App env:", url);
+        return new Response("{}", {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
       throw error;
     }
   };
