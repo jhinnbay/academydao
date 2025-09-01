@@ -1243,7 +1243,7 @@ export default function Index() {
                     : isGenerating
                       ? "Calculating decision-matrix...."
                       : isTyping
-                        ? "Combining elements..."
+                        ? "Alchemizing..."
                         : "send"}
                 </button>
               </div>
