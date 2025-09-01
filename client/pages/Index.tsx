@@ -301,7 +301,7 @@ export default function Index() {
       const t = setTimeout(() => setIsGlitching(false), 800);
       // ensure timeout cleared if component unmounts before it fires
       return () => clearTimeout(t);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -686,7 +686,7 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            Connect Wallet
+                            Sync Account
                           </span>
                         </>
                       );
