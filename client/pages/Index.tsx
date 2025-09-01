@@ -137,7 +137,8 @@ export default function Index() {
 
   // Angels ownership state and fetch logic
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f";
-  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+  const ALCHEMY_RPC =
+    "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
   const ANGELS_TARGET = 3;
   const [angelsOwned, setAngelsOwned] = useState<number | null>(null);
 
@@ -151,7 +152,11 @@ export default function Index() {
         const r = await fetch(url, { headers: { Accept: "application/json" } });
         if (!r.ok) return null;
         const j = await r.json();
-        const count = Array.isArray(j?.ownedNfts) ? j.ownedNfts.length : (typeof j?.totalCount === "number" ? j.totalCount : 0);
+        const count = Array.isArray(j?.ownedNfts)
+          ? j.ownedNfts.length
+          : typeof j?.totalCount === "number"
+            ? j.totalCount
+            : 0;
         return Number(count) || 0;
       } catch {
         return null;
@@ -184,7 +189,7 @@ export default function Index() {
           const hex: string | undefined = json?.result;
           count = hex ? Number(BigInt(hex)) : 0;
         }
-        if ((!res.ok || count === 0)) {
+        if (!res.ok || count === 0) {
           const alt = await fetchViaNFTApi(address);
           if (typeof alt === "number") count = alt;
         }
@@ -1062,7 +1067,9 @@ export default function Index() {
               <div className="w-full bg-gray-800 rounded-full h-2 mb-3">
                 <div
                   className="bg-gradient-to-r from-white/40 to-white/50 h-2 rounded-full transition-all duration-500"
-                  style={{ width: `${Math.min(((angelsOwned ?? 0) / ANGELS_TARGET) * 100, 100)}%` }}
+                  style={{
+                    width: `${Math.min(((angelsOwned ?? 0) / ANGELS_TARGET) * 100, 100)}%`,
+                  }}
                 ></div>
               </div>
             </div>
