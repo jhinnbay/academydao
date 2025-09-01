@@ -18,6 +18,7 @@ export default function Index() {
   const [showResponse, setShowResponse] = useState(true);
   const [displayedResponse, setDisplayedResponse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMembershipOpen, setIsMembershipOpen] = useState(false);
 
   // Debounced updater for typing animation to prevent scroll jumping
   const debouncedSetDisplayedResponse = useMemo(
