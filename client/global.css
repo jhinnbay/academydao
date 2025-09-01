@@ -34,6 +34,14 @@ html {
   scroll-padding-top: 0;
 }
 
+/* Smaller typography inside Farcaster Mini App */
+html.fc-miniapp {
+  font-size: 14px;
+}
+@media (max-width: 420px) {
+  html.fc-miniapp { font-size: 13px; }
+}
+
 body {
   overflow-x: hidden;
   scroll-behavior: smooth;
