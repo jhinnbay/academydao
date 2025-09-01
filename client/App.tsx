@@ -14,22 +14,31 @@ import React from "react";
 
 const queryClient = new QueryClient();
 
-// Suppress Privy fetch errors globally
-const originalFetch = window.fetch;
-window.fetch = function (...args) {
-  return originalFetch.apply(this, args).catch((error) => {
-    // Only suppress known Privy analytics errors
-    if (
-      error.message === "Failed to fetch" &&
-      (args[0]?.toString().includes("privy") ||
-        args[0]?.toString().includes("analytics"))
-    ) {
-      console.warn("Suppressed Privy network error:", error);
-      return Promise.resolve(new Response("{}", { status: 200 }));
+// Suppress noisy analytics fetch errors safely (do not interfere with core APIs)
+(() => {
+  if ((window as any).__fetchPatched) return;
+  (window as any).__fetchPatched = true;
+  const originalFetch = window.fetch.bind(window);
+  window.fetch = async (...args: any[]) => {
+    try {
+      return await originalFetch(...(args as any));
+    } catch (error: any) {
+      // Best-effort URL extraction (handles Request objects)
+      let url = "";
+      try {
+        const input = args[0] as any;
+        url = typeof input === "string" ? input : input?.url ?? String(input);
+      } catch {}
+
+      const isAnalytics = /analytics|plausible|segment|sentry/i.test(url) || /events\.privy\.io/i.test(url);
+      if (isAnalytics && (error?.message === "Failed to fetch" || error?.name === "TypeError")) {
+        console.warn("Suppressed analytics network error:", url);
+        return new Response("", { status: 204 });
+      }
+      throw error;
     }
-    throw error;
-  });
-};
+  };
+})();
 
 // Check if running in Farcaster environment
 const isFarcasterEnvironment = () => {
