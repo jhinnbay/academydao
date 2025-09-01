@@ -492,14 +492,42 @@ body {
 
 /* Glitch text animation for hero message */
 @keyframes glitch-text-shift {
-  0% { text-shadow: none; transform: none; }
-  10% { text-shadow: 2px 0 rgba(255,0,0,0.6), -2px 0 rgba(0,255,255,0.6); }
-  20% { text-shadow: -2px 0 rgba(255,0,0,0.6), 2px 0 rgba(0,255,255,0.6); }
-  30% { text-shadow: 3px 0 rgba(255,0,0,0.6), -3px 0 rgba(0,255,255,0.6); }
-  40% { text-shadow: -1px 0 rgba(255,0,0,0.6), 1px 0 rgba(0,255,255,0.6); }
-  50% { text-shadow: 1px 0 rgba(255,0,0,0.6), -1px 0 rgba(0,255,255,0.6); }
-  60% { text-shadow: none; }
-  100% { text-shadow: none; transform: none; }
+  0% {
+    text-shadow: none;
+    transform: none;
+  }
+  10% {
+    text-shadow:
+      2px 0 rgba(255, 0, 0, 0.6),
+      -2px 0 rgba(0, 255, 255, 0.6);
+  }
+  20% {
+    text-shadow:
+      -2px 0 rgba(255, 0, 0, 0.6),
+      2px 0 rgba(0, 255, 255, 0.6);
+  }
+  30% {
+    text-shadow:
+      3px 0 rgba(255, 0, 0, 0.6),
+      -3px 0 rgba(0, 255, 255, 0.6);
+  }
+  40% {
+    text-shadow:
+      -1px 0 rgba(255, 0, 0, 0.6),
+      1px 0 rgba(0, 255, 255, 0.6);
+  }
+  50% {
+    text-shadow:
+      1px 0 rgba(255, 0, 0, 0.6),
+      -1px 0 rgba(0, 255, 255, 0.6);
+  }
+  60% {
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: none;
+    transform: none;
+  }
 }
 .glitch-text {
   animation: glitch-text-shift 0.8s linear both;

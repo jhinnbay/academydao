@@ -24,8 +24,10 @@ export default function Index() {
   const [isIQOpen, setIsIQOpen] = useState(false);
 
   // Hero text glitch toggle
-  const originalHeroText = "I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.";
-  const altHeroText = "Azura. That is the last name you will ever hear. Look around. Touch nothing. It is the last world you will ever know. My help is a final, merciful cut... and I am so eager for you to be ready for it.";
+  const originalHeroText =
+    "I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.";
+  const altHeroText =
+    "Azura. That is the last name you will ever hear. Look around. Touch nothing. It is the last world you will ever know. My help is a final, merciful cut... and I am so eager for you to be ready for it.";
   const [heroText, setHeroText] = useState<string>(originalHeroText);
   const [isGlitching, setIsGlitching] = useState(false);
 
@@ -297,7 +299,9 @@ export default function Index() {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsGlitching(true);
-      setHeroText((prev) => (prev === originalHeroText ? altHeroText : originalHeroText));
+      setHeroText((prev) =>
+        prev === originalHeroText ? altHeroText : originalHeroText,
+      );
       const t = setTimeout(() => setIsGlitching(false), 800);
       // ensure timeout cleared if component unmounts before it fires
       return () => clearTimeout(t);
