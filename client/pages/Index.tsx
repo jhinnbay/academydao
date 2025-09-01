@@ -293,6 +293,18 @@ export default function Index() {
     }
   }, []);
 
+  // Periodically toggle hero text with glitch animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsGlitching(true);
+      setHeroText((prev) => (prev === originalHeroText ? altHeroText : originalHeroText));
+      const t = setTimeout(() => setIsGlitching(false), 800);
+      // ensure timeout cleared if component unmounts before it fires
+      return () => clearTimeout(t);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
       e.preventDefault();
