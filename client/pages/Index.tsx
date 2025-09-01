@@ -333,20 +333,55 @@ export default function Index() {
         const n8nData = await response.json();
         const parsedResponse = JSON.parse(n8nData.text);
 
-        // Format the n8n response and update the state
+        // Format the n8n response and start typewriter reveal
         const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${parsedResponse.decision}\n\nReasoning: ${parsedResponse.reason}`;
         setDaemonResponse(formattedResponse);
+        setShowResponse(true);
+        setIsTyping(true);
+        setDisplayedResponse("");
+
+        let currentText = "";
+        SoundEffects.typeWithSound(
+          formattedResponse,
+          (char, isComplete) => {
+            if (!isComplete) {
+              currentText += char;
+              debouncedSetDisplayedResponse(currentText);
+            } else {
+              setDisplayedResponse(formattedResponse);
+              setIsTyping(false);
+            }
+          },
+          30,
+        );
       } catch (err) {
         console.error("Error sending to n8n:", err);
-        // Fallback error message
-        setDaemonResponse(
-          "❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.",
+        // Fallback error message with typewriter as well
+        const fallback =
+          "❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.";
+        setDaemonResponse(fallback);
+        setShowResponse(true);
+        setIsTyping(true);
+        setDisplayedResponse("");
+        let currentText = "";
+        SoundEffects.typeWithSound(
+          fallback,
+          (char, isComplete) => {
+            if (!isComplete) {
+              currentText += char;
+              debouncedSetDisplayedResponse(currentText);
+            } else {
+              setDisplayedResponse(fallback);
+              setIsTyping(false);
+            }
+          },
+          30,
         );
       } finally {
         setIsN8nLoading(false);
       }
     },
-    [],
+    [debouncedSetDisplayedResponse],
   );
 
   return (
@@ -1204,7 +1239,7 @@ export default function Index() {
                   className="btn-70 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isN8nLoading
-                    ? "Connecting to n8n..."
+                    ? "Azura Thinking..."
                     : isGenerating
                       ? "Calculating decision-matrix...."
                       : isTyping
