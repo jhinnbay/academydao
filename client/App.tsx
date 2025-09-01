@@ -120,7 +120,11 @@ function AutoConnect() {
   const { isConnected } = useAccount();
   const { connectAsync, connectors, status } = useConnect();
   useEffect(() => {
-    const shouldAuto = !isConnected && Array.isArray(connectors) && connectors.length > 0 && isFarcasterEnvironment();
+    const shouldAuto =
+      !isConnected &&
+      Array.isArray(connectors) &&
+      connectors.length > 0 &&
+      isFarcasterEnvironment();
     if (!shouldAuto) return;
     // Auto-connect using first available connector (Mini App connector is injected by config)
     connectAsync({ connector: connectors[0] }).catch(() => {});
