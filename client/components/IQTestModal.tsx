@@ -209,7 +209,9 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
                 <div className="text-white font-sans text-lg font-semibold">
                   Score: {score} / {QUESTIONS.length}
                 </div>
-                <p className="text-white/80 text-sm mt-1">{IQ_FEEDBACKS[score] || ""}</p>
+                <p className="text-white/80 text-sm mt-1">
+                  {IQ_FEEDBACKS[score] || ""}
+                </p>
                 <div className="mt-3 flex gap-2 justify-end">
                   <Button
                     onClick={handleShare}
