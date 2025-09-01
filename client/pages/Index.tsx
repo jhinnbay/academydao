@@ -133,8 +133,8 @@ export default function Index() {
   }, [tooltipVisible]);
 
   // responses
-const [daemonResponse, setDaemonResponse] = useState("");
-const [isN8nLoading, setIsN8nLoading] = useState(false);
+  const [daemonResponse, setDaemonResponse] = useState("");
+  const [isN8nLoading, setIsN8nLoading] = useState(false);
 
   // Angels ownership state and fetch logic
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f";
@@ -268,12 +268,12 @@ const [isN8nLoading, setIsN8nLoading] = useState(false);
   );
 
   // Initialize with the response already displayed only on mount if not actively processing
-// modified to include daemonResponse
+  // modified to include daemonResponse
   useEffect(() => {
-  if (!isTyping && !isGenerating && showResponse && daemonResponse) {
-    setDisplayedResponse(daemonResponse);
-  }
-}, [daemonResponse, isTyping, isGenerating, showResponse]);
+    if (!isTyping && !isGenerating && showResponse && daemonResponse) {
+      setDisplayedResponse(daemonResponse);
+    }
+  }, [daemonResponse, isTyping, isGenerating, showResponse]);
 
   // Simple scroll management - only prevent initial jump, allow normal scrolling during typing
   useEffect(() => {
@@ -298,52 +298,56 @@ const [isN8nLoading, setIsN8nLoading] = useState(false);
     setIsModalOpen(false);
   }, []);
 
-const handleSaveRequest = useCallback(async (data: { type: "funding" | "events"; content: string }) => {
-  setSavedRequest(data);
-  SoundEffects.playCompleteSound();
-  setIsN8nLoading(true);
-  
-  try {
-    const webhookUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
-    
-    if (!webhookUrl) {
-      throw new Error('Chat webhook URL is not configured');
-    }
+  const handleSaveRequest = useCallback(
+    async (data: { type: "funding" | "events"; content: string }) => {
+      setSavedRequest(data);
+      SoundEffects.playCompleteSound();
+      setIsN8nLoading(true);
 
-    // Send the request to n8n
-    const response = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify([
-        {
-          "action": "sendMessage",
-          "chatInput": data.content,
-          "type": data.type
+      try {
+        const webhookUrl = import.meta.env.VITE_CHAT_WEBHOOK_URL;
+
+        if (!webhookUrl) {
+          throw new Error("Chat webhook URL is not configured");
         }
-      ]),
-    });
 
-    if (!response.ok) {
-      throw new Error(`n8n request failed with status: ${response.status}`);
-    }
+        // Send the request to n8n
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([
+            {
+              action: "sendMessage",
+              chatInput: data.content,
+              type: data.type,
+            },
+          ]),
+        });
 
-    const n8nData = await response.json();
-    const parsedResponse = JSON.parse(n8nData.text);
+        if (!response.ok) {
+          throw new Error(`n8n request failed with status: ${response.status}`);
+        }
 
-    // Format the n8n response and update the state
-    const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${parsedResponse.decision}\n\nReasoning: ${parsedResponse.reason}`;
-    setDaemonResponse(formattedResponse);
+        const n8nData = await response.json();
+        const parsedResponse = JSON.parse(n8nData.text);
 
-  } catch (err) {
-    console.error('Error sending to n8n:', err);
-    // Fallback error message
-    setDaemonResponse("❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.");
-  } finally {
-    setIsN8nLoading(false);
-  }
-}, []);
+        // Format the n8n response and update the state
+        const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${parsedResponse.decision}\n\nReasoning: ${parsedResponse.reason}`;
+        setDaemonResponse(formattedResponse);
+      } catch (err) {
+        console.error("Error sending to n8n:", err);
+        // Fallback error message
+        setDaemonResponse(
+          "❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.",
+        );
+      } finally {
+        setIsN8nLoading(false);
+      }
+    },
+    [],
+  );
 
   return (
     <div className="min-h-screen bg-black text-white font-cartograph relative">
@@ -750,7 +754,10 @@ const handleSaveRequest = useCallback(async (data: { type: "funding" | "events";
                   color: "#b0b0b0",
                 }}
               >
-                I'm Azura. Welcome to the Academy. We built to accelerate your vision. Call a team meeting — I'll schedule, shape the agenda, and unlock the exact resources you need to win. Let's build what's next.
+                I'm Azura. Welcome to the Academy. We built to accelerate your
+                vision. Call a team meeting — I'll schedule, shape the agenda,
+                and unlock the exact resources you need to win. Let's build
+                what's next.
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
@@ -1191,7 +1198,9 @@ const handleSaveRequest = useCallback(async (data: { type: "funding" | "events";
               <div className="flex justify-center">
                 <button
                   onClick={handleGenerate}
-                  disabled={isGenerating || isTyping || isN8nLoading || !daemonResponse}
+                  disabled={
+                    isGenerating || isTyping || isN8nLoading || !daemonResponse
+                  }
                   className="btn-70 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isN8nLoading
