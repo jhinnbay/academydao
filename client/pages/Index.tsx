@@ -840,7 +840,7 @@ export default function Index() {
                 Ready To Test Your IQ?
               </h1>
               <p
-                className="font-sans"
+                className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
                 style={{
                   fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
                   lineHeight: "1.6",
@@ -848,8 +848,7 @@ export default function Index() {
                   color: "#b0b0b0",
                 }}
               >
-                I'm Azura. Search around and make yourself at home, i'll help
-                you whenever you're ready.
+                {heroText}
               </p>
               <div className="flex flex-col items-start gap-2">
                 <PrivyAuth />
