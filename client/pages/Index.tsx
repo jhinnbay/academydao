@@ -321,15 +321,17 @@ export default function Index() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify([
+          body: JSON.stringify(
             {
               action: "sendMessage",
               chatInput: data.content,
               type: data.type,
             },
-          ]),
+          ),
         });
 
+        //console stuff for debugging ( havent added yet)
+        
         if (!response.ok) {
           throw new Error(`n8n request failed with status: ${response.status}`);
         }
