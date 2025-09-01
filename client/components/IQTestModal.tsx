@@ -86,6 +86,49 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
     );
   }, [answers]);
 
+  const shareText = useMemo(() => {
+    const lines = [
+      `My IQ score was ${score}/${QUESTIONS.length}.`,
+      score === 5
+        ? "In the hush of the halls, the Academy whispers my name. Azura tilts her head."
+        : score >= 3
+          ? "The sigils glow faintly—I am seen. The trial continues under Azura’s gaze."
+          : "I step into the dim corridor. The rites begin. Azura waits, patient and cold.",
+      "#Academy #Azura #IQTrial",
+    ];
+    return lines.join("\n\n");
+  }, [score]);
+
+  const handleShare = async () => {
+    const composeUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}`;
+    try {
+      const anySdk: any = sdk as any;
+      if (anySdk?.actions?.openUrl) {
+        // Try both signatures
+        try {
+          await anySdk.actions.openUrl(composeUrl);
+          return;
+        } catch (_) {
+          await anySdk.actions.openUrl({ url: composeUrl });
+          return;
+        }
+      }
+      if (anySdk?.actions?.openShareSheet) {
+        await anySdk.actions.openShareSheet({ text: shareText });
+        return;
+      }
+    } catch (_) {
+      // fall through to web share
+    }
+    if (navigator.share) {
+      try {
+        await navigator.share({ text: shareText });
+        return;
+      } catch (_) {}
+    }
+    window.open(composeUrl, "_blank");
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -176,17 +219,14 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
                 </p>
                 <div className="mt-3 flex gap-2 justify-end">
                   <Button
-                    onClick={() => {
-                      setAnswers({});
-                      setSubmitted(false);
-                    }}
-                    className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
+                    onClick={handleShare}
+                    className="bg-white text-black hover:bg-gray-200"
                   >
-                    Retake
+                    Share Results
                   </Button>
                   <Button
                     onClick={onClose}
-                    className="bg-white text-black hover:bg-gray-200"
+                    className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
                   >
                     Close
                   </Button>
