@@ -19,6 +19,15 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Farcaster Mini App manifest: redirect to hosted manifest (correct schema)
+  app.get("/.well-known/farcaster.json", (_req, res) => {
+    res.set("Cache-Control", "public, max-age=600, s-maxage=600");
+    res.redirect(
+      302,
+      "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47",
+    );
+  });
+
 // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {
     try {
