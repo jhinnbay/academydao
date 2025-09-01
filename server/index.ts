@@ -28,16 +28,19 @@ export function createServer() {
     );
   });
 
-// posting form data to n8n webhook
+  // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {
     try {
       const { type, content } = req.body;
 
-      const response = await fetch("https://jogibay.app.n8n.cloud/webhook/10207fda-f103-425e-9ab5-59950b3f5f9d/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, content }),
-      });
+      const response = await fetch(
+        "https://jogibay.app.n8n.cloud/webhook/10207fda-f103-425e-9ab5-59950b3f5f9d/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type, content }),
+        },
+      );
 
       const data = await response.json();
       res.json(data);
