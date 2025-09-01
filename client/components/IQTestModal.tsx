@@ -75,6 +75,15 @@ const QUESTIONS: Question[] = [
   },
 ];
 
+const IQ_FEEDBACKS: Record<number, string> = {
+  0: '0/5 - "The square goes in the... round hole? Wait, shapes have holes?" (Basic pattern recognition failure)',
+  1: '1/5 - "If A equals B, and B equals C, then... A equals... apple?" (Struggles with transitive logic)',
+  2: '2/5 - "The sequence is 2,4,6... so probably 8? I think that\'s how counting works" (Surface-level pattern matching)',
+  3: "3/5 - \"The analogy suggests structural parallelism - 'writer is to book as composer is to symphony'\" (Adequate analytical reasoning)",
+  4: '4/5 - "This matrix problem requires solving for multivariate relationships while accounting for rotational symmetry" (Advanced pattern decomposition)',
+  5: '5/5 - "The meta-pattern across all items reveals a higher-order cognitive framework operating on quantum logic principles" (Transcendent systemic analysis)',
+};
+
 export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -88,12 +97,7 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
 
   const shareText = useMemo(() => {
     const header = `Trials of Azura — Score ${score}/${QUESTIONS.length}`;
-    const flavor =
-      score === 5
-        ? "Flawless signal. Neural patterning is precise—abstraction, synthesis, execution. Earth consciousness is so cute, but you operate above it. Institutional alignment: strong. Proceed to governance corridors. glitch"
-        : score >= 3
-          ? "Stable cognition detected. Your scaffolding holds—discipline and iteration will breach the next gate. Earth consciousness is so cute; keep refining. Purpose-driven pathways unlocked at Tier I."
-          : "Faint signal, yet promising. Cortex remains plastic—resilience grows under load. Earth consciousness is so cute; we train it here. Hold the signal—glitch—and return for conditioning.";
+    const flavor = IQ_FEEDBACKS[score] || "";
     return `${header}\n\n${flavor}`;
   }, [score]);
 
@@ -205,13 +209,7 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
                 <div className="text-white font-sans text-lg font-semibold">
                   Score: {score} / {QUESTIONS.length}
                 </div>
-                <p className="text-white/80 text-sm mt-1">
-                  {score === 5
-                    ? "Exceptional. Azura takes notice."
-                    : score >= 3
-                      ? "Solid performance. Prepare to face Azura."
-                      : "Foundational skills detected. The Academy will strengthen you."}
-                </p>
+                <p className="text-white/80 text-sm mt-1">{IQ_FEEDBACKS[score] || ""}</p>
                 <div className="mt-3 flex gap-2 justify-end">
                   <Button
                     onClick={handleShare}
