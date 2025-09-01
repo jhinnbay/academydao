@@ -334,11 +334,38 @@ export default function Index() {
           throw new Error(`n8n request failed with status: ${response.status}`);
         }
 
-        const n8nData = await response.json();
-        const parsedResponse = JSON.parse(n8nData.text);
+        const raw = await response.text();
+        let decision = "";
+        let reason = "";
+        try {
+          const outer = JSON.parse(raw);
+          const extract = (obj: Record<string, any> | null | undefined) => {
+            if (!obj || typeof obj !== "object") return;
+            if (typeof obj.decision === "string") decision = obj.decision;
+            if (typeof obj.reason === "string") reason = obj.reason;
+            if ((!decision || !reason) && typeof obj.text === "string") {
+              try {
+                const inner = JSON.parse(obj.text);
+                if (typeof inner.decision === "string") decision ||= inner.decision;
+                if (typeof inner.reason === "string") reason ||= inner.reason;
+              } catch {
+                const m1 = obj.text.match(/decision\s*[:\-]\s*(.+)/i);
+                const m2 = obj.text.match(/reason(?:ing)?\s*[:\-]\s*([\s\S]+)/i);
+                if (!decision && m1) decision = m1[1].trim();
+                if (!reason && m2) reason = m2[1].trim();
+              }
+            }
+          };
+          extract(outer);
+        } catch {
+          const m1 = raw.match(/decision\s*[:\-]\s*(.+)/i);
+          const m2 = raw.match(/reason(?:ing)?\s*[:\-]\s*([\s\S]+)/i);
+          if (m1) decision = m1[1].trim();
+          if (m2) reason = m2[1].trim();
+        }
 
         // Format the n8n response and start typewriter reveal
-        const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${parsedResponse.decision}\n\nReasoning: ${parsedResponse.reason}`;
+        const formattedResponse = `🔍 Analysis Complete\n\nDecision: ${decision || "N/A"}\n\nReasoning: ${reason || "No reasoning provided."}`;
         setDaemonResponse(formattedResponse);
         setShowResponse(true);
         setIsTyping(true);
@@ -960,7 +987,7 @@ export default function Index() {
                       whiteSpace: "pre",
                     }}
                   >
-                    ˚₊‧꒰ა ☆ ໒꒱ ‧₊˚
+                    ˚₊��꒰ა ☆ ໒꒱ ‧₊˚
                   </span>
                 </span>
                 <span
