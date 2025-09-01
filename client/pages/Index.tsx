@@ -976,21 +976,24 @@ export default function Index() {
                 <span
                   className="font-cartograph"
                   style={{
-                    fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    fontSize: "10px",
+                    lineHeight: "15px",
                     fontWeight: "400",
                     color: "#888888",
+                    display: "block",
                   }}
                 >
-                  Angels&nbsp;
+                  Angels
                   <span
                     style={{
                       fontFamily: "Roboto, sans-serif",
                       fontSize: "10px",
                       textAlign: "center",
                       whiteSpace: "pre",
+                      display: "inline",
                     }}
                   >
-                    ˚₊��꒰ა ☆ ໒꒱ ‧₊˚
+                    {" \u02DA\u208A\u{1F90B}\u20E3?"}
                   </span>
                 </span>
                 <span
