@@ -27,11 +27,16 @@ const queryClient = new QueryClient();
       let url = "";
       try {
         const input = args[0] as any;
-        url = typeof input === "string" ? input : input?.url ?? String(input);
+        url = typeof input === "string" ? input : (input?.url ?? String(input));
       } catch {}
 
-      const isAnalytics = /analytics|plausible|segment|sentry/i.test(url) || /events\.privy\.io/i.test(url);
-      if (isAnalytics && (error?.message === "Failed to fetch" || error?.name === "TypeError")) {
+      const isAnalytics =
+        /analytics|plausible|segment|sentry/i.test(url) ||
+        /events\.privy\.io/i.test(url);
+      if (
+        isAnalytics &&
+        (error?.message === "Failed to fetch" || error?.name === "TypeError")
+      ) {
         console.warn("Suppressed analytics network error:", url);
         return new Response("", { status: 204 });
       }
