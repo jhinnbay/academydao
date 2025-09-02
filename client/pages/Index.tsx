@@ -799,9 +799,8 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-        <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
-          {/* Hero Section */}
-          <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 mb-8 gap-8">
+<div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 relative -top-12">          {/* Hero Section */}
+          <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-8 gap-8">
               <h1
                 className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
                 style={{
@@ -816,7 +815,7 @@ export default function Index() {
               </h1>
               
               {/* Fixed height container for text content only */}
-              <div style={{ height: 'clamp(130px,30vh, 180px)',
+              <div style={{ height: 'clamp(30px,100vh, 100px)',
                   display: 'flex',       // needed for alignItems to work
                   alignItems: 'center',      // centers vertically
               }}>
