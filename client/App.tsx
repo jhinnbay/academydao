@@ -10,7 +10,7 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { FarcasterCompat } from "@/components/FarcasterCompat";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { WagmiProvider, useAccount, useConnect } from "wagmi";
 import { wagmiConfig } from "@/lib/wagmi";
 
@@ -147,11 +147,27 @@ function AutoConnect() {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  useEffect(() => {
+    const t = setTimeout(() => setShowSplash(false), 5000);
+    return () => clearTimeout(t);
+  }, []);
+  const Splash = (
+    <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl mb-4">Trials of Azura</h1>
+        <p className="text-gray-400">Loading application...</p>
+      </div>
+    </div>
+  );
   return (
     <AppErrorBoundary>
-      <FarcasterCompat>
-        <WagmiProvider config={wagmiConfig}>
-          <PrivyProvider
+      {showSplash ? (
+        Splash
+      ) : (
+        <FarcasterCompat>
+          <WagmiProvider config={wagmiConfig}>
+            <PrivyProvider
             appId="cmex4tmt200k5ju0aorv4f5od"
             config={{
               appearance: {
@@ -188,9 +204,10 @@ function App() {
                 </BrowserRouter>
               </TooltipProvider>
             </QueryClientProvider>
-          </PrivyProvider>
-        </WagmiProvider>
-      </FarcasterCompat>
+            </PrivyProvider>
+          </WagmiProvider>
+        </FarcasterCompat>
+      )}
     </AppErrorBoundary>
   );
 }
