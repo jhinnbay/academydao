@@ -824,6 +824,9 @@ export default function Index() {
                   lineHeight: "1.6",
                   fontWeight: "400",
                   color: "#b0b0b0",
+                  minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
+                  display: "flex",
+                  alignItems: "flex-start",
                 }}
               >
                 {heroText}
