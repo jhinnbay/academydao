@@ -1,0 +1,9 @@
+{
+  "accountAssociation": {},
+  "frame": {},
+  "baseBuilder": {
+    "allowedAddresses": [
+      "0x814Ab3ae3A4E07F1E13b39F6cd9aEbD53c48AD79"
+    ]
+  }
+}
