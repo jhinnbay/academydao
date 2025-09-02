@@ -78,19 +78,11 @@ export const SyncAccount: React.FC = () => {
       }}
     >
       Sync Account
-      <svg
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fe9892b664f7a44ba837c5fbd845ed811?format=webp&width=800"
+        alt="Atom Icon"
         className="w-4 h-4"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 12a9 9 0 019-9 9 9 0 018.94 8H19l3 3-3 3h1.94A9 9 0 113 12z"
-        />
-      </svg>
+      />
     </button>
   );
 };
