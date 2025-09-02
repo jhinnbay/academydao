@@ -1142,9 +1142,7 @@ export default function Index() {
               </div>
 
               {/* Connection Status Message */}
-              {ready &&
-                authenticated &&
-                (connectionMessage || isTypingConnection) && (
+              {isConnected && (connectionMessage || isTypingConnection) && (
                   <div
                     className={`font-cartograph leading-[140.628%] mb-10 ${
                       hasAcademicAngel === true
