@@ -616,7 +616,7 @@ export default function Index() {
                                 className="w-full h-full object-cover object-center"
                               />
                             ) : (
-                              <UserAvatar size={8} className="border border-white/20" />
+                              <UserAvatar size="md" className="border border-white/20" />
                             )}
                           </div>
                           <span
@@ -853,7 +853,7 @@ export default function Index() {
                     >
                       Connected (
                       <span className="inline-flex items-center">
-                        <UserAvatar size={3} />
+                        <UserAvatar size="sm" />
                         <Name
                           address={wagmiAddress}
                           chain={baseChain}
@@ -1143,7 +1143,7 @@ export default function Index() {
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
                   <span className="inline-flex items-center">
-                    <UserAvatar size={4} />
+                    <UserAvatar size="sm" />
                     <Name
                       address={wagmiAddress}
                       chain={baseChain}
