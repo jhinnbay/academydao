@@ -178,11 +178,11 @@ export default function Index() {
 
     const fetchBalance = async () => {
       try {
-        if (!(ready && authenticated && user?.wallet?.address)) {
+        if (!(isConnected && wagmiAddress)) {
           setAngelsOwned(null);
           return;
         }
-        const address = user.wallet.address;
+        const address = wagmiAddress;
         const selector = "70a08231"; // balanceOf(address)
         const addr = address.replace(/^0x/, "").toLowerCase().padStart(64, "0");
         const data = `0x${selector}${addr}`;
