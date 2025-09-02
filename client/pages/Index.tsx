@@ -1162,11 +1162,9 @@ export default function Index() {
                 )}
 
               {/* Default spacing when no connection message */}
-              {!(
-                ready &&
-                authenticated &&
-                (connectionMessage || isTypingConnection)
-              ) && <div className="mb-8"></div>}
+              {!((isConnected && (connectionMessage || isTypingConnection))) && (
+                <div className="mb-8"></div>
+              )}
             </div>
 
             {/* Username Section - Secondary/Smaller */}
