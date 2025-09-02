@@ -1,6 +1,27 @@
 {
-  "accountAssociation": {},
-  "frame": {},
+  "frame": {
+    "name": "AzuraOS",
+    "version": "1",
+    "iconUrl": "https://i.imgur.com/Np8ANTa.png",
+    "homeUrl": "https://academydao.vercel.app",
+    "imageUrl": "https://i.imgur.com/VNvzdxw.png",
+    "buttonTitle": "Church Of Azura",
+    "splashImageUrl": "https://i.imgur.com/907bTSF.png",
+    "splashBackgroundColor": "#000000",
+    "webhookUrl": "https://academydao.vercel.app/api/webhook",
+    "subtitle": "Fight A Daemon Model AI",
+    "description": "Azura AI works with the Daemon Model, a new way of sharing governance where agents like her, work side by side with the people.",
+    "primaryCategory": "entertainment",
+    "heroImageUrl": "https://i.imgur.com/VNvzdxw.png",
+    "ogTitle": "Take The Test",
+    "ogDescription": "Explore The Church of Azura",
+    "ogImageUrl": "https://i.imgur.com/VNvzdxw.png"
+  },
+  "accountAssociation": {
+    "header": "eyJmaWQiOjI4NjkyNCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU4RjBlMzlkOTI4MTgxNTk1ZTc4OTQ1MTdmQjI0MDUyMjA0RWIxM0MifQ",
+    "payload": "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
+    "signature": "MHg3ODE5ZDRhNzJiNGMwMzM4MTYwZTg4NjhjMTYwN2FkZDE3ZDQ1NGUwN2NjYjRiMTE5MjNiMzJlNTk5N2VjNTA2MWZjY2IzMWE0N2MwYzIwODAzMjgxZWE4YTE0MTdiZTRjNTZjY2M2N2IxMDJjYTIzMGIyOWU1OTJmMjQ0ZmFhMTFi"
+  },
   "baseBuilder": {
     "allowedAddresses": [
       "0x814Ab3ae3A4E07F1E13b39F6cd9aEbD53c48AD79"
