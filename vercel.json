@@ -2,5 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
   "redirects": [],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/.well-known/farcaster.json", "destination": "/well-known/farcaster.json" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
