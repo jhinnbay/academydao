@@ -57,11 +57,12 @@ export const SyncAccount: React.FC = () => {
               {displayName || username}
             </span>
           ) : (
-            <Name
-              address={address}
-              chain={baseChain}
-              className="text-white/90 max-w-[160px] truncate"
-            />
+            <span className="text-white/90 max-w-[160px] truncate inline-block" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
+              <Name
+                address={address}
+                chain={baseChain}
+              />
+            </span>
           )}
         </span>
         <span className="sr-only">Disconnect</span>
