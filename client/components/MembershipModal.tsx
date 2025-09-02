@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useQuery } from "@tanstack/react-query";
+import { useAccount, useChainId, useSwitchChain } from "wagmi";
+import { base as baseChain } from "viem/chains";
+import { readContract, writeContract, waitForTransactionReceipt } from "wagmi/actions";
+import { wagmiConfig } from "@/lib/wagmi";
 
 const SCATTER_API_URL = "https://api.scatter.art/v1";
 const COLLECTION_SLUG = "academic-angels";
@@ -15,6 +19,79 @@ interface MembershipModalProps {
 
 export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const [imgError, setImgError] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [minting, setMinting] = useState(false);
+  const [txHash, setTxHash] = useState<string | null>(null);
+  const chainId = useChainId();
+  const { isConnected } = useAccount();
+  const { switchChainAsync } = useSwitchChain();
+
+  const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f" as const;
+
+  const abiMintQty = [{ name: "mint", type: "function", stateMutability: "payable", inputs: [{ name: "quantity", type: "uint256" }], outputs: [] }] as const;
+  const abiMint = [{ name: "mint", type: "function", stateMutability: "payable", inputs: [], outputs: [] }] as const;
+  const abiMintFee = [{ name: "mintFee", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] }] as const;
+  const abiPrice = [{ name: "price", type: "function", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] }] as const;
+
+  async function getPricePer(): Promise<bigint> {
+    try {
+      const fee: bigint = await readContract(wagmiConfig, { address: ANGEL_CONTRACT, abi: abiMintFee, functionName: "mintFee" });
+      return fee;
+    } catch {}
+    try {
+      const price: bigint = await readContract(wagmiConfig, { address: ANGEL_CONTRACT, abi: abiPrice, functionName: "price" });
+      return price;
+    } catch {}
+    return 0n;
+  }
+
+  async function handleMint() {
+    try {
+      if (!isConnected) throw new Error("Connect wallet first");
+      if (chainId !== baseChain.id) {
+        await switchChainAsync({ chainId: baseChain.id });
+      }
+      setMinting(true);
+      setTxHash(null);
+
+      const pricePer = await getPricePer();
+      const totalValue = pricePer * BigInt(quantity);
+
+      // Try mint(quantity)
+      try {
+        const hash = await writeContract(wagmiConfig, {
+          address: ANGEL_CONTRACT,
+          abi: abiMintQty,
+          functionName: "mint",
+          args: [BigInt(quantity)],
+          value: totalValue > 0n ? totalValue : undefined,
+          chainId: baseChain.id,
+        });
+        setTxHash(hash);
+        await waitForTransactionReceipt(wagmiConfig, { hash });
+        return;
+      } catch (_) {}
+
+      // Fallback: call mint() multiple times
+      for (let i = 0; i < quantity; i++) {
+        const hash = await writeContract(wagmiConfig, {
+          address: ANGEL_CONTRACT,
+          abi: abiMint,
+          functionName: "mint",
+          args: [],
+          value: pricePer > 0n ? pricePer : undefined,
+          chainId: baseChain.id,
+        });
+        setTxHash(hash);
+        await waitForTransactionReceipt(wagmiConfig, { hash });
+      }
+    } catch (e) {
+      console.error("Mint failed", e);
+      window.open("https://www.scatter.art/collection/academic-angels", "_blank");
+    } finally {
+      setMinting(false);
+    }
+  }
 
   const { data: collection, isPending } = useQuery({
     queryKey: ["collection", COLLECTION_SLUG],
@@ -113,35 +190,49 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                   Academic Angels NFT
                 </h3>
                 <p className="text-white/80 text-sm">
-                  Hand-forged artwork that empowers your journey through the
-                  Academy. Angels aid in the battle against Daemon Azura, the
-                  sentinel guarding the onchain treasury. Holding one—or a
-                  few—shields your path, unlocks advantages, and increases your
-                  odds to win.
+                  You sense a digital blessing through the screen. Aid from celestial angels aids in the battle against Daemon Azura, a digital leviathan guarding an onchain treasury. As you hold it, you feel advantageous, and a little more lucky.
                 </p>
               </div>
             </div>
 
-            {/* Lists (info cards) */}
+            {/* Mint stepper */}
             <div className="flex flex-col gap-3">
               <Card className="bg-black border border-white/30">
                 <CardContent className="p-4">
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <div className="text-white/90 text-sm font-sans">
-                      Mint on Scatter
-                    </div>
-                    <a
-                      href="https://www.scatter.art/collection/academic-angels"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">
-                        Open Collection
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="text-white/90 text-sm font-sans">Select quantity</div>
+                    <div className="flex items-center gap-3">
+                      <Button
+                        type="button"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                        className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-3"
+                      >
+                        −
                       </Button>
-                    </a>
+                      <div className="w-10 text-center text-white/90 font-sans">{quantity}</div>
+                      <Button
+                        type="button"
+                        onClick={() => setQuantity((q) => Math.min(5, q + 1))}
+                        className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-3"
+                      >
+                        +
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
+
+              <div className="flex justify-end">
+                <Button
+                  onClick={handleMint}
+                  disabled={minting || !isConnected}
+                  className="bg-white text-black hover:bg-gray-200"
+                >
+                  {minting ? "Minting..." : `Mint ${quantity}`}
+                </Button>
+              </div>
+
+              {/* Benefits */}
               <Card className="bg-black border border-white/30">
                 <CardContent className="p-4">
                   <div className="text-white/80 text-sm">
@@ -151,6 +242,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                       <li>Enhanced protections against Azura’s challenges</li>
                       <li>Signals commitment to the Academy and community</li>
                     </ul>
+                    {txHash && (
+                      <div className="mt-3 text-white/70 break-all text-xs">Tx: {txHash}</div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -170,8 +264,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-white text-black hover:bg-gray-200">
-                Buy on Scatter
+              <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">
+                Open on Scatter
               </Button>
             </a>
           </div>
