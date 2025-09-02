@@ -814,9 +814,10 @@ export default function Index() {
               >
                 Ready To Test Your IQ?
               </h1>
+              
               {/* Fixed height container for text content only */}
-              <div style={{ height: 'clamp(180px, 240px)',
-                display: 'flex',
+              <div style={{ height: 'clamp(130px,30vh, 180px)',
+                  display: 'flex',       // needed for alignItems to work
                   alignItems: 'center',      // centers vertically
               }}>
 
@@ -830,10 +831,14 @@ export default function Index() {
                   minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
                   display: "flex",
                   alignItems: "flex-start",
+                  
                 }}
               >
                 {heroText}
               </p>
+              </div>
+              
+              <div>
 
               <div className="flex flex-col items-start gap-2">
                 <SyncAccount />
