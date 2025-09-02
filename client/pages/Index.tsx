@@ -8,6 +8,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { useAccount } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import {
@@ -615,10 +616,7 @@ export default function Index() {
                                 className="w-full h-full object-cover object-center"
                               />
                             ) : (
-                              <Avatar
-                                address={wagmiAddress}
-                                chain={baseChain}
-                              />
+                              <UserAvatar size={8} className="border border-white/20" />
                             )}
                           </div>
                           <span
@@ -851,6 +849,7 @@ export default function Index() {
                     >
                       Connected (
                       <span className="inline-flex items-center">
+                        <UserAvatar size={3} />
                         <Name
                           address={wagmiAddress}
                           chain={baseChain}
@@ -1140,6 +1139,7 @@ export default function Index() {
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
                   <span className="inline-flex items-center">
+                    <UserAvatar size={4} />
                     <Name
                       address={wagmiAddress}
                       chain={baseChain}
