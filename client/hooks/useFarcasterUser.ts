@@ -23,7 +23,7 @@ export function useFarcasterUser() {
     const privyFc: any =
       (privyUser as any)?.farcaster ||
       (privyUser as any)?.linkedAccounts?.find?.(
-        (a: any) => a?.type === "farcaster"
+        (a: any) => a?.type === "farcaster",
       ) ||
       null;
 
