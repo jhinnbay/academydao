@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -133,9 +132,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             <button
               onClick={onClose}
               aria-label="Close"
-              className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
+              className="absolute top-4 right-4 px-3 py-1 text-white/80 border border-white/30 rounded hover:bg-white/10 transition-colors"
             >
-              <X size={18} />
+              Close
             </button>
             <div className="text-center">
               <h2 className="text-white font-sans font-bold text-xl">
@@ -190,7 +189,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                   Academic Angels NFT
                 </h3>
                 <p className="text-white/80 text-sm">
-                  You sense a digital blessing through the screen. Aid from celestial angels aids in the battle against Daemon Azura, a digital leviathan guarding an onchain treasury. As you hold it, you feel advantageous, and a little more lucky.
+                  You sense a digital blessing through the screen. Aid from celestial angels cover you in a new light, a scream from the digital leviathan, Azura guards an onchain treasury. As you hold your angel, you feel much more advantageous, and a little more lucky.
                 </p>
               </div>
             </div>
@@ -238,9 +237,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                   <div className="text-white/80 text-sm">
                     Benefits:
                     <ul className="list-disc pl-5 mt-2 space-y-1">
-                      <li>Priority access and reduced fees</li>
-                      <li>Enhanced protections against Azura’s challenges</li>
-                      <li>Signals commitment to the Academy and community</li>
+                      <li>Enhanced protection</li>
+                      <li>Luck against Azura's Challenges</li>
+                      <li>Access to the celestial Academy</li>
                     </ul>
                     {txHash && (
                       <div className="mt-3 text-white/70 break-all text-xs">Tx: {txHash}</div>
@@ -253,19 +252,13 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
           {/* Footer */}
           <div className="p-4 border-t border-white/20 bg-black/70 flex justify-end gap-2">
-            <Button
-              onClick={onClose}
-              className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
-            >
-              Close
-            </Button>
             <a
-              href="https://www.scatter.art/collection/academic-angels"
+              href="https://opensea.io/collection/academic-angels/overview"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">
-                Open on Scatter
+                View OpenSea Collection
               </Button>
             </a>
           </div>
