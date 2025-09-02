@@ -9,6 +9,7 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { useAccount } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
+import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -16,6 +17,7 @@ import {
 
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
+  const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -605,8 +607,12 @@ export default function Index() {
                     if (isConnected && wagmiAddress) {
                       return (
                         <>
-                          <div className="w-8 h-8 rounded-full overflow-hidden">
-                            <Avatar address={wagmiAddress} chain={baseChain} />
+                          <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10">
+                            {isFarcaster && pfpUrl ? (
+                              <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover object-center" />
+                            ) : (
+                              <Avatar address={wagmiAddress} chain={baseChain} />
+                            )}
                           </div>
                           <span
                             className="hidden sm:block font-sans text-white/90"
@@ -615,7 +621,11 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            <Name address={wagmiAddress} chain={baseChain} className="text-white" />
+                            {isFarcaster && (displayName || username) ? (
+                              <span className="text-white">{displayName || username}</span>
+                            ) : (
+                              <Name address={wagmiAddress} chain={baseChain} className="text-white" />
+                            )}
                           </span>
                         </>
                       );
