@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
+import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 
 function isFarcasterEnvironment() {
   if (typeof window === "undefined") return false;
@@ -12,6 +13,7 @@ function isFarcasterEnvironment() {
 
 export const SyncAccount: React.FC = () => {
   const { address, isConnected, status } = useAccount();
+  const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const { connectAsync, connectors, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
@@ -39,10 +41,18 @@ export const SyncAccount: React.FC = () => {
         }}
       >
         <span className="inline-flex items-center gap-2">
-          <span className="w-5 h-5 rounded-full overflow-hidden">
-            <Avatar address={address} chain={baseChain} />
+          <span className="w-5 h-5 rounded-full overflow-hidden bg-white/10">
+            {isFarcaster && pfpUrl ? (
+              <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover object-center" />
+            ) : (
+              <Avatar address={address} chain={baseChain} />
+            )}
           </span>
-          <Name address={address} chain={baseChain} className="text-white/90 max-w-[140px] truncate" />
+          {isFarcaster && (displayName || username) ? (
+            <span className="text-white/90 max-w-[160px] truncate">{displayName || username}</span>
+          ) : (
+            <Name address={address} chain={baseChain} className="text-white/90 max-w-[160px] truncate" />
+          )}
         </span>
         <span className="sr-only">Disconnect</span>
       </button>
