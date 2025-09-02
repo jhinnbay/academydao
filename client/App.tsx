@@ -148,66 +148,73 @@ function AutoConnect() {
 }
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [splashVisible, setSplashVisible] = useState(true);
+  const [splashFade, setSplashFade] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setShowSplash(false), 5000);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setSplashFade(true), 3000);
+    const t2 = setTimeout(() => setSplashVisible(false), 3500);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
   }, []);
-  const Splash = (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-2xl mb-4">Trials of Azura</h1>
-        <p className="text-gray-400">Loading application...</p>
-      </div>
-    </div>
-  );
+
   return (
     <AppErrorBoundary>
-      {showSplash ? (
-        Splash
-      ) : (
-        <FarcasterCompat>
-          <WagmiProvider config={wagmiConfig}>
-            <PrivyProvider
-              appId="cmex4tmt200k5ju0aorv4f5od"
-              config={{
-                appearance: {
-                  theme: "dark",
-                  accentColor: "#06b6d4",
-                  logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
-                },
-                loginMethods: ["wallet", "email", "sms", "farcaster"],
-                embeddedWallets: {
-                  createOnLogin: "users-without-wallets",
-                },
-                farcaster: {
-                  enabled: true,
-                },
-                // Disable all analytics and external calls
-                clientAnalyticsEnabled: false,
-                serverAnalyticsEnabled: false,
-                mfaEnabled: false,
-                experimental: {
-                  noConnectionModal: true,
-                },
-              }}
-            >
-              <QueryClientProvider client={queryClient}>
-                <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
-                  <AutoConnect />
-                  <BrowserRouter>
-                    <Routes>
-                      <Route path="/" element={<Index />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </BrowserRouter>
-                </TooltipProvider>
-              </QueryClientProvider>
-            </PrivyProvider>
-          </WagmiProvider>
-        </FarcasterCompat>
+      <FarcasterCompat>
+        <WagmiProvider config={wagmiConfig}>
+          <PrivyProvider
+            appId="cmex4tmt200k5ju0aorv4f5od"
+            config={{
+              appearance: {
+                theme: "dark",
+                accentColor: "#06b6d4",
+                logo: "https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800",
+              },
+              loginMethods: ["wallet", "email", "sms", "farcaster"],
+              embeddedWallets: {
+                createOnLogin: "users-without-wallets",
+              },
+              farcaster: {
+                enabled: true,
+              },
+              // Disable all analytics and external calls
+              clientAnalyticsEnabled: false,
+              serverAnalyticsEnabled: false,
+              mfaEnabled: false,
+              experimental: {
+                noConnectionModal: true,
+              },
+            }}
+          >
+            <QueryClientProvider client={queryClient}>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <AutoConnect />
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </TooltipProvider>
+            </QueryClientProvider>
+          </PrivyProvider>
+        </WagmiProvider>
+      </FarcasterCompat>
+
+      {splashVisible && (
+        <div
+          className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black text-white transition-opacity duration-500 ${
+            splashFade ? "opacity-0" : "opacity-100"
+          }`}
+        >
+          <div className="text-center">
+            <h1 className="text-2xl mb-4">Trials of Azura</h1>
+            <p className="text-gray-400">Loading application...</p>
+          </div>
+        </div>
       )}
     </AppErrorBoundary>
   );
