@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useMiniAppContext } from "@farcaster/miniapp-sdk";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 function isFarcasterEnvironment() {
   if (typeof window === "undefined") return false;
@@ -9,15 +9,16 @@ function isFarcasterEnvironment() {
 }
 
 export function useFarcasterUser() {
-  const { context } = useMiniAppContext?.() ?? ({} as any);
   const data = useMemo(() => {
     const fc = isFarcasterEnvironment();
+    const anySdk: any = sdk as any;
+    const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
     const user = (context as any)?.user ?? (context as any)?.viewer ?? null;
     const profile = user || {};
     const pfpUrl: string | undefined = profile.pfpUrl || profile.pfp || profile.profileImage || undefined;
     const displayName: string | undefined = profile.displayName || profile.name || undefined;
     const username: string | undefined = profile.username || profile.handle || undefined;
     return { isFarcaster: fc, pfpUrl, displayName, username };
-  }, [context]);
+  }, []);
   return data;
 }
