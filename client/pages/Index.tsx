@@ -855,7 +855,7 @@ export default function Index() {
                 {heroText}
               </p>
               <div className="flex flex-col items-start gap-2">
-                <PrivyAuth />
+                <SyncAccount />
                 {ready &&
                   authenticated &&
                   user &&
