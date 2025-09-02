@@ -9,12 +9,6 @@
   node_bundler = "esbuild"
   
 [[redirects]]
-  from = "/.well-known/farcaster.json"
-  to = "https://api.farcaster.xyz/miniapps/hosted-manifest/0198f949-5639-ef75-2699-e9c5cbeffb47"
-  status = 307
-  force = true
-
-[[redirects]]
   force = true
   from = "/api/*"
   status = 200
