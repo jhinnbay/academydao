@@ -615,7 +615,7 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            <Name address={wagmiAddress} chain={baseChain} />
+                            <Name address={wagmiAddress} chain={baseChain} className="text-white" />
                           </span>
                         </>
                       );
@@ -819,7 +819,7 @@ export default function Index() {
                     >
                       Connected (
                       <span className="inline-flex items-center">
-                        <Name address={wagmiAddress} chain={baseChain} />
+                        <Name address={wagmiAddress} chain={baseChain} className="text-white/90" />
                       </span>
                       )
                     </span>
@@ -1104,7 +1104,7 @@ export default function Index() {
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
                   <span className="inline-flex items-center">
-                    <Name address={wagmiAddress} chain={baseChain} />
+                    <Name address={wagmiAddress} chain={baseChain} className="text-white/80" />
                   </span>
                 ) : (
                   "Not Connected"
