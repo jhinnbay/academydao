@@ -600,46 +600,7 @@ export default function Index() {
                   className="flex items-center gap-3 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-2 hover:border-white/40 transition-colors duration-300 cursor-pointer"
                 >
                   {(() => {
-                    // Get Farcaster account if available
-                    const farcasterAccount = user?.linkedAccounts?.find(
-                      (account) => account.type === "farcaster",
-                    );
-
-                    if (ready && authenticated && farcasterAccount) {
-                      // Show Farcaster profile
-                      return (
-                        <>
-                          <div className="w-8 h-8 rounded-full overflow-hidden">
-                            <img
-                              src={
-                                farcasterAccount.pfp ||
-                                "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC"
-                              }
-                              alt="Farcaster Profile"
-                              className="w-full h-full object-cover"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src =
-                                  "https://via.placeholder.com/32x32/6366f1/ffffff?text=FC";
-                              }}
-                            />
-                          </div>
-                          <span
-                            className="hidden sm:block font-sans text-white/90"
-                            style={{
-                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                              fontWeight: "500",
-                            }}
-                          >
-                            @{farcasterAccount.username || "farcaster"}
-                          </span>
-                        </>
-                      );
-                    } else if (
-                      ready &&
-                      authenticated &&
-                      user?.wallet?.address
-                    ) {
-                      // Show wallet address
+                    if (isConnected && wagmiAddress) {
                       return (
                         <>
                           <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
@@ -662,39 +623,37 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            {`${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}`}
-                          </span>
-                        </>
-                      );
-                    } else {
-                      // Show default state
-                      return (
-                        <>
-                          <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
-                            <svg
-                              className="w-4 h-4 text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                          <span
-                            className="hidden sm:block font-sans text-white/90"
-                            style={{
-                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Sync Account
+                            {`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`}
                           </span>
                         </>
                       );
                     }
+                    return (
+                      <>
+                        <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
+                          <svg
+                            className="w-4 h-4 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <span
+                          className="hidden sm:block font-sans text-white/90"
+                          style={{
+                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                            fontWeight: "500",
+                          }}
+                        >
+                          Sync Account
+                        </span>
+                      </>
+                    );
                   })()}
                 </div>
 
