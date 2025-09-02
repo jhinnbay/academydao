@@ -3,7 +3,10 @@
   "outputDirectory": "dist/spa",
   "redirects": [],
   "rewrites": [
-    { "source": "/.well-known/farcaster.json", "destination": "/well-known/farcaster.json" },
+    {
+      "source": "/.well-known/farcaster.json",
+      "destination": "/well-known/farcaster.json"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
