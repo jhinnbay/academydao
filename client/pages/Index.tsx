@@ -8,6 +8,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { useAccount } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import {
@@ -615,10 +616,7 @@ export default function Index() {
                                 className="w-full h-full object-cover object-center"
                               />
                             ) : (
-                              <Avatar
-                                address={wagmiAddress}
-                                chain={baseChain}
-                              />
+                              <UserAvatar size={8} className="border border-white/20" />
                             )}
                           </div>
                           <span
@@ -804,7 +802,6 @@ export default function Index() {
         <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 mb-8 gap-8">
-            <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
               <h1
                 className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
                 style={{
@@ -817,6 +814,13 @@ export default function Index() {
               >
                 Ready To Test Your IQ?
               </h1>
+              
+              {/* Fixed height container for text content only */}
+              <div style={{ height: 'clamp(130px,30vh, 180px)',
+                  display: 'flex',       // needed for alignItems to work
+                  alignItems: 'center',      // centers vertically
+              }}>
+
               <p
                 className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
                 style={{
@@ -827,10 +831,15 @@ export default function Index() {
                   minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
                   display: "flex",
                   alignItems: "flex-start",
+                  
                 }}
               >
                 {heroText}
               </p>
+              </div>
+              
+              <div>
+
               <div className="flex flex-col items-start gap-2">
                 <SyncAccount />
                 {isConnected && wagmiAddress && (
@@ -845,6 +854,7 @@ export default function Index() {
                     >
                       Connected (
                       <span className="inline-flex items-center">
+                        <UserAvatar size={3} />
                         <Name
                           address={wagmiAddress}
                           chain={baseChain}
@@ -1134,6 +1144,7 @@ export default function Index() {
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
                   <span className="inline-flex items-center">
+                    <UserAvatar size={4} />
                     <Name
                       address={wagmiAddress}
                       chain={baseChain}
