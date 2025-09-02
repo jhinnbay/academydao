@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { base as baseChain } from "viem/chains";
 
 function isFarcasterEnvironment() {
   if (typeof window === "undefined") return false;
@@ -24,7 +26,7 @@ export const SyncAccount: React.FC = () => {
     return (
       <button
         onClick={() => disconnect()}
-        className="flex justify-center items-center border border-white/20 bg-gradient-to-b from-red-400/10 to-red-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+        className="flex items-center gap-2 border border-white/20 bg-gradient-to-b from-red-400/10 to-red-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
         style={{
           paddingTop: "8px",
           paddingBottom: "8px",
@@ -36,7 +38,13 @@ export const SyncAccount: React.FC = () => {
           color: "#ffffff",
         }}
       >
-        Disconnect {`${address.slice(0, 6)}...${address.slice(-4)}`}
+        <span className="inline-flex items-center gap-2">
+          <span className="w-5 h-5 rounded-full overflow-hidden">
+            <Avatar address={address} chain={baseChain} />
+          </span>
+          <Name address={address} chain={baseChain} className="text-white/90 max-w-[140px] truncate" />
+        </span>
+        <span className="sr-only">Disconnect</span>
       </button>
     );
   }
