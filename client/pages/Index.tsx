@@ -856,50 +856,20 @@ export default function Index() {
               </p>
               <div className="flex flex-col items-start gap-2">
                 <SyncAccount />
-                {ready &&
-                  authenticated &&
-                  user &&
-                  (() => {
-                    // Get Farcaster account if available
-                    const farcasterAccount = user.linkedAccounts?.find(
-                      (account) => account.type === "farcaster",
-                    );
-
-                    if (farcasterAccount) {
-                      return (
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                          <span
-                            className="font-sans text-purple-300"
-                            style={{
-                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Connected via Farcaster (@
-                            {farcasterAccount.username || "farcaster"})
-                          </span>
-                        </div>
-                      );
-                    } else if (user.wallet?.address) {
-                      return (
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                          <span
-                            className="font-sans text-green-300"
-                            style={{
-                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Connected{" "}
-                            {`(${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)})`}
-                          </span>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })()}
+                {isConnected && wagmiAddress && (
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span
+                      className="font-sans text-green-300"
+                      style={{
+                        fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Connected ({`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`})
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
