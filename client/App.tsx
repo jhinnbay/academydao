@@ -11,7 +11,7 @@ import { PrivyProvider } from "@privy-io/react-auth";
 import { FarcasterCompat } from "@/components/FarcasterCompat";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { WagmiProvider, useAccount, useConnect } from "wagmi";
 import { wagmiConfig } from "@/lib/wagmi";
 
@@ -148,16 +148,6 @@ function AutoConnect() {
 }
 
 function App() {
-  const [splashVisible, setSplashVisible] = useState(true);
-  const [splashFade, setSplashFade] = useState(false);
-  useEffect(() => {
-    const t1 = setTimeout(() => setSplashFade(true), 3000);
-    const t2 = setTimeout(() => setSplashVisible(false), 3500);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, []);
 
   return (
     <AppErrorBoundary>
@@ -203,19 +193,6 @@ function App() {
           </PrivyProvider>
         </WagmiProvider>
       </FarcasterCompat>
-
-      {splashVisible && (
-        <div
-          className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black text-white transition-opacity duration-500 ${
-            splashFade ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <div className="text-center">
-            <h1 className="text-2xl mb-4">Trials of Azura</h1>
-            <p className="text-gray-400">Loading application...</p>
-          </div>
-        </div>
-      )}
     </AppErrorBoundary>
   );
 }
