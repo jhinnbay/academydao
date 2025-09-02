@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Play, Pause, SkipBack, SkipForward, Volume2 } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 
 const RetroMusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -149,19 +149,6 @@ const RetroMusicPlayer = () => {
             </button>
           </div>
 
-          {/* Volume */}
-          <div className="flex items-center space-x-2">
-            <Volume2 size={12} className="text-white/70" />
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={volume}
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="w-16 accent-white bg-white/20 rounded-full"
-            />
-          </div>
         </div>
       </div>
 

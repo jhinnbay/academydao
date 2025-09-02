@@ -532,3 +532,21 @@ body {
 .glitch-text {
   animation: glitch-text-shift 0.8s linear both;
 }
+
+/* OnchainKit Name component overrides for light text on dark background */
+[class*="ock-text"],
+[class*="ock-name"],
+[class*="ock-identity"] {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Ensure Name component text is always light */
+span:has(> [class*="ock-"]) {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Override any inline styles from OnchainKit components */
+[class*="ock-"] span,
+[class*="ock-"] div {
+  color: inherit !important;
+}
