@@ -221,11 +221,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 </CardContent>
               </Card>
 
-              <div className="flex justify-end">
+              <div className="flex">
                 <Button
                   onClick={handleMint}
                   disabled={minting || !isConnected}
-                  className="bg-white text-black hover:bg-gray-200"
+                  className="w-full bg-white text-black hover:bg-gray-200"
                 >
                   {minting ? "Minting..." : `Mint ${quantity}`}
                 </Button>
@@ -251,13 +251,14 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
           </div>
 
           {/* Footer */}
-          <div className="p-4 border-t border-white/20 bg-black/70 flex justify-end gap-2">
+          <div className="p-4 border-t border-white/20 bg-black/70">
             <a
+              className="block w-full"
               href="https://opensea.io/collection/academic-angels/overview"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-white/10 hover:bg-white/20 border border-white/30 text-white">
+              <Button className="w-full bg-white/10 hover:bg-white/20 border border-white/30 text-white">
                 View OpenSea Collection
               </Button>
             </a>
