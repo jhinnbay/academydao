@@ -804,7 +804,6 @@ export default function Index() {
         <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-center border-b-2 border-white/20 mb-8 gap-8">
-            <div className="flex flex-col items-start gap-6 flex-1 max-w-4xl">
               <h1
                 className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
                 style={{
@@ -817,6 +816,12 @@ export default function Index() {
               >
                 Ready To Test Your IQ?
               </h1>
+              {/* Fixed height container for text content only */}
+              <div style={{ height: 'clamp(180px, 240px)',
+                display: 'flex',
+                  alignItems: 'center',      // centers vertically
+              }}>
+
               <p
                 className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
                 style={{
@@ -831,6 +836,7 @@ export default function Index() {
               >
                 {heroText}
               </p>
+
               <div className="flex flex-col items-start gap-2">
                 <SyncAccount />
                 {isConnected && wagmiAddress && (
