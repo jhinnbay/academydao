@@ -7,6 +7,8 @@ import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { useAccount } from "wagmi";
+import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { base as baseChain } from "viem/chains";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -603,18 +605,8 @@ export default function Index() {
                     if (isConnected && wagmiAddress) {
                       return (
                         <>
-                          <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
-                            <svg
-                              className="w-4 h-4 text-white"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                          <div className="w-8 h-8 rounded-full overflow-hidden">
+                            <Avatar address={wagmiAddress} chain={baseChain} />
                           </div>
                           <span
                             className="hidden sm:block font-sans text-white/90"
@@ -623,7 +615,7 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            {`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`}
+                            <Name address={wagmiAddress} chain={baseChain} />
                           </span>
                         </>
                       );
@@ -826,7 +818,9 @@ export default function Index() {
                       }}
                     >
                       Connected (
-                      {`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`}
+                      <span className="inline-flex items-center">
+                        <Name address={wagmiAddress} chain={baseChain} />
+                      </span>
                       )
                     </span>
                   </div>
@@ -1108,9 +1102,13 @@ export default function Index() {
                 }}
               >
                 {">"} Username:{" "}
-                {isConnected && wagmiAddress
-                  ? `${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`
-                  : "Not Connected"}
+                {isConnected && wagmiAddress ? (
+                  <span className="inline-flex items-center">
+                    <Name address={wagmiAddress} chain={baseChain} />
+                  </span>
+                ) : (
+                  "Not Connected"
+                )}
               </div>
             </div>
 
