@@ -852,13 +852,8 @@ export default function Index() {
                       }}
                     >
                       Connected (
-                      <span className="inline-flex items-center">
-                        <UserAvatar size="sm" />
-                        <Name
-                          address={wagmiAddress}
-                          chain={baseChain}
-                          className="text-white/90"
-                        />
+                      <span className="text-white/90">
+                        {wagmiAddress?.slice(0, 6)}...{wagmiAddress?.slice(-4)}
                       </span>
                       )
                     </span>
@@ -1142,13 +1137,8 @@ export default function Index() {
               >
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
-                  <span className="inline-flex items-center">
-                    <UserAvatar size="sm" />
-                    <Name
-                      address={wagmiAddress}
-                      chain={baseChain}
-                      className="text-white/80"
-                    />
+                  <span className="text-white/80">
+                    {wagmiAddress?.slice(0, 6)}...{wagmiAddress?.slice(-4)}
                   </span>
                 ) : (
                   "Not Connected"
