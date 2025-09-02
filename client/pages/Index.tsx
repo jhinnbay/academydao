@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
-import { PrivyAuth } from "@/components/PrivyAuth";
+import { SyncAccount } from "@/components/SyncAccount";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
