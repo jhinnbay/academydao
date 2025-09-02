@@ -221,7 +221,7 @@ export default function Index() {
     return () => {
       cancelled = true;
     };
-  }, [ready, authenticated, user?.wallet?.address]);
+  }, [isConnected, wagmiAddress]);
 
   const handleGenerate = useCallback(
     (e?: React.MouseEvent) => {
