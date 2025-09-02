@@ -1181,8 +1181,8 @@ export default function Index() {
                 }}
               >
                 {">"} Username:{" "}
-                {ready && authenticated && user?.wallet?.address
-                  ? `${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}`
+                {isConnected && wagmiAddress
+                  ? `${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`
                   : "Not Connected"}
               </div>
             </div>
