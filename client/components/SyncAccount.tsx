@@ -44,7 +44,9 @@ export const SyncAccount: React.FC = () => {
   return (
     <button
       onClick={() => connectAsync({ connector: connectors[0] }).catch(() => {})}
-      disabled={status === "reconnecting" || isPending || connectors.length === 0}
+      disabled={
+        status === "reconnecting" || isPending || connectors.length === 0
+      }
       className="flex justify-center items-center gap-2 border border-white/20 bg-gradient-to-b from-white/10 to-white/10 bg-black hover:bg-gray-900 transition-colors duration-300 disabled:opacity-50"
       style={{
         paddingTop: "8px",
@@ -58,7 +60,19 @@ export const SyncAccount: React.FC = () => {
       }}
     >
       Sync Account
-      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M3 12a9 9 0 019-9 9 9 0 018.94 8H19l3 3-3 3h1.94A9 9 0 113 12z"/></svg>
+      <svg
+        className="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+      >
+        <path
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3 12a9 9 0 019-9 9 9 0 018.94 8H19l3 3-3 3h1.94A9 9 0 113 12z"
+        />
+      </svg>
     </button>
   );
 };

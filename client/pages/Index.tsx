@@ -825,7 +825,9 @@ export default function Index() {
                         fontWeight: "500",
                       }}
                     >
-                      Connected ({`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`})
+                      Connected (
+                      {`${wagmiAddress.slice(0, 6)}...${wagmiAddress.slice(-4)}`}
+                      )
                     </span>
                   </div>
                 )}
@@ -1072,26 +1074,26 @@ export default function Index() {
 
               {/* Connection Status Message */}
               {isConnected && (connectionMessage || isTypingConnection) && (
-                  <div
-                    className={`font-cartograph leading-[140.628%] mb-10 ${
-                      hasAcademicAngel === true
-                        ? "text-green-300"
-                        : hasAcademicAngel === false
-                          ? "text-red-300"
-                          : "text-white/80"
-                    }`}
-                    style={{ fontSize: "16px" }}
-                  >
-                    <span className="text-white">{"|"} </span>
-                    {connectionMessage}
-                    {isTypingConnection && (
-                      <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
-                    )}
-                  </div>
-                )}
+                <div
+                  className={`font-cartograph leading-[140.628%] mb-10 ${
+                    hasAcademicAngel === true
+                      ? "text-green-300"
+                      : hasAcademicAngel === false
+                        ? "text-red-300"
+                        : "text-white/80"
+                  }`}
+                  style={{ fontSize: "16px" }}
+                >
+                  <span className="text-white">{"|"} </span>
+                  {connectionMessage}
+                  {isTypingConnection && (
+                    <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
+                  )}
+                </div>
+              )}
 
               {/* Default spacing when no connection message */}
-              {!((isConnected && (connectionMessage || isTypingConnection))) && (
+              {!(isConnected && (connectionMessage || isTypingConnection)) && (
                 <div className="mb-8"></div>
               )}
             </div>

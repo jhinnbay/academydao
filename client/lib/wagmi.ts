@@ -11,7 +11,10 @@ export const wagmiConfig = createConfig({
   connectors: [
     miniAppConnector(),
     injected(),
-    coinbaseWallet({ appName: "Trials of Azura", preference: "smartWalletOnly" }),
+    coinbaseWallet({
+      appName: "Trials of Azura",
+      preference: "smartWalletOnly",
+    }),
   ],
   ssr: true,
 });
