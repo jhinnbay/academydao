@@ -81,7 +81,8 @@ export const SyncAccount: React.FC = () => {
       <img
         src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fe9892b664f7a44ba837c5fbd845ed811?format=webp&width=800"
         alt="Atom Icon"
-        className="w-4 h-4"
+        className="w-4 h-4 align-middle"
+        style={{ filter: "brightness(0) invert(1)" }}
       />
     </button>
   );
