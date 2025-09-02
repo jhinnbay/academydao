@@ -6,14 +6,14 @@ import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
-import { usePrivy } from "@privy-io/react-auth";
+import { useAccount } from "wagmi";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
 } from "@/lib/scrollPreservation";
 
 export default function Index() {
-  const { ready, authenticated, user } = usePrivy();
+  const { address: wagmiAddress, isConnected } = useAccount();
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
