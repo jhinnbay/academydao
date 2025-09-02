@@ -609,9 +609,16 @@ export default function Index() {
                         <>
                           <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10">
                             {isFarcaster && pfpUrl ? (
-                              <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover object-center" />
+                              <img
+                                src={pfpUrl}
+                                alt="Profile"
+                                className="w-full h-full object-cover object-center"
+                              />
                             ) : (
-                              <Avatar address={wagmiAddress} chain={baseChain} />
+                              <Avatar
+                                address={wagmiAddress}
+                                chain={baseChain}
+                              />
                             )}
                           </div>
                           <span
@@ -622,9 +629,15 @@ export default function Index() {
                             }}
                           >
                             {isFarcaster && (displayName || username) ? (
-                              <span className="text-white">{displayName || username}</span>
+                              <span className="text-white">
+                                {displayName || username}
+                              </span>
                             ) : (
-                              <Name address={wagmiAddress} chain={baseChain} className="text-white" />
+                              <Name
+                                address={wagmiAddress}
+                                chain={baseChain}
+                                className="text-white"
+                              />
                             )}
                           </span>
                         </>
@@ -829,7 +842,11 @@ export default function Index() {
                     >
                       Connected (
                       <span className="inline-flex items-center">
-                        <Name address={wagmiAddress} chain={baseChain} className="text-white/90" />
+                        <Name
+                          address={wagmiAddress}
+                          chain={baseChain}
+                          className="text-white/90"
+                        />
                       </span>
                       )
                     </span>
@@ -1114,7 +1131,11 @@ export default function Index() {
                 {">"} Username:{" "}
                 {isConnected && wagmiAddress ? (
                   <span className="inline-flex items-center">
-                    <Name address={wagmiAddress} chain={baseChain} className="text-white/80" />
+                    <Name
+                      address={wagmiAddress}
+                      chain={baseChain}
+                      className="text-white/80"
+                    />
                   </span>
                 ) : (
                   "Not Connected"

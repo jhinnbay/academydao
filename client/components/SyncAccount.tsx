@@ -43,15 +43,25 @@ export const SyncAccount: React.FC = () => {
         <span className="inline-flex items-center gap-2">
           <span className="w-5 h-5 rounded-full overflow-hidden bg-white/10">
             {isFarcaster && pfpUrl ? (
-              <img src={pfpUrl} alt="Profile" className="w-full h-full object-cover object-center" />
+              <img
+                src={pfpUrl}
+                alt="Profile"
+                className="w-full h-full object-cover object-center"
+              />
             ) : (
               <Avatar address={address} chain={baseChain} />
             )}
           </span>
           {isFarcaster && (displayName || username) ? (
-            <span className="text-white/90 max-w-[160px] truncate">{displayName || username}</span>
+            <span className="text-white/90 max-w-[160px] truncate">
+              {displayName || username}
+            </span>
           ) : (
-            <Name address={address} chain={baseChain} className="text-white/90 max-w-[160px] truncate" />
+            <Name
+              address={address}
+              chain={baseChain}
+              className="text-white/90 max-w-[160px] truncate"
+            />
           )}
         </span>
         <span className="sr-only">Disconnect</span>
@@ -76,7 +86,7 @@ export const SyncAccount: React.FC = () => {
         fontWeight: "500",
         color: "#ffffff",
       }}
->
+    >
       <img
         src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fe9892b664f7a44ba837c5fbd845ed811?format=webp&width=800"
         alt="Atom Icon"
