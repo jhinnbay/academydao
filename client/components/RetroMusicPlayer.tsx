@@ -105,7 +105,7 @@ const RetroMusicPlayer = () => {
   return (
     <div className="bg-black text-white font-cartograph p-3 border-b border-white/20 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-center sm:justify-start space-x-4">
           {/* Track Info */}
           <div className="flex-1 min-w-0">
             <div className="text-xs truncate font-bold text-white/90">
