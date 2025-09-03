@@ -11,6 +11,7 @@ import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
+import { useNeynarProfile } from "@/hooks/useNeynarProfile";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -19,6 +20,9 @@ import {
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
+  const { data: neynar } = useNeynarProfile({ username, address: wagmiAddress });
+  const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
+  const mergedName = displayName || username || neynar?.displayName || neynar?.username || null;
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -609,9 +613,9 @@ export default function Index() {
                       return (
                         <>
                           <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10">
-                            {isFarcaster && pfpUrl ? (
+                            {mergedPfp ? (
                               <img
-                                src={pfpUrl}
+                                src={mergedPfp}
                                 alt="Profile"
                                 className="w-full h-full object-cover object-center"
                               />
@@ -626,10 +630,8 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            {isFarcaster && (displayName || username) ? (
-                              <span className="text-white">
-                                {displayName || username}
-                              </span>
+                            {mergedName ? (
+                              <span className="text-white">{mergedName}</span>
                             ) : (
                               <Name
                                 address={wagmiAddress}
@@ -973,7 +975,7 @@ export default function Index() {
                       display: "inline",
                     }}
                   >
-                    ˚₊꒰ა ☆ ໒꒱ ‧₊˚
+                    ˚₊꒰��� ☆ ໒꒱ ‧₊˚
                   </span>
                 </span>
                 <span
