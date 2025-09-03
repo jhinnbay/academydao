@@ -155,7 +155,6 @@ function AutoConnect() {
 }
 
 function App() {
-
   return (
     <AppErrorBoundary>
       <FarcasterCompat>
