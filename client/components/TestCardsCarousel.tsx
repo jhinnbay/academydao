@@ -1,8 +1,8 @@
-import React, { useMemo } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import React, { useEffect, useMemo, useState } from "react";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Bot, ClipboardList } from "lucide-react";
+import { Brain, Bot, ClipboardList, MessageCircle } from "lucide-react";
 
 type TestCardsCarouselProps = {
   onOpenIQ: () => void;
@@ -15,6 +15,18 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   onOpenSurveys,
   onStartDaemon,
 }) => {
+  const [api, setApi] = useState<CarouselApi | null>(null);
+
+  useEffect(() => {
+    if (!api) return;
+    const id = setInterval(() => {
+      try {
+        api.scrollNext();
+      } catch {}
+    }, 4000);
+    return () => clearInterval(id);
+  }, [api]);
+
   const cards = useMemo(
     () =>
       [
@@ -48,6 +60,16 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           cta: "Launch Simulation",
           onClick: onStartDaemon,
         },
+        {
+          id: "discord",
+          title: "Join Discord",
+          description:
+            "Enter the Academy lounge. Sync with peers, get updates, and unlock community drops.",
+          tokens: 20,
+          icon: MessageCircle,
+          cta: "Join Discord",
+          onClick: () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
+        },
       ],
     [onOpenIQ, onOpenSurveys, onStartDaemon],
   );
@@ -59,6 +81,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
       <Carousel
         className="w-full"
         opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
+        setApi={setApi}
       >
         <CarouselContent>
           {cards.map((card) => {
