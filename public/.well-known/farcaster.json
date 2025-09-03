@@ -2,11 +2,11 @@
   "frame": {
     "name": "AzuraOS",
     "version": "1",
-    "iconUrl": "https://i.imgur.com/lAHmbk9.png",
+    "iconUrl": "https://i.imgur.com/kw4XkSj.png",
     "homeUrl": "https://academydao.vercel.app",
     "imageUrl": "https://i.imgur.com/VNvzdxw.png",
     "buttonTitle": "Enter",
-    "splashImageUrl": "https://i.imgur.com/907bTSF.png",
+    "splashImageUrl": "https://i.imgur.com/kw4XkSj.png",
     "splashBackgroundColor": "#09133b",
     "webhookUrl": "https://academydao.vercel.app/api/webhook",
     "subtitle": "Neurons Firing...",
