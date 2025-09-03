@@ -23,19 +23,26 @@ const queryClient = new QueryClient();
   (window as any).__fetchPatched = true;
   const originalFetch = window.fetch.bind(window);
   window.fetch = async (...args: any[]) => {
+    // Extract URL early for domain-based stubbing
+    let url = "";
+    try {
+      const input = args[0] as any;
+      url = typeof input === "string" ? input : (input?.url ?? String(input));
+    } catch {}
+
+    // In Farcaster Mini App, stub Coinbase CCA metrics/amp to avoid runtime noise
+    if (isFarcasterEnvironment() && /cca-lite\.coinbase\.com/i.test(url)) {
+      console.warn("Stubbed Coinbase CCA request in Mini App:", url);
+      return new Response("", { status: 204 });
+    }
+
     try {
       return await originalFetch(...(args as any));
     } catch (error: any) {
-      // Best-effort URL extraction (handles Request objects)
-      let url = "";
-      try {
-        const input = args[0] as any;
-        url = typeof input === "string" ? input : (input?.url ?? String(input));
-      } catch {}
-
       const isAnalytics =
         /analytics|plausible|segment|sentry/i.test(url) ||
-        /events\.privy\.io/i.test(url);
+        /events\.privy\.io/i.test(url) ||
+        /cca-lite\.coinbase\.com/i.test(url);
       if (
         isAnalytics &&
         (error?.message === "Failed to fetch" || error?.name === "TypeError")
