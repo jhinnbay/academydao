@@ -5,6 +5,7 @@ import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
+import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { UserAvatar } from "@/components/UserAvatar";
@@ -887,6 +888,16 @@ export default function Index() {
               />
             </div>
           </div>
+
+          {/* Tests carousel */}
+          <div className="mb-10">
+            <TestCardsCarousel
+              onOpenIQ={() => setIsIQOpen(true)}
+              onOpenSurveys={() => setIsModalOpen(true)}
+              onStartDaemon={handleGenerate}
+            />
+          </div>
+
           {/* Header Stats */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">
