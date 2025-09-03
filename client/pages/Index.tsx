@@ -7,7 +7,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
-import { Identity } from "@coinbase/onchainkit/identity";
+import { Identity, Avatar, Name, Address, Badge } from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { useNeynarProfile } from "@/hooks/useNeynarProfile";
@@ -622,8 +622,15 @@ export default function Index() {
                           <Identity
                             address={wagmiAddress}
                             chain={baseChain}
+                            schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
                             className="text-white"
-                          />
+                          >
+                            <Avatar />
+                            <Name>
+                              <Badge />
+                            </Name>
+                            <Address />
+                          </Identity>
                         </div>
                       );
                     }
