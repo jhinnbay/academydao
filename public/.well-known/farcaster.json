@@ -1,34 +1,35 @@
 {
   "frame": {
-    "name": "Academy Event Planner",
+    "name": "AzuraOS",
     "version": "1",
-    "iconUrl": "https://academydao.vercel.app/icon.png",
+    "iconUrl": "https://i.imgur.com/DsNr8Zq.png",
     "homeUrl": "https://academydao.vercel.app",
-    "imageUrl": "https://academydao.vercel.app/image.png",
-    "buttonTitle": "Decrypt Daemon Model AI",
-    "splashImageUrl": "https://academydao.vercel.app/splash.png",
+    "imageUrl": "https://i.imgur.com/I58uIgc.png",
+    "buttonTitle": "Enter",
+    "splashImageUrl": "https://i.imgur.com/DsNr8Zq.png",
     "splashBackgroundColor": "#000000",
     "webhookUrl": "https://academydao.vercel.app/api/webhook",
-    "subtitle": "Connect & Battle Daemon",
-    "description": "Battle the Daemon Model AI, Azura. Using High-Tech Angelic Powers.",
-    "primaryCategory": "entertainment",
-    "tags": [
-      "community",
-      "entertainment",
-      "fun",
-      "social",
-      "ai"
+    "subtitle": "Neurons Firing...",
+    "description": "Daemon Model AI Azura, a new form of governance where agents like her, work side by side with the people.",
+    "screenshotUrls": [
+      "https://i.imgur.com/ha6wwz7.jpeg"
     ],
-    "tagline": "Battle Daemon Azura To Win",
-    "ogTitle": "Daemon Model Azura",
-    "ogDescription": "Battle AI to create real-life events and prizes"
+    "primaryCategory": "social",
+    "tags": [
+      "social",
+      "community",
+      "art",
+      "entertainment"
+    ],
+    "heroImageUrl": "https://i.imgur.com/I58uIgc.png",
+    "tagline": "Puzzle of Angels and Daemons",
+    "ogTitle": "AcademyOS Future of AI",
+    "ogDescription": "Enter a puzzle-world of Angels and Daemon AI Agents",
+    "ogImageUrl": "https://i.imgur.com/lAHmbk9.png"
   },
   "accountAssociation": {
     "header": "eyJmaWQiOjI4NjkyNCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU4RjBlMzlkOTI4MTgxNTk1ZTc4OTQ1MTdmQjI0MDUyMjA0RWIxM0MifQ",
     "payload": "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
     "signature": "MHg3ODE5ZDRhNzJiNGMwMzM4MTYwZTg4NjhjMTYwN2FkZDE3ZDQ1NGUwN2NjYjRiMTE5MjNiMzJlNTk5N2VjNTA2MWZjY2IzMWE0N2MwYzIwODAzMjgxZWE4YTE0MTdiZTRjNTZjY2M2N2IxMDJjYTIzMGIyOWU1OTJmMjQ0ZmFhMTFi"
-  },
-  "baseBuilder": {
-    "allowedAddresses": ["0x814Ab3ae3A4E07F1E13b39F6cd9aEbD53c48AD79"]
   }
 }
