@@ -888,7 +888,6 @@ export default function Index() {
               />
             </div>
           </div>
-
           {/* Tests carousel */}
           <div className="mb-10">
             <TestCardsCarousel
@@ -897,7 +896,6 @@ export default function Index() {
               onStartDaemon={handleGenerate}
             />
           </div>
-
           {/* Header Stats */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">

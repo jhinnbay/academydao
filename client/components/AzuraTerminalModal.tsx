@@ -87,7 +87,9 @@ export const AzuraTerminalModal: React.FC<AzuraTerminalModalProps> = ({
 
           {/* Terminal body */}
           <div className="p-4 bg-black">
-            <div className="text-xs text-white/60 font-cartograph mb-2">/usr/bin/azura</div>
+            <div className="text-xs text-white/60 font-cartograph mb-2">
+              /usr/bin/azura
+            </div>
             <div
               className="font-cartograph text-white/90 bg-white/5 border border-white/20 rounded p-4 min-h-[160px] whitespace-pre-wrap"
               style={{ lineHeight: 1.5 }}

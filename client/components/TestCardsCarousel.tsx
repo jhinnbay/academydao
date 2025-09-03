@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AzuraTerminalModal from "@/components/AzuraTerminalModal";
@@ -38,85 +45,84 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   };
 
   const cards = useMemo(
-    () =>
-      [
-        {
-          id: "surveys",
-          title: "Research Surveys",
-          description:
-            "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
-          tokens: 25,
-          icon: ClipboardList,
-          cta: "Open Surveys",
-          onClick: () =>
-            openWithTerminal(
-              [
-                "Booting azura.exe...",
-                "Calibrating survey protocols...",
-                "Signal channels clear. Ready to ingest.",
-                "Opening Research Surveys...",
-              ],
-              onOpenSurveys,
-            ),
-        },
-        {
-          id: "iq",
-          title: "IQ Test",
-          description:
-            "Measure your cognition across logic, memory, and reasoning. Results feed your profile.",
-          tokens: 50,
-          icon: Brain,
-          cta: "Start IQ Test",
-          onClick: () =>
-            openWithTerminal(
-              [
-                "Booting azura.exe...",
-                "Cognitive matrices aligning...",
-                "Synaptic test-suite loaded.",
-                "Opening IQ Test...",
-              ],
-              onOpenIQ,
-            ),
-        },
-        {
-          id: "daemon",
-          title: "AI Simulation Daemon",
-          description:
-            "Engage the simulation loop. Probe scenarios and harvest insights from the Daemon.",
-          tokens: 75,
-          icon: Bot,
-          cta: "Launch Simulation",
-          onClick: () =>
-            openWithTerminal(
-              [
-                "Booting azura.exe...",
-                "Spinning up simulation daemon...",
-                "Entropy stabilized. Sandbox online.",
-                "Launching AI Simulation Daemon...",
-              ],
-              onStartDaemon,
-            ),
-        },
-        {
-          id: "discord",
-          title: "Join Discord",
-          description:
-            "Enter the Academy lounge. Sync with peers, get updates, and unlock community drops.",
-          tokens: 20,
-          icon: MessageCircle,
-          cta: "Join Discord",
-          onClick: () =>
-            openWithTerminal(
-              [
-                "Booting azura.exe...",
-                "Resolving gateway to the Academy lounge...",
-                "Handshake accepted.",
-                "Opening Discord...",
-              ],
-              () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
-            ),
-        },
-      ],
+    () => [
+      {
+        id: "surveys",
+        title: "Research Surveys",
+        description:
+          "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
+        tokens: 25,
+        icon: ClipboardList,
+        cta: "Open Surveys",
+        onClick: () =>
+          openWithTerminal(
+            [
+              "Booting azura.exe...",
+              "Calibrating survey protocols...",
+              "Signal channels clear. Ready to ingest.",
+              "Opening Research Surveys...",
+            ],
+            onOpenSurveys,
+          ),
+      },
+      {
+        id: "iq",
+        title: "IQ Test",
+        description:
+          "Measure your cognition across logic, memory, and reasoning. Results feed your profile.",
+        tokens: 50,
+        icon: Brain,
+        cta: "Start IQ Test",
+        onClick: () =>
+          openWithTerminal(
+            [
+              "Booting azura.exe...",
+              "Cognitive matrices aligning...",
+              "Synaptic test-suite loaded.",
+              "Opening IQ Test...",
+            ],
+            onOpenIQ,
+          ),
+      },
+      {
+        id: "daemon",
+        title: "AI Simulation Daemon",
+        description:
+          "Engage the simulation loop. Probe scenarios and harvest insights from the Daemon.",
+        tokens: 75,
+        icon: Bot,
+        cta: "Launch Simulation",
+        onClick: () =>
+          openWithTerminal(
+            [
+              "Booting azura.exe...",
+              "Spinning up simulation daemon...",
+              "Entropy stabilized. Sandbox online.",
+              "Launching AI Simulation Daemon...",
+            ],
+            onStartDaemon,
+          ),
+      },
+      {
+        id: "discord",
+        title: "Join Discord",
+        description:
+          "Enter the Academy lounge. Sync with peers, get updates, and unlock community drops.",
+        tokens: 20,
+        icon: MessageCircle,
+        cta: "Join Discord",
+        onClick: () =>
+          openWithTerminal(
+            [
+              "Booting azura.exe...",
+              "Resolving gateway to the Academy lounge...",
+              "Handshake accepted.",
+              "Opening Discord...",
+            ],
+            () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
+          ),
+      },
+    ],
     [onOpenIQ, onOpenSurveys, onStartDaemon],
   );
 
