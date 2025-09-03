@@ -620,7 +620,11 @@ export default function Index() {
                     if (isConnected && wagmiAddress) {
                       return (
                         <div className="min-w-[220px] sm:min-w-[260px]">
-                          <Identity address={wagmiAddress} chain={baseChain} className="text-white" />
+                          <Identity
+                            address={wagmiAddress}
+                            chain={baseChain}
+                            className="text-white"
+                          />
                         </div>
                       );
                     }
@@ -824,8 +828,7 @@ export default function Index() {
             </div>
 
             <div>
-              <div className="flex flex-col items-start gap-2">
-              </div>
+              <div className="flex flex-col items-start gap-2"></div>
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
               <img
