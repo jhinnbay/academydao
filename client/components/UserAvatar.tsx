@@ -55,19 +55,7 @@ export function UserAvatar({
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <div className={`${sizeClasses[size]} rounded-full overflow-hidden bg-white/10`}>
-        {isFarcaster && pfpUrl ? (
-          <img
-            src={pfpUrl}
-            alt="Profile"
-            className="w-full h-full object-cover object-center"
-          />
-        ) : (
-          <Avatar 
-            address={wagmiAddress} 
-            chain={baseChain}
-            className="w-full h-full"
-          />
-        )}
+        <Avatar address={wagmiAddress} chain={baseChain} className="w-full h-full" />
       </div>
       
       {showName && (
