@@ -1,7 +1,7 @@
-import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleFarcasterProfile } from "./routes/neynar-profile";
 
 export function createServer() {
   const app = express();
@@ -19,8 +19,8 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Farcaster Mini App manifest: served statically from public/.well-known/farcaster.json
-  // No runtime redirect here so that deployments can ship a local manifest.
+  // Farcaster profile fallback via Neynar
+  app.get("/api/farcaster/profile", handleFarcasterProfile);
 
   // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {
