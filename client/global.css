@@ -540,13 +540,21 @@ body {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-/* Ensure Name component text is always light */
-span:has(> [class*="ock-"]) {
-  color: rgba(255, 255, 255, 0.9) !important;
+/* Fix avatar + image sizing so they don't blow up buttons */
+[class*="ock-avatar"],
+[class*="ock-image"],
+span:has(> [class*="ock-avatar"]) img,
+span:has(> [class*="ock-image"]) img {
+  width: 32px !important;
+  height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  border-radius: 0.5rem;  /* matches Tailwind rounded-md */
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
-/* Override any inline styles from OnchainKit components */
-[class*="ock-"] span,
-[class*="ock-"] div {
+/* Override inline styles inside OnchainKit, but keep layout intact */
+[class*="ock-"] span {
   color: inherit !important;
 }
