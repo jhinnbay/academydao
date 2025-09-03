@@ -8,7 +8,6 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { Identity } from "@coinbase/onchainkit/identity";
-import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { useNeynarProfile } from "@/hooks/useNeynarProfile";
@@ -629,8 +628,8 @@ export default function Index() {
                       );
                     }
                     return (
-                      <>
-                        <div className="w-8 h-8 bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
+                      <div className="flex items-center gap-3 min-w-[220px] sm:min-w-[260px]">
+                        <div className="w-8 h-8 rounded-md bg-white/10 border border-white/20 flex items-center justify-center">
                           <svg
                             className="w-4 h-4 text-white"
                             fill="currentColor"
@@ -644,7 +643,7 @@ export default function Index() {
                           </svg>
                         </div>
                         <span
-                          className="hidden sm:block font-sans text-white/90"
+                          className="font-sans text-white/90"
                           style={{
                             fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
                             fontWeight: "500",
@@ -652,7 +651,7 @@ export default function Index() {
                         >
                           Sync Account
                         </span>
-                      </>
+                      </div>
                     );
                   })()}
                 </div>
