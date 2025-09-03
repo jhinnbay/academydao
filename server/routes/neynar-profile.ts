@@ -24,7 +24,8 @@ function mapUser(user: any) {
   return {
     fid: user?.fid ?? user?.id ?? null,
     username: user?.username ?? user?.handle ?? user?.fname ?? null,
-    displayName: profile?.display_name || profile?.name || user?.display_name || null,
+    displayName:
+      profile?.display_name || profile?.name || user?.display_name || null,
     pfpUrl:
       profile?.pfp_url ||
       profile?.avatar_url ||
@@ -59,7 +60,10 @@ export const handleFarcasterProfile: RequestHandler = async (req, res) => {
     // Try by fid
     if (fid) {
       try {
-        const data = await fetchNeynar(`/v2/farcaster/user?fid=${encodeURIComponent(fid)}`, apiKey);
+        const data = await fetchNeynar(
+          `/v2/farcaster/user?fid=${encodeURIComponent(fid)}`,
+          apiKey,
+        );
         user = (data as any).result?.user || (data as any).user || null;
       } catch (e) {}
     }

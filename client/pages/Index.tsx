@@ -20,9 +20,13 @@ import {
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
-  const { data: neynar } = useNeynarProfile({ username, address: wagmiAddress });
+  const { data: neynar } = useNeynarProfile({
+    username,
+    address: wagmiAddress,
+  });
   const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
-  const mergedName = displayName || username || neynar?.displayName || neynar?.username || null;
+  const mergedName =
+    displayName || username || neynar?.displayName || neynar?.username || null;
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -620,7 +624,10 @@ export default function Index() {
                                 className="w-full h-full object-cover object-center"
                               />
                             ) : (
-                              <UserAvatar size="md" className="border border-white/20" />
+                              <UserAvatar
+                                size="md"
+                                className="border border-white/20"
+                              />
                             )}
                           </div>
                           <span
@@ -801,27 +808,31 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-<div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 relative -top-12">          {/* Hero Section */}
+        <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 relative -top-12">
+          {" "}
+          {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-8 gap-8">
-              <h1
-                className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
-                style={{
-                  fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
-                  lineHeight: "1.1",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                  fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
-                }}
-              >
-                Ready To Test Your IQ?
-              </h1>
-              
-              {/* Fixed height container for text content only */}
-              <div style={{ height: 'clamp(30px,100vh, 100px)',
-                  display: 'flex',       // needed for alignItems to work
-                  alignItems: 'center',      // centers vertically
-              }}>
+            <h1
+              className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
+              style={{
+                fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                lineHeight: "1.1",
+                letterSpacing: "-0.02em",
+                fontWeight: "700",
+                fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+              }}
+            >
+              Ready To Test Your IQ?
+            </h1>
 
+            {/* Fixed height container for text content only */}
+            <div
+              style={{
+                height: "clamp(30px,100vh, 100px)",
+                display: "flex", // needed for alignItems to work
+                alignItems: "center", // centers vertically
+              }}
+            >
               <p
                 className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
                 style={{
@@ -832,15 +843,13 @@ export default function Index() {
                   minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
                   display: "flex",
                   alignItems: "flex-start",
-                  
                 }}
               >
                 {heroText}
               </p>
-              </div>
-              
-              <div>
+            </div>
 
+            <div>
               <div className="flex flex-col items-start gap-2">
                 <SyncAccount />
                 {isConnected && wagmiAddress && (
@@ -871,7 +880,6 @@ export default function Index() {
               />
             </div>
           </div>
-
           {/* Header Stats */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 mb-8 gap-4">
             <div className="flex items-center gap-6">
@@ -1078,7 +1086,6 @@ export default function Index() {
               </div>
             </div>
           </div>
-
           {/* Terminal Header Section */}
           <div className="border border-white/20 bg-black backdrop-blur-md mb-4 shadow-2xl overflow-hidden">
             <div className="p-5 pb-0">
@@ -1295,7 +1302,6 @@ export default function Index() {
               </div>
             </div>
           </div>
-
           {/* Daemon Response Section */}
           <div
             className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden"

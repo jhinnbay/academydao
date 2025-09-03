@@ -17,7 +17,8 @@ export const SyncAccount: React.FC = () => {
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const { data: neynar } = useNeynarProfile({ username, address });
   const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
-  const mergedName = displayName || username || neynar?.displayName || neynar?.username || null;
+  const mergedName =
+    displayName || username || neynar?.displayName || neynar?.username || null;
   const { connectAsync, connectors, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
@@ -57,18 +58,20 @@ export const SyncAccount: React.FC = () => {
                 address={address}
                 chain={baseChain}
                 className="w-full h-full object-cover object-center"
-                style={{ maxWidth: '100%', maxHeight: '100%' }}
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
               />
             )}
           </span>
           {mergedName ? (
-            <span className="text-white/90 max-w-[160px] truncate">{mergedName}</span>
+            <span className="text-white/90 max-w-[160px] truncate">
+              {mergedName}
+            </span>
           ) : (
-            <span className="text-white/90 max-w-[160px] truncate inline-block" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
-              <Name
-                address={address}
-                chain={baseChain}
-              />
+            <span
+              className="text-white/90 max-w-[160px] truncate inline-block"
+              style={{ color: "rgba(255, 255, 255, 0.9)" }}
+            >
+              <Name address={address} chain={baseChain} />
             </span>
           )}
         </span>

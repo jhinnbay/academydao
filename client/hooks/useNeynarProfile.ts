@@ -17,7 +17,12 @@ interface Params {
 }
 
 export function useNeynarProfile({ fid, username, address }: Params) {
-  const key = ["neynar-profile", fid ?? null, username ?? null, address ?? null];
+  const key = [
+    "neynar-profile",
+    fid ?? null,
+    username ?? null,
+    address ?? null,
+  ];
   const query = useQuery<NeynarProfile, Error>({
     queryKey: key,
     enabled: Boolean(fid || username || address),
