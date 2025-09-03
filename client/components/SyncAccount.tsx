@@ -3,6 +3,7 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
+import { useNeynarProfile } from "@/hooks/useNeynarProfile";
 
 function isFarcasterEnvironment() {
   if (typeof window === "undefined") return false;
@@ -14,6 +15,9 @@ function isFarcasterEnvironment() {
 export const SyncAccount: React.FC = () => {
   const { address, isConnected, status } = useAccount();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
+  const { data: neynar } = useNeynarProfile({ username, address });
+  const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
+  const mergedName = displayName || username || neynar?.displayName || neynar?.username || null;
   const { connectAsync, connectors, isPending } = useConnect();
   const { disconnect } = useDisconnect();
 
@@ -42,25 +46,23 @@ export const SyncAccount: React.FC = () => {
       >
         <span className="inline-flex items-center gap-2">
           <span className="w-5 h-5 rounded-full overflow-hidden bg-white/10">
-            {isFarcaster && pfpUrl ? (
+            {mergedPfp ? (
               <img
-                src={pfpUrl}
+                src={mergedPfp}
                 alt="Profile"
                 className="w-full h-full object-cover object-center"
               />
             ) : (
-              <Avatar 
-                address={address} 
+              <Avatar
+                address={address}
                 chain={baseChain}
                 className="w-full h-full object-cover object-center"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
               />
             )}
           </span>
-          {isFarcaster && (displayName || username) ? (
-            <span className="text-white/90 max-w-[160px] truncate">
-              {displayName || username}
-            </span>
+          {mergedName ? (
+            <span className="text-white/90 max-w-[160px] truncate">{mergedName}</span>
           ) : (
             <span className="text-white/90 max-w-[160px] truncate inline-block" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
               <Name
