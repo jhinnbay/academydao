@@ -148,7 +148,6 @@ const RetroMusicPlayer = () => {
               <SkipForward size={14} />
             </button>
           </div>
-
         </div>
       </div>
 

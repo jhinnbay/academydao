@@ -7,7 +7,13 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
-import { Identity, Avatar, Name, Address, Badge } from "@coinbase/onchainkit/identity";
+import {
+  Identity,
+  Avatar,
+  Name,
+  Address,
+  Badge,
+} from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { useNeynarProfile } from "@/hooks/useNeynarProfile";
