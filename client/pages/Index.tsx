@@ -25,8 +25,7 @@ export default function Index() {
     address: wagmiAddress,
   });
   const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
-  const mergedName =
-    displayName || username || neynar?.displayName || neynar?.username || null;
+  const mergedName = displayName || username || neynar?.displayName || neynar?.username || null;
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -621,18 +620,7 @@ export default function Index() {
                       return (
                         <>
                           <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10">
-                            {mergedPfp ? (
-                              <img
-                                src={mergedPfp}
-                                alt="Profile"
-                                className="w-full h-full object-cover object-center"
-                              />
-                            ) : (
-                              <UserAvatar
-                                size="md"
-                                className="border border-white/20"
-                              />
-                            )}
+                            <UserAvatar size="md" className="border border-white/20" />
                           </div>
                           <span
                             className="hidden sm:block font-sans text-white/90"
@@ -641,15 +629,7 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            {mergedName ? (
-                              <span className="text-white">{mergedName}</span>
-                            ) : (
-                              <Name
-                                address={wagmiAddress}
-                                chain={baseChain}
-                                className="text-white"
-                              />
-                            )}
+                            <Name address={wagmiAddress} chain={baseChain} className="text-white" />
                           </span>
                         </>
                       );
