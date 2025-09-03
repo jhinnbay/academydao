@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,8 +15,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   onOpenSurveys,
   onStartDaemon,
 }) => {
-  const [hidden, setHidden] = useState<Record<string, boolean>>({});
-
   const cards = useMemo(
     () =>
       [
@@ -50,8 +48,8 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           cta: "Launch Simulation",
           onClick: onStartDaemon,
         },
-      ].filter((c) => !hidden[c.id]),
-    [hidden, onOpenIQ, onOpenSurveys, onStartDaemon],
+      ],
+    [onOpenIQ, onOpenSurveys, onStartDaemon],
   );
 
   if (cards.length === 0) return null;
@@ -76,22 +74,15 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
                         "polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px)",
                     }}
                   >
-                    {/* Header row: badge + close */}
-                    <div className="flex items-center justify-between p-3 border-b border-white/20 bg-black/80">
+                    {/* Header row: token badge */}
+                    <div className="flex items-center p-3 border-b border-white/20 bg-black/80">
                       <Badge className="bg-white/10 text-white border-white/30">
                         {card.tokens} $AzuraOS
                       </Badge>
-                      <button
-                        onClick={() => setHidden((h) => ({ ...h, [card.id]: true }))}
-                        className="px-3 py-1 text-white/80 border border-white/30 rounded hover:bg-white/10 transition-colors"
-                        aria-label={`Close ${card.title}`}
-                      >
-                        Close
-                      </button>
                     </div>
 
                     {/* Body */}
-                    <div className="p-5 flex flex-col gap-4">
+                    <div className="p-5 flex flex-col gap-4 min-h-56">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded bg-white/10 border border-white/20 flex items-center justify-center text-white">
                           <Icon className="w-5 h-5" />
