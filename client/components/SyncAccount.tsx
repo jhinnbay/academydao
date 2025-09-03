@@ -28,7 +28,7 @@ export const SyncAccount: React.FC = () => {
     return (
       <button
         onClick={() => disconnect()}
-        className="flex items-center gap-2 border border-white/20 bg-gradient-to-b from-red-400/10 to-red-400/10 bg-black hover:bg-gray-900 transition-colors duration-300"
+        className="flex items-center gap-2 border border-white/20 bg-gradient-to-b from-gray-600/20 to-gray-600/20 bg-black hover:bg-gray-900 transition-colors duration-300"
         style={{
           paddingTop: "8px",
           paddingBottom: "8px",
@@ -49,7 +49,12 @@ export const SyncAccount: React.FC = () => {
                 className="w-full h-full object-cover object-center"
               />
             ) : (
-              <Avatar address={address} chain={baseChain} />
+              <Avatar 
+                address={address} 
+                chain={baseChain}
+                className="w-full h-full object-cover object-center"
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
+              />
             )}
           </span>
           {isFarcaster && (displayName || username) ? (
