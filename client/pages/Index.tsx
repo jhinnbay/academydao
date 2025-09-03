@@ -628,7 +628,7 @@ export default function Index() {
                       );
                     }
                     return (
-                      <div className="flex items-center gap-3 min-w-[220px] sm:min-w-[260px]">
+                      <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-md bg-white/10 border border-white/20 flex items-center justify-center">
                           <svg
                             className="w-4 h-4 text-white"
