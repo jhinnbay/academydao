@@ -7,7 +7,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
-import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { Identity } from "@coinbase/onchainkit/identity";
 import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
@@ -619,27 +619,9 @@ export default function Index() {
                   {(() => {
                     if (isConnected && wagmiAddress) {
                       return (
-                        <>
-                          <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10">
-                            <UserAvatar
-                              size="md"
-                              className="border border-white/20"
-                            />
-                          </div>
-                          <span
-                            className="hidden sm:block font-sans text-white/90"
-                            style={{
-                              fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                              fontWeight: "500",
-                            }}
-                          >
-                            <Name
-                              address={wagmiAddress}
-                              chain={baseChain}
-                              className="text-white"
-                            />
-                          </span>
-                        </>
+                        <div className="min-w-[220px] sm:min-w-[260px]">
+                          <Identity address={wagmiAddress} chain={baseChain} className="text-white" />
+                        </div>
                       );
                     }
                     return (
@@ -843,24 +825,6 @@ export default function Index() {
 
             <div>
               <div className="flex flex-col items-start gap-2">
-                {isConnected && wagmiAddress && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span
-                      className="font-sans text-green-300"
-                      style={{
-                        fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                        fontWeight: "500",
-                      }}
-                    >
-                      Connected (
-                      <span className="text-white/90">
-                        {wagmiAddress?.slice(0, 6)}...{wagmiAddress?.slice(-4)}
-                      </span>
-                      )
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
             <div className="flex justify-center items-end flex-shrink-0">
@@ -982,7 +946,7 @@ export default function Index() {
                       display: "inline",
                     }}
                   >
-                    ˚₊꒰��� ☆ ໒꒱ ‧₊˚
+                    ˚₊꒰����� ☆ ໒꒱ ‧₊˚
                   </span>
                 </span>
                 <span
