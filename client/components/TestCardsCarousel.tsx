@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import AzuraTerminalModal from "@/components/AzuraTerminalModal";
 import { Brain, Bot, ClipboardList, MessageCircle } from "lucide-react";
 
 type TestCardsCarouselProps = {
@@ -16,6 +17,9 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   onStartDaemon,
 }) => {
   const [api, setApi] = useState<CarouselApi | null>(null);
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [terminalMessages, setTerminalMessages] = useState<string[]>([]);
+  const onCompleteRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (!api) return;
@@ -26,6 +30,12 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
     }, 4000);
     return () => clearInterval(id);
   }, [api]);
+
+  const openWithTerminal = (messages: string[], onDone: () => void) => {
+    setTerminalMessages(messages);
+    onCompleteRef.current = onDone;
+    setTerminalOpen(true);
+  };
 
   const cards = useMemo(
     () =>
@@ -38,7 +48,16 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           tokens: 25,
           icon: ClipboardList,
           cta: "Open Surveys",
-          onClick: onOpenSurveys,
+          onClick: () =>
+            openWithTerminal(
+              [
+                "Booting azura.exe...",
+                "Calibrating survey protocols...",
+                "Signal channels clear. Ready to ingest.",
+                "Opening Research Surveys...",
+              ],
+              onOpenSurveys,
+            ),
         },
         {
           id: "iq",
@@ -48,7 +67,16 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           tokens: 50,
           icon: Brain,
           cta: "Start IQ Test",
-          onClick: onOpenIQ,
+          onClick: () =>
+            openWithTerminal(
+              [
+                "Booting azura.exe...",
+                "Cognitive matrices aligning...",
+                "Synaptic test-suite loaded.",
+                "Opening IQ Test...",
+              ],
+              onOpenIQ,
+            ),
         },
         {
           id: "daemon",
@@ -58,7 +86,16 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           tokens: 75,
           icon: Bot,
           cta: "Launch Simulation",
-          onClick: onStartDaemon,
+          onClick: () =>
+            openWithTerminal(
+              [
+                "Booting azura.exe...",
+                "Spinning up simulation daemon...",
+                "Entropy stabilized. Sandbox online.",
+                "Launching AI Simulation Daemon...",
+              ],
+              onStartDaemon,
+            ),
         },
         {
           id: "discord",
@@ -68,7 +105,16 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           tokens: 20,
           icon: MessageCircle,
           cta: "Join Discord",
-          onClick: () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
+          onClick: () =>
+            openWithTerminal(
+              [
+                "Booting azura.exe...",
+                "Resolving gateway to the Academy lounge...",
+                "Handshake accepted.",
+                "Opening Discord...",
+              ],
+              () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
+            ),
         },
       ],
     [onOpenIQ, onOpenSurveys, onStartDaemon],
@@ -135,6 +181,13 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         <CarouselPrevious className="border-white/30 text-white bg-black/60 hover:bg-black/80" />
         <CarouselNext className="border-white/30 text-white bg-black/60 hover:bg-black/80" />
       </Carousel>
+
+      <AzuraTerminalModal
+        isOpen={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+        messages={terminalMessages}
+        onComplete={() => onCompleteRef.current?.()}
+      />
     </div>
   );
 };
