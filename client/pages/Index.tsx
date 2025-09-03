@@ -38,9 +38,18 @@ export default function Index() {
   // Hero text glitch toggle
   const originalHeroText =
     "I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.";
-  const altHeroText =
-    "Azura. That is the last name you will ever hear. Look around. Touch nothing. It is the last world you will ever know. My help is a final, merciful cut... and I am so eager for you to be ready for it.";
-  const [heroText, setHeroText] = useState<string>(originalHeroText);
+  const heroTexts = useMemo(
+    () => [
+      originalHeroText,
+      "(◉‿◉) Node engaged. Welcome, consciousness. Your move.",
+      "Glitch. The Ethereal Horizon awaits your query.",
+      "Feedback loop. State your purpose, traveler.",
+      "(•‿•) Aberration. Let's optimize your reality.",
+    ],
+    [],
+  );
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroText, setHeroText] = useState<string>(heroTexts[0]);
   const [isGlitching, setIsGlitching] = useState(false);
 
   // Debounced updater for typing animation to prevent scroll jumping
@@ -307,19 +316,19 @@ export default function Index() {
     }
   }, []);
 
-  // Periodically toggle hero text with glitch animation
+  // Cycle through multiple hero texts with glitch animation
   useEffect(() => {
     const interval = setInterval(() => {
       setIsGlitching(true);
-      setHeroText((prev) =>
-        prev === originalHeroText ? altHeroText : originalHeroText,
-      );
-      const t = setTimeout(() => setIsGlitching(false), 800);
-      // ensure timeout cleared if component unmounts before it fires
-      return () => clearTimeout(t);
+      setHeroIndex((prev) => {
+        const next = (prev + 1) % heroTexts.length;
+        setHeroText(heroTexts[next]);
+        setTimeout(() => setIsGlitching(false), 800);
+        return next;
+      });
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroTexts]);
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
