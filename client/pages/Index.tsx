@@ -512,11 +512,6 @@ export default function Index() {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center gap-3">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F907173652fac434888a7b68f5b83718e?format=webp&width=800"
-                  alt="Mental Wealth Academy"
-                  className="h-10 w-10 rounded-lg object-cover"
-                />
                 <span
                   className="font-sans font-bold text-white"
                   style={{
@@ -524,7 +519,7 @@ export default function Index() {
                     fontWeight: "700",
                   }}
                 >
-                  Mental Wealth Academy
+://AcademyOS
                 </span>
               </div>
 
