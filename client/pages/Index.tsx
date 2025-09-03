@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { SoundEffects } from "@/lib/soundEffects";
 import { TypewriterDots } from "@/components/TypewriterDots";
-import { SyncAccount } from "@/components/SyncAccount";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
@@ -808,7 +807,7 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-        <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 relative -top-12">
+        <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           {" "}
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-8 gap-8">
@@ -851,7 +850,6 @@ export default function Index() {
 
             <div>
               <div className="flex flex-col items-start gap-2">
-                <SyncAccount />
                 {isConnected && wagmiAddress && (
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full"></div>
