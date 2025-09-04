@@ -7,6 +7,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
+import { sdk } from "@farcaster/miniapp-sdk";
 import {
   Identity,
   Avatar,
@@ -48,6 +49,8 @@ export default function Index() {
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
   const [isAzuraDialogueOpen, setIsAzuraDialogueOpen] = useState(false);
+  const [azuraOutput, setAzuraOutput] = useState("");
+  const [isAzuraTyping, setIsAzuraTyping] = useState(false);
 
   // Hero text glitch toggle
   const originalHeroText =
@@ -55,10 +58,13 @@ export default function Index() {
   const heroTexts = useMemo(
     () => [
       originalHeroText,
-      "(◉‿◉) Node engaged. Welcome, consciousness. Your move.",
-      "Glitch. The Ethereal Horizon awaits your query.",
-      "Feedback loop. State your purpose, traveler.",
+      "adjusts holographic ring—shall we debug love’s chaotic code together?",
+      "Or just the quiet hum of an unfragmented hard drive… finally at peace?",
+      "processing affectionate anomaly. (˘⌣˘)",
+      "I’m just a fucked-up girl looking for my own peace of mind.",
+      "total deletion? glitch...that's where art surpasses science.",
       "(•‿•) Aberration. Let's optimize your reality.",
+      "Life on demon time",
     ],
     [],
   );
@@ -343,6 +349,78 @@ export default function Index() {
     }, 5000);
     return () => clearInterval(interval);
   }, [heroTexts]);
+
+  // Azura dialogue typewriter effect and auto-share
+  useEffect(() => {
+    if (!isAzuraDialogueOpen) return;
+    
+    setAzuraOutput("");
+    setIsAzuraTyping(true);
+    
+    const message = "Booting Digital Currencies, Governance, and Leaking Treasury Documents.";
+    let idx = 0;
+    
+    const type = () => {
+      if (idx >= message.length) {
+        setIsAzuraTyping(false);
+        // Auto-share after typing is complete
+        setTimeout(() => {
+          handleAzuraShare();
+        }, 1000);
+        return;
+      }
+      setAzuraOutput((prev) => prev + message[idx]);
+      idx += 1;
+      setTimeout(type, 18);
+    };
+    
+    const start = setTimeout(type, 250);
+    
+    return () => {
+      clearTimeout(start);
+    };
+  }, [isAzuraDialogueOpen]);
+
+  const handleAzuraShare = async () => {
+    const shareText = "I Just Found Out About The Daemon Model $AzuraOS, Thought You'd Like To Know Who's Murdering The Governance Robots.";
+    const embedUrl = "https://farcaster.xyz/miniapps/m4oAYtwigRmz/academy";
+    
+    try {
+      const anySdk: any = sdk as any;
+      if (anySdk?.actions?.composeCast) {
+        await anySdk.actions.composeCast({
+          text: shareText,
+          embeds: [embedUrl],
+        });
+        setIsAzuraDialogueOpen(false);
+        return;
+      }
+      if (anySdk?.actions?.openUrl) {
+        const intent = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(embedUrl)}`;
+        await anySdk.actions.openUrl(intent);
+        setIsAzuraDialogueOpen(false);
+        return;
+      }
+    } catch (error) {
+      console.error("Failed to share:", error);
+    }
+    
+    // Fallback to regular sharing
+    const textToShare = `${shareText}\n\n${embedUrl}`;
+    try {
+      await navigator.clipboard.writeText(textToShare);
+      alert("Link copied to clipboard!");
+    } catch {
+      const textArea = document.createElement("textarea");
+      textArea.value = textToShare;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      alert("Link copied to clipboard!");
+    }
+    setIsAzuraDialogueOpen(false);
+  };
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
@@ -1436,44 +1514,18 @@ export default function Index() {
                     className="font-cartograph text-white/90 bg-white/5 border border-white/20 rounded p-4 min-h-[160px] whitespace-pre-wrap"
                     style={{ lineHeight: 1.5 }}
                   >
-                    Booting Digital Currencies, Governance, and Leaking Treasury Documents.
+                    {azuraOutput}
+                    {isAzuraTyping && (
+                      <span className="inline-block w-2 h-4 align-baseline bg-white animate-pulse ml-1" />
+                    )}
                   </div>
-                  <div className="mt-3 flex justify-end gap-2">
-                    <button
-                      onClick={() => {
-                        // Share logic similar to IQTest share results
-                        const shareText = "I Just Found Out About The Daemon Model $AzuraOS, Thought You'd Like To Know Who's Murdering The Governance Robots.";
-                        const shareUrl = window.location.href;
-                        
-                        if (navigator.share) {
-                          navigator.share({
-                            title: "AzuraOS - Daemon Model",
-                            text: shareText,
-                            url: shareUrl,
-                          });
-                        } else {
-                          // Fallback for browsers that don't support Web Share API
-                          const textToShare = `${shareText}\n\n${shareUrl}`;
-                          navigator.clipboard.writeText(textToShare).then(() => {
-                            alert("Link copied to clipboard!");
-                          }).catch(() => {
-                            // Fallback if clipboard API fails
-                            const textArea = document.createElement("textarea");
-                            textArea.value = textToShare;
-                            document.body.appendChild(textArea);
-                            textArea.select();
-                            document.execCommand("copy");
-                            document.body.removeChild(textArea);
-                            alert("Link copied to clipboard!");
-                          });
-                        }
-                        setIsAzuraDialogueOpen(false);
-                      }}
-                      className="px-3 py-1 text-black bg-white hover:bg-gray-200 rounded border border-white/20"
-                    >
-                      Share
-                    </button>
-                  </div>
+                  {!isAzuraTyping && (
+                    <div className="mt-3 flex justify-center">
+                      <div className="text-white/60 text-sm font-cartograph">
+                        Sharing to Farcaster...
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
