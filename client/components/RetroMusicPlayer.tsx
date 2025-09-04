@@ -6,6 +6,8 @@ const RetroMusicPlayer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Real track data
@@ -36,23 +38,50 @@ const RetroMusicPlayer = () => {
     audio.addEventListener("pause", handlePause);
     audio.addEventListener("ended", handleEnded);
 
-    // Autoplay when component mounts
+    // Enhanced autoplay with better error handling
     const playAudio = async () => {
       try {
+        // Set autoplay attributes
+        audio.autoplay = true;
+        audio.loop = true;
+        audio.muted = false;
+        
         await audio.play();
         setIsPlaying(true);
+        setAutoplayBlocked(false);
       } catch (error) {
         console.log("Autoplay failed:", error);
+        setAutoplayBlocked(true);
+        
+        // Try muted autoplay as fallback
+        try {
+          audio.muted = true;
+          await audio.play();
+          setIsPlaying(true);
+          setAutoplayBlocked(false);
+        } catch (mutedError) {
+          console.log("Muted autoplay also failed:", mutedError);
+          setAutoplayBlocked(true);
+        }
       }
     };
 
+    // Try autoplay when audio is ready
     if (audio.readyState >= 3) {
       playAudio();
     } else {
       audio.addEventListener("canplaythrough", playAudio, { once: true });
     }
 
+    // Also try autoplay after a short delay
+    const delayedAutoplay = setTimeout(() => {
+      if (!isPlaying && !hasUserInteracted) {
+        playAudio();
+      }
+    }, 1000);
+
     return () => {
+      clearTimeout(delayedAutoplay);
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("play", handlePlay);
@@ -73,10 +102,18 @@ const RetroMusicPlayer = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
+    // Mark that user has interacted
+    setHasUserInteracted(true);
+    setAutoplayBlocked(false);
+
     try {
       if (isPlaying) {
         audio.pause();
       } else {
+        // Unmute if it was muted due to autoplay restrictions
+        if (audio.muted) {
+          audio.muted = false;
+        }
         await audio.play();
       }
     } catch (error) {
@@ -103,7 +140,20 @@ const RetroMusicPlayer = () => {
   };
 
   return (
-    <div className="bg-black text-white font-cartograph p-3 border-b border-white/20 backdrop-blur-xl">
+    <div className="bg-black text-white font-cartograph p-3 border-b border-white/20 backdrop-blur-xl relative">
+      {/* Click to play overlay when autoplay is blocked */}
+      {autoplayBlocked && !hasUserInteracted && (
+        <div 
+          className="absolute inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center cursor-pointer z-10"
+          onClick={playPause}
+        >
+          <div className="text-center">
+            <div className="text-white/90 text-sm mb-2">Click to play music</div>
+            <div className="text-white/60 text-xs">Autoplay blocked by browser</div>
+          </div>
+        </div>
+      )}
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center sm:justify-start space-x-4">
           {/* Track Info */}
@@ -152,7 +202,13 @@ const RetroMusicPlayer = () => {
       </div>
 
       {/* Audio element */}
-      <audio ref={audioRef} preload="auto" className="hidden" />
+      <audio 
+        ref={audioRef} 
+        preload="auto" 
+        autoPlay 
+        loop 
+        className="hidden" 
+      />
     </div>
   );
 };
