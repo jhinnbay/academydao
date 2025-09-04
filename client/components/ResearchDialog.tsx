@@ -8,6 +8,7 @@ interface ResearchDialogProps {
 }
 
 export function ResearchDialog({ isOpen, onClose }: ResearchDialogProps) {
+  console.log("ResearchDialog rendered, isOpen:", isOpen);
   if (!isOpen) return null;
 
   return (

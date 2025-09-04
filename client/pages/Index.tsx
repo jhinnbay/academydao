@@ -543,6 +543,7 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    console.log("Research button clicked, opening dialog");
                     setIsResearchOpen(true);
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
