@@ -1,4 +1,5 @@
 // components/UserAvatar.tsx
+import Image from "next/image";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { base as baseChain } from "viem/chains";
 import { useAccount } from "wagmi";
@@ -19,25 +20,33 @@ export function UserAvatar({
   showAddress = false,
   showBadge = true,
   className = "",
-  schemaId = "0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9", // Default schema ID from docs
+  schemaId = "0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9",
 }: UserAvatarProps) {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { isFarcaster, pfpUrl } = useFarcasterUser();
 
-  if (!isConnected || !wagmiAddress) {
-    const sizeClasses = {
-      sm: "w-6 h-6",
-      md: "w-8 h-8",
-      lg: "w-12 h-12",
-      xl: "w-16 h-16",
-    };
+  const sizeClasses = {
+    sm: "w-6 h-6",
+    md: "w-8 h-8",
+    lg: "w-12 h-12",
+    xl: "w-16 h-16",
+  };
 
+  if (!isConnected || !wagmiAddress) {
     return (
       <div
         className={`${sizeClasses[size]} bg-gradient-to-r from-gray-600 to-gray-800 rounded-full flex items-center justify-center ${className}`}
       >
         <svg
-          className={`${size === "sm" ? "w-3 h-3" : size === "md" ? "w-4 h-4" : size === "lg" ? "w-6 h-6" : "w-8 h-8"} text-white`}
+          className={`${
+            size === "sm"
+              ? "w-3 h-3"
+              : size === "md"
+              ? "w-4 h-4"
+              : size === "lg"
+              ? "w-6 h-6"
+              : "w-8 h-8"
+          } text-white`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -51,26 +60,36 @@ export function UserAvatar({
     );
   }
 
-  const sizeClasses = {
-    sm: "w-6 h-6",
-    md: "w-8 h-8",
-    lg: "w-12 h-12",
-    xl: "w-16 h-16",
-  };
-
   return (
     <div className={`flex items-center gap-2 ${className}`}>
+      {/* Avatar container with enforced size */}
       <div
-        className={`${sizeClasses[size]} rounded-full overflow-hidden bg-white/10`}
+        className={`${sizeClasses[size]} rounded-full overflow-hidden bg-white/10 flex-shrink-0`}
       >
-        <Avatar
-          address={wagmiAddress}
-          chain={baseChain}
-          className="w-full h-full"
-        />
+        {pfpUrl ? (
+          <Image
+            src={pfpUrl}
+            alt="User avatar"
+            width={64}
+            height={64}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <Avatar
+            address={wagmiAddress}
+            chain={baseChain}
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
-      {showName && <Name address={wagmiAddress} chain={baseChain} />}
+      {showName && (
+        <Name
+          address={wagmiAddress}
+          chain={baseChain}
+          className="text-white/90 text-sm font-medium"
+        />
+      )}
     </div>
   );
 }
