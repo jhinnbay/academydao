@@ -196,11 +196,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             >
               Close
             </button>
-            <div className="text-center">
+            <div className="text-left">
               <h2 className="text-white font-sans font-bold text-xl">
-                Acquire an Angel
+                ://AcademicAngels
               </h2>
-              <div className="w-24 h-0.5 bg-white/50 mx-auto mt-2" />
+              <div className="w-24 h-0.5 bg-white/50 mt-2" />
             </div>
           </div>
 
@@ -245,8 +245,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 </div>
               </div>
               <div className="text-center">
-                <h3 className="text-white font-sans font-semibold mb-1">
-                  Angels
+                <h3 className="text-white font-sans font-semibold mb-1 text-left">
+                  Academic Angel x Base
                 </h3>
                 <p className="text-white/80 text-sm">
                   You sense a digital blessing...
@@ -288,10 +288,10 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               <div className="flex">
                 <Button
                   onClick={handleMint}
-                  disabled={minting || !isConnected}
-                  className="w-full bg-white text-black hover:bg-gray-200"
+                  disabled={true}
+                  className="w-full bg-gray-500 text-gray-300 cursor-not-allowed"
                 >
-                  {minting ? "Minting..." : `Mint ${quantity}`}
+                  Mint {quantity} (Disabled)
                 </Button>
               </div>
 
@@ -320,12 +320,12 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
           <div className="p-4 border-t border-white/20 bg-black/70">
             <a
               className="block w-full"
-              href="https://opensea.io/collection/academic-angels/overview"
+              href="https://scatter.art/collection/academic-angels"
               target="_blank"
               rel="noopener noreferrer"
             >
               <Button className="w-full bg-white/10 hover:bg-white/20 border border-white/30 text-white">
-                View OpenSea Collection
+                View on Scatter
               </Button>
             </a>
           </div>
