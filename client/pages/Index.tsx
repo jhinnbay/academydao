@@ -640,22 +640,9 @@ export default function Index() {
                       );
                     }
                     return (
-                      <div className="flex items-center gap-2 h-full">
-                        <div className="w-8 h-8 rounded-md bg-white/10 border border-white/20 flex items-center justify-center">
-                          <svg
-                            className="w-4 h-4 text-white"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
+                      <div className="flex items-center h-full">
                         <span
-                          className="font-sans text-white/90"
+                          className="font-sans text-white/90 whitespace-nowrap leading-none"
                           style={{
                             fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
                             fontWeight: "500",
