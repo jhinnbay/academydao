@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useQuery } from "@tanstack/react-query";
-import { useAccount, useChainId, useSwitchChain } from "wagmi";
+import { useAccount, useChainId, useSwitchChain, useBalance } from "wagmi";
 import { base as baseChain } from "viem/chains";
 import {
   readContract,
@@ -26,8 +26,12 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const [minting, setMinting] = useState(false);
   const [txHash, setTxHash] = useState<string | null>(null);
   const chainId = useChainId();
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { switchChainAsync } = useSwitchChain();
+  const { data: balance } = useBalance({
+    address: address,
+    chainId: baseChain.id,
+  });
 
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f" as const;
 
@@ -100,10 +104,19 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
       const pricePer = await getPricePer();
       const totalValue = pricePer * BigInt(quantity);
       
+      // Check if user has enough ETH balance
+      if (balance && totalValue > 0n) {
+        const userBalance = balance.value;
+        if (userBalance < totalValue) {
+          throw new Error(`Insufficient ETH balance. Required: ${(Number(totalValue) / 1e18).toFixed(4)} ETH, Available: ${(Number(userBalance) / 1e18).toFixed(4)} ETH`);
+        }
+      }
+      
       console.log("Mint attempt:", {
         quantity,
         pricePer: pricePer.toString(),
         totalValue: totalValue.toString(),
+        userBalance: balance?.value?.toString() || "unknown",
         contract: ANGEL_CONTRACT,
         chainId: baseChain.id
       });
