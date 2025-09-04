@@ -8,7 +8,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import AzuraTerminalModal from "@/components/AzuraTerminalModal";
+import { Card, CardContent } from "@/components/ui/card";
+import { SoundEffects } from "@/lib/soundEffects";
 import { Brain, Bot, ClipboardList, MessageCircle } from "lucide-react";
 
 type TestCardsCarouselProps = {
@@ -25,7 +26,11 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [terminalMessages, setTerminalMessages] = useState<string[]>([]);
+  const [showChoices, setShowChoices] = useState(false);
+  const [output, setOutput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const onCompleteRef = useRef<() => void>(() => {});
+  const timers = useRef<number[]>([]);
 
   useEffect(() => {
     if (!api) return;
@@ -41,6 +46,31 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
     setTerminalMessages(messages);
     onCompleteRef.current = onDone;
     setTerminalOpen(true);
+    setShowChoices(false);
+    setOutput("");
+    setIsTyping(true);
+
+    // Play sound effect
+    SoundEffects.playTerminal();
+
+    // Build script with line prefixes
+    const script = messages.map((m) => `> ${m}`).join("\n");
+    
+    let idx = 0;
+    const type = () => {
+      if (idx >= script.length) {
+        setIsTyping(false);
+        setShowChoices(true);
+        return;
+      }
+      setOutput((p) => p + script[idx]);
+      idx += 1;
+      const t = window.setTimeout(type, 18);
+      timers.current.push(t);
+    };
+
+    const start = window.setTimeout(type, 250);
+    timers.current.push(start);
   };
 
   const cards = useMemo(
@@ -175,12 +205,64 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         {/* Arrows removed per request */}
       </Carousel>
 
-      <AzuraTerminalModal
-        isOpen={terminalOpen}
-        onClose={() => setTerminalOpen(false)}
-        messages={terminalMessages}
-        onComplete={() => onCompleteRef.current?.()}
-      />
+      {/* Custom Terminal Modal with User Choice */}
+      {terminalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setTerminalOpen(false)} />
+          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-hidden">
+            <Card className="bg-black border border-white/20 shadow-2xl">
+              <CardContent className="p-0">
+                {/* Terminal Header */}
+                <div className="relative p-6 border-b border-white/20 bg-black backdrop-blur-sm">
+                  <button
+                    onClick={() => setTerminalOpen(false)}
+                    className="absolute top-4 right-4 px-3 py-1 text-white/80 border border-white/30 rounded hover:bg-white/10 transition-colors"
+                  >
+                    Close
+                  </button>
+                  <div className="text-left">
+                    <h2 className="text-white font-sans font-bold text-2xl mb-2">
+                      Azura Terminal
+                    </h2>
+                    <div className="w-24 h-0.5 bg-white/50 mt-2" />
+                  </div>
+                </div>
+
+                {/* Terminal Output */}
+                <div className="relative flex-1 overflow-y-auto p-6 bg-black backdrop-blur-sm">
+                  <div className="font-mono text-green-400 text-sm leading-relaxed whitespace-pre-wrap">
+                    {output}
+                    {isTyping && <span className="animate-pulse">|</span>}
+                  </div>
+                </div>
+
+                {/* Choice Buttons */}
+                {showChoices && (
+                  <div className="p-6 border-t border-white/20 bg-black/70">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Button
+                        onClick={() => setTerminalOpen(false)}
+                        className="flex-1 bg-white/10 hover:bg-white/20 border border-white/30 text-white"
+                      >
+                        Close
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          onCompleteRef.current?.();
+                          setTerminalOpen(false);
+                        }}
+                        className="flex-1 bg-white text-black hover:bg-gray-200"
+                      >
+                        Continue
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
