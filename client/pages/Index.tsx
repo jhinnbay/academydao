@@ -843,7 +843,7 @@ export default function Index() {
             </div>
           </div>
           {/* Tests carousel */}
-          <div className="mb-10">
+          <div className="mb-10 -mx-6 sm:-mx-8 md:-mx-12 lg:-mx-16 xl:-mx-20">
             <TestCardsCarousel
               onOpenIQ={() => setIsIQOpen(true)}
               onOpenSurveys={() => setIsModalOpen(true)}

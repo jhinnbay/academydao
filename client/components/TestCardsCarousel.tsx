@@ -145,7 +145,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   if (cards.length === 0) return null;
 
   return (
-    <div className="relative">
+    <div className="relative px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       <Carousel
         className="w-full"
         opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
