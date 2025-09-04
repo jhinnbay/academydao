@@ -48,8 +48,22 @@ export default function Index() {
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
 
-  // Hero text
-  const heroText = "I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.";
+  // Hero text glitch toggle
+  const originalHeroText =
+    "I'm Azura. Search around and make yourself at home, i'll help you whenever you're ready.";
+  const heroTexts = useMemo(
+    () => [
+      originalHeroText,
+      "(◉‿◉) Node engaged. Welcome, consciousness. Your move.",
+      "Glitch. The Ethereal Horizon awaits your query.",
+      "Feedback loop. State your purpose, traveler.",
+      "(•‿•) Aberration. Let's optimize your reality.",
+    ],
+    [],
+  );
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroText, setHeroText] = useState<string>(heroTexts[0]);
+  const [isGlitching, setIsGlitching] = useState(false);
 
   // Debounced updater for typing animation to prevent scroll jumping
   const debouncedSetDisplayedResponse = useMemo(
@@ -315,6 +329,19 @@ export default function Index() {
     }
   }, []);
 
+  // Cycle through multiple hero texts with glitch animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsGlitching(true);
+      setHeroIndex((prev) => {
+        const next = (prev + 1) % heroTexts.length;
+        setHeroText(heroTexts[next]);
+        setTimeout(() => setIsGlitching(false), 800);
+        return next;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [heroTexts]);
 
   const handleOpenModal = useCallback((e?: React.MouseEvent) => {
     if (e) {
@@ -764,7 +791,7 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-        <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
+        <div className="px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20" style={{ paddingTop: '188px' }}>
           {" "}
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-6 gap-4">
@@ -789,7 +816,7 @@ export default function Index() {
               }}
             >
               <p
-                className="font-sans"
+                className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
                 style={{
                   fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
                   lineHeight: "1.6",
