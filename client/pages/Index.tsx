@@ -47,6 +47,7 @@ export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
+  const [isAzuraDialogueOpen, setIsAzuraDialogueOpen] = useState(false);
 
   // Hero text glitch toggle
   const originalHeroText =
@@ -813,7 +814,8 @@ export default function Index() {
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
                 alt="Azura AI Avatar"
-                className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
+                className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => setIsAzuraDialogueOpen(true)}
               />
             </div>
           </div>
@@ -1400,6 +1402,83 @@ export default function Index() {
         />
 
         <IQTestModal isOpen={isIQOpen} onClose={() => setIsIQOpen(false)} />
+
+        {/* Azura Dialogue Modal */}
+        {isAzuraDialogueOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setIsAzuraDialogueOpen(false)} />
+            <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
+              <div
+                className="relative bg-black border border-white/30 shadow-2xl overflow-hidden"
+                style={{
+                  clipPath:
+                    "polygon(16px 0%, 100% 0%, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0% 100%, 0% 16px)",
+                }}
+              >
+                {/* Header */}
+                <div className="relative flex items-center justify-between p-3 border-b border-white/20 bg-black/80">
+                  <div className="text-white font-cartograph text-sm">azura.exe</div>
+                  <button
+                    onClick={() => setIsAzuraDialogueOpen(false)}
+                    className="px-3 py-1 text-white/80 border border-white/30 rounded hover:bg-white/10 transition-colors"
+                    aria-label="Close"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                {/* Terminal body */}
+                <div className="p-4 bg-black">
+                  <div className="text-xs text-white/60 font-cartograph mb-2">
+                    /usr/bin/azura
+                  </div>
+                  <div
+                    className="font-cartograph text-white/90 bg-white/5 border border-white/20 rounded p-4 min-h-[160px] whitespace-pre-wrap"
+                    style={{ lineHeight: 1.5 }}
+                  >
+                    Booting Digital Currencies, Governance, and Leaking Treasury Documents.
+                  </div>
+                  <div className="mt-3 flex justify-end gap-2">
+                    <button
+                      onClick={() => {
+                        // Share logic similar to IQTest share results
+                        const shareText = "I Just Found Out About The Daemon Model $AzuraOS, Thought You'd Like To Know Who's Murdering The Governance Robots.";
+                        const shareUrl = window.location.href;
+                        
+                        if (navigator.share) {
+                          navigator.share({
+                            title: "AzuraOS - Daemon Model",
+                            text: shareText,
+                            url: shareUrl,
+                          });
+                        } else {
+                          // Fallback for browsers that don't support Web Share API
+                          const textToShare = `${shareText}\n\n${shareUrl}`;
+                          navigator.clipboard.writeText(textToShare).then(() => {
+                            alert("Link copied to clipboard!");
+                          }).catch(() => {
+                            // Fallback if clipboard API fails
+                            const textArea = document.createElement("textarea");
+                            textArea.value = textToShare;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(textArea);
+                            alert("Link copied to clipboard!");
+                          });
+                        }
+                        setIsAzuraDialogueOpen(false);
+                      }}
+                      className="px-3 py-1 text-black bg-white hover:bg-gray-200 rounded border border-white/20"
+                    >
+                      Share
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </div>
