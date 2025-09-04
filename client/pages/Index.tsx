@@ -800,7 +800,7 @@ export default function Index() {
         <div className="pt-52 px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
           {" "}
           {/* Hero Section */}
-          <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-8 gap-8">
+          <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-6 gap-4">
             <h1
               className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
               style={{
