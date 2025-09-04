@@ -4,6 +4,7 @@ import { TypewriterDots } from "@/components/TypewriterDots";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
+import { ResearchDialog } from "@/components/ResearchDialog";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
@@ -47,6 +48,7 @@ export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
+  const [isResearchOpen, setIsResearchOpen] = useState(false);
 
   // Hero text glitch toggle
   const originalHeroText =
@@ -541,6 +543,7 @@ export default function Index() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    setIsResearchOpen(true);
                   }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
@@ -1406,6 +1409,11 @@ export default function Index() {
         />
 
         <IQTestModal isOpen={isIQOpen} onClose={() => setIsIQOpen(false)} />
+
+        <ResearchDialog
+          isOpen={isResearchOpen}
+          onClose={() => setIsResearchOpen(false)}
+        />
       </div>
     </div>
   );
