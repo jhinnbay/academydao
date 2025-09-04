@@ -8,7 +8,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Brain, Bot, ClipboardList, MessageCircle } from "lucide-react";
+import { Brain, Bot, ClipboardList } from "lucide-react";
 import { AzuraTerminalModal } from "@/components/AzuraTerminalModal";
 import { SoundEffects } from "@/lib/soundEffects";
 
@@ -91,24 +91,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
               "Opening Research Surveys...",
             ],
             onOpenSurveys,
-          ),
-      },
-      {
-        id: "discord",
-        title: "Join Discord",
-        description:
-          "Enter the Academy lounge. Sync with peers, get updates, and unlock community drops.",
-        icon: MessageCircle,
-        cta: "Join Discord",
-        onClick: () =>
-          openWithTerminal(
-            [
-              "Booting azura.exe...",
-              "Resolving gateway to the Academy lounge...",
-              "Handshake accepted.",
-              "Opening Discord...",
-            ],
-            () => window.open("https://discord.gg/NMuFJ2QvGq", "_blank"),
           ),
       },
     ],

@@ -4,7 +4,6 @@ import { TypewriterDots } from "@/components/TypewriterDots";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
-import { ResearchDialog } from "@/components/ResearchDialog";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
@@ -47,7 +46,6 @@ export default function Index() {
   const [displayedResponse, setDisplayedResponse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
-  const [isResearchOpen, setIsResearchOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
 
   // Hero text glitch toggle
@@ -540,7 +538,10 @@ export default function Index() {
               {/* Navigation Links */}
               <div className="hidden md:flex items-center gap-8">
                 <button
-                  onClick={() => setIsResearchOpen(true)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
                   className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
@@ -702,8 +703,9 @@ export default function Index() {
                       fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                       fontWeight: "500",
                     }}
-                    onClick={() => {
-                      setIsResearchOpen(true);
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -1398,7 +1400,6 @@ export default function Index() {
         />
 
         <IQTestModal isOpen={isIQOpen} onClose={() => setIsIQOpen(false)} />
-        <ResearchDialog isOpen={isResearchOpen} onClose={() => setIsResearchOpen(false)} />
 
       </div>
     </div>
