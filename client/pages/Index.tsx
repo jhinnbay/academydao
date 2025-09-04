@@ -521,7 +521,13 @@ export default function Index() {
         </div>
 
         {/* Futuristic Navbar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+        <nav 
+          className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl"
+          style={{ pointerEvents: "auto" }}
+          onClick={(e) => {
+            console.log("Navbar clicked", e.target);
+          }}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
@@ -538,7 +544,7 @@ export default function Index() {
               </div>
 
               {/* Navigation Links */}
-              <div className="hidden md:flex items-center gap-8">
+              <div className="hidden md:flex items-center gap-8" style={{ zIndex: 60 }}>
                 <button
                   onClick={(e) => {
                     e.preventDefault();
@@ -546,10 +552,13 @@ export default function Index() {
                     console.log("Research button clicked, opening dialog");
                     setIsResearchOpen(true);
                   }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
+                  className="font-sans text-white/80 hover:text-white transition-colors duration-300 cursor-pointer"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                     fontWeight: "500",
+                    pointerEvents: "auto",
+                    position: "relative",
+                    zIndex: 70,
                   }}
                 >
                   Research
@@ -710,6 +719,8 @@ export default function Index() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
+                      console.log("Mobile Research button clicked, opening dialog");
+                      setIsResearchOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
                   >
