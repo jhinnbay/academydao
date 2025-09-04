@@ -1201,7 +1201,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          You feel the wind under your wings
+                          A gust of wind under your wings
                         </p>
 
                         {/* Action Buttons */}
@@ -1236,8 +1236,8 @@ export default function Index() {
                           >
                             {isAngelLoading ? (
                               "Loading..."
-                            ) : angelDetails?.collectionName ? (
-                              angelDetails.collectionName
+                            ) : angelDetails?.name ? (
+                              angelDetails.name
                             ) : (
                               "Academic Angels"
                             )}
