@@ -249,7 +249,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                   Angels
                 </h3>
                 <p className="text-white/80 text-sm">
-                  You sense a digital blessing.... ...leviathan, Azura.
+                  You sense a digital blessing...
                 </p>
               </div>
             </div>
@@ -258,25 +258,25 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             <div className="flex flex-col gap-3">
               <Card className="bg-black border border-white/30">
                 <CardContent className="p-4">
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex flex-col gap-4">
                     <div className="text-white/90 text-sm font-sans">
                       Select quantity
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 w-full">
                       <Button
                         type="button"
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                        className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-3"
+                        className="flex-1 bg-white/10 hover:bg-white/20 border border-white/30 text-white py-2"
                       >
                         −
                       </Button>
-                      <div className="w-10 text-center text-white/90 font-sans">
+                      <div className="w-16 text-center text-white/90 font-sans text-lg">
                         {quantity}
                       </div>
                       <Button
                         type="button"
                         onClick={() => setQuantity((q) => Math.min(5, q + 1))}
-                        className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-3"
+                        className="flex-1 bg-white/10 hover:bg-white/20 border border-white/30 text-white py-2"
                       >
                         +
                       </Button>
