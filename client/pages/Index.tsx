@@ -504,7 +504,7 @@ export default function Index() {
                     fontWeight: "700",
                   }}
                 >
-                  ://AcademyOS
+                  ://AzuraOS
                 </span>
               </div>
 
