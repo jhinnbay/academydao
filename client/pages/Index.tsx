@@ -619,7 +619,7 @@ export default function Index() {
                   tabIndex={0}
                   aria-haspopup="menu"
                   aria-expanded={isMobileMenuOpen}
-                  className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-0 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
+                  className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
                 >
                   {(() => {
                     if (isConnected && wagmiAddress) {
