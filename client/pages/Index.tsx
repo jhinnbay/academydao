@@ -1178,7 +1178,7 @@ export default function Index() {
                         fontWeight: "700",
                       }}
                     >
-                      Strengthen Your Proposal
+                      Rediscover Yourself
                     </h3>
                     <div className="space-y-3">
                       {/* Action Guidance */}
@@ -1191,7 +1191,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          No Angel(s) found, buy one to boost.
+                          feel the wind under your wings?
                         </p>
 
                         {/* Action Buttons */}
