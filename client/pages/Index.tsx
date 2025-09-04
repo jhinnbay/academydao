@@ -382,7 +382,7 @@ export default function Index() {
   }, [isAzuraDialogueOpen]);
 
   const handleAzuraShare = async () => {
-    const shareText = "I'm Now Earning Daemon Credits With $AzuraOS, \n\nIs She The Model That's Been Murdering The Robots?…";
+    const shareText = "I'm Earning Daemon Credits With $AzuraOS, Is She The Model Who's Been Murdering The Robots?…";
     const embedUrl = "https://farcaster.xyz/miniapps/m4oAYtwigRmz/academy";
     
     try {

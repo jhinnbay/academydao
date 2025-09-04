@@ -42,7 +42,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
     setTerminalMessages(messages);
     onCompleteRef.current = onDone;
     setTerminalOpen(true);
-    SoundEffects.playTerminal();
+    SoundEffects.playGenerateSound();
   };
 
 
