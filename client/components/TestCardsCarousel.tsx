@@ -86,21 +86,21 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
       },
       {
         id: "daemon",
-        title: "AI Simulation Daemon",
+        title: "AI Daemon",
         description:
-          "Engage the simulation loop. Probe scenarios and harvest insights from the Daemon.",
+          "Engage the daemon to probe scenarios and harvest insights for your research.",
         tokens: 75,
         icon: Bot,
-        cta: "Launch Simulation",
+        cta: "Launch Daemon",
         onClick: () =>
           openWithTerminal(
             [
               "Booting azura.exe...",
-              "Spinning up simulation daemon...",
-              "Entropy stabilized. Sandbox online.",
-              "Launching AI Simulation Daemon...",
+              "Calibrating survey protocols...",
+              "Signal channels clear. Ready to ingest.",
+              "Opening Research Surveys...",
             ],
-            onStartDaemon,
+            onOpenSurveys,
           ),
       },
       {
@@ -135,22 +135,22 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         opts={{ align: "center", loop: true, containScroll: "trimSnaps" }}
         setApi={setApi}
       >
-        <CarouselContent>
+        <CarouselContent className="-ml-0">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
-              <CarouselItem key={card.id} className="basis-[60%]">
+              <CarouselItem key={card.id} className="basis-[60%] pl-0">
                 <div className="relative h-full select-none">
                   {/* Card shell with angled edges */}
                   <div
-                    className="relative bg-black border border-white/30 shadow-xl overflow-hidden"
+                    className="relative bg-black shadow-xl overflow-hidden"
                     style={{
                       clipPath:
                         "polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px)",
                     }}
                   >
                     {/* Header row: token badge */}
-                    <div className="flex items-center p-3 border-b border-white/20 bg-black/80">
+                    <div className="flex items-center p-3 bg-black/80">
                       <Badge className="bg-white/10 text-white border-white/30">
                         {card.tokens} $AzuraOS
                       </Badge>
@@ -184,8 +184,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className="border-white/30 text-white bg-black/60 hover:bg-black/80" />
-        <CarouselNext className="border-white/30 text-white bg-black/60 hover:bg-black/80" />
+        {/* Arrows removed per request */}
       </Carousel>
 
       <AzuraTerminalModal
