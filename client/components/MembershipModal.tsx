@@ -146,7 +146,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
     } catch (e) {
       console.error("Mint failed", e);
       window.open(
-        "https://www.scatter.art/collection/academic-angels",
+        "https://opensea.io/collection/academic-angels",
         "_blank",
       );
     } finally {
