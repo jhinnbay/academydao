@@ -157,13 +157,9 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
             return (
               <CarouselItem key={card.id} className="basis-[60%] pl-0">
                 <div className="relative h-full select-none">
-                  {/* Card shell with angled edges */}
+                  {/* Card shell */}
                   <div
-                    className="relative bg-black shadow-xl overflow-hidden"
-                    style={{
-                      clipPath:
-                        "polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px)",
-                    }}
+                    className="relative bg-black shadow-xl overflow-hidden rounded-lg"
                   >
                     {/* Body */}
                     <div className="p-5 flex flex-col gap-4 min-h-56">
