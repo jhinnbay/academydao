@@ -27,15 +27,45 @@ export function useNeynarProfile({ fid, username, address }: Params) {
     queryKey: key,
     enabled: Boolean(fid || username || address),
     queryFn: async () => {
-      const qs = new URLSearchParams();
-      if (fid) qs.set("fid", String(fid));
-      if (username) qs.set("username", String(username));
-      if (address) qs.set("address", String(address));
-      const res = await fetch(`/api/farcaster/profile?${qs.toString()}`);
-      if (!res.ok) throw new Error(`Failed to load profile (${res.status})`);
-      return (await res.json()) as NeynarProfile;
+      try {
+        const qs = new URLSearchParams();
+        if (fid) qs.set("fid", String(fid));
+        if (username) qs.set("username", String(username));
+        if (address) qs.set("address", String(address));
+        const res = await fetch(`/api/farcaster/profile?${qs.toString()}`);
+        if (!res.ok) {
+          // Handle 501 error gracefully (missing API key)
+          if (res.status === 501) {
+            console.warn("Neynar API key not configured, skipping profile fetch");
+            return {
+              fid: null,
+              username: null,
+              displayName: null,
+              pfpUrl: null,
+              bio: null,
+              followerCount: null,
+              followingCount: null,
+            };
+          }
+          throw new Error(`Failed to load profile (${res.status})`);
+        }
+        return (await res.json()) as NeynarProfile;
+      } catch (error) {
+        console.warn("Neynar profile fetch failed:", error);
+        // Return empty profile instead of throwing
+        return {
+          fid: null,
+          username: null,
+          displayName: null,
+          pfpUrl: null,
+          bio: null,
+          followerCount: null,
+          followingCount: null,
+        };
+      }
     },
     staleTime: 5 * 60 * 1000,
+    retry: false, // Don't retry on failure
   });
   return query;
 }
