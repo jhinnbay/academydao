@@ -99,6 +99,14 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
       const pricePer = await getPricePer();
       const totalValue = pricePer * BigInt(quantity);
+      
+      console.log("Mint attempt:", {
+        quantity,
+        pricePer: pricePer.toString(),
+        totalValue: totalValue.toString(),
+        contract: ANGEL_CONTRACT,
+        chainId: baseChain.id
+      });
 
       // Try mint(quantity)
       try {
@@ -113,20 +121,27 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         setTxHash(hash);
         await waitForTransactionReceipt(wagmiConfig, { hash });
         return;
-      } catch (_) {}
+      } catch (error) {
+        console.error("Mint with quantity failed:", error);
+      }
 
       // Fallback: call mint() multiple times
       for (let i = 0; i < quantity; i++) {
-        const hash = await writeContract(wagmiConfig, {
-          address: ANGEL_CONTRACT,
-          abi: abiMint,
-          functionName: "mint",
-          args: [],
-          value: pricePer > 0n ? pricePer : undefined,
-          chainId: baseChain.id,
-        });
-        setTxHash(hash);
-        await waitForTransactionReceipt(wagmiConfig, { hash });
+        try {
+          const hash = await writeContract(wagmiConfig, {
+            address: ANGEL_CONTRACT,
+            abi: abiMint,
+            functionName: "mint",
+            args: [],
+            value: pricePer > 0n ? pricePer : undefined,
+            chainId: baseChain.id,
+          });
+          setTxHash(hash);
+          await waitForTransactionReceipt(wagmiConfig, { hash });
+        } catch (error) {
+          console.error(`Mint attempt ${i + 1} failed:`, error);
+          throw error; // Re-throw to trigger the outer catch block
+        }
       }
     } catch (e) {
       console.error("Mint failed", e);
