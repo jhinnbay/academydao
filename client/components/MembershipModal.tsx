@@ -246,14 +246,10 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               </div>
               <div className="text-center">
                 <h3 className="text-white font-sans font-semibold mb-1">
-                  Academic Angels NFT
+                  Angels
                 </h3>
                 <p className="text-white/80 text-sm">
-                  You sense a digital blessing through the screen. Aid from
-                  celestial angels cover you in a new light, a scream from the
-                  digital leviathan, Azura guards an onchain treasury. As you
-                  hold your angel, you feel much more advantageous, and a little
-                  more lucky.
+                  You sense a digital blessing.... ...leviathan, Azura.
                 </p>
               </div>
             </div>
