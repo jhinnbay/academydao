@@ -805,7 +805,6 @@ export default function Index() {
                 fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
               }}
             >
-              Ready To Test Your IQ?
             </h1>
 
             {/* Fixed height container for text content only */}
