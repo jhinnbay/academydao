@@ -14,6 +14,7 @@ import {
   Address,
   Badge,
 } from "@coinbase/onchainkit/identity";
+import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { useNeynarProfile } from "@/hooks/useNeynarProfile";
@@ -32,6 +33,12 @@ export default function Index() {
   const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
   const mergedName =
     displayName || username || neynar?.displayName || neynar?.username || null;
+  
+  // Fetch Academic Angels collection details
+  const { data: angelDetails, isLoading: isAngelLoading } = useTokenDetails({
+    contractAddress: "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f",
+    tokenId: "1", // Use token ID 1 as a representative sample
+  });
   const [isTyping, setIsTyping] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
@@ -1224,7 +1231,13 @@ export default function Index() {
                               fontWeight: "500",
                             }}
                           >
-                            Learn More
+                            {isAngelLoading ? (
+                              "Loading..."
+                            ) : angelDetails?.collectionName ? (
+                              angelDetails.collectionName
+                            ) : (
+                              "Academic Angels"
+                            )}
                           </button>
                         </div>
                       </div>
