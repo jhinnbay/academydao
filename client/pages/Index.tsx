@@ -4,7 +4,6 @@ import { TypewriterDots } from "@/components/TypewriterDots";
 import { InputRequestModal } from "@/components/InputRequestModal";
 import { MembershipModal } from "@/components/MembershipModal";
 import { IQTestModal } from "@/components/IQTestModal";
-import { ResearchDialog } from "@/components/ResearchDialog";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
@@ -48,7 +47,6 @@ export default function Index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
-  const [isResearchOpen, setIsResearchOpen] = useState(false);
 
   // Hero text glitch toggle
   const originalHeroText =
@@ -521,13 +519,7 @@ export default function Index() {
         </div>
 
         {/* Futuristic Navbar */}
-        <nav 
-          className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl"
-          style={{ pointerEvents: "auto" }}
-          onClick={(e) => {
-            console.log("Navbar clicked", e.target);
-          }}
-        >
+        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
@@ -544,21 +536,16 @@ export default function Index() {
               </div>
 
               {/* Navigation Links */}
-              <div className="hidden md:flex items-center gap-8" style={{ zIndex: 60 }}>
+              <div className="hidden md:flex items-center gap-8">
                 <button
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log("Research button clicked, opening dialog");
-                    setIsResearchOpen(true);
                   }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300 cursor-pointer"
+                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
                   style={{
                     fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
                     fontWeight: "500",
-                    pointerEvents: "auto",
-                    position: "relative",
-                    zIndex: 70,
                   }}
                 >
                   Research
@@ -719,8 +706,6 @@ export default function Index() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      console.log("Mobile Research button clicked, opening dialog");
-                      setIsResearchOpen(true);
                       setIsMobileMenuOpen(false);
                     }}
                   >
@@ -1422,10 +1407,6 @@ export default function Index() {
 
         <IQTestModal isOpen={isIQOpen} onClose={() => setIsIQOpen(false)} />
 
-        <ResearchDialog
-          isOpen={isResearchOpen}
-          onClose={() => setIsResearchOpen(false)}
-        />
       </div>
     </div>
   );
