@@ -795,51 +795,45 @@ export default function Index() {
           {" "}
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-6 gap-4">
-            <h1
-              className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
-              style={{
-                fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
-                lineHeight: "1.1",
-                letterSpacing: "-0.02em",
-                fontWeight: "700",
-                fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
-              }}
-            >
-            </h1>
-
-            {/* Fixed height container for text content only */}
-            <div
-              style={{
-                height: "clamp(30px,100vh, 100px)",
-                display: "flex", // needed for alignItems to work
-                alignItems: "center", // centers vertically
-              }}
-            >
-              <p
-                className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
+            <div className="flex flex-col">
+              <h1
+                className="font-sans font-bold bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent"
                 style={{
-                  fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
-                  lineHeight: "1.6",
-                  fontWeight: "400",
-                  color: "#b0b0b0",
-                  minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
-                  display: "flex",
-                  alignItems: "flex-start",
+                  fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                  fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
                 }}
               >
-                {heroText}
-              </p>
+              </h1>
             </div>
 
-            <div>
-              <div className="flex flex-col items-start gap-2"></div>
-            </div>
-            <div className="flex justify-center items-end flex-shrink-0">
+            <div className="flex flex-col items-center">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
               />
+              
+              {/* Glitched text underneath Azura */}
+              <div className="mt-4 text-center">
+                <p
+                  className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
+                  style={{
+                    fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                    lineHeight: "1.6",
+                    fontWeight: "400",
+                    color: "#b0b0b0",
+                    minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "center",
+                  }}
+                >
+                  {heroText}
+                </p>
+              </div>
             </div>
           </div>
           {/* Tests carousel */}
