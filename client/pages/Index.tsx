@@ -1191,7 +1191,7 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          an feel the wind under your wings?
+                          feel the wind under your wings?
                         </p>
 
                         {/* Action Buttons */}
