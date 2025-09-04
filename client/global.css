@@ -537,7 +537,8 @@ body {
 [class*="ock-text"],
 [class*="ock-name"],
 [class*="ock-identity"] {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  background: transparent !important;
 }
 
 /* Fix avatar + image sizing so they don't blow up buttons */
@@ -557,4 +558,5 @@ span:has(> [class*="ock-image"]) img {
 /* Override inline styles inside OnchainKit, but keep layout intact */
 [class*="ock-"] span {
   color: inherit !important;
+  background: transparent !important;
 }

@@ -624,18 +624,17 @@ export default function Index() {
                   {(() => {
                     if (isConnected && wagmiAddress) {
                       return (
-                        <div className="min-w-[220px] sm:min-w-[260px]">
+                        <div className="flex items-center gap-2 overflow-hidden">
                           <Identity
                             address={wagmiAddress}
                             chain={baseChain}
                             schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                            className="text-white"
+                            className="text-white bg-transparent"
                           >
                             <Avatar />
                             <Name>
                               <Badge />
                             </Name>
-                            <Address />
                           </Identity>
                         </div>
                       );
