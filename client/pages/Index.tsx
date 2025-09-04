@@ -791,7 +791,7 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-        <div className="px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20" style={{ paddingTop: '128px' }}>
+        <div className="px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20" style={{ paddingTop: '156px' }}>
           {" "}
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-6 gap-4">
@@ -809,33 +809,34 @@ export default function Index() {
               </h1>
             </div>
 
-            <div className="flex flex-col items-center">
+            <div className="flex justify-center items-end flex-shrink-0">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F3188d1a4b66143a3aa0723ddb0dda104"
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover"
               />
-              
-              {/* Glitched text underneath Azura */}
-              <div className="mt-4 text-center">
-                <p
-                  className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
-                  style={{
-                    fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
-                    lineHeight: "1.6",
-                    fontWeight: "400",
-                    color: "#b0b0b0",
-                    minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
-                    display: "flex",
-                    alignItems: "flex-start",
-                    justifyContent: "center",
-                  }}
-                >
-                  {heroText}
-                </p>
-              </div>
             </div>
           </div>
+          
+          {/* Glitched text under separator */}
+          <div className="text-center mb-6">
+            <p
+              className={`font-sans ${isGlitching ? "glitch-text" : ""}`}
+              style={{
+                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                lineHeight: "1.6",
+                fontWeight: "400",
+                color: "#b0b0b0",
+                minHeight: "4.8em", // Fixed height to prevent layout shift (3 lines * 1.6 line-height)
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "center",
+              }}
+            >
+              {heroText}
+            </p>
+          </div>
+          
           {/* Tests carousel */}
           <div className="mb-10 -mx-6 sm:-mx-8 md:-mx-12 lg:-mx-16 xl:-mx-20">
             <TestCardsCarousel
