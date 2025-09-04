@@ -1191,26 +1191,11 @@ export default function Index() {
                             fontWeight: "400",
                           }}
                         >
-                          feel the wind under your wings?
+                          You feel the wind under your wings
                         </p>
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3">
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsMembershipOpen(true);
-                            }}
-                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Learn More
-                          </button>
                           <button
                             onClick={(e) => {
                               e.preventDefault();
@@ -1225,6 +1210,21 @@ export default function Index() {
                             }}
                           >
                             Take The Test
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setIsMembershipOpen(true);
+                            }}
+                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Learn More
                           </button>
                         </div>
                       </div>
