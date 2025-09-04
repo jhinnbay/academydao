@@ -82,16 +82,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
         icon: ClipboardList,
         cta: "Open Surveys",
-        onClick: () =>
-          openWithTerminal(
-            [
-              "Booting azura.exe...",
-              "Calibrating survey protocols...",
-              "Signal channels clear. Ready to ingest.",
-              "Opening Research Surveys...",
-            ],
-            onOpenSurveys,
-          ),
+        onClick: () => onOpenSurveys(),
       },
       {
         id: "iq",

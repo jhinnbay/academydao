@@ -791,7 +791,7 @@ export default function Index() {
           <RetroMusicPlayer />
         </div>
 
-        <div className="px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20" style={{ paddingTop: '30px' }}>
+        <div className="px-6 pb-4 sm:px-8 md:px-12 lg:px-16 xl:px-20" style={{ paddingTop: '88px' }}>
           {" "}
           {/* Hero Section */}
           <div className="flex flex-col lg:flex-row justify-between items-left border-b-2 border-white/20 mb-6 gap-4">
