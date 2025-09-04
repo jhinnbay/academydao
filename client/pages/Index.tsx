@@ -8,7 +8,6 @@ import { IQTestModal } from "@/components/IQTestModal";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import { useAccount } from "wagmi";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
-import { UserAvatar } from "@/components/UserAvatar";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import {
@@ -616,7 +615,11 @@ export default function Index() {
                                 className="w-full h-full object-cover object-center"
                               />
                             ) : (
-                              <UserAvatar size="md" className="border border-white/20" />
+                              <Avatar
+                                address={wagmiAddress}
+                                chain={baseChain}
+                                className="w-full h-full object-cover"
+                              />
                             )}
                           </div>
                           <span
