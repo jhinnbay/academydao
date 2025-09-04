@@ -8,7 +8,6 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import AzuraTerminalModal from "@/components/AzuraTerminalModal";
 import { Brain, Bot, ClipboardList, MessageCircle } from "lucide-react";
 
@@ -51,7 +50,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         title: "Research Surveys",
         description:
           "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
-        tokens: 25,
         icon: ClipboardList,
         cta: "Open Surveys",
         onClick: () =>
@@ -70,7 +68,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         title: "IQ Test",
         description:
           "Measure your cognition across logic, memory, and reasoning. Results feed your profile.",
-        tokens: 50,
         icon: Brain,
         cta: "Start IQ Test",
         onClick: () =>
@@ -89,7 +86,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         title: "AI Daemon",
         description:
           "Engage the daemon to probe scenarios and harvest insights for your research.",
-        tokens: 75,
         icon: Bot,
         cta: "Launch Daemon",
         onClick: () =>
@@ -108,7 +104,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         title: "Join Discord",
         description:
           "Enter the Academy lounge. Sync with peers, get updates, and unlock community drops.",
-        tokens: 20,
         icon: MessageCircle,
         cta: "Join Discord",
         onClick: () =>
@@ -149,13 +144,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
                         "polygon(18px 0%, 100% 0%, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0% 100%, 0% 18px)",
                     }}
                   >
-                    {/* Header row: token badge */}
-                    <div className="flex items-center p-3 bg-black/80">
-                      <Badge className="bg-white/10 text-white border-white/30">
-                        {card.tokens} $AzuraOS
-                      </Badge>
-                    </div>
-
                     {/* Body */}
                     <div className="p-5 flex flex-col gap-4 min-h-56">
                       <div className="flex items-center gap-3">
