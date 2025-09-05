@@ -29,7 +29,7 @@ import {
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { connectAsync } = useConnect();
-  const { login, authenticated, user } = usePrivy();
+  const { login, authenticated, user, ready } = usePrivy();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const { data: neynar } = useNeynarProfile({
     username,
@@ -704,12 +704,33 @@ export default function Index() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        console.log("Connect wallet clicked, isFarcaster:", isFarcaster, "Privy ready:", ready);
                         if (isFarcaster) {
                           // In Farcaster, try to connect via wagmi
+                          console.log("Attempting wagmi connection...");
                           connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
                         } else {
                           // In regular browser, use Privy
-                          login();
+                          console.log("Attempting Privy login...");
+                          if (!ready) {
+                            console.log("Privy not ready yet, waiting...");
+                            return;
+                          }
+                          try {
+                            // Try different approaches to trigger Privy modal
+                            if (typeof login === 'function') {
+                              login();
+                            } else {
+                              console.error("Login function not available");
+                              // Fallback: try to trigger via window event
+                              window.dispatchEvent(new CustomEvent('privy:login'));
+                            }
+                          } catch (error) {
+                            console.error("Privy login error:", error);
+                            // Fallback: try wagmi connection
+                            console.log("Falling back to wagmi connection...");
+                            connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
+                          }
                         }
                       }}
                     >
