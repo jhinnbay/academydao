@@ -672,6 +672,15 @@ export default function Index() {
 
                 {/* User Profile - Simple Name Component */}
                 {(() => {
+                  console.log("🔍 User Profile State:", { 
+                    isConnected, 
+                    wagmiAddress, 
+                    isFarcaster, 
+                    mergedName,
+                    displayName,
+                    username
+                  });
+                  
                   if (isConnected && wagmiAddress) {
                     return (
                       <div
@@ -688,7 +697,12 @@ export default function Index() {
                               {mergedName}
                             </span>
                           ) : (
-                            <Name address={wagmiAddress} />
+                            <div className="flex items-center gap-2">
+                              <Name address={wagmiAddress} />
+                              <span className="text-white/60 text-xs">
+                                {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
+                              </span>
+                            </div>
                           )}
                         </div>
                       </div>
