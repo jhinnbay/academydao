@@ -179,7 +179,7 @@ function App() {
               serverAnalyticsEnabled: false,
               mfaEnabled: false,
               experimental: {
-                noConnectionModal: true,
+                noConnectionModal: false,
               },
             }}
           >

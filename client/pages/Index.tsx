@@ -7,7 +7,8 @@ import { IQTestModal } from "@/components/IQTestModal";
 import { DaemonMenu } from "@/components/DaemonMenu";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
+import { usePrivy } from "@privy-io/react-auth";
 import { sdk } from "@farcaster/miniapp-sdk";
 import {
   Identity,
@@ -27,6 +28,8 @@ import {
 
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
+  const { connectAsync } = useConnect();
+  const { login, authenticated, user } = usePrivy();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const { data: neynar } = useNeynarProfile({
     username,
@@ -695,7 +698,18 @@ export default function Index() {
                       );
                     }
                     return (
-                      <div className="flex items-center h-full">
+                      <div 
+                        className="flex items-center h-full cursor-pointer hover:text-white"
+                        onClick={() => {
+                          if (isFarcaster) {
+                            // In Farcaster, try to connect via wagmi
+                            connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
+                          } else {
+                            // In regular browser, use Privy
+                            login();
+                          }
+                        }}
+                      >
                         <span
                           className="font-sans text-white/90 whitespace-nowrap leading-none"
                           style={{
@@ -703,7 +717,7 @@ export default function Index() {
                             fontWeight: "500",
                           }}
                         >
-                          Sync Account
+                          Connect Wallet
                         </span>
                       </div>
                     );
@@ -1146,6 +1160,26 @@ export default function Index() {
               {/* Default spacing when no connection message */}
               {!(isConnected && (connectionMessage || isTypingConnection)) && (
                 <div className="mb-8"></div>
+              )}
+
+              {/* Wallet Connection Prompt for Non-Farcaster */}
+              {!isFarcaster && !isConnected && (
+                <div className="mb-8 p-6 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
+                  <div className="text-center">
+                    <h3 className="text-lg font-semibold text-white mb-2">
+                      Connect Your Wallet
+                    </h3>
+                    <p className="text-white/70 mb-4">
+                      Connect your wallet to mint Academic Angels and access all features
+                    </p>
+                    <button
+                      onClick={() => login()}
+                      className="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-lg transition-colors"
+                    >
+                      Connect Wallet
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
 
