@@ -9,22 +9,7 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
-import {
-  Identity,
-  Avatar,
-  Name,
-  Address,
-  Badge,
-} from "@coinbase/onchainkit/identity";
-import {
-  ConnectWallet,
-  Wallet,
-  WalletDropdown,
-  WalletAdvancedAddressDetails,
-  WalletAdvancedTokenHoldings,
-  WalletAdvancedTransactionActions,
-  WalletAdvancedWalletActions,
-} from "@coinbase/onchainkit/wallet";
+import { Name } from "@coinbase/onchainkit/identity";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
@@ -685,16 +670,53 @@ export default function Index() {
                   </svg>
                 </div>
 
-                {/* User Profile - OnchainKit ConnectWallet */}
-                <Wallet>
-                  <ConnectWallet />
-                  <WalletDropdown>
-                    <WalletAdvancedWalletActions />
-                    <WalletAdvancedAddressDetails />
-                    <WalletAdvancedTransactionActions />
-                    <WalletAdvancedTokenHoldings />
-                  </WalletDropdown>
-                </Wallet>
+                {/* User Profile - Simple Name Component */}
+                {(() => {
+                  if (isConnected && wagmiAddress) {
+                    return (
+                      <div
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        role="button"
+                        tabIndex={0}
+                        aria-haspopup="menu"
+                        aria-expanded={isMobileMenuOpen}
+                        className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
+                      >
+                        <div className="flex items-center gap-2 overflow-hidden h-full">
+                          {isFarcaster && mergedName ? (
+                            <span className="text-white/90 max-w-[160px] truncate font-medium">
+                              {mergedName}
+                            </span>
+                          ) : (
+                            <Name address={wagmiAddress} />
+                          )}
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div 
+                      className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log("Connect wallet clicked");
+                        // Simple alert for now - you can add wallet connection logic here
+                        alert("Please connect your wallet using the browser extension or wallet app");
+                      }}
+                    >
+                      <span
+                        className="font-sans text-white/90 whitespace-nowrap leading-none"
+                        style={{
+                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Connect Wallet
+                      </span>
+                    </div>
+                  );
+                })()}
 
                 {/* Mobile Menu Button */}
                 <button
