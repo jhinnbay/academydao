@@ -1168,31 +1168,6 @@ export default function Index() {
                 <div className="mb-8"></div>
               )}
 
-              {/* Wallet Connection Prompt */}
-              {!isConnected && (
-                <div className="mb-8 p-6 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      Connect Your Wallet
-                    </h3>
-                    <p className="text-white/70 mb-4">
-                      Connect your wallet to mint Academic Angels and access all features
-                    </p>
-                    <button
-                      onClick={() => {
-                        if (connectors.length > 0) {
-                          connectAsync({ connector: connectors[0] }).catch(console.error);
-                        } else {
-                          alert("No wallet connectors available. Please install a wallet extension like MetaMask.");
-                        }
-                      }}
-                      className="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-lg transition-colors"
-                    >
-                      Connect Wallet
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Username Section - Secondary/Smaller */}
