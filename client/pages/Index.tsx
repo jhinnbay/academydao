@@ -679,6 +679,15 @@ export default function Index() {
 
                 {/* User Profile */}
                 {(() => {
+                  console.log("User Profile Debug:", { 
+                    isConnected, 
+                    wagmiAddress, 
+                    isFarcaster, 
+                    mergedName,
+                    displayName,
+                    username 
+                  });
+                  
                   if (isConnected && wagmiAddress) {
                     return (
                       <div
@@ -695,16 +704,25 @@ export default function Index() {
                               {mergedName}
                             </span>
                           ) : isConnected && wagmiAddress ? (
-                            <Identity
-                              address={wagmiAddress}
-                              chain={baseChain}
-                              schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                              className="text-white bg-transparent whitespace-nowrap leading-none"
-                            >
-                              <Name>
-                                <Badge />
-                              </Name>
-                            </Identity>
+                            <div className="flex items-center gap-2">
+                              <Avatar
+                                address={wagmiAddress}
+                                chain={baseChain}
+                                className="w-6 h-6 rounded-full"
+                              />
+                              <Name
+                                address={wagmiAddress}
+                                chain={baseChain}
+                                className="text-white/90 text-sm font-medium whitespace-nowrap"
+                              />
+                              <Badge
+                                className="text-white/60 text-xs"
+                              />
+                              {/* Fallback if OnchainKit components don't render */}
+                              <span className="text-white/60 text-xs ml-1">
+                                {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
+                              </span>
+                            </div>
                           ) : (
                             <span className="text-white/90 max-w-[160px] truncate font-medium">
                               Connected
