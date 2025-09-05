@@ -7,7 +7,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import { DaemonMenu } from "@/components/DaemonMenu";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
 import {
   Identity,
@@ -16,6 +16,15 @@ import {
   Address,
   Badge,
 } from "@coinbase/onchainkit/identity";
+import {
+  ConnectWallet,
+  Wallet,
+  WalletDropdown,
+  WalletAdvancedAddressDetails,
+  WalletAdvancedTokenHoldings,
+  WalletAdvancedTransactionActions,
+  WalletAdvancedWalletActions,
+} from "@coinbase/onchainkit/wallet";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
@@ -26,7 +35,6 @@ import {
 
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
-  const { connectAsync, connectors } = useConnect();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const mergedPfp = pfpUrl || null;
   const mergedName = displayName || username || null;
@@ -677,94 +685,16 @@ export default function Index() {
                   </svg>
                 </div>
 
-                {/* User Profile */}
-                {(() => {
-                  console.log("User Profile Debug:", { 
-                    isConnected, 
-                    wagmiAddress, 
-                    isFarcaster, 
-                    mergedName,
-                    displayName,
-                    username 
-                  });
-                  
-                  if (isConnected && wagmiAddress) {
-                    return (
-                      <div
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        role="button"
-                        tabIndex={0}
-                        aria-haspopup="menu"
-                        aria-expanded={isMobileMenuOpen}
-                        className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
-                      >
-                        <div className="flex items-center gap-2 overflow-hidden h-full">
-                          {isFarcaster && mergedName ? (
-                            <span className="text-white/90 max-w-[160px] truncate font-medium">
-                              {mergedName}
-                            </span>
-                          ) : isConnected && wagmiAddress ? (
-                            <div className="flex items-center gap-2">
-                              <Avatar
-                                address={wagmiAddress}
-                                chain={baseChain}
-                                className="w-6 h-6 rounded-full"
-                              />
-                              <Name
-                                address={wagmiAddress}
-                                chain={baseChain}
-                                className="text-white/90 text-sm font-medium whitespace-nowrap"
-                              />
-                              <Badge
-                                className="text-white/60 text-xs"
-                              />
-                              {/* Fallback if OnchainKit components don't render */}
-                              <span className="text-white/60 text-xs ml-1">
-                                {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
-                              </span>
-                            </div>
-                          ) : (
-                            <span className="text-white/90 max-w-[160px] truncate font-medium">
-                              Connected
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-                  return (
-                    <div 
-                      className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log("Connect wallet clicked, connectors available:", connectors.length);
-                        
-                        // Use wagmi connection for all environments
-                        if (connectors.length > 0) {
-                          console.log("Attempting wagmi connection...");
-                          connectAsync({ connector: connectors[0] }).catch((error) => {
-                            console.error("Wallet connection failed:", error);
-                            alert(`Wallet connection failed: ${error.message || 'Unknown error'}`);
-                          });
-                        } else {
-                          console.error("No wallet connectors available");
-                          alert("No wallet connectors available. Please install a wallet extension like MetaMask.");
-                        }
-                      }}
-                    >
-                      <span
-                        className="font-sans text-white/90 whitespace-nowrap leading-none"
-                        style={{
-                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Connect Wallet
-                      </span>
-                    </div>
-                  );
-                })()}
+                {/* User Profile - OnchainKit ConnectWallet */}
+                <Wallet>
+                  <ConnectWallet />
+                  <WalletDropdown>
+                    <WalletAdvancedWalletActions />
+                    <WalletAdvancedAddressDetails />
+                    <WalletAdvancedTransactionActions />
+                    <WalletAdvancedTokenHoldings />
+                  </WalletDropdown>
+                </Wallet>
 
                 {/* Mobile Menu Button */}
                 <button
