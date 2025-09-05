@@ -9,7 +9,7 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
-// Removed OnchainKit Name import - using simple wallet address display
+import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
@@ -688,9 +688,15 @@ export default function Index() {
                               {mergedName}
                             </span>
                           ) : (
-                            <span className="text-white/90 text-sm font-medium">
-                              {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
-                            </span>
+                            <Identity
+                              address={wagmiAddress}
+                              schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                            >
+                              <Avatar />
+                              <Name>
+                                <Badge />
+                              </Name>
+                            </Identity>
                           )}
                         </div>
                       </div>
