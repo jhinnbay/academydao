@@ -75,22 +75,25 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         abi: abiMintFee,
         functionName: "mintFee",
         chainId: baseChain.id,
-        account: wagmiAddress,
-        authorizationList: [],
       });
+      console.log("Mint fee retrieved:", fee.toString());
       return fee;
-    } catch {}
+    } catch (error) {
+      console.log("mintFee() failed, trying price():", error);
+    }
     try {
       const price: bigint = await readContract(wagmiConfig, {
         address: ANGEL_CONTRACT,
         abi: abiPrice,
         functionName: "price",
         chainId: baseChain.id,
-        account: wagmiAddress,
-        authorizationList: [],
       });
+      console.log("Price retrieved:", price.toString());
       return price;
-    } catch {}
+    } catch (error) {
+      console.log("price() failed:", error);
+    }
+    console.log("No price function found, using 0");
     return 0n;
   }
 
@@ -102,6 +105,20 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
       }
       setMinting(true);
       setTxHash(null);
+
+      // Verify contract exists and is accessible
+      try {
+        const code = await wagmiConfig.getClient({ chainId: baseChain.id }).getBytecode({
+          address: ANGEL_CONTRACT,
+        });
+        if (!code || code === "0x") {
+          throw new Error("Contract not found at the specified address");
+        }
+        console.log("Contract verified at address:", ANGEL_CONTRACT);
+      } catch (error) {
+        console.error("Contract verification failed:", error);
+        throw new Error("Unable to verify contract. Please check the contract address.");
+      }
 
       const pricePer = await getPricePer();
       const totalValue = pricePer * BigInt(quantity);
@@ -116,6 +133,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
 
       // Try mint(quantity)
       try {
+        console.log("Attempting mint with quantity:", quantity);
         const hash = await writeContract(wagmiConfig, {
           address: ANGEL_CONTRACT,
           abi: abiMintQty,
@@ -126,16 +144,24 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
           account: wagmiAddress,
           chain: baseChain,
         });
+        console.log("Mint transaction submitted:", hash);
         setTxHash(hash);
         await waitForTransactionReceipt(wagmiConfig, { hash });
+        console.log("Mint transaction confirmed!");
         return;
       } catch (error) {
         console.error("Mint with quantity failed:", error);
+        // Don't continue to fallback if it's a user rejection
+        if (error instanceof Error && error.message.includes("User rejected")) {
+          throw error;
+        }
       }
 
       // Fallback: call mint() multiple times
+      console.log("Trying fallback minting method...");
       for (let i = 0; i < quantity; i++) {
         try {
+          console.log(`Fallback mint attempt ${i + 1}/${quantity}`);
           const hash = await writeContract(wagmiConfig, {
             address: ANGEL_CONTRACT,
             abi: abiMint,
@@ -146,11 +172,20 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             account: wagmiAddress,
             chain: baseChain,
           });
+          console.log(`Fallback mint ${i + 1} transaction submitted:`, hash);
           setTxHash(hash);
           await waitForTransactionReceipt(wagmiConfig, { hash });
+          console.log(`Fallback mint ${i + 1} confirmed!`);
         } catch (error) {
           console.error(`Mint attempt ${i + 1} failed:`, error);
-          throw error; // Re-throw to trigger the outer catch block
+          // Don't re-throw user rejections in fallback
+          if (error instanceof Error && error.message.includes("User rejected")) {
+            throw error;
+          }
+          // For other errors, continue with next attempt
+          if (i === quantity - 1) {
+            throw new Error(`All ${quantity} mint attempts failed. Last error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+          }
         }
       }
     } catch (e) {
