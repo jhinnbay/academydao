@@ -24,6 +24,21 @@ export default function Index() {
   const mergedPfp = pfpUrl || null;
   const mergedName = displayName || username || null;
   
+  // Add loading state for better UX during state transitions
+  const [isIdentityLoading, setIsIdentityLoading] = useState(false);
+  
+  // Handle loading state when wallet connects
+  useEffect(() => {
+    if (isConnected && wagmiAddress) {
+      setIsIdentityLoading(true);
+      // Simulate loading time for OnchainKit components
+      const timer = setTimeout(() => {
+        setIsIdentityLoading(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isConnected, wagmiAddress]);
+  
   // Debug logging
   console.log("Farcaster data:", { isFarcaster, pfpUrl, displayName, username, mergedName });
   
@@ -670,8 +685,19 @@ export default function Index() {
                   </svg>
                 </div>
 
-                {/* User Profile - Simple Wallet Display */}
+                {/* User Profile - State Transition Logic */}
                 {(() => {
+                  // Debug state transition
+                  console.log("🔄 State Transition Debug:", {
+                    isConnected,
+                    wagmiAddress,
+                    isFarcaster,
+                    mergedName,
+                    displayName,
+                    username,
+                    pfpUrl
+                  });
+
                   if (isConnected && wagmiAddress) {
                     return (
                       <div
@@ -688,15 +714,29 @@ export default function Index() {
                               {mergedName}
                             </span>
                           ) : (
-                            <Identity
-                              address={wagmiAddress}
-                              schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                            >
-                              <Avatar />
-                              <Name>
-                                <Badge />
-                              </Name>
-                            </Identity>
+                            <div className="flex items-center gap-2">
+                              {isIdentityLoading ? (
+                                <span className="text-white/60 text-sm">
+                                  Loading...
+                                </span>
+                              ) : (
+                                <>
+                                  <Identity
+                                    address={wagmiAddress}
+                                    schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                                  >
+                                    <Avatar />
+                                    <Name>
+                                      <Badge />
+                                    </Name>
+                                  </Identity>
+                                  {/* Always show wallet address as primary content */}
+                                  <span className="text-white/90 text-sm font-medium">
+                                    {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
+                                  </span>
+                                </>
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>
