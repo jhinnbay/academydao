@@ -687,17 +687,22 @@ export default function Index() {
                         className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
                       >
                         <div className="flex items-center gap-2 overflow-hidden h-full">
-                          <Identity
-                            address={wagmiAddress}
-                            chain={baseChain}
-                            schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                            className="text-white bg-transparent whitespace-nowrap leading-none"
-                          >
-                            <Avatar />
-                            <Name>
-                              <Badge />
-                            </Name>
-                          </Identity>
+                          {isFarcaster && mergedName ? (
+                            <span className="text-white/90 max-w-[160px] truncate font-medium">
+                              {mergedName}
+                            </span>
+                          ) : (
+                            <Identity
+                              address={wagmiAddress}
+                              chain={baseChain}
+                              schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                              className="text-white bg-transparent whitespace-nowrap leading-none"
+                            >
+                              <Name>
+                                <Badge />
+                              </Name>
+                            </Identity>
+                          )}
                         </div>
                       </div>
                     );
