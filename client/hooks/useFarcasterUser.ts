@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { sdk } from "@farcaster/miniapp-sdk";
 
 function hasFarcasterContext() {
@@ -10,38 +9,35 @@ function hasFarcasterContext() {
 }
 
 export function useFarcasterUser() {
-  const data = useMemo(() => {
-    try {
-      const anySdk: any = sdk as any;
-      const context =
-        anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
-      const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
+  // Remove useMemo to allow dynamic updates when Farcaster context changes
+  try {
+    const anySdk: any = sdk as any;
+    const context =
+      anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
+    const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
 
-      const source = fcUser || {};
+    const source = fcUser || {};
 
-      const pfpUrl: string | undefined =
-        source.pfpUrl ||
-        source.pfp ||
-        source.profileImage ||
-        source.profile_image_url ||
-        source.profilePictureUrl ||
-        source.photoURL ||
-        undefined;
+    const pfpUrl: string | undefined =
+      source.pfpUrl ||
+      source.pfp ||
+      source.profileImage ||
+      source.profile_image_url ||
+      source.profilePictureUrl ||
+      source.photoURL ||
+      undefined;
 
-      const displayName: string | undefined =
-        source.displayName || source.name || source.fullName || undefined;
+    const displayName: string | undefined =
+      source.displayName || source.name || source.fullName || undefined;
 
-      const username: string | undefined =
-        source.username || source.handle || source.fname || undefined;
+    const username: string | undefined =
+      source.username || source.handle || source.fname || undefined;
 
-      const isFarcaster = Boolean(hasFarcasterContext());
+    const isFarcaster = Boolean(hasFarcasterContext());
 
-      return { isFarcaster, pfpUrl, displayName, username };
-    } catch (error) {
-      console.warn("Error in useFarcasterUser:", error);
-      return { isFarcaster: false, pfpUrl: undefined, displayName: undefined, username: undefined };
-    }
-  }, []);
-
-  return data;
+    return { isFarcaster, pfpUrl, displayName, username };
+  } catch (error) {
+    console.warn("Error in useFarcasterUser:", error);
+    return { isFarcaster: false, pfpUrl: undefined, displayName: undefined, username: undefined };
+  }
 }
