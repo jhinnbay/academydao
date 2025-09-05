@@ -688,23 +688,23 @@ export default function Index() {
                         </Identity>
                       </MenubarTrigger>
                       <MenubarContent className="bg-black/90 border-white/20 text-white">
-                        <MenubarItem>
-                          <Identity
+                        <MenubarItem className="flex items-center gap-2">
+                          <Address 
                             address={wagmiAddress}
-                            schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                          >
-                            <Avatar />
-                            <Name>
-                              <Badge />
-                            </Name>
-                            <Address />
-                          </Identity>
+                            className="text-white/80 text-sm"
+                          />
                         </MenubarItem>
                         <MenubarSeparator />
-                        <MenubarItem onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                        <MenubarItem onClick={() => {
+                          setIsMobileMenuOpen(true);
+                          setIsDaemonMenuOpen(false);
+                        }}>
                           Profile Settings
                         </MenubarItem>
-                        <MenubarItem onClick={() => setIsDaemonMenuOpen(!isDaemonMenuOpen)}>
+                        <MenubarItem onClick={() => {
+                          setIsDaemonMenuOpen(true);
+                          setIsMobileMenuOpen(false);
+                        }}>
                           Daemon Menu
                         </MenubarItem>
                       </MenubarContent>
@@ -748,11 +748,7 @@ export default function Index() {
               <div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-xl">
                 <div className="px-4 py-4 space-y-3">
                   <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                      fontWeight: "500",
-                    }}
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -762,11 +758,7 @@ export default function Index() {
                     Research
                   </button>
                   <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                      fontWeight: "500",
-                    }}
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -776,11 +768,7 @@ export default function Index() {
                     Angels
                   </button>
                   <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                      fontWeight: "500",
-                    }}
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -790,11 +778,7 @@ export default function Index() {
                     Facility
                   </button>
                   <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                      fontWeight: "500",
-                    }}
+                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
