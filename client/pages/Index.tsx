@@ -705,31 +705,27 @@ export default function Index() {
                         e.preventDefault();
                         e.stopPropagation();
                         console.log("Connect wallet clicked, isFarcaster:", isFarcaster, "Privy ready:", ready);
-                        if (isFarcaster) {
-                          // In Farcaster, try to connect via wagmi
-                          console.log("Attempting wagmi connection...");
+                        
+                        // Always use Privy for wallet connection in regular browsers
+                        // Only use wagmi if we're actually in a Farcaster mini app
+                        const isActuallyFarcaster = isFarcaster && typeof window !== 'undefined' && 
+                          (window.self !== window.top || /farcaster/i.test(window.navigator.userAgent));
+                        
+                        if (isActuallyFarcaster) {
+                          // In actual Farcaster mini app, try to connect via wagmi
+                          console.log("Attempting wagmi connection in Farcaster...");
                           connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
                         } else {
                           // In regular browser, use Privy
-                          console.log("Attempting Privy login...");
+                          console.log("Attempting Privy login in regular browser...");
                           if (!ready) {
                             console.log("Privy not ready yet, waiting...");
                             return;
                           }
                           try {
-                            // Try different approaches to trigger Privy modal
-                            if (typeof login === 'function') {
-                              login();
-                            } else {
-                              console.error("Login function not available");
-                              // Fallback: try to trigger via window event
-                              window.dispatchEvent(new CustomEvent('privy:login'));
-                            }
+                            login();
                           } catch (error) {
                             console.error("Privy login error:", error);
-                            // Fallback: try wagmi connection
-                            console.log("Falling back to wagmi connection...");
-                            connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
                           }
                         }
                       }}
