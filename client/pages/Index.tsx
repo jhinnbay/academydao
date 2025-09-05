@@ -13,7 +13,6 @@ import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger, MenubarSeparator } from "@/components/ui/menubar";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -80,25 +79,12 @@ export default function Index() {
   );
   const [connectionMessage, setConnectionMessage] = useState("");
   const [isTypingConnection, setIsTypingConnection] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [requestCount, setRequestCount] = useState(3);
   const [tooltipVisible, setTooltipVisible] = useState<string | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState<{
     [key: string]: { top?: boolean; left?: boolean; center?: boolean };
   }>({});
 
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (isMobileMenuOpen && !target.closest("nav")) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMobileMenuOpen]);
 
   // Calculate tooltip position based on viewport bounds
   const calculateTooltipPosition = (
@@ -571,254 +557,30 @@ export default function Index() {
           </svg>
         </div>
 
-        {/* Futuristic Navbar */}
+        {/* Simple Navbar */}
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <div className="flex items-center gap-3">
-                <span
-                  className="font-sans font-bold text-white"
-                  style={{
-                    fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
-                    fontWeight: "700",
-                  }}
-                >
+              <div className="flex items-center">
+                <span className="font-cartograph font-bold text-white text-xl">
                   ://AzuraOS
                 </span>
               </div>
 
-              {/* Navigation Links */}
-              <div className="hidden md:flex items-center gap-8">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
-                  style={{
-                    fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                    fontWeight: "500",
-                  }}
+              {/* OnchainKit Identity */}
+              {isConnected && wagmiAddress && (
+                <Identity
+                  address={wagmiAddress}
+                  schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
                 >
-                  Research
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
-                  style={{
-                    fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Angels
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
-                  style={{
-                    fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Facility
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  className="font-sans text-white/80 hover:text-white transition-colors duration-300"
-                  style={{
-                    fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Events
-                </button>
-              </div>
-
-              {/* Search Bar and User Profile */}
-              <div className="flex items-center gap-4">
-                {/* Search Bar */}
-                <div className="hidden sm:flex items-center relative">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-colors duration-300"
-                    style={{
-                      fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                      width: "200px",
-                    }}
-                  />
-                  <svg
-                    className="absolute right-3 w-4 h-4 text-white/50"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
-
-                {/* OnchainKit Menubar */}
-                {isConnected && wagmiAddress && (
-                  <Menubar className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
-                    <MenubarMenu>
-                      <MenubarTrigger className="bg-transparent hover:bg-white/10 text-white border-none focus:bg-transparent focus:text-white focus:outline-none">
-                        <Identity
-                          address={wagmiAddress}
-                          schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                        >
-                          <Avatar />
-                          <Name>
-                            <Badge />
-                          </Name>
-                        </Identity>
-                      </MenubarTrigger>
-                      <MenubarContent className="bg-black/90 border-white/20 text-white">
-                        <MenubarItem className="flex items-center gap-2 focus:bg-transparent focus:text-white/80">
-                          <Address 
-                            address={wagmiAddress}
-                            className="text-white/80 text-sm focus:outline-none"
-                          />
-                        </MenubarItem>
-                        <MenubarSeparator />
-                        <MenubarItem onClick={() => {
-                          setIsMobileMenuOpen(true);
-                          setIsDaemonMenuOpen(false);
-                        }}>
-                          Profile Settings
-                        </MenubarItem>
-                        <MenubarItem onClick={() => {
-                          setIsDaemonMenuOpen(true);
-                          setIsMobileMenuOpen(false);
-                        }}>
-                          Daemon Menu
-                        </MenubarItem>
-                      </MenubarContent>
-                    </MenubarMenu>
-                  </Menubar>
-                )}
-
-                {/* Mobile Menu Button - Only show when not connected */}
-                {!isConnected && (
-                  <button
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
-                  >
-                  <svg
-                    className="w-5 h-5 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    {isMobileMenuOpen ? (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    ) : (
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 6h16M4 12h16M4 18h16"
-                      />
-                    )}
-                  </svg>
-                  </button>
-                )}
-              </div>
+                  <Avatar />
+                  <Name>
+                    <Badge />
+                  </Name>
+                </Identity>
+              )}
             </div>
-
-            {/* Mobile Menu Dropdown */}
-            {isMobileMenuOpen && (
-              <div className="md:hidden border-t border-white/10 bg-black/90 backdrop-blur-xl">
-                <div className="px-4 py-4 space-y-3">
-                  <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    Research
-                  </button>
-                  <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    Angels
-                  </button>
-                  <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    Facility
-                  </button>
-                  <button
-                    className="block w-full text-left font-sans text-white/80 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    Events
-                  </button>
-
-                  {/* Mobile Search */}
-                  <div className="pt-3 border-t border-white/10">
-                    <div className="relative">
-                      <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-full bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:border-white/40 transition-colors duration-300"
-                        style={{
-                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                        }}
-                      />
-                      <svg
-                        className="absolute right-3 top-2.5 w-4 h-4 text-white/50"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </nav>
 
