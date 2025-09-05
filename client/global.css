@@ -7,6 +7,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent yellow flash during loading */
+html, body {
+  background-color: #000000 !important;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background-color: #000000 !important;
+}
+
 /* Farcaster miniapp specific styles */
 .farcaster-miniapp {
   /* Ensure the app fills the available space in Farcaster */
