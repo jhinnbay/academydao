@@ -698,8 +698,8 @@ export default function Index() {
                             </span>
                           ) : (
                             <div className="flex items-center gap-2">
-                              <Name address={wagmiAddress} />
-                              <span className="text-white/60 text-xs">
+                              <Name address={wagmiAddress} chain={baseChain} />
+                              <span className="text-white/80 text-sm font-medium">
                                 {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
                               </span>
                             </div>
