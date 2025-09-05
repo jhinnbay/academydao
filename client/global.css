@@ -8,10 +8,6 @@
 @tailwind utilities;
 
 /* Prevent flash during loading */
-* {
-  background-color: #000000 !important;
-}
-
 html, body {
   background-color: #000000 !important;
   margin: 0;
@@ -24,12 +20,11 @@ html, body {
   min-height: 100vh;
 }
 
-/* Override any potential white backgrounds from third-party libraries */
+/* Override specific third-party libraries that might show white backgrounds */
 .privy-modal,
 .privy-dialog,
 [data-testid="privy-modal"],
-div[role="dialog"],
-[class*="ock-"] {
+div[role="dialog"] {
   background-color: #000000 !important;
 }
 
