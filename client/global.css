@@ -47,11 +47,12 @@ div[role="dialog"] {
   }
 }
 
-/* Smooth scroll with stability */
+/* Enhanced smooth scroll with stability */
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  scroll-padding-top: 0;
+  scroll-padding-top: 80px; /* Account for fixed navbar */
+  scroll-padding-bottom: 20px;
 }
 
 /* Smaller typography inside Farcaster Mini App */
@@ -67,6 +68,7 @@ html.fc-miniapp {
 body {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity; /* Optional: gentle snap scrolling */
 }
 
 /* Prevent horizontal overflow issues */
@@ -84,15 +86,37 @@ embed {
   height: auto;
 }
 
-/* Smooth focus scrolling with reasonable offset */
+/* Enhanced smooth focus scrolling with reasonable offset */
 *:focus {
-  scroll-margin-top: 20px;
+  scroll-margin-top: 100px; /* Account for fixed navbar */
+  scroll-margin-bottom: 20px;
   outline-offset: 2px;
+  transition: scroll-margin 0.3s ease;
 }
 
 /* Smooth anchor link scrolling */
 a[href^="#"]:not([href="#"]) {
   scroll-behavior: smooth;
+}
+
+/* Smooth scrolling for programmatic scrolls */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced scroll snap points for better UX */
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
+
+.scroll-snap-center {
+  scroll-snap-align: center;
+}
+
+/* Smooth transitions for scroll-triggered animations */
+.scroll-triggered {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Custom animated button styles */

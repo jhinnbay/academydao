@@ -258,6 +258,17 @@ export default function Index() {
     };
   }, [isConnected, wagmiAddress]);
 
+  // Smooth scroll utility function
+  const smoothScrollTo = useCallback((element: HTMLElement | null, offset = 100) => {
+    if (!element) return;
+    
+    const elementPosition = element.offsetTop - offset;
+    window.scrollTo({
+      top: elementPosition,
+      behavior: 'smooth'
+    });
+  }, []);
+
   const handleGenerate = useCallback(
     (e?: React.MouseEvent) => {
       if (e) {
@@ -265,18 +276,11 @@ export default function Index() {
         e.stopPropagation();
       }
 
-      // Immediately preserve scroll position before any state changes
-      const currentScrollPosition = window.scrollY;
-
-      // Prevent any scroll jumping during state updates
-      requestAnimationFrame(() => {
-        if (Math.abs(window.scrollY - currentScrollPosition) > 10) {
-          window.scrollTo({
-            top: currentScrollPosition,
-            behavior: "instant",
-          });
-        }
-      });
+      // Smooth scroll to response section if it exists
+      const responseSection = document.querySelector('[data-section="daemon-response"]');
+      if (responseSection) {
+        smoothScrollTo(responseSection as HTMLElement, 120);
+      }
 
       // Batch state updates
       setRequestCount((prev) => prev + 1);
@@ -311,7 +315,7 @@ export default function Index() {
         );
       }, 1500);
     },
-    [debouncedSetDisplayedResponse, daemonResponse],
+    [debouncedSetDisplayedResponse, daemonResponse, smoothScrollTo],
   );
 
   // Initialize with the response already displayed only on mount if not actively processing
@@ -322,12 +326,20 @@ export default function Index() {
     }
   }, [daemonResponse, isTyping, isGenerating, showResponse]);
 
-  // Simple scroll management - only prevent initial jump, allow normal scrolling during typing
+  // Enhanced scroll management with smooth scrolling
   useEffect(() => {
     // Enable auto scroll restoration
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "auto";
     }
+
+    // Add smooth scrolling class to body
+    document.body.classList.add('smooth-scroll');
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('smooth-scroll');
+    };
   }, []);
 
   // Cycle through multiple hero texts with glitch animation
@@ -518,7 +530,7 @@ export default function Index() {
   );
 
   return (
-    <div className="min-h-screen bg-black text-white font-cartograph relative">
+    <div className="min-h-screen bg-black text-white font-cartograph relative smooth-scroll">
       {/* Grainy texture background */}
       <div
         className="absolute inset-0 opacity-30 bg-cover bg-center bg-no-repeat"
@@ -1341,7 +1353,8 @@ export default function Index() {
           </div>
           {/* Daemon Response Section */}
           <div
-            className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden"
+            data-section="daemon-response"
+            className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start"
             style={{
               backgroundColor: "rgba(30, 30, 30, 0.1)",
               border: "1px solid rgba(255, 255, 255, 0.2)",
