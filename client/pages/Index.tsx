@@ -676,7 +676,7 @@ export default function Index() {
                 {isConnected && wagmiAddress && (
                   <Menubar className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
                     <MenubarMenu>
-                      <MenubarTrigger className="bg-transparent hover:bg-white/10 text-white border-none">
+                      <MenubarTrigger className="bg-transparent hover:bg-white/10 text-white border-none focus:bg-transparent focus:text-white focus:outline-none">
                         <Identity
                           address={wagmiAddress}
                           schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
@@ -688,10 +688,10 @@ export default function Index() {
                         </Identity>
                       </MenubarTrigger>
                       <MenubarContent className="bg-black/90 border-white/20 text-white">
-                        <MenubarItem className="flex items-center gap-2">
+                        <MenubarItem className="flex items-center gap-2 focus:bg-transparent focus:text-white/80">
                           <Address 
                             address={wagmiAddress}
-                            className="text-white/80 text-sm"
+                            className="text-white/80 text-sm focus:outline-none"
                           />
                         </MenubarItem>
                         <MenubarSeparator />
@@ -712,11 +712,12 @@ export default function Index() {
                   </Menubar>
                 )}
 
-                {/* Mobile Menu Button */}
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
-                >
+                {/* Mobile Menu Button - Only show when not connected */}
+                {!isConnected && (
+                  <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="hidden p-2 rounded-lg bg-white/5 border border-white/20 hover:border-white/40 transition-colors duration-300"
+                  >
                   <svg
                     className="w-5 h-5 text-white"
                     fill="none"
@@ -739,7 +740,8 @@ export default function Index() {
                       />
                     )}
                   </svg>
-                </button>
+                  </button>
+                )}
               </div>
             </div>
 
