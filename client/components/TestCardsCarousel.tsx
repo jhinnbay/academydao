@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Brain, Bot, ClipboardList } from "lucide-react";
-import { AzuraTerminalModal } from "@/components/AzuraTerminalModal";
 import { SoundEffects } from "@/lib/soundEffects";
 
 type TestCardsCarouselProps = {
@@ -24,9 +23,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   onStartDaemon,
 }) => {
   const [api, setApi] = useState<CarouselApi | null>(null);
-  const [terminalOpen, setTerminalOpen] = useState(false);
-  const [terminalMessages, setTerminalMessages] = useState<string[]>([]);
-  const onCompleteRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (!api) return;
@@ -38,12 +34,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
     return () => clearInterval(id);
   }, [api]);
 
-  const openWithTerminal = (messages: string[], onDone: () => void) => {
-    setTerminalMessages(messages);
-    onCompleteRef.current = onDone;
-    setTerminalOpen(true);
-    SoundEffects.playGenerateSound();
-  };
 
 
   const cards = useMemo(
@@ -55,7 +45,9 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
         icon: ClipboardList,
         cta: "Open Surveys",
-        onClick: () => onOpenSurveys(),
+        onClick: () => {
+          // Research Survey disabled - do nothing
+        },
       },
       {
         id: "iq",
@@ -64,16 +56,10 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Measure your cognition across logic, memory, and reasoning. Results feed your profile.",
         icon: Brain,
         cta: "Start IQ Test",
-        onClick: () =>
-          openWithTerminal(
-            [
-              "Booting azura.exe...",
-              "Cognitive matrices aligning...",
-              "Synaptic test-suite loaded.",
-              "Opening IQ Test...",
-            ],
-            onOpenIQ,
-          ),
+        onClick: () => {
+          SoundEffects.playGenerateSound();
+          onOpenIQ();
+        },
       },
       {
         id: "daemon",
@@ -82,16 +68,10 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Engage the daemon to probe scenarios and harvest insights for your research.",
         icon: Bot,
         cta: "Launch Daemon",
-        onClick: () =>
-          openWithTerminal(
-            [
-              "Booting azura.exe...",
-              "Calibrating survey protocols...",
-              "Signal channels clear. Ready to ingest.",
-              "Opening Research Surveys...",
-            ],
-            onOpenSurveys,
-          ),
+        onClick: () => {
+          SoundEffects.playGenerateSound();
+          onOpenSurveys();
+        },
       },
     ],
     [onOpenIQ, onOpenSurveys, onStartDaemon],
@@ -151,14 +131,6 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         {/* Arrows removed per request */}
       </Carousel>
 
-      {/* Azura Terminal Modal */}
-      <AzuraTerminalModal
-        isOpen={terminalOpen}
-        onClose={() => setTerminalOpen(false)}
-        messages={terminalMessages}
-        onComplete={() => onCompleteRef.current?.()}
-        autoProceedDelayMs={600}
-      />
     </div>
   );
 };

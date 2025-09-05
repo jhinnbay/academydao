@@ -997,7 +997,7 @@ export default function Index() {
                       display: "inline",
                     }}
                   >
-                    ˚₊꒰����� ☆ ໒꒱ ‧₊˚
+                    ꒰ა ♱ ໒꒱
                   </span>
                 </span>
                 <span
