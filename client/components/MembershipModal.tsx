@@ -26,7 +26,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const [minting, setMinting] = useState(false);
   const [txHash, setTxHash] = useState<string | null>(null);
   const chainId = useChainId();
-  const { isConnected } = useAccount();
+  const { isConnected, address: wagmiAddress } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f" as const;
@@ -74,6 +74,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         address: ANGEL_CONTRACT,
         abi: abiMintFee,
         functionName: "mintFee",
+        chainId: baseChain.id,
+        account: wagmiAddress,
+        authorizationList: [],
       });
       return fee;
     } catch {}
@@ -82,6 +85,9 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         address: ANGEL_CONTRACT,
         abi: abiPrice,
         functionName: "price",
+        chainId: baseChain.id,
+        account: wagmiAddress,
+        authorizationList: [],
       });
       return price;
     } catch {}
@@ -117,6 +123,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
           args: [BigInt(quantity)],
           value: totalValue > 0n ? totalValue : undefined,
           chainId: baseChain.id,
+          account: wagmiAddress,
+          chain: baseChain,
         });
         setTxHash(hash);
         await waitForTransactionReceipt(wagmiConfig, { hash });
@@ -135,6 +143,8 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             args: [],
             value: pricePer > 0n ? pricePer : undefined,
             chainId: baseChain.id,
+            account: wagmiAddress,
+            chain: baseChain,
           });
           setTxHash(hash);
           await waitForTransactionReceipt(wagmiConfig, { hash });
@@ -288,10 +298,10 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               <div className="flex">
                 <Button
                   onClick={handleMint}
-                  disabled={true}
-                  className="w-full bg-gray-500 text-gray-300 cursor-not-allowed"
+                  disabled={minting || !isConnected}
+                  className="w-full bg-white text-black hover:bg-gray-200 disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed"
                 >
-                  Mint {quantity} (Disabled)
+                  {minting ? "Minting..." : `Mint ${quantity}`}
                 </Button>
               </div>
 
