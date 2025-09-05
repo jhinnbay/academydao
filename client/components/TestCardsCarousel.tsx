@@ -57,8 +57,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         icon: Brain,
         cta: "Start IQ Test",
         onClick: () => {
-          SoundEffects.playGenerateSound();
-          onOpenIQ();
+          // IQ Test disabled - do nothing
         },
       },
       {
@@ -69,8 +68,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         icon: Bot,
         cta: "Launch Daemon",
         onClick: () => {
-          SoundEffects.playGenerateSound();
-          onOpenSurveys();
+          // Launch Daemon disabled - do nothing
         },
       },
     ],

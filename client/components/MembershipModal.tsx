@@ -245,7 +245,7 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 </div>
               </div>
               <div className="text-center">
-                <h3 className="text-white font-sans font-semibold mb-1 text-left">
+                <h3 className="text-white font-sans font-semibold mb-1 text-center">
                   Academic Angel x Base
                 </h3>
                 <p className="text-white/80 text-sm">
