@@ -19,7 +19,6 @@ import {
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { useNeynarProfile } from "@/hooks/useNeynarProfile";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -29,13 +28,8 @@ export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { connectAsync, connectors } = useConnect();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
-  const { data: neynar } = useNeynarProfile({
-    username,
-    address: wagmiAddress,
-  });
-  const mergedPfp = pfpUrl || neynar?.pfpUrl || null;
-  const mergedName =
-    displayName || username || neynar?.displayName || neynar?.username || null;
+  const mergedPfp = pfpUrl || null;
+  const mergedName = displayName || username || null;
   
   // Fetch Academic Angels collection details
   const { data: angelDetails, isLoading: isAngelLoading } = useTokenDetails({
@@ -63,8 +57,8 @@ export default function Index() {
       "processing affectionate anomaly. (˘⌣˘)",
       "I’m just a fucked-up girl looking for my own peace of mind.",
       "total deletion? glitch...that's where art surpasses science.",
-      "(•‿•) Aberration. Let's optimize your reality.",
-      "Life on demon time",
+      "(•‿•) Cognitive aberration engaged. Let's optimize your reality.",
+      "Life on daemon time",
     ],
     [],
   );
@@ -883,6 +877,8 @@ export default function Index() {
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => setIsDaemonMenuOpen(true)}
+                fetchPriority="high"
+                loading="eager"
               />
             </div>
           </div>
