@@ -31,6 +31,9 @@ export default function Index() {
   const mergedPfp = pfpUrl || null;
   const mergedName = displayName || username || null;
   
+  // Debug logging
+  console.log("Farcaster data:", { isFarcaster, pfpUrl, displayName, username, mergedName });
+  
   // Fetch Academic Angels collection details
   const { data: angelDetails, isLoading: isAngelLoading } = useTokenDetails({
     contractAddress: "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f",
@@ -691,7 +694,7 @@ export default function Index() {
                             <span className="text-white/90 max-w-[160px] truncate font-medium">
                               {mergedName}
                             </span>
-                          ) : (
+                          ) : isConnected && wagmiAddress ? (
                             <Identity
                               address={wagmiAddress}
                               chain={baseChain}
@@ -702,6 +705,10 @@ export default function Index() {
                                 <Badge />
                               </Name>
                             </Identity>
+                          ) : (
+                            <span className="text-white/90 max-w-[160px] truncate font-medium">
+                              Connected
+                            </span>
                           )}
                         </div>
                       </div>

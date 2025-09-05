@@ -16,6 +16,8 @@ export function useFarcasterUser() {
       anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
     const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
 
+    console.log("Farcaster context debug:", { context, fcUser, anySdk });
+
     const source = fcUser || {};
 
     const pfpUrl: string | undefined =
@@ -34,6 +36,8 @@ export function useFarcasterUser() {
       source.username || source.handle || source.fname || undefined;
 
     const isFarcaster = Boolean(hasFarcasterContext());
+
+    console.log("Farcaster user data extracted:", { isFarcaster, pfpUrl, displayName, username, source });
 
     return { isFarcaster, pfpUrl, displayName, username };
   } catch (error) {
