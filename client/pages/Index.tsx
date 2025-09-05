@@ -9,10 +9,11 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
-import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
+import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger, MenubarSeparator } from "@/components/ui/menubar";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -24,20 +25,6 @@ export default function Index() {
   const mergedPfp = pfpUrl || null;
   const mergedName = displayName || username || null;
   
-  // Add loading state for better UX during state transitions
-  const [isIdentityLoading, setIsIdentityLoading] = useState(false);
-  
-  // Handle loading state when wallet connects
-  useEffect(() => {
-    if (isConnected && wagmiAddress) {
-      setIsIdentityLoading(true);
-      // Simulate loading time for OnchainKit components
-      const timer = setTimeout(() => {
-        setIsIdentityLoading(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [isConnected, wagmiAddress]);
   
   // Debug logging
   console.log("Farcaster data:", { isFarcaster, pfpUrl, displayName, username, mergedName });
@@ -685,86 +672,45 @@ export default function Index() {
                   </svg>
                 </div>
 
-                {/* User Profile - State Transition Logic */}
-                {(() => {
-                  // Debug state transition
-                  console.log("🔄 State Transition Debug:", {
-                    isConnected,
-                    wagmiAddress,
-                    isFarcaster,
-                    mergedName,
-                    displayName,
-                    username,
-                    pfpUrl
-                  });
-
-                  if (isConnected && wagmiAddress) {
-                    return (
-                      <div
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        role="button"
-                        tabIndex={0}
-                        aria-haspopup="menu"
-                        aria-expanded={isMobileMenuOpen}
-                        className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
-                      >
-                        <div className="flex items-center gap-2 overflow-hidden h-full">
-                          {isFarcaster && mergedName ? (
-                            <span className="text-white/90 max-w-[160px] truncate font-medium">
-                              {mergedName}
-                            </span>
-                          ) : (
-                            <div className="flex items-center gap-2">
-                              {isIdentityLoading ? (
-                                <span className="text-white/60 text-sm">
-                                  Loading...
-                                </span>
-                              ) : (
-                                <>
-                                  <Identity
-                                    address={wagmiAddress}
-                                    schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
-                                  >
-                                    <Avatar />
-                                    <Name>
-                                      <Badge />
-                                    </Name>
-                                  </Identity>
-                                  {/* Always show wallet address as primary content */}
-                                  <span className="text-white/90 text-sm font-medium">
-                                    {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
-                                  </span>
-                                </>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  }
-                  return (
-                    <div 
-                      className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log("Connect wallet clicked");
-                        // Simple alert for now - you can add wallet connection logic here
-                        alert("Please connect your wallet using the browser extension or wallet app");
-                      }}
-                    >
-                      <span
-                        className="font-sans text-white/90 whitespace-nowrap leading-none"
-                        style={{
-                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Connect Wallet
-                      </span>
-                    </div>
-                  );
-                })()}
+                {/* OnchainKit Menubar */}
+                {isConnected && wagmiAddress && (
+                  <Menubar className="bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
+                    <MenubarMenu>
+                      <MenubarTrigger className="bg-transparent hover:bg-white/10 text-white border-none">
+                        <Identity
+                          address={wagmiAddress}
+                          schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                        >
+                          <Avatar />
+                          <Name>
+                            <Badge />
+                          </Name>
+                        </Identity>
+                      </MenubarTrigger>
+                      <MenubarContent className="bg-black/90 border-white/20 text-white">
+                        <MenubarItem>
+                          <Identity
+                            address={wagmiAddress}
+                            schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                          >
+                            <Avatar />
+                            <Name>
+                              <Badge />
+                            </Name>
+                            <Address />
+                          </Identity>
+                        </MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                          Profile Settings
+                        </MenubarItem>
+                        <MenubarItem onClick={() => setIsDaemonMenuOpen(!isDaemonMenuOpen)}>
+                          Daemon Menu
+                        </MenubarItem>
+                      </MenubarContent>
+                    </MenubarMenu>
+                  </Menubar>
+                )}
 
                 {/* Mobile Menu Button */}
                 <button

@@ -13,6 +13,8 @@ import NotFound from "./pages/NotFound";
 import React, { useEffect } from "react";
 import { WagmiProvider, useAccount, useConnect } from "wagmi";
 import { wagmiConfig } from "@/lib/wagmi";
+import { OnchainKitProvider } from "@coinbase/onchainkit";
+import { base } from "viem/chains";
 
 const queryClient = new QueryClient();
 
@@ -158,19 +160,32 @@ function App() {
     <AppErrorBoundary>
       <FarcasterCompat>
         <WagmiProvider config={wagmiConfig}>
-          <QueryClientProvider client={queryClient}>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <AutoConnect />
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </TooltipProvider>
-          </QueryClientProvider>
+          <OnchainKitProvider
+            config={{
+              appearance: {
+                name: 'Academy DAO',
+                logo: 'https://onchainkit.xyz/favicon/48x48.png?v4-19-24',
+                mode: 'auto',
+                theme: 'default',
+              },
+            }}
+            chain={base}
+            apiKey="9oU7BptpclCm3gy0G7d9bfbp9J2oUoQP"
+          >
+            <QueryClientProvider client={queryClient}>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <AutoConnect />
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </TooltipProvider>
+            </QueryClientProvider>
+          </OnchainKitProvider>
         </WagmiProvider>
       </FarcasterCompat>
     </AppErrorBoundary>
