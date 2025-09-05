@@ -9,7 +9,7 @@ import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
-import { Name } from "@coinbase/onchainkit/identity";
+// Removed OnchainKit Name import - using simple wallet address display
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
@@ -670,17 +670,8 @@ export default function Index() {
                   </svg>
                 </div>
 
-                {/* User Profile - Simple Name Component */}
+                {/* User Profile - Simple Wallet Display */}
                 {(() => {
-                  console.log("🔍 User Profile State:", { 
-                    isConnected, 
-                    wagmiAddress, 
-                    isFarcaster, 
-                    mergedName,
-                    displayName,
-                    username
-                  });
-                  
                   if (isConnected && wagmiAddress) {
                     return (
                       <div
@@ -697,12 +688,9 @@ export default function Index() {
                               {mergedName}
                             </span>
                           ) : (
-                            <div className="flex items-center gap-2">
-                              <Name address={wagmiAddress} chain={baseChain} />
-                              <span className="text-white/80 text-sm font-medium">
-                                {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
-                              </span>
-                            </div>
+                            <span className="text-white/90 text-sm font-medium">
+                              {wagmiAddress.slice(0, 6)}...{wagmiAddress.slice(-4)}
+                            </span>
                           )}
                         </div>
                       </div>
