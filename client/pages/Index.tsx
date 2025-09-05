@@ -1204,18 +1204,6 @@ export default function Index() {
 
             {/* Main Action Section */}
             <div className="p-6 sm:p-8 space-y-6 overflow-hidden">
-              {/* Primary Input Request Form Card - Main Focal Point */}
-              <div className="relative">
-                <div className="text-center p-6 sm:p-8">
-                  <button
-                    onClick={handleOpenModal}
-                    className="animated-request-button"
-                  >
-                    <span>Fill Out the form</span>
-                  </button>
-                </div>
-              </div>
-
               {/* Angel Guidance Section */}
               <div className="border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
                 <div className="mb-4">
@@ -1250,28 +1238,13 @@ export default function Index() {
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              setIsIQOpen(true);
+                              setIsMembershipOpen(true);
                             }}
                             className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
                             style={{
                               fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                               lineHeight: "1.4",
                               fontWeight: "600",
-                            }}
-                          >
-                            Take The Test
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsMembershipOpen(true);
-                            }}
-                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "500",
                             }}
                           >
                             {isAngelLoading ? (
@@ -1282,10 +1255,37 @@ export default function Index() {
                               "Academic Angels"
                             )}
                           </button>
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setIsIQOpen(true);
+                            }}
+                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
+                            style={{
+                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                              lineHeight: "1.4",
+                              fontWeight: "500",
+                            }}
+                          >
+                            Take The IQ Test
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* Primary Input Request Form Card - Main Focal Point */}
+              <div className="relative">
+                <div className="text-center p-6 sm:p-8">
+                  <button
+                    onClick={handleOpenModal}
+                    className="animated-request-button"
+                  >
+                    <span>Fill Out the form</span>
+                  </button>
                 </div>
               </div>
 
