@@ -671,17 +671,17 @@ export default function Index() {
                 </div>
 
                 {/* User Profile */}
-                <div
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  role="button"
-                  tabIndex={0}
-                  aria-haspopup="menu"
-                  aria-expanded={isMobileMenuOpen}
-                  className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
-                >
-                  {(() => {
-                    if (isConnected && wagmiAddress) {
-                      return (
+                {(() => {
+                  if (isConnected && wagmiAddress) {
+                    return (
+                      <div
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        role="button"
+                        tabIndex={0}
+                        aria-haspopup="menu"
+                        aria-expanded={isMobileMenuOpen}
+                        className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
+                      >
                         <div className="flex items-center gap-2 overflow-hidden h-full">
                           <Identity
                             address={wagmiAddress}
@@ -695,34 +695,36 @@ export default function Index() {
                             </Name>
                           </Identity>
                         </div>
-                      );
-                    }
-                    return (
-                      <div 
-                        className="flex items-center h-full cursor-pointer hover:text-white"
-                        onClick={() => {
-                          if (isFarcaster) {
-                            // In Farcaster, try to connect via wagmi
-                            connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
-                          } else {
-                            // In regular browser, use Privy
-                            login();
-                          }
-                        }}
-                      >
-                        <span
-                          className="font-sans text-white/90 whitespace-nowrap leading-none"
-                          style={{
-                            fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
-                            fontWeight: "500",
-                          }}
-                        >
-                          Connect Wallet
-                        </span>
                       </div>
                     );
-                  })()}
-                </div>
+                  }
+                  return (
+                    <div 
+                      className="flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg px-3 py-1 h-10 hover:border-white/40 transition-colors duration-300 cursor-pointer overflow-hidden"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isFarcaster) {
+                          // In Farcaster, try to connect via wagmi
+                          connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
+                        } else {
+                          // In regular browser, use Privy
+                          login();
+                        }
+                      }}
+                    >
+                      <span
+                        className="font-sans text-white/90 whitespace-nowrap leading-none"
+                        style={{
+                          fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Connect Wallet
+                      </span>
+                    </div>
+                  );
+                })()}
 
                 {/* Mobile Menu Button */}
                 <button
