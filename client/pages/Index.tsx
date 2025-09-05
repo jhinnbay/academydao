@@ -8,7 +8,6 @@ import { DaemonMenu } from "@/components/DaemonMenu";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
 import { useAccount, useConnect } from "wagmi";
-import { usePrivy } from "@privy-io/react-auth";
 import { sdk } from "@farcaster/miniapp-sdk";
 import {
   Identity,
@@ -28,8 +27,7 @@ import {
 
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
-  const { connectAsync } = useConnect();
-  const { login, authenticated, user, ready } = usePrivy();
+  const { connectAsync, connectors } = useConnect();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
   const { data: neynar } = useNeynarProfile({
     username,
@@ -704,29 +702,18 @@ export default function Index() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log("Connect wallet clicked, isFarcaster:", isFarcaster, "Privy ready:", ready);
+                        console.log("Connect wallet clicked, connectors available:", connectors.length);
                         
-                        // Always use Privy for wallet connection in regular browsers
-                        // Only use wagmi if we're actually in a Farcaster mini app
-                        const isActuallyFarcaster = isFarcaster && typeof window !== 'undefined' && 
-                          (window.self !== window.top || /farcaster/i.test(window.navigator.userAgent));
-                        
-                        if (isActuallyFarcaster) {
-                          // In actual Farcaster mini app, try to connect via wagmi
-                          console.log("Attempting wagmi connection in Farcaster...");
-                          connectAsync({ connector: connectAsync.connectors?.[0] }).catch(console.error);
+                        // Use wagmi connection for all environments
+                        if (connectors.length > 0) {
+                          console.log("Attempting wagmi connection...");
+                          connectAsync({ connector: connectors[0] }).catch((error) => {
+                            console.error("Wallet connection failed:", error);
+                            alert(`Wallet connection failed: ${error.message || 'Unknown error'}`);
+                          });
                         } else {
-                          // In regular browser, use Privy
-                          console.log("Attempting Privy login in regular browser...");
-                          if (!ready) {
-                            console.log("Privy not ready yet, waiting...");
-                            return;
-                          }
-                          try {
-                            login();
-                          } catch (error) {
-                            console.error("Privy login error:", error);
-                          }
+                          console.error("No wallet connectors available");
+                          alert("No wallet connectors available. Please install a wallet extension like MetaMask.");
                         }
                       }}
                     >
@@ -1181,8 +1168,8 @@ export default function Index() {
                 <div className="mb-8"></div>
               )}
 
-              {/* Wallet Connection Prompt for Non-Farcaster */}
-              {!isFarcaster && !isConnected && (
+              {/* Wallet Connection Prompt */}
+              {!isConnected && (
                 <div className="mb-8 p-6 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
                   <div className="text-center">
                     <h3 className="text-lg font-semibold text-white mb-2">
@@ -1192,7 +1179,13 @@ export default function Index() {
                       Connect your wallet to mint Academic Angels and access all features
                     </p>
                     <button
-                      onClick={() => login()}
+                      onClick={() => {
+                        if (connectors.length > 0) {
+                          connectAsync({ connector: connectors[0] }).catch(console.error);
+                        } else {
+                          alert("No wallet connectors available. Please install a wallet extension like MetaMask.");
+                        }
+                      }}
                       className="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 text-black font-semibold rounded-lg transition-colors"
                     >
                       Connect Wallet
