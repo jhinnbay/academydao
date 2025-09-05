@@ -7,76 +7,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent flash during loading */
+/* Basic dark theme setup */
 html, body {
-  background-color: #000000 !important;
+  background-color: #000000;
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
 
 #root {
-  background-color: #000000 !important;
+  background-color: #000000;
   min-height: 100vh;
 }
 
-/* Override specific third-party libraries that might show white backgrounds */
-.privy-modal,
-.privy-dialog,
-[data-testid="privy-modal"],
-div[role="dialog"] {
-  background-color: #000000 !important;
-}
-
-/* Farcaster miniapp specific styles */
-.farcaster-miniapp {
-  /* Ensure the app fills the available space in Farcaster */
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  overflow-x: hidden;
-  /* Prevent any layout issues in iframe */
-  box-sizing: border-box;
-}
-
-/* Prevent iOS bounce in Farcaster */
-@media (max-width: 768px) {
-  .farcaster-miniapp body {
-    position: fixed;
-    overflow: hidden;
-  }
-}
-
-/* Enhanced smooth scroll with stability */
+/* Basic smooth scrolling */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  scroll-padding-top: 80px; /* Account for fixed navbar */
-  scroll-padding-bottom: 20px;
-}
-
-/* Smaller typography inside Farcaster Mini App */
-html.fc-miniapp {
-  font-size: 14px;
-}
-@media (max-width: 420px) {
-  html.fc-miniapp {
-    font-size: 13px;
-  }
 }
 
 body {
   overflow-x: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity; /* Optional: gentle snap scrolling */
 }
 
-/* Prevent horizontal overflow issues */
-* {
-  overscroll-behavior-x: none;
-}
-
-/* Prevent layout shifts from causing scroll jumps */
+/* Prevent layout shifts */
 img,
 video,
 iframe,
@@ -86,157 +40,39 @@ embed {
   height: auto;
 }
 
-/* Enhanced smooth focus scrolling with reasonable offset */
-*:focus {
-  scroll-margin-top: 100px; /* Account for fixed navbar */
-  scroll-margin-bottom: 20px;
-  outline-offset: 2px;
-  transition: scroll-margin 0.3s ease;
-}
-
-/* Smooth anchor link scrolling */
-a[href^="#"]:not([href="#"]) {
-  scroll-behavior: smooth;
-}
-
-/* Smooth scrolling for programmatic scrolls */
-.smooth-scroll {
-  scroll-behavior: smooth;
-}
-
-/* Enhanced scroll snap points for better UX */
-.scroll-snap-start {
-  scroll-snap-align: start;
-}
-
-.scroll-snap-center {
-  scroll-snap-align: center;
-}
-
-/* Smooth transitions for scroll-triggered animations */
-.scroll-triggered {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Custom animated button styles */
-.animated-request-button {
-  position: relative;
-  display: inline-block;
-  padding: 15px 30px;
-  border: 1px solid #fefefe;
-  text-transform: uppercase;
-  color: #fefefe;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 1);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.animated-request-button::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% - 12px);
-  background-color: rgba(0, 0, 0, 1);
-  transition: 0.3s ease-in-out;
-  transform: scaleY(1);
-}
-
-.animated-request-button:hover::before {
-  transform: scaleY(0);
-}
-
-.animated-request-button::after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: -2px;
-  height: calc(100% + 4px);
-  width: calc(100% - 12px);
-  background-color: rgba(0, 0, 0, 1);
-  transition: 0.3s ease-in-out;
-  transform: scaleX(1);
-  transition-delay: 0.5s;
-}
-
-.animated-request-button:hover::after {
-  transform: scaleX(0);
-}
-
-.animated-request-button span {
-  position: relative;
-  z-index: 3;
-  font-weight: 200;
-}
-button,
-input,
-textarea,
-select,
-a {
-  scroll-margin: 0 !important;
-  scroll-behavior: auto !important;
-}
-
-/* Ensure fixed positioning doesn't cause scroll issues */
-.fixed {
-  transform: translateZ(0);
-}
-
-/* Prevent touch scroll momentum on mobile */
-html,
-body {
-  -webkit-overflow-scrolling: auto !important;
-  overscroll-behavior-y: none !important;
-  overscroll-behavior-x: none !important;
-}
-
-/* Modal overlay scroll lock helper */
-.scroll-locked {
-  overflow: hidden !important;
-  position: fixed !important;
-  width: 100% !important;
-  height: 100% !important;
-}
-
 @layer base {
   /**
    * Tailwind CSS theme
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
-   * A different format will require also updating the theme in tailwind.config.ts.
-  */
+   */
   :root {
-    --background: 248 250 252; /* Soft light blue-gray */
-    --foreground: 30 41 59; /* Dark blue-gray text */
+    --background: 248 250 252;
+    --foreground: 30 41 59;
 
-    --card: 255 255 255; /* Pure white cards */
+    --card: 255 255 255;
     --card-foreground: 30 41 59;
 
     --popover: 255 255 255;
     --popover-foreground: 30 41 59;
 
-    --primary: 99 102 241; /* Bright indigo */
+    --primary: 99 102 241;
     --primary-foreground: 255 255 255;
 
-    --secondary: 139 92 246; /* Bright purple */
+    --secondary: 139 92 246;
     --secondary-foreground: 255 255 255;
 
-    --muted: 241 245 249; /* Very light blue */
+    --muted: 241 245 249;
     --muted-foreground: 71 85 105;
 
-    --accent: 147 197 253; /* Light sky blue */
+    --accent: 147 197 253;
     --accent-foreground: 30 41 59;
 
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
 
-    --border: 226 232 240; /* Light border */
+    --border: 226 232 240;
     --input: 226 232 240;
-    --ring: 99 102 241; /* Bright indigo ring */
+    --ring: 99 102 241;
 
     --radius: 0.75rem;
 
@@ -251,7 +87,7 @@ body {
   }
 
   .dark {
-    --background: 15 23 42; /* Dark slate */
+    --background: 15 23 42;
     --foreground: 248 250 252;
 
     --card: 30 41 59;
@@ -306,14 +142,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Typography improvements for retina and standard displays */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    body {
-      -webkit-font-smoothing: subpixel-antialiased;
-    }
-  }
-
-  /* Improve text contrast and readability */
   h1,
   h2,
   h3,
@@ -327,283 +155,4 @@ body {
       "ss01" 1;
     text-rendering: optimizeLegibility;
   }
-
-  /* Color hierarchy variables */
-  :root {
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --text-tertiary: #888888;
-    --text-quaternary: #666666;
-  }
-
-  /* Privy modal logo styling */
-  .privy-modal img[src*="builder.io"],
-  .privy-dialog img[src*="builder.io"],
-  [data-testid="privy-modal"] img[src*="builder.io"],
-  div[role="dialog"] img[src*="builder.io"] {
-    border-radius: 0.5rem !important;
-  }
-
-  /* Cyberpunk button styling */
-  .cyberpunk-button {
-    clip-path: polygon(
-      15px 0%,
-      100% 0%,
-      100% calc(100% - 15px),
-      calc(100% - 15px) 100%,
-      0% 100%,
-      0% 15px
-    );
-    position: relative;
-  }
-
-  .cyberpunk-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(34, 211, 238, 0.3) 0%,
-      transparent 50%,
-      rgba(34, 211, 238, 0.3) 100%
-    );
-    clip-path: polygon(
-      15px 0%,
-      100% 0%,
-      100% calc(100% - 15px),
-      calc(100% - 15px) 100%,
-      0% 100%,
-      0% 15px
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .cyberpunk-button:hover::before {
-    opacity: 1;
-  }
-
-  .cyberpunk-button::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
-    background: inherit;
-    clip-path: polygon(
-      13px 0%,
-      100% 0%,
-      100% calc(100% - 13px),
-      calc(100% - 13px) 100%,
-      0% 100%,
-      0% 13px
-    );
-    z-index: -1;
-  }
-
-  /* btn-70 button styles */
-  .btn-70,
-  .btn-70 *,
-  .btn-70 :after,
-  .btn-70 :before,
-  .btn-70:after,
-  .btn-70:before {
-    border: 0 solid;
-    box-sizing: border-box;
-  }
-  .btn-70 {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: button;
-    background-color: #000;
-    background-image: none;
-    color: #fff;
-    cursor: pointer;
-    font-family:
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      Segoe UI,
-      Roboto,
-      Helvetica Neue,
-      Arial,
-      Noto Sans,
-      sans-serif,
-      Apple Color Emoji,
-      Segoe UI Emoji,
-      Segoe UI Symbol,
-      Noto Color Emoji;
-    font-size: 100%;
-    line-height: 1.5;
-    margin: 0;
-    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
-    padding: 0;
-  }
-  .btn-70:disabled {
-    cursor: default;
-  }
-  .btn-70:-moz-focusring {
-    outline: auto;
-  }
-  .btn-70 svg {
-    display: block;
-    vertical-align: middle;
-  }
-  .btn-70 [hidden] {
-    display: none;
-  }
-  .btn-70 {
-    box-shadow: inset 0 0 0 2px #fff;
-    box-sizing: border-box;
-    display: block;
-    font-weight: 900;
-    padding: 1.2rem 3rem;
-    position: relative;
-    text-transform: uppercase;
-    transition: color 0.1s linear;
-    width: 100%;
-  }
-  .btn-70:after,
-  .btn-70:before {
-    content: "";
-    position: absolute;
-  }
-  .btn-70:before {
-    border-bottom: var(--border);
-    border-top: var(--border);
-    height: 100%;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    width: 0;
-  }
-  .btn-70:hover:before {
-    --border: 4px solid #000;
-    -webkit-animation: border-top-and-bottom 1s forwards;
-    animation: border-top-and-bottom 1s forwards;
-  }
-  .btn-70:after {
-    border-left: var(--border);
-    border-right: var(--border);
-    bottom: 50%;
-    right: 0;
-    transform: translateY(50%);
-    width: 100%;
-    height: 0;
-    z-index: -1;
-  }
-  .btn-70:hover:after {
-    --border: 4px solid #000;
-    -webkit-animation: border-right-and-left 1s forwards;
-    animation: border-right-and-left 1s forwards;
-  }
-  @-webkit-keyframes border-top-and-bottom {
-    0% {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
-  @keyframes border-top-and-bottom {
-    0% {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
-  @-webkit-keyframes border-right-and-left {
-    0% {
-      height: 0;
-    }
-    to {
-      height: 100%;
-    }
-  }
-  @keyframes border-right-and-left {
-    0% {
-      height: 0;
-    }
-    to {
-      height: 100%;
-    }
-  }
-}
-
-/* Glitch text animation for hero message */
-@keyframes glitch-text-shift {
-  0% {
-    text-shadow: none;
-    transform: none;
-  }
-  10% {
-    text-shadow:
-      2px 0 rgba(255, 0, 0, 0.6),
-      -2px 0 rgba(0, 255, 255, 0.6);
-  }
-  20% {
-    text-shadow:
-      -2px 0 rgba(255, 0, 0, 0.6),
-      2px 0 rgba(0, 255, 255, 0.6);
-  }
-  30% {
-    text-shadow:
-      3px 0 rgba(255, 0, 0, 0.6),
-      -3px 0 rgba(0, 255, 255, 0.6);
-  }
-  40% {
-    text-shadow:
-      -1px 0 rgba(255, 0, 0, 0.6),
-      1px 0 rgba(0, 255, 255, 0.6);
-  }
-  50% {
-    text-shadow:
-      1px 0 rgba(255, 0, 0, 0.6),
-      -1px 0 rgba(0, 255, 255, 0.6);
-  }
-  60% {
-    text-shadow: none;
-  }
-  100% {
-    text-shadow: none;
-    transform: none;
-  }
-}
-.glitch-text {
-  animation: glitch-text-shift 0.8s linear both;
-}
-
-/* OnchainKit Name component overrides for light text on dark background */
-[class*="ock-text"],
-[class*="ock-name"],
-[class*="ock-identity"] {
-  color: rgba(255, 255, 255, 0.95) !important;
-  background: transparent !important;
-}
-
-/* Fix avatar + image sizing so they don't blow up buttons */
-[class*="ock-avatar"],
-[class*="ock-image"],
-span:has(> [class*="ock-avatar"]) img,
-span:has(> [class*="ock-image"]) img {
-  width: 28px !important;
-  height: 28px !important;
-  max-width: 28px !important;
-  max-height: 28px !important;
-  border-radius: 0.5rem;  /* matches Tailwind rounded-md */
-  object-fit: cover;
-  flex-shrink: 0;
-  margin-top: 1px !important;
-  margin-bottom: 1px !important;
-}
-
-/* Override inline styles inside OnchainKit, but keep layout intact */
-[class*="ock-"] span {
-  color: inherit !important;
-  background: transparent !important;
 }
