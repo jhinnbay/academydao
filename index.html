@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trials of Azura</title>
     
-    <!-- Prevent any flash during loading -->
+    <!-- Prevent flash during loading -->
     <style>
       * {
         background-color: #000000 !important;
@@ -20,8 +20,12 @@
         background-color: #000000 !important;
         min-height: 100vh;
       }
-      /* Ensure no white flash on any element */
-      div, span, p, h1, h2, h3, h4, h5, h6, section, article, main, nav, header, footer {
+      /* Override any potential white backgrounds from third-party libraries */
+      .privy-modal,
+      .privy-dialog,
+      [data-testid="privy-modal"],
+      div[role="dialog"],
+      [class*="ock-"] {
         background-color: #000000 !important;
       }
     </style>

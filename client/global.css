@@ -7,7 +7,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent any flash during loading */
+/* Prevent flash during loading */
 * {
   background-color: #000000 !important;
 }
@@ -28,7 +28,8 @@ html, body {
 .privy-modal,
 .privy-dialog,
 [data-testid="privy-modal"],
-div[role="dialog"] {
+div[role="dialog"],
+[class*="ock-"] {
   background-color: #000000 !important;
 }
 
