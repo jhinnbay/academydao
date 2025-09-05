@@ -7,14 +7,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Prevent yellow flash during loading */
+/* Prevent any flash during loading */
+* {
+  background-color: #000000 !important;
+}
+
 html, body {
   background-color: #000000 !important;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 
 #root {
+  background-color: #000000 !important;
+  min-height: 100vh;
+}
+
+/* Override any potential white backgrounds from third-party libraries */
+.privy-modal,
+.privy-dialog,
+[data-testid="privy-modal"],
+div[role="dialog"] {
   background-color: #000000 !important;
 }
 
