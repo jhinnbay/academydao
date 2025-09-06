@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleFarcasterProfile } from "./routes/neynar-profile";
-import { handleFriendsLeaderboard } from "./routes/friends-leaderboard";
+import { handleFriendsLeaderboard, handleFollowUser } from "./routes/friends-leaderboard";
 
 export function createServer() {
   const app = express();
@@ -25,6 +25,9 @@ export function createServer() {
 
   // Friends leaderboard with token ownership
   app.get("/api/friends-leaderboard", handleFriendsLeaderboard);
+
+  // Follow user endpoint
+  app.post("/api/follow-user", handleFollowUser);
 
   // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {

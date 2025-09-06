@@ -114,6 +114,37 @@ function mapUser(user: any): FriendData {
   };
 }
 
+export const handleFollowUser: RequestHandler = async (req, res) => {
+  try {
+    const apiKey = process.env.NEYNAR_API_KEY;
+    if (!apiKey) {
+      return res.status(501).json({
+        error: "NEYNAR_API_KEY not configured on server",
+        hint: "Set NEYNAR_API_KEY in environment to enable follow functionality",
+      });
+    }
+
+    const { targetFid, viewerFid } = req.body as {
+      targetFid: number;
+      viewerFid: number;
+    };
+
+    if (!targetFid || !viewerFid) {
+      return res.status(400).json({ error: "targetFid and viewerFid are required" });
+    }
+
+    // For now, we'll just return success since we don't have a signer
+    // In a real implementation, you'd need to use the Neynar SDK with a signer
+    res.json({ 
+      success: true, 
+      message: `Follow request for FID ${targetFid} by viewer ${viewerFid}` 
+    });
+  } catch (err: any) {
+    console.error("Error in follow user:", err);
+    res.status(500).json({ error: err?.message || "Unknown error" });
+  }
+};
+
 export const handleFriendsLeaderboard: RequestHandler = async (req, res) => {
   try {
     const apiKey = process.env.NEYNAR_API_KEY;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { Loader2, Trophy } from "lucide-react";
+import { sdk } from "@farcaster/miniapp-sdk";
 
 interface FriendsLeaderboardProps {
   isOpen: boolean;
@@ -22,10 +23,10 @@ export function FriendsLeaderboard({
     setIsLoading(true);
 
     try {
-      // Dummy data as specified
+      // Dummy data with actual FIDs as specified
       const mockFriends: FriendData[] = [
         {
-          fid: 1,
+          fid: 286924,
           username: "jhinnbay.eth",
           displayName: "jhinnbay.eth",
           pfpUrl: "",
@@ -33,7 +34,7 @@ export function FriendsLeaderboard({
           tokenBalance: 10
         },
         {
-          fid: 2,
+          fid: 284618,
           username: "brennuet",
           displayName: "brennuet",
           pfpUrl: "",
@@ -41,7 +42,7 @@ export function FriendsLeaderboard({
           tokenBalance: 5
         },
         {
-          fid: 3,
+          fid: 194372,
           username: "roadu",
           displayName: "roadu",
           pfpUrl: "",
@@ -111,9 +112,39 @@ export function FriendsLeaderboard({
                     
                     <button 
                       className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors"
-                      onClick={() => {
-                        // Open Farcaster profile in new tab
-                        window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                      onClick={async () => {
+                        try {
+                          // Get current user's FID from Farcaster context
+                          const anySdk: any = sdk as any;
+                          const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
+                          const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
+                          const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
+
+                          // Call follow API
+                          const response = await fetch('/api/follow-user', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                              targetFid: friend.fid,
+                              viewerFid: currentUserFid
+                            })
+                          });
+
+                          if (response.ok) {
+                            // Also open Farcaster profile in new tab
+                            window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                          } else {
+                            console.error('Follow request failed');
+                            // Still open profile as fallback
+                            window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                          }
+                        } catch (error) {
+                          console.error('Error following user:', error);
+                          // Fallback to opening profile
+                          window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                        }
                       }}
                     >
                       Follow
