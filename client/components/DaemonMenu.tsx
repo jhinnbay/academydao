@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FriendsLeaderboard } from "./FriendsLeaderboard"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useAccount } from "wagmi"
 
 interface DaemonMenuProps {
   isOpen: boolean;
@@ -11,6 +12,61 @@ interface DaemonMenuProps {
 
 export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) {
   const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
+  const [azuraBalance, setAzuraBalance] = useState<number | null>(null);
+  const [isLoadingBalance, setIsLoadingBalance] = useState(false);
+  const { address, isConnected } = useAccount();
+
+  const AZURAOS_CONTRACT = "0x30b3d29062e82c36a9a0ba8dc83eed5fcdba3b07";
+  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+
+  const fetchAzuraBalance = async (walletAddress: string) => {
+    try {
+      setIsLoadingBalance(true);
+      
+      // ERC-20 balanceOf function selector
+      const selector = "70a08231";
+      const addr = walletAddress.replace(/^0x/, "").toLowerCase().padStart(64, "0");
+      const data = `0x${selector}${addr}`;
+      
+      const response = await fetch(ALCHEMY_RPC, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          jsonrpc: "2.0",
+          id: 1,
+          method: "eth_call",
+          params: [{ to: AZURAOS_CONTRACT, data }, "latest"],
+        }),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        const hex = result?.result;
+        if (hex && hex !== "0x" && hex !== "0x0") {
+          // Convert hex to BigInt then to number (assuming 18 decimals)
+          const balance = Number(BigInt(hex)) / Math.pow(10, 18);
+          setAzuraBalance(balance);
+        } else {
+          setAzuraBalance(0);
+        }
+      } else {
+        setAzuraBalance(0);
+      }
+    } catch (error) {
+      console.error("Error fetching AzuraOS balance:", error);
+      setAzuraBalance(0);
+    } finally {
+      setIsLoadingBalance(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isConnected && address) {
+      fetchAzuraBalance(address);
+    } else {
+      setAzuraBalance(null);
+    }
+  }, [isConnected, address]);
 
   if (!isOpen) return null;
 
@@ -56,7 +112,15 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
 
             {/* Available credits */}
             <div className="text-center py-2 border-t border-gray-600">
-              <p className="text-sm text-white font-medium">Available Daemon Credits: 0 $AzuraOS</p>
+              <p className="text-sm text-white font-medium">
+                Available Daemon Credits: {
+                  isLoadingBalance 
+                    ? "Loading..." 
+                    : azuraBalance !== null 
+                      ? `${azuraBalance.toFixed(2)} $AzuraOS`
+                      : "Connect wallet to view balance"
+                }
+              </p>
             </div>
 
 
