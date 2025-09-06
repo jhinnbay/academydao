@@ -56,9 +56,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Measure your cognition across logic, memory, and reasoning. Results feed your profile.",
         icon: Brain,
         cta: "Start IQ Test",
-        onClick: () => {
-          // IQ Test disabled - do nothing
-        },
+        onClick: onOpenIQ,
       },
       {
         id: "daemon",

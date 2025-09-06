@@ -573,6 +573,7 @@ export default function Index() {
                   <Identity
                     address={wagmiAddress}
                     schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
+                    className="bg-transparent"
                   >
                     <Avatar />
                     <Name>
@@ -959,20 +960,18 @@ export default function Index() {
             {/* Main Action Section */}
             <div className="p-6 sm:p-8 space-y-6 overflow-hidden">
               {/* Primary Input Request Form Card - Main Focal Point */}
-              <div className="relative">
-                <div className="text-center p-6 sm:p-8">
-                  <button
-                    onClick={handleOpenModal}
-                    className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                      lineHeight: "1.4",
-                      fontWeight: "600",
-                    }}
-                  >
-                    Fill Out the form
-                  </button>
-                </div>
+              <div className="w-full">
+                <button
+                  onClick={handleOpenModal}
+                  className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.4",
+                    fontWeight: "600",
+                  }}
+                >
+                  AI Discussion Form
+                </button>
               </div>
 
               {/* Send Azura Your Request Button */}
@@ -995,7 +994,7 @@ export default function Index() {
                       ? "Calculating decision-matrix...."
                       : isTyping
                         ? "Alchemizing..."
-                        : "send"}
+                        : "Complete Form To Activate Azura"}
                 </button>
               </div>
               <div className="text-center">
@@ -1007,7 +1006,7 @@ export default function Index() {
                     fontWeight: "400",
                   }}
                 >
-                  Skip submission fee by grabbing an angel
+                  Hope you're feeling great today angel
                   <br />
                 </p>
               </div>
