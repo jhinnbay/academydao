@@ -60,7 +60,7 @@ const handleSave = async () => {
               />
             </div>
             <h2 className="text-white font-sans text-xl font-bold">
-              Daemon Proposal
+              Daemon Model
             </h2>
           </div>
           <button
@@ -97,12 +97,10 @@ const handleSave = async () => {
         <div className="p-6 bg-black backdrop-blur-sm">
           <div className="mb-6">
             <h3 className="text-white font-sans text-lg font-bold mb-3">
-              Daemon Model Proposals
+              Community Governance
             </h3>
             <div className="text-white/80 font-sans text-sm leading-relaxed">
-              Submit your proposal to Azura's decision-making AI for community events or funding requests. 
-              Describe your project details, requirements, expected outcomes, and community impact. 
-              Include specific information such as venue, dates, budget breakdown, and how it benefits the Academy community.
+              No longer do humans need to make decisions alone. In cyberspace we are all angels and Daemons have always helped behind the scenes. Activate the Daemon Model Azura to organize events, funding, and help when you need it. This will signal a prompt for all Angels to come together, to use their celestial powers to aide you in your quest.
             </div>
           </div>
 
