@@ -12,7 +12,6 @@ export const InputRequestModal: React.FC<InputRequestModalProps> = ({
   onClose,
   onSave,
 }) => {
-  const [activeTab, setActiveTab] = useState<"funding" | "events">("events");
   const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
@@ -23,13 +22,13 @@ const handleSave = async () => {
   setIsSaving(true);
   SoundEffects.playGenerateSound();
 
-  // JUST prepare the data and pass it up to the parent
-  // DON'T try to fetch here anymore
-  onSave({ type: activeTab, content: content.trim() });
+  // Default to "events" type since we removed the tab selection
+  // Users can specify in their content whether it's for events or funding
+  onSave({ type: "events", content: content.trim() });
   
   setContent("");
   onClose();
-  setIsSaving(false); // Move this here since we're not awaiting anything
+  setIsSaving(false);
 };
 
 
@@ -93,62 +92,17 @@ const handleSave = async () => {
           </button>
         </div>
 
-        {/* Tabs */}
-        <div className="flex border-b border-white/20 bg-black backdrop-blur-sm">
-          <button
-            onClick={() => setActiveTab("events")}
-            className={`flex-1 py-4 px-6 font-sans text-sm font-medium transition-all duration-300 ${
-              activeTab === "events"
-                ? "text-white bg-white/10 backdrop-blur-md border-b-2 border-white/50"
-                : "text-white/70 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            Events
-          </button>
-          <button
-            onClick={() => setActiveTab("funding")}
-            className={`flex-1 py-4 px-6 font-sans text-sm font-medium transition-all duration-300 ${
-              activeTab === "funding"
-                ? "text-white bg-white/10 backdrop-blur-md border-b-2 border-white/50"
-                : "text-white/70 hover:text-white hover:bg-white/5"
-            }`}
-          >
-            Funding
-          </button>
-        </div>
 
         {/* Content */}
         <div className="p-6 bg-black backdrop-blur-sm">
-          {/* Reward Hierarchy Section */}
-          <div className="mb-6 p-4 bg-white/5 backdrop-blur-sm border border-white/20 rounded-lg">
-            <h3 className="text-white font-sans text-sm font-bold mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-              Proposal Rewards
+          <div className="mb-6">
+            <h3 className="text-white font-sans text-lg font-bold mb-3">
+              Daemon Model Proposals
             </h3>
-            <div className="space-y-2 text-xs">
-              <div className="flex items-center justify-between text-white/80">
-                <span>Angel Backing (3+ Angels)</span>
-                <span className="text-green-400 font-medium">Skip Submission Fee</span>
-              </div>
-              <div className="flex items-center justify-between text-white/80">
-                <span>High-Quality Proposal</span>
-                <span className="text-white font-medium">Priority Review</span>
-              </div>
-              <div className="flex items-center justify-between text-white/80">
-                <span>Community Support</span>
-                <span className="text-white font-medium">Enhanced Visibility</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-white font-sans text-sm font-medium mb-2">
-              {activeTab === "events" ? "Event Proposal" : "Funding Proposal"}
-            </label>
-            <div className="text-white/70 font-sans text-xs mb-3">
-              {activeTab === "events"
-                ? "Describe your event details, requirements, and expected outcomes. Include venue, date, budget, and community impact."
-                : "Describe your funding proposal, amount needed, and how funds will be used. Include budget breakdown and expected ROI."}
+            <div className="text-white/80 font-sans text-sm leading-relaxed">
+              Submit your proposal to Azura's decision-making AI for community events or funding requests. 
+              Describe your project details, requirements, expected outcomes, and community impact. 
+              Include specific information such as venue, dates, budget breakdown, and how it benefits the Academy community.
             </div>
           </div>
 
@@ -156,7 +110,7 @@ const handleSave = async () => {
             <textarea
               value={content}
               onChange={handleInputChange}
-              placeholder={`Type your ${activeTab} proposal to Azura Model Daemon...`}
+              placeholder="Describe your proposal details, requirements, expected outcomes, and community impact..."
               className="w-full h-48 bg-white/5 backdrop-blur-md border border-white/20 rounded-lg p-4 text-white font-cartograph text-sm resize-none focus:border-white/40 focus:bg-white/10 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
               autoFocus={false}
