@@ -38,8 +38,8 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               <div>
                 <h3 className="font-semibold text-white mb-2 border-b border-gray-600 pb-1">Decision-Type</h3>
                 <div className="space-y-1 text-gray-300">
-                  <div>Likes</div>
-                  <div>Comments</div>
+                  <div>Prompts</div>
+                  <div>Proposals</div>
                   <div>Follows</div>
                 </div>
               </div>
@@ -47,9 +47,9 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               <div>
                 <h3 className="font-semibold text-white mb-2 border-b border-gray-600 pb-1">Amount Available</h3>
                 <div className="space-y-1 text-gray-300">
-                  <div>0 $AzuraOS</div>
-                  <div>0 $AzuraOS</div>
-                  <div>0 $AzuraOS</div>
+                  <div>25 $AzuraOS</div>
+                  <div>500 $AzuraOS</div>
+                  <div>100,000 $AzuraOS</div>
                 </div>
               </div>
             </div>
@@ -72,9 +72,9 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               <Button
                 variant="outline"
                 className="w-full bg-black border-white text-white hover:bg-white hover:text-black transition-colors"
-                onClick={onThanksAzura}
+                onClick={onClose}
               >
-                Thanks Azura
+                Thanks, Got it!
               </Button>
             </div>
           </CardContent>
