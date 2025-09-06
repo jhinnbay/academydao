@@ -169,8 +169,7 @@ export default function Index() {
 
   // Angels ownership state and fetch logic
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f";
-  const ALCHEMY_RPC =
-    "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
   const ANGELS_TARGET = 3;
   const [angelsOwned, setAngelsOwned] = useState<number | null>(null);
 
@@ -611,7 +610,7 @@ export default function Index() {
 
             <div className="flex justify-center items-end flex-shrink-0">
               <img
-                src="https://i.imgur.com/ip6OGzW.png"
+                src="https://i.imgur.com/zFJCaI0.png"
                 alt="Azura AI Avatar"
                 className="w-72 h-72 sm:w-96 sm:h-96 lg:w-[485px] lg:h-[485px] object-cover cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => setIsDaemonMenuOpen(true)}

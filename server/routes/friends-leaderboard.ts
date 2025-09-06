@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
+import { ALCHEMY_RPC_URL } from "@shared/config";
 
 interface NeynarUserResponse {
   result?: { users?: any[] };
@@ -41,14 +42,13 @@ async function fetchNeynarFollowing(path: string, apiKey: string) {
 
 async function checkTokenOwnership(address: string, contractAddress: string): Promise<number> {
   try {
-    const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
     
     // Try direct balanceOf call first
     const selector = "70a08231"; // balanceOf(address)
     const addr = address.replace(/^0x/, "").toLowerCase().padStart(64, "0");
     const data = `0x${selector}${addr}`;
     
-    const res = await fetch(ALCHEMY_RPC, {
+    const res = await fetch(ALCHEMY_RPC_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -79,7 +79,7 @@ async function checkTokenOwnership(address: string, contractAddress: string): Pr
 
     // Fallback to NFT API
     try {
-      const restBase = ALCHEMY_RPC.replace("/v2/", "/nft/v3/");
+      const restBase = ALCHEMY_RPC_URL.replace("/v2/", "/nft/v3/");
       const url = `${restBase}/getNFTsForOwner?owner=${address}&contractAddresses[]=${contractAddress}&withMetadata=false`;
       const r = await fetch(url, { headers: { Accept: "application/json" } });
       if (r.ok) {

@@ -96,10 +96,10 @@ export function FriendsLeaderboard({
               AzuraOS holders
             </h2>
             <p className="text-white text-sm mb-2">
-              $AZURAOS LEADERBOARD
+              $AzuraOS LEADERBOARD
             </p>
             <p className="text-white/80 text-xs mb-4">
-              Follow the top Daemon Model Supporters to get rewarded.
+              Follow top holders to get rewarded.
             </p>
             <div className="w-full h-px bg-white/20" />
           </div>
@@ -123,7 +123,7 @@ export function FriendsLeaderboard({
                         @{friend.username}
                       </div>
                       <div className="text-white/60 text-sm">
-                        {friend.tokenBalance}M $AZURAOS
+                        {friend.tokenBalance}M $AzuraOS
                       </div>
                     </div>
                     

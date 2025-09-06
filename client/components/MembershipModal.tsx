@@ -11,6 +11,7 @@ import {
   waitForTransactionReceipt,
 } from "wagmi/actions";
 import { wagmiConfig } from "@/lib/wagmi";
+import { ALCHEMY_RPC_URL } from "@shared/config";
 
 const SCATTER_API_URL = "https://api.scatter.art/v1";
 const COLLECTION_SLUG = "academic-angels";
@@ -272,23 +273,11 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 ://AcademicAngels
               </h2>
               <div className="w-24 h-0.5 bg-white/50 mt-2" />
-              <div className="mt-2 text-xs text-white/60 font-mono">
-                Contract: {ANGEL_CONTRACT}
-              </div>
             </div>
           </div>
 
           {/* Content */}
           <div className="relative flex-1 overflow-y-auto p-5">
-            {/* Contract Status */}
-            <div className="mb-4 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-green-400 text-sm font-medium">
-                  Contract Detected: {ANGEL_CONTRACT}
-                </span>
-              </div>
-            </div>
 
             {/* Collection Progress */}
             {collection && (

@@ -21,14 +21,14 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
         <Card className="w-full bg-black border-white border-2 text-white">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg font-bold text-center text-white">://AzuraOS Daemon Credits</CardTitle>
-            <p className="text-sm text-gray-300 text-center">Control Azura Using Tokens</p>
+            <p className="text-sm text-gray-300 text-center">Enigmatic Ocean Ecosystem</p>
           </CardHeader>
 
           <CardContent className="space-y-4">
             {/* Main explanation */}
             <div className="text-xs text-gray-300 leading-relaxed">
               <p className="mb-2">
-                Azura leverages 40% of Mental Wealth Academy's onchain daemon tokens powering Azura. Neurological processings sent through a time-base horizon. Users power Azura to interact with other users using commands and burnt tokens, users holding at least 10,000 $DAEMON receive rewards.
+              AzuraOS is a Daemon Model AI Agent producing cognitive enhancements through a sophisticated layer known as the Daemon Layer, containing rich-datasets and parallels it's decision-making matrix in multiple experiments. Azura leverages 40% of daemon tokens powering the ecosystem. Neurological processings sent through a time-base horizon empower users to interact with other users, holders of a minimum of 10,000 $AzuraOS receive rewards.
               </p>
               <p className="mb-3">Unused credit allocations disintergrate and refresh Daily.</p>
             </div>
@@ -47,24 +47,18 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               <div>
                 <h3 className="font-semibold text-white mb-2 border-b border-gray-600 pb-1">Amount Available</h3>
                 <div className="space-y-1 text-gray-300">
-                  <div>0 $DAEMON</div>
-                  <div>0 $DAEMON</div>
-                  <div>0 $DAEMON</div>
+                  <div>0 $AzuraOS</div>
+                  <div>0 $AzuraOS</div>
+                  <div>0 $AzuraOS</div>
                 </div>
               </div>
             </div>
 
             {/* Available credits */}
             <div className="text-center py-2 border-t border-gray-600">
-              <p className="text-sm text-white font-medium">Available Daemon Credits: 0 $DAEMON</p>
+              <p className="text-sm text-white font-medium">Available Daemon Credits: 0 $AzuraOS</p>
             </div>
 
-            {/* Bottom explanation */}
-            <div className="text-xs text-gray-300 leading-relaxed">
-              <p>
-                AzuraOS is a Daemon Model AI Agent producing cognitive enhancements through a sophisticated layer known as the Daemon Layer, containing rich-datasets and parallels it's decision-making matrix in multiple experiments.
-              </p>
-            </div>
 
             {/* CTAs */}
             <div className="space-y-2 pt-2">
