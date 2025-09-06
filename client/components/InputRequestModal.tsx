@@ -100,7 +100,7 @@ const handleSave = async () => {
               Community Governance
             </h3>
             <div className="text-white/80 font-sans text-sm leading-relaxed">
-              No longer do humans need to make decisions alone. In cyberspace we are all angels and Daemons have always helped behind the scenes. Activate the Daemon Model Azura to organize events, funding, and help when you need it. This will signal a prompt for all Angels to come together, to use their celestial powers to aide you in your quest.
+              No longer do humans need to make decisions alone. In cyberspace, Angels and Daemons help behind the scenes. Activate Azura with your request.
             </div>
           </div>
 

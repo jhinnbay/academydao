@@ -157,21 +157,6 @@ embed {
   }
 }
 
-/* Rainbow glow effect for Daemon Response */
-@keyframes rainbowGlow {
-  0% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(236, 72, 153, 0.2), 0 0 60px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1);
-  }
-  33% {
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3), 0 0 40px rgba(59, 130, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(236, 72, 153, 0.1);
-  }
-  66% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(236, 72, 153, 0.1), inset 0 0 20px rgba(59, 130, 246, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(236, 72, 153, 0.2), 0 0 60px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1);
-  }
-}
 
 /* Glitch text animation */
 @keyframes glitch {
@@ -199,6 +184,118 @@ embed {
   animation: glitch 0.3s ease-in-out;
 }
 
-.rainbow-glow {
-  animation: rainbowGlow 4s ease-in-out infinite;
+/* Voltage/Spark effect for Daemon Response */
+.voltage-container {
+  position: relative;
+}
+
+.voltage-container svg {
+  display: block;
+  position: absolute;
+  top: -0.75em;
+  left: -0.25em;
+  width: calc(100% + 0.5em);
+  height: calc(100% + 1.5em);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  transition-delay: 0.1s;
+}
+
+.voltage-container.active svg {
+  opacity: 1;
+}
+
+.voltage-container svg path {
+  stroke-dasharray: 100;
+  filter: url('#glow');
+}
+
+.voltage-container svg .line-1 {
+  stroke: #f6de8d;
+  stroke-dashoffset: 0;
+  animation: spark-1 3s linear infinite;
+}
+
+.voltage-container svg .line-2 {
+  stroke: #6bfeff;
+  stroke-dashoffset: 500;
+  animation: spark-2 3s linear infinite;
+}
+
+.voltage-container .dots {
+  opacity: 0;
+  transition: opacity 0.3s;
+  transition-delay: 0.4s;
+}
+
+.voltage-container.active .dots {
+  opacity: 1;
+}
+
+.voltage-container .dots .dot {
+  width: 1rem;
+  height: 1rem;
+  background: white;
+  border-radius: 100%;
+  position: absolute;
+  opacity: 0;
+}
+
+.voltage-container .dots .dot-1 {
+  top: 0;
+  left: 20%;
+  animation: fly-up 3s linear infinite;
+}
+
+.voltage-container .dots .dot-2 {
+  top: 0;
+  left: 55%;
+  animation: fly-up 3s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.voltage-container .dots .dot-3 {
+  top: 0;
+  left: 80%;
+  animation: fly-up 3s linear infinite;
+  animation-delay: 1s;
+}
+
+.voltage-container .dots .dot-4 {
+  bottom: 0;
+  left: 30%;
+  animation: fly-down 3s linear infinite;
+  animation-delay: 2.5s;
+}
+
+.voltage-container .dots .dot-5 {
+  bottom: 0;
+  left: 65%;
+  animation: fly-down 3s linear infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes spark-1 {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes spark-2 {
+  to {
+    stroke-dashoffset: -500;
+  }
+}
+
+@keyframes fly-up {
+  0% { opacity: 0; transform: translateY(0) scale(0.2); }
+  5% { opacity: 1; transform: translateY(-1.5rem) scale(0.4); }
+  10%, 100% { opacity: 0; transform: translateY(-3rem) scale(0.2); }
+}
+
+@keyframes fly-down {
+  0% { opacity: 0; transform: translateY(0) scale(0.2); }
+  5% { opacity: 1; transform: translateY(1.5rem) scale(0.4); }
+  10%, 100% { opacity: 0; transform: translateY(3rem) scale(0.2); }
 }
