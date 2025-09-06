@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleFarcasterProfile } from "./routes/neynar-profile";
+import { handleFriendsLeaderboard } from "./routes/friends-leaderboard";
 
 export function createServer() {
   const app = express();
@@ -21,6 +22,9 @@ export function createServer() {
 
   // Farcaster profile fallback via Neynar
   app.get("/api/farcaster/profile", handleFarcasterProfile);
+
+  // Friends leaderboard with token ownership
+  app.get("/api/friends-leaderboard", handleFriendsLeaderboard);
 
   // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {

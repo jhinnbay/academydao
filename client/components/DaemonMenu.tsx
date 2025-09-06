@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FriendsLeaderboard } from "./FriendsLeaderboard"
+import { useState } from "react"
 
 interface DaemonMenuProps {
   isOpen: boolean;
@@ -8,6 +10,8 @@ interface DaemonMenuProps {
 }
 
 export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) {
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
+
   if (!isOpen) return null;
 
   return (
@@ -67,6 +71,7 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               <Button
                 variant="outline"
                 className="w-full bg-black border-white text-white hover:bg-white hover:text-black transition-colors"
+                onClick={() => setIsLeaderboardOpen(true)}
               >
                 Leaderboard
               </Button>
@@ -81,6 +86,13 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
           </CardContent>
         </Card>
       </div>
+      
+      {/* Friends Leaderboard Modal */}
+      <FriendsLeaderboard
+        isOpen={isLeaderboardOpen}
+        onClose={() => setIsLeaderboardOpen(false)}
+        contractAddress="0x30b3d29062e82c36a9a0ba8dc83eed5fcdba3b07"
+      />
     </div>
   )
 }
