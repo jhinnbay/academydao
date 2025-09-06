@@ -1015,10 +1015,23 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div
             data-section="daemon-response"
-            className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start"
+            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start transition-all duration-1000 ${
+              isGenerating || isTyping || isN8nLoading
+                ? "bg-gradient-to-r from-purple-500/20 via-pink-500/20 via-red-500/20 via-yellow-500/20 via-green-500/20 via-blue-500/20 via-indigo-500/20 to-purple-500/20 animate-pulse"
+                : ""
+            }`}
             style={{
-              backgroundColor: "rgba(30, 30, 30, 0.1)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              backgroundColor: isGenerating || isTyping || isN8nLoading 
+                ? "transparent" 
+                : "rgba(30, 30, 30, 0.1)",
+              border: isGenerating || isTyping || isN8nLoading
+                ? "2px solid rgba(255, 255, 255, 0.4)"
+                : "1px solid rgba(255, 255, 255, 0.2)",
+              backgroundImage: isGenerating || isTyping || isN8nLoading
+                ? "linear-gradient(45deg, #8b5cf6, #ec4899, #ef4444, #f59e0b, #10b981, #3b82f6, #6366f1, #8b5cf6)"
+                : "none",
+              backgroundSize: isGenerating || isTyping || isN8nLoading ? "400% 400%" : "auto",
+              animation: isGenerating || isTyping || isN8nLoading ? "rainbowShift 3s ease-in-out infinite" : "none",
             }}
           >
             <div className="text-center">
