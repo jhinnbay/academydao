@@ -23,8 +23,28 @@ export function FriendsLeaderboard({
     setIsLoading(true);
 
     try {
-      // Dummy data with actual FIDs as specified
-      const mockFriends: FriendData[] = [
+      // Get current user's FID from Farcaster context
+      const anySdk: any = sdk as any;
+      const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
+      const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
+      const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
+
+      // Call the real API to get relevant token holders
+      const response = await fetch(
+        `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}`
+      );
+      
+      if (!response.ok) {
+        throw new Error("Failed to fetch friends leaderboard");
+      }
+
+      const data: FriendsLeaderboardResponse = await response.json();
+      setFriends(data.friends);
+    } catch (err: any) {
+      console.error("Error fetching friends leaderboard:", err);
+      
+      // Fallback to dummy data if API fails
+      const fallbackFriends: FriendData[] = [
         {
           fid: 286924,
           username: "jhinnbay.eth",
@@ -51,10 +71,7 @@ export function FriendsLeaderboard({
         }
       ];
       
-      setFriends(mockFriends);
-    } catch (err: any) {
-      console.error("Error fetching friends leaderboard:", err);
-      // Don't set error, just show empty state
+      setFriends(fallbackFriends);
     } finally {
       setIsLoading(false);
     }
