@@ -62,10 +62,14 @@ async function checkTokenOwnership(address: string, contractAddress: string): Pr
     if (res.ok) {
       const json = await res.json();
       const hex: string | undefined = json?.result;
-      if (hex && hex !== "0x") {
+      if (hex && hex !== "0x" && hex !== "0x0") {
         try {
-          const bigIntValue = BigInt(hex);
-          return Number(bigIntValue);
+          // Remove 0x prefix and convert to BigInt
+          const cleanHex = hex.startsWith('0x') ? hex.slice(2) : hex;
+          const bigIntValue = BigInt('0x' + cleanHex);
+          // Convert to number safely
+          const numValue = Number(bigIntValue);
+          return isNaN(numValue) ? 0 : numValue;
         } catch (e) {
           console.warn("Failed to convert hex to BigInt:", hex, e);
           return 0;

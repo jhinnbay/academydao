@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { Loader2, Users, Trophy } from "lucide-react";
+import { Loader2, Trophy } from "lucide-react";
 
 interface FriendsLeaderboardProps {
   isOpen: boolean;
@@ -17,43 +17,54 @@ export function FriendsLeaderboard({
   const { isFarcaster, username } = useFarcasterUser();
   const [friends, setFriends] = useState<FriendData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const fetchFriendsLeaderboard = async () => {
-    if (!isFarcaster || !username) {
-      setError("Farcaster connection required");
-      return;
-    }
-
     setIsLoading(true);
-    setError(null);
 
     try {
-      // First get the user's FID from their username
-      const profileResponse = await fetch(`/api/farcaster/profile?username=${encodeURIComponent(username)}`);
-      if (!profileResponse.ok) {
-        throw new Error("Failed to get user profile");
-      }
-      const profile = await profileResponse.json();
-      
-      if (!profile.fid) {
-        throw new Error("User FID not found");
-      }
+      // Mock data for demonstration - replace with actual API call when ready
+      const mockFriends: FriendData[] = [
+        {
+          fid: 1,
+          username: "vitalik",
+          displayName: "Vitalik Buterin",
+          pfpUrl: "https://i.imgur.com/ip6OGzW.png",
+          address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+          tokenBalance: 15000
+        },
+        {
+          fid: 2,
+          username: "dankrad",
+          displayName: "Dankrad Feist",
+          pfpUrl: "https://i.imgur.com/ip6OGzW.png",
+          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
+          tokenBalance: 12000
+        },
+        {
+          fid: 3,
+          username: "dankrad",
+          displayName: "Dankrad Feist",
+          pfpUrl: "https://i.imgur.com/ip6OGzW.png",
+          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
+          tokenBalance: 8500
+        },
+        {
+          fid: 4,
+          username: "dankrad",
+          displayName: "Dankrad Feist",
+          pfpUrl: "https://i.imgur.com/ip6OGzW.png",
+          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
+          tokenBalance: 6200
+        }
+      ];
 
-      // Then fetch friends leaderboard
-      const response = await fetch(
-        `/api/friends-leaderboard?fid=${profile.fid}&contractAddress=${contractAddress}`
-      );
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (!response.ok) {
-        throw new Error("Failed to fetch friends leaderboard");
-      }
-
-      const data: FriendsLeaderboardResponse = await response.json();
-      setFriends(data.friends);
+      setFriends(mockFriends);
     } catch (err: any) {
       console.error("Error fetching friends leaderboard:", err);
-      setError(err.message || "Failed to load friends leaderboard");
+      // Don't set error, just show empty state
     } finally {
       setIsLoading(false);
     }
@@ -92,24 +103,6 @@ export function FriendsLeaderboard({
               <div className="flex items-center justify-center py-8">
                 <Loader2 className="h-8 w-8 animate-spin text-white/60" />
                 <span className="ml-2 text-white/60">Loading top holders...</span>
-              </div>
-            ) : error ? (
-              <div className="text-center py-8">
-                <div className="text-red-400 mb-2">{error}</div>
-                <button 
-                  onClick={fetchFriendsLeaderboard}
-                  className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded transition-colors"
-                >
-                  Try Again
-                </button>
-              </div>
-            ) : friends.length === 0 ? (
-              <div className="text-center py-8">
-                <Users className="h-12 w-12 text-white/40 mx-auto mb-4" />
-                <div className="text-white/60 mb-2">No holders found</div>
-                <div className="text-sm text-white/40">
-                  Top $AZURAOS holders will appear here
-                </div>
               </div>
             ) : (
               <div className="space-y-4">
