@@ -1015,19 +1015,12 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div
             data-section="daemon-response"
-            className="backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start transition-all duration-1000"
+            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start transition-all duration-1000 ${
+              showResponse ? "rainbow-glow" : ""
+            }`}
             style={{
-              backgroundColor: showResponse 
-                ? "transparent" 
-                : "rgba(30, 30, 30, 0.1)",
-              border: showResponse
-                ? "2px solid rgba(255, 255, 255, 0.4)"
-                : "1px solid rgba(255, 255, 255, 0.2)",
-              backgroundImage: showResponse
-                ? "linear-gradient(45deg, #8b5cf6, #ec4899, #ef4444, #f59e0b, #10b981, #3b82f6, #6366f1, #8b5cf6)"
-                : "none",
-              backgroundSize: showResponse ? "400% 400%" : "auto",
-              animation: showResponse ? "rainbowShift 3s ease-in-out infinite" : "none",
+              backgroundColor: "rgba(30, 30, 30, 0.1)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
             }}
           >
             <div className="text-center">
@@ -1177,7 +1170,7 @@ export default function Index() {
                           fontWeight: "600",
                         }}
                       >
-                        Learn More
+                        Membership
                       </button>
                       <button
                         onClick={(e) => {

@@ -138,9 +138,6 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
           functionName: "mint",
           args: [BigInt(quantity)],
           value: totalValue > 0n ? totalValue : undefined,
-          chainId: baseChain.id,
-          account: wagmiAddress,
-          chain: baseChain,
         });
         console.log("Mint transaction submitted:", hash);
         setTxHash(hash);
@@ -166,9 +163,6 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
             functionName: "mint",
             args: [],
             value: pricePer > 0n ? pricePer : undefined,
-            chainId: baseChain.id,
-            account: wagmiAddress,
-            chain: baseChain,
           });
           console.log(`Fallback mint ${i + 1} transaction submitted:`, hash);
           setTxHash(hash);
