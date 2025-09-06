@@ -12,8 +12,7 @@ import { sdk } from "@farcaster/miniapp-sdk";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { useNeynarProfile } from "@/hooks/useNeynarProfile";
-import { Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
+import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -22,9 +21,8 @@ import {
 export default function Index() {
   const { address: wagmiAddress, isConnected } = useAccount();
   const { isFarcaster, pfpUrl, displayName, username } = useFarcasterUser();
-  const { profile: neynarProfile, isLoading: isNeynarLoading } = useNeynarProfile();
-  const mergedPfp = neynarProfile?.pfpUrl || pfpUrl || null;
-  const mergedName = neynarProfile?.displayName || neynarProfile?.username || displayName || username || null;
+  const mergedPfp = pfpUrl || null;
+  const mergedName = displayName || username || null;
   
   
   // Debug logging
@@ -570,25 +568,14 @@ export default function Index() {
                 </span>
               </div>
 
-              {/* User Profile with Neynar Avatar */}
+              {/* OnchainKit Identity */}
               {isConnected && wagmiAddress && (
-                <div className="flex items-center gap-3 scale-90">
-                  {/* Neynar Avatar */}
-                  {mergedPfp && (
-                    <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20">
-                      <img
-                        src={mergedPfp}
-                        alt="Profile"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* OnchainKit Identity (Name and Badge only) */}
+                <div className="scale-90 bg-transparent">
                   <Identity
                     address={wagmiAddress}
                     schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
                   >
+                    <Avatar />
                     <Name>
                       <Badge />
                     </Name>
