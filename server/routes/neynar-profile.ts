@@ -1,102 +1,84 @@
-import type { RequestHandler } from "express";
+import { RequestHandler } from "express";
+import { NeynarUser, NeynarProfileResponse } from "@shared/api";
 
-interface NeynarUserResponse {
-  result?: { user?: any };
-  user?: any;
-}
-
-async function fetchNeynar(path: string, apiKey: string) {
-  const res = await fetch(`https://api.neynar.com${path}`, {
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-KEY": apiKey,
-    },
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Neynar error ${res.status}: ${text}`);
-  }
-  return (await res.json()) as NeynarUserResponse;
-}
-
-function mapUser(user: any) {
-  const profile = user?.profile || user || {};
-  return {
-    fid: user?.fid ?? user?.id ?? null,
-    username: user?.username ?? user?.handle ?? user?.fname ?? null,
-    displayName:
-      profile?.display_name || profile?.name || user?.display_name || null,
-    pfpUrl:
-      profile?.pfp_url ||
-      profile?.avatar_url ||
-      user?.pfp_url ||
-      user?.avatar_url ||
-      null,
-    bio: profile?.bio?.text || profile?.bio || null,
-    followerCount: user?.follower_count ?? null,
-    followingCount: user?.following_count ?? null,
-    raw: user || null,
+interface NeynarApiUser {
+  object: string;
+  fid: number;
+  custody_address: string;
+  username: string;
+  display_name: string;
+  pfp_url: string;
+  profile: {
+    bio: {
+      text: string;
+    };
   };
+  follower_count: number;
+  following_count: number;
+  verifications: string[];
+  verified_addresses: {
+    eth_addresses: string[];
+    sol_addresses: string[];
+  };
+  active_status: string;
+  power_badge: boolean;
 }
 
-export const handleFarcasterProfile: RequestHandler = async (req, res) => {
+interface NeynarApiResponse {
+  [address: string]: NeynarApiUser[];
+}
+
+export const handleNeynarProfile: RequestHandler = async (req, res) => {
   try {
-    const apiKey = process.env.NEYNAR_API_KEY;
-    if (!apiKey) {
-      return res.status(501).json({
-        error: "NEYNAR_API_KEY not configured on server",
-        hint: "Set NEYNAR_API_KEY in environment to enable Farcaster profile fallback",
-      });
+    const { address } = req.query;
+
+    if (!address || typeof address !== 'string') {
+      return res.status(400).json({ error: 'Wallet address is required' });
     }
 
-    const { fid, username, address } = req.query as {
-      fid?: string;
-      username?: string;
-      address?: string;
+    const url = `https://api.neynar.com/v2/farcaster/user/bulk-by-address?addresses=${address}`;
+    const options = {
+      method: 'GET',
+      headers: {
+        'accept': 'application/json',
+        'api_key': '5B907AF2-3087-49A8-88C6-DFA45CF19383'
+      }
     };
 
-    let user: any = null;
-
-    // Try by fid
-    if (fid) {
-      try {
-        const data = await fetchNeynar(
-          `/v2/farcaster/user?fid=${encodeURIComponent(fid)}`,
-          apiKey,
-        );
-        user = (data as any).result?.user || (data as any).user || null;
-      } catch (e) {}
+    const response = await fetch(url, options);
+    
+    if (!response.ok) {
+      throw new Error(`Neynar API error: ${response.status}`);
     }
 
-    // Try by username
-    if (!user && username) {
-      try {
-        const data = await fetchNeynar(
-          `/v2/farcaster/user-by-username?username=${encodeURIComponent(username)}`,
-          apiKey,
-        );
-        user = (data as any).result?.user || (data as any).user || null;
-      } catch (e) {}
+    const data: NeynarApiResponse = await response.json();
+    const userData = data[address.toLowerCase()];
+
+    if (!userData || userData.length === 0) {
+      return res.json({ user: null });
     }
 
-    // Try by verified address
-    if (!user && address) {
-      try {
-        const data = await fetchNeynar(
-          `/v2/farcaster/user-by-verification?address=${encodeURIComponent(address)}`,
-          apiKey,
-        );
-        user = (data as any).result?.user || (data as any).user || null;
-      } catch (e) {}
-    }
+    // Return the first user found
+    const user = userData[0];
+    
+    res.json({ 
+      user: {
+        fid: user.fid,
+        username: user.username,
+        displayName: user.display_name,
+        pfpUrl: user.pfp_url,
+        bio: user.profile.bio.text,
+        followerCount: user.follower_count,
+        followingCount: user.following_count,
+        verifications: user.verifications,
+        verifiedAddresses: user.verified_addresses,
+        activeStatus: user.active_status,
+        powerBadge: user.power_badge
+      }
+    });
 
-    if (!user) {
-      return res.status(404).json({ error: "Farcaster user not found" });
-    }
-
-    const mapped = mapUser(user);
-    res.json(mapped);
-  } catch (err: any) {
-    res.status(500).json({ error: err?.message || "Unknown error" });
+  } catch (error) {
+    console.error('Error fetching Neynar profile:', error);
+    res.status(500).json({ error: 'Failed to fetch user profile' });
   }
 };

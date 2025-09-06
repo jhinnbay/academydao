@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
-import { handleFarcasterProfile } from "./routes/neynar-profile";
+import { handleNeynarProfile } from "./routes/neynar-profile";
 
 export function createServer() {
   const app = express();
@@ -19,8 +19,8 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Farcaster profile fallback via Neynar
-  app.get("/api/farcaster/profile", handleFarcasterProfile);
+  // Neynar profile API
+  app.get("/api/neynar/profile", handleNeynarProfile);
 
   // posting form data to n8n webhook
   app.post("/api/chat", async (req, res) => {

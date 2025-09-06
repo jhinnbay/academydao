@@ -10,3 +10,27 @@
 export interface DemoResponse {
   message: string;
 }
+
+/**
+ * Neynar profile response types
+ */
+export interface NeynarUser {
+  fid: number;
+  username: string;
+  displayName: string;
+  pfpUrl: string;
+  bio: string;
+  followerCount: number;
+  followingCount: number;
+  verifications: string[];
+  verifiedAddresses: {
+    eth_addresses: string[];
+    sol_addresses: string[];
+  };
+  activeStatus: string;
+  powerBadge: boolean;
+}
+
+export interface NeynarProfileResponse {
+  user: NeynarUser | null;
+}
