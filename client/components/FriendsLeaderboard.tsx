@@ -22,39 +22,31 @@ export function FriendsLeaderboard({
     setIsLoading(true);
 
     try {
-      // Mock data for demonstration - replace with actual API call when ready
+      // Dummy data as specified
       const mockFriends: FriendData[] = [
         {
           fid: 1,
-          username: "vitalik",
-          displayName: "Vitalik Buterin",
+          username: "jhinnbay.eth",
+          displayName: "jhinnbay.eth",
           pfpUrl: "https://i.imgur.com/ip6OGzW.png",
           address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
-          tokenBalance: 15000
+          tokenBalance: 10000000
         },
         {
           fid: 2,
-          username: "dankrad",
-          displayName: "Dankrad Feist",
+          username: "brennuet",
+          displayName: "Brennuet",
           pfpUrl: "https://i.imgur.com/ip6OGzW.png",
           address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
-          tokenBalance: 12000
+          tokenBalance: 5000000
         },
         {
           fid: 3,
-          username: "dankrad",
-          displayName: "Dankrad Feist",
+          username: "roadu",
+          displayName: "Roadu",
           pfpUrl: "https://i.imgur.com/ip6OGzW.png",
           address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
-          tokenBalance: 8500
-        },
-        {
-          fid: 4,
-          username: "dankrad",
-          displayName: "Dankrad Feist",
-          pfpUrl: "https://i.imgur.com/ip6OGzW.png",
-          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
-          tokenBalance: 6200
+          tokenBalance: 2350000
         }
       ];
 
@@ -106,25 +98,41 @@ export function FriendsLeaderboard({
               </div>
             ) : (
               <div className="space-y-4">
-                {friends.slice(0, 4).map((friend, index) => (
-                  <div
-                    key={friend.fid}
-                    className="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10"
-                  >
-                    <div className="flex-1">
-                      <div className="text-white font-medium text-lg">
-                        @{friend.username}
+                {friends.map((friend, index) => {
+                  // Format token balance for display
+                  const formatTokenBalance = (balance: number) => {
+                    if (balance >= 1000000) {
+                      return (balance / 1000000).toFixed(1).replace('.0', '') + 'M';
+                    }
+                    return balance.toLocaleString();
+                  };
+
+                  return (
+                    <div
+                      key={friend.fid}
+                      className="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10"
+                    >
+                      <div className="flex-1">
+                        <div className="text-white font-medium text-lg">
+                          @{friend.username}
+                        </div>
+                        <div className="text-white/60 text-sm">
+                          {formatTokenBalance(friend.tokenBalance)} $AZURAOS
+                        </div>
                       </div>
-                      <div className="text-white/60 text-sm">
-                        {friend.tokenBalance} $AZURAOS
-                      </div>
+                      
+                      <button 
+                        className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors"
+                        onClick={() => {
+                          // Open Farcaster profile in new tab
+                          window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                        }}
+                      >
+                        Follow
+                      </button>
                     </div>
-                    
-                    <button className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors">
-                      Follow
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
