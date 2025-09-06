@@ -570,14 +570,14 @@ export default function Index() {
 
               {/* OnchainKit Identity */}
               {isConnected && wagmiAddress && (
-                <div className="scale-90">
+                <div className="scale-90 bg-transparent">
                   <Identity
                     address={wagmiAddress}
                     schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9"
                   >
-                    <Avatar className="bg-transparent" />
-                    <Name className="bg-transparent">
-                      <Badge className="bg-transparent" />
+                    <Avatar />
+                    <Name>
+                      <Badge />
                     </Name>
                   </Identity>
                 </div>
