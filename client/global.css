@@ -157,16 +157,19 @@ embed {
   }
 }
 
-/* Rainbow gradient animation for Daemon Response */
-@keyframes rainbowShift {
+/* Rainbow glow effect for Daemon Response */
+@keyframes rainbowGlow {
   0% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(236, 72, 153, 0.2), 0 0 60px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1);
   }
-  50% {
-    background-position: 100% 50%;
+  33% {
+    box-shadow: 0 0 20px rgba(236, 72, 153, 0.3), 0 0 40px rgba(59, 130, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1), inset 0 0 20px rgba(236, 72, 153, 0.1);
+  }
+  66% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(236, 72, 153, 0.1), inset 0 0 20px rgba(59, 130, 246, 0.1);
   }
   100% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(236, 72, 153, 0.2), 0 0 60px rgba(59, 130, 246, 0.1), inset 0 0 20px rgba(139, 92, 246, 0.1);
   }
 }
 
@@ -194,4 +197,8 @@ embed {
 
 .glitch-text {
   animation: glitch 0.3s ease-in-out;
+}
+
+.rainbow-glow {
+  animation: rainbowGlow 4s ease-in-out infinite;
 }
