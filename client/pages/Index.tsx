@@ -959,99 +959,36 @@ export default function Index() {
 
             {/* Main Action Section */}
             <div className="p-6 sm:p-8 space-y-6 overflow-hidden">
-              {/* Angel Guidance Section */}
-              <div className="border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
-                <div className="mb-4">
-                  <div>
-                    <h3
-                      className="font-sans font-bold text-white mb-2"
-                      style={{
-                        fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                        lineHeight: "1.3",
-                        fontWeight: "700",
-                      }}
-                    >
-                      Rediscover Yourself
-                    </h3>
-                    <div className="space-y-3">
-                      {/* Action Guidance */}
-                      <div className="space-y-3">
-                        <p
-                          className="font-sans text-white/80"
-                          style={{
-                            fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                            lineHeight: "1.5",
-                            fontWeight: "400",
-                          }}
-                        >
-                          A gust of wind under your wings
-                        </p>
-
-                        {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-3">
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsMembershipOpen(true);
-                            }}
-                            className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "600",
-                            }}
-                          >
-                            {isAngelLoading ? (
-                              "Loading..."
-                            ) : angelDetails?.name ? (
-                              angelDetails.name
-                            ) : (
-                              "Academic Angels"
-                            )}
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              setIsIQOpen(true);
-                            }}
-                            className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
-                            style={{
-                              fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                              lineHeight: "1.4",
-                              fontWeight: "500",
-                            }}
-                          >
-                            Take The IQ Test
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               {/* Primary Input Request Form Card - Main Focal Point */}
               <div className="relative">
                 <div className="text-center p-6 sm:p-8">
                   <button
                     onClick={handleOpenModal}
-                    className="animated-request-button"
+                    className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
+                    style={{
+                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                      lineHeight: "1.4",
+                      fontWeight: "600",
+                    }}
                   >
-                    <span>Fill Out the form</span>
+                    Fill Out the form
                   </button>
                 </div>
               </div>
 
               {/* Send Azura Your Request Button */}
-              <div className="flex justify-center">
+              <div className="w-full">
                 <button
                   onClick={handleGenerate}
                   disabled={
                     isGenerating || isTyping || isN8nLoading || !daemonResponse
                   }
-                  className="btn-70 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black disabled:hover:border-white/40"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                    lineHeight: "1.4",
+                    fontWeight: "600",
+                  }}
                 >
                   {isN8nLoading
                     ? "Azura Thinking..."
@@ -1186,6 +1123,73 @@ export default function Index() {
                   >
                     {">"} SHARE PROP
                   </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Rediscover Yourself Section - Moved to bottom */}
+          <div className="mt-8 border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
+            <div className="mb-4">
+              <div>
+                <h3
+                  className="font-sans font-bold text-white mb-2"
+                  style={{
+                    fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
+                    lineHeight: "1.3",
+                    fontWeight: "700",
+                  }}
+                >
+                  Rediscover Yourself
+                </h3>
+                <div className="space-y-3">
+                  {/* Action Guidance */}
+                  <div className="space-y-3">
+                    <p
+                      className="font-sans text-white/80"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                        lineHeight: "1.5",
+                        fontWeight: "400",
+                      }}
+                    >
+                      A gust of wind under your wings
+                    </p>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsMembershipOpen(true);
+                        }}
+                        className="flex-1 bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
+                        style={{
+                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                          lineHeight: "1.4",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Learn More
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsIQOpen(true);
+                        }}
+                        className="flex-1 bg-black border border-white/30 rounded px-4 py-3 font-sans font-medium text-white/80 hover:bg-white/20 hover:border-white/60 hover:text-white transition-all duration-300 backdrop-blur overflow-hidden"
+                        style={{
+                          fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                          lineHeight: "1.4",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Take The IQ Test
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
