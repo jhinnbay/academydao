@@ -111,9 +111,10 @@ const handleSave = async () => {
               value={content}
               onChange={handleInputChange}
               placeholder="Describe your proposal details, requirements, expected outcomes, and community impact..."
-              className="w-full h-48 bg-white/5 backdrop-blur-md border border-white/20 rounded-lg p-4 text-white font-cartograph text-sm resize-none focus:border-white/40 focus:bg-white/10 focus:outline-none placeholder-white/50 transition-all duration-300"
+              className="w-full h-48 bg-white/5 backdrop-blur-md border border-white/20 rounded-lg p-4 text-white font-cartograph text-base resize-none focus:border-white/40 focus:bg-white/10 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
               autoFocus={false}
+              style={{ fontSize: '16px' }}
             />
 
             {/* Terminal cursor effect */}
