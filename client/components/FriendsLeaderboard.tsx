@@ -73,29 +73,25 @@ export function FriendsLeaderboard({
       <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
         <div className="relative bg-black border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full">
           {/* Header */}
-          <div className="relative flex-shrink-0 p-5 border-b border-white/20 bg-black/80">
-            <button
-              onClick={onClose}
-              aria-label="Close"
-              className="absolute top-4 right-4 px-3 py-1 text-white/80 border border-white/30 rounded hover:bg-white/10 transition-colors"
-            >
-              Close
-            </button>
-            <div className="text-left">
-              <h2 className="text-white font-sans font-bold text-xl flex items-center gap-2">
-                <Trophy className="h-5 w-5 text-yellow-400" />
-                Friends Leaderboard
-              </h2>
-              <div className="w-24 h-0.5 bg-white/50 mt-2" />
-            </div>
+          <div className="relative flex-shrink-0 p-6 text-center">
+            <h2 className="text-white font-sans font-bold text-2xl mb-2">
+              AzuraOS holders
+            </h2>
+            <p className="text-white text-sm mb-2">
+              $AZURAOS LEADERBOARD
+            </p>
+            <p className="text-white/80 text-xs mb-4">
+              Follow the top Daemon Model Supporters to get rewarded.
+            </p>
+            <div className="w-full h-px bg-white/20" />
           </div>
           
           {/* Content */}
-          <div className="relative flex-1 overflow-y-auto p-5">
+          <div className="relative flex-1 p-6">
             {isLoading ? (
               <div className="flex items-center justify-center py-8">
                 <Loader2 className="h-8 w-8 animate-spin text-white/60" />
-                <span className="ml-2 text-white/60">Loading friends...</span>
+                <span className="ml-2 text-white/60">Loading top holders...</span>
               </div>
             ) : error ? (
               <div className="text-center py-8">
@@ -110,45 +106,30 @@ export function FriendsLeaderboard({
             ) : friends.length === 0 ? (
               <div className="text-center py-8">
                 <Users className="h-12 w-12 text-white/40 mx-auto mb-4" />
-                <div className="text-white/60 mb-2">No friends found</div>
+                <div className="text-white/60 mb-2">No holders found</div>
                 <div className="text-sm text-white/40">
-                  Friends who own tokens from this contract will appear here
+                  Top $AZURAOS holders will appear here
                 </div>
               </div>
             ) : (
-              <div className="space-y-3 max-h-96 overflow-y-auto">
-                {friends.map((friend, index) => (
+              <div className="space-y-4">
+                {friends.slice(0, 4).map((friend, index) => (
                   <div
                     key={friend.fid}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                    className="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10"
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-mono text-white/60 w-6">
-                        #{index + 1}
-                      </span>
-                      <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 flex-shrink-0">
-                        <img
-                          src={friend.pfpUrl || "https://via.placeholder.com/40x40/333/fff?text=?"}
-                          alt={friend.displayName || friend.username}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium text-white truncate">
-                        {friend.displayName || friend.username}
-                      </div>
-                      <div className="text-sm text-white/60 truncate">
+                    <div className="flex-1">
+                      <div className="text-white font-medium text-lg">
                         @{friend.username}
                       </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
-                      <div className="px-2 py-1 bg-yellow-400/20 text-yellow-400 border border-yellow-400/30 rounded text-xs">
-                        {friend.tokenBalance} token{friend.tokenBalance !== 1 ? 's' : ''}
+                      <div className="text-white/60 text-sm">
+                        {friend.tokenBalance} $AZURAOS
                       </div>
                     </div>
+                    
+                    <button className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors">
+                      Follow
+                    </button>
                   </div>
                 ))}
               </div>
@@ -156,10 +137,13 @@ export function FriendsLeaderboard({
           </div>
           
           {/* Footer */}
-          <div className="p-4 border-t border-white/20 bg-black/70">
-            <div className="text-xs text-white/40 text-center">
-              Showing friends who own tokens from contract: {contractAddress.slice(0, 6)}...{contractAddress.slice(-4)}
-            </div>
+          <div className="p-6">
+            <button 
+              onClick={onClose}
+              className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded font-medium transition-colors"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
