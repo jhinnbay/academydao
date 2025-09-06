@@ -11,7 +11,7 @@ import {
   waitForTransactionReceipt,
 } from "wagmi/actions";
 import { wagmiConfig } from "@/lib/wagmi";
-import { ALCHEMY_RPC_URL } from "@shared/config";
+import { ALCHEMY_RPC_URL } from "../../shared/config";
 
 const SCATTER_API_URL = "https://api.scatter.art/v1";
 const COLLECTION_SLUG = "academic-angels";

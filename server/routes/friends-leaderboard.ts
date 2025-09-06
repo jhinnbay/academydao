@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
-import { ALCHEMY_RPC_URL } from "@shared/config";
+import { ALCHEMY_RPC_URL } from "../../shared/config";
 
 interface NeynarUserResponse {
   result?: { users?: any[] };
