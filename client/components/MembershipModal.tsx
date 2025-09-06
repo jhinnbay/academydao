@@ -13,6 +13,7 @@ import {
 import { wagmiConfig } from "@/lib/wagmi";
 import { ALCHEMY_RPC_URL } from "../../shared/config";
 import { useWaitForTransactionReceipt } from "wagmi";
+import { useMintDetails } from "@coinbase/onchainkit/nft";
 
 const SCATTER_API_URL = "https://api.scatter.art/v1";
 const COLLECTION_SLUG = "academic-angels";
@@ -36,6 +37,13 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   // Wagmi transaction confirmation hook
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash: txHash as `0x${string}` | undefined,
+  });
+
+  // OnchainKit mint details hook
+  const { data: mintDetails, isLoading: isMintDetailsLoading, error: mintDetailsError } = useMintDetails({
+    contractAddress: ANGEL_CONTRACT,
+    takerAddress: wagmiAddress,
+    tokenId: "1", // Use tokenId 1 for minting details
   });
   
   // Log contract configuration on component mount
@@ -80,34 +88,14 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
     },
   ] as const;
 
-  async function getPricePer(): Promise<bigint> {
-    try {
-      const fee: bigint = await readContract(wagmiConfig, {
-        address: ANGEL_CONTRACT,
-        abi: abiMintFee,
-        functionName: "mintFee",
-        chainId: baseChain.id,
-        authorizationList: [],
-      });
-      console.log("Mint fee retrieved:", fee.toString());
-      return fee;
-    } catch (error) {
-      console.log("mintFee() failed, trying price():", error);
+  function getPricePer(): bigint {
+    if (mintDetails?.price) {
+      // Convert price from ETH to wei
+      const priceInWei = BigInt(Math.floor(parseFloat(mintDetails.price.amount) * 1e18));
+      console.log("Price from OnchainKit:", mintDetails.price.amount, "ETH");
+      return priceInWei;
     }
-    try {
-      const price: bigint = await readContract(wagmiConfig, {
-        address: ANGEL_CONTRACT,
-        abi: abiPrice,
-        functionName: "price",
-        chainId: baseChain.id,
-        authorizationList: [],
-      });
-      console.log("Price retrieved:", price.toString());
-      return price;
-    } catch (error) {
-      console.log("price() failed:", error);
-    }
-    console.log("No price function found, using 0");
+    console.log("No price found in mint details, using 0");
     return 0n;
   }
 
@@ -118,14 +106,20 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         await switchChainAsync({ chainId: baseChain.id });
       }
 
+      // Check if user is eligible to mint
+      if (mintDetails && !mintDetails.isEligibleToMint) {
+        throw new Error("You are not eligible to mint this NFT");
+      }
+
       setMinting(true);
       setTxHash(null);
 
       console.log("Starting improved wagmi mint process...");
       console.log("Wallet address:", wagmiAddress);
       console.log("Quantity:", quantity);
+      console.log("Mint details:", mintDetails);
 
-      const pricePer = await getPricePer();
+      const pricePer = getPricePer();
       const totalValue = pricePer * BigInt(quantity);
       
       console.log("Mint attempt:", {
@@ -327,11 +321,27 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
               <div className="flex flex-col gap-2">
                 <Button
                   onClick={handleMint}
-                  disabled={minting || isConfirming || !isConnected}
+                  disabled={minting || isConfirming || !isConnected || isMintDetailsLoading || (mintDetails && !mintDetails.isEligibleToMint)}
                   className="w-full bg-white text-black hover:bg-gray-200 disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed"
                 >
-                  {minting ? "Minting..." : isConfirming ? "Confirming..." : isConfirmed ? "Minted!" : `Mint ${quantity}`}
+                  {isMintDetailsLoading ? "Loading..." : minting ? "Minting..." : isConfirming ? "Confirming..." : isConfirmed ? "Minted!" : (mintDetails && !mintDetails.isEligibleToMint) ? "Not Eligible" : `Mint ${quantity}`}
                 </Button>
+                {mintDetailsError && (
+                  <div className="text-red-400 text-sm text-center">
+                    Error loading mint details: {mintDetailsError.message}
+                  </div>
+                )}
+                {mintDetails && (
+                  <div className="text-white/70 text-sm text-center">
+                    Price: {mintDetails.price?.amount || "0"} {mintDetails.price?.currency || "ETH"}
+                    {mintDetails.maxMintsPerWallet && ` • Max ${mintDetails.maxMintsPerWallet} per wallet`}
+                    {!mintDetails.isEligibleToMint && (
+                      <div className="text-red-400 mt-1">
+                        You are not eligible to mint this NFT
+                      </div>
+                    )}
+                  </div>
+                )}
                 {isConfirmed && (
                   <div className="text-green-400 text-sm text-center">
                     ✅ Successfully minted {quantity} NFT{quantity > 1 ? 's' : ''}!
