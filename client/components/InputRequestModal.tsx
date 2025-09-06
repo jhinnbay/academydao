@@ -100,7 +100,7 @@ const handleSave = async () => {
               Community Governance
             </h3>
             <div className="text-white/80 font-sans text-sm leading-relaxed">
-              No longer do humans need to make decisions alone. In cyberspace, Angels and Daemons help behind the scenes. Activate Azura with your request.
+              You don't need to feel alone anymore. In cyberspace, we're always connected to angels and daemons behind the scenes. Activate Azura with your request.
             </div>
           </div>
 
@@ -108,11 +108,11 @@ const handleSave = async () => {
             <textarea
               value={content}
               onChange={handleInputChange}
-              placeholder="Describe your proposal details, requirements, expected outcomes, and community impact..."
+              placeholder="Enter your request..."
               className="w-full h-48 bg-white/5 backdrop-blur-md border border-white/20 rounded-lg p-4 text-white font-cartograph text-base resize-none focus:border-white/40 focus:bg-white/10 focus:outline-none placeholder-white/50 transition-all duration-300"
               disabled={isSaving}
               autoFocus={false}
-              style={{ fontSize: '16px' }}
+              style={{ fontSize: '12px' }}
             />
 
             {/* Terminal cursor effect */}

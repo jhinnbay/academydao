@@ -57,24 +57,6 @@
       content="https://cdn.builder.io/api/v1/image/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2F15733f5c7fe94ee4bb8f00485ea7ca39?format=webp&width=1200"
     />
     <meta property="og:type" content="website" />
-    
-    <!-- SVG Filter for voltage effect -->
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0;">
-      <defs>
-        <filter id="glow">
-          <fegaussianblur class="blur" result="coloredBlur" stddeviation="2"></fegaussianblur>
-          <feTurbulence type="fractalNoise" baseFrequency="0.075" numOctaves="0.3" result="turbulence"></feTurbulence>
-          <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="30" xChannelSelector="R" yChannelSelector="G" result="displace"></feDisplacementMap>
-          <femerge>
-            <femergenode in="coloredBlur"></femergenode>
-            <femergenode in="coloredBlur"></femergenode>
-            <femergenode in="coloredBlur"></femergenode>
-            <femergenode in="displace"></femergenode>
-            <femergenode in="SourceGraphic"></femergenode>
-          </femerge>
-        </filter>
-      </defs>
-    </svg>
   </head>
 
   <body>
