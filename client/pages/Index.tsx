@@ -1015,11 +1015,11 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div
             data-section="daemon-response"
-            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start transition-all duration-1000 ${
+            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl overflow-hidden scroll-snap-start transition-all duration-1000 ${
               showResponse ? "rainbow-glow" : ""
             }`}
             style={{
-              backgroundColor: "rgba(30, 30, 30, 0.1)",
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
               border: "1px solid rgba(255, 255, 255, 0.2)",
             }}
           >
@@ -1034,49 +1034,69 @@ export default function Index() {
                   />
                 </div>
                 <h2
-                  className="text-white font-sans font-bold drop-shadow-lg"
-                  style={{
-                    fontSize: "24px",
-                    lineHeight: "1.1",
-                    letterSpacing: "-0.02em",
-                  }}
+                  className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg"
+                  style={{ fontSize: "16px" }}
                 >
-                  Daemon Response
+                  {">"} AZURA RESPONSE
                 </h2>
               </div>
 
               {showResponse && (
-                <div className="border border-white/20 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
-                  <div
-                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded border border-white/20 shadow-lg overflow-hidden"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                      lineHeight: "1.6",
-                      fontWeight: "400",
-                      color: "#b0b0b0",
-                    }}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center">
-                        <span className="animate-pulse">
-                          Generating response...
-                        </span>
-                        <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
-                      </div>
-                    ) : (
-                      <div>
-                        {displayedResponse}
-                        {isTyping && (
-                          <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
-                        )}
-                      </div>
-                    )}
+                <div className="border border-white/20 p-4 mb-5 bg-black backdrop-blur-sm overflow-hidden font-cartograph text-left shadow-lg">
+                  {/* AI Agent Status */}
+                  <div className="mb-4 space-y-1">
+                    <div className="text-green-400 text-sm">
+                      ✓ AI Agent: Online
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ Model: Daemon Azura v2.1
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ Token Pool: 100 available
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ AgentKit: Connected
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ⚡ Ready for onchain actions
+                    </div>
+                  </div>
+                  
+                  {/* Terminal Prompt and Response */}
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="text-blue-400 text-sm mb-2">
+                      Azura@daemon: ~$
+                    </div>
+                    <div
+                      className="text-white/90"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                        lineHeight: "1.6",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {isGenerating ? (
+                        <div className="flex items-center">
+                          <span className="animate-pulse">
+                            Generating response...
+                          </span>
+                          <span className="ml-2 w-2 h-5 bg-white animate-pulse"></span>
+                        </div>
+                      ) : (
+                        <div>
+                          {displayedResponse}
+                          {isTyping && (
+                            <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
 
               {/* Terminal-style Action Buttons */}
-              <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-lg shadow-2xl overflow-hidden">
+              <div className="border border-white/30 bg-black backdrop-blur-lg p-3 shadow-2xl overflow-hidden">
                 <div
                   className="font-cartograph space-y-1"
                   style={{
@@ -1128,18 +1148,14 @@ export default function Index() {
           </div>
 
           {/* Rediscover Yourself Section - Moved to bottom */}
-          <div className="mt-8 border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
+          <div className="mt-8 border border-white/30 bg-black backdrop-blur-lg p-6 shadow-xl overflow-hidden">
             <div className="mb-4">
               <div>
                 <h3
-                  className="font-sans font-bold text-white mb-2"
-                  style={{
-                    fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                    lineHeight: "1.3",
-                    fontWeight: "700",
-                  }}
+                  className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg mb-2"
+                  style={{ fontSize: "16px" }}
                 >
-                  Rediscover Yourself
+                  {">"} REDISCOVER YOURSELF
                 </h3>
                 <div className="space-y-3">
                   {/* Action Guidance */}
@@ -1170,7 +1186,7 @@ export default function Index() {
                           fontWeight: "600",
                         }}
                       >
-                        Learn More
+                        Membership
                       </button>
                       <button
                         onClick={(e) => {

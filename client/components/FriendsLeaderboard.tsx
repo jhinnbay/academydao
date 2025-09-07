@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { Loader2, Trophy } from "lucide-react";
+import { Trophy, X } from "lucide-react";
 import { sdk } from "@farcaster/miniapp-sdk";
 
 interface FriendsLeaderboardProps {
@@ -17,63 +17,54 @@ export function FriendsLeaderboard({
 }: FriendsLeaderboardProps) {
   const { isFarcaster, username } = useFarcasterUser();
   const [friends, setFriends] = useState<FriendData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
   const fetchFriendsLeaderboard = async () => {
-    setIsLoading(true);
-
     try {
-      // Get current user's FID from Farcaster context
+      // Get current user's FID from Farcaster context with better error handling
       const anySdk: any = sdk as any;
       const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
       const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
-      const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
+      
+      // More robust FID extraction
+      let currentUserFid = 1; // fallback to 1
+      if (fcUser) {
+        try {
+          // Handle different possible FID locations and Proxy objects
+          const fidCandidates = [fcUser.fid, fcUser.id, fcUser.user?.fid, fcUser.user?.id];
+          for (const candidate of fidCandidates) {
+            if (candidate !== undefined && candidate !== null) {
+              const fidValue = typeof candidate === 'object' && 'valueOf' in candidate 
+                ? candidate.valueOf() 
+                : candidate;
+              const parsedFid = Number(fidValue);
+              if (!isNaN(parsedFid) && parsedFid > 0) {
+                currentUserFid = parsedFid;
+                break;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn("Could not extract FID from user object, using fallback:", e);
+        }
+      }
 
-      // Call the real API to get relevant token holders
+      console.log("Fetching AzuraOS token holders for contract:", contractAddress, "with viewerFid:", currentUserFid);
+
+      // Call the API to get top AzuraOS token holders
       const response = await fetch(
-        `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}`
+        `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}&t=${Date.now()}`
       );
       
       if (!response.ok) {
-        throw new Error("Failed to fetch friends leaderboard");
+        const errorText = await response.text();
+        throw new Error(`Failed to fetch friends leaderboard: ${response.status} - ${errorText}`);
       }
 
       const data: FriendsLeaderboardResponse = await response.json();
+      console.log("Received leaderboard data:", data);
       setFriends(data.friends);
     } catch (err: any) {
       console.error("Error fetching friends leaderboard:", err);
-      
-      // Fallback to dummy data if API fails
-      const fallbackFriends: FriendData[] = [
-        {
-          fid: 286924,
-          username: "jhinnbay.eth",
-          displayName: "jhinnbay.eth",
-          pfpUrl: "",
-          address: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
-          tokenBalance: 10
-        },
-        {
-          fid: 284618,
-          username: "brennuet",
-          displayName: "brennuet",
-          pfpUrl: "",
-          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
-          tokenBalance: 5
-        },
-        {
-          fid: 194372,
-          username: "roadu",
-          displayName: "roadu",
-          pfpUrl: "",
-          address: "0x8EB8a3b3C6C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0",
-          tokenBalance: 2.35
-        }
-      ];
-      
-      setFriends(fallbackFriends);
-    } finally {
-      setIsLoading(false);
+      setFriends([]);
     }
   };
 
@@ -81,102 +72,132 @@ export function FriendsLeaderboard({
     if (isOpen) {
       fetchFriendsLeaderboard();
     }
-  }, [isOpen, contractAddress, isFarcaster, username]);
+  }, [isOpen, contractAddress]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
       <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
         <div className="relative bg-black border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full">
           {/* Header */}
-          <div className="relative flex-shrink-0 p-6 text-center">
-            <h2 className="text-white font-sans font-bold text-2xl mb-2">
-              AzuraOS holders
-            </h2>
-            <p className="text-white text-sm mb-2">
-              $AzuraOS LEADERBOARD
-            </p>
-            <p className="text-white/80 text-xs mb-4">
-              Follow top holders to get rewarded.
-            </p>
-            <div className="w-full h-px bg-white/20" />
+          <div className="relative flex-shrink-0 p-5 border-b border-white/20 bg-black/80">
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <div className="text-center">
+              <h2 className="text-white font-sans font-bold text-xl mb-2">
+                $AZURA TOP HOLDERS
+              </h2>
+              <div className="w-28 h-0.5 bg-white/50 mx-auto" />
+            </div>
           </div>
           
           {/* Content */}
           <div className="relative flex-1 p-6">
-            {isLoading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 className="h-8 w-8 animate-spin text-white/60" />
-                <span className="ml-2 text-white/60">Loading top holders...</span>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {friends.map((friend, index) => (
+            <div className="space-y-4">
+              {friends.map((friend, index) => (
                   <div
                     key={friend.fid}
-                    className="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10"
+                    className="bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/30 transition-all duration-200"
                   >
-                    <div className="flex-1">
-                      <div className="text-white font-medium text-lg">
-                        @{friend.username}
+                    <div className="flex items-center p-4 gap-4">
+                      {/* Avatar */}
+                      <div className="flex-shrink-0">
+                        {friend.pfpUrl ? (
+                          <img 
+                            src={friend.pfpUrl} 
+                            alt={friend.displayName}
+                            className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg border border-white/30 object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg border border-white/30 bg-white/10 flex items-center justify-center text-white text-sm font-bold">
+                            {friend.displayName?.charAt(0)?.toUpperCase() || friend.username?.charAt(0)?.toUpperCase() || '?'}
+                          </div>
+                        )}
                       </div>
-                      <div className="text-white/60 text-sm">
-                        {friend.tokenBalance}M $AzuraOS
+                      
+                      {/* User info - mobile optimized */}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-white font-bold text-sm sm:text-base mb-1 truncate">
+                          {friend.displayName}
+                        </div>
+                        <div className="text-white/60 text-xs sm:text-sm mb-1 truncate">
+                          @{friend.username}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="text-green-400 font-mono font-bold text-sm">
+                            {(friend.tokenBalance / 1000000).toFixed(1)}M
+                          </div>
+                          <div className="text-white/50 text-xs">
+                            $AZURA
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Follow button - mobile optimized */}
+                      <div className="flex-shrink-0">
+                        <button 
+                          className="px-3 py-2 sm:px-4 sm:py-2 bg-white text-black hover:bg-gray-200 font-medium text-sm transition-colors rounded border border-white"
+                          onClick={async () => {
+                            try {
+                              // Get current user's FID from Farcaster context
+                              const anySdk: any = sdk as any;
+                              const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
+                              const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
+                              const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
+
+                              // Call follow API
+                              const response = await fetch('/api/follow-user', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  targetFid: friend.fid,
+                                  viewerFid: currentUserFid
+                                })
+                              });
+
+                              if (response.ok) {
+                                // Also open Farcaster profile in new tab
+                                window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                              } else {
+                                console.error('Follow request failed');
+                                // Still open profile as fallback
+                                window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                              }
+                            } catch (error) {
+                              console.error('Error following user:', error);
+                              // Fallback to opening profile
+                              window.open(`https://warpcast.com/${friend.username}`, '_blank');
+                            }
+                          }}
+                        >
+                          Follow
+                        </button>
                       </div>
                     </div>
-                    
-                    <button 
-                      className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors"
-                      onClick={async () => {
-                        try {
-                          // Get current user's FID from Farcaster context
-                          const anySdk: any = sdk as any;
-                          const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
-                          const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
-                          const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
-
-                          // Call follow API
-                          const response = await fetch('/api/follow-user', {
-                            method: 'POST',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                              targetFid: friend.fid,
-                              viewerFid: currentUserFid
-                            })
-                          });
-
-                          if (response.ok) {
-                            // Also open Farcaster profile in new tab
-                            window.open(`https://warpcast.com/${friend.username}`, '_blank');
-                          } else {
-                            console.error('Follow request failed');
-                            // Still open profile as fallback
-                            window.open(`https://warpcast.com/${friend.username}`, '_blank');
-                          }
-                        } catch (error) {
-                          console.error('Error following user:', error);
-                          // Fallback to opening profile
-                          window.open(`https://warpcast.com/${friend.username}`, '_blank');
-                        }
-                      }}
-                    >
-                      Follow
-                    </button>
                   </div>
                 ))}
-              </div>
-            )}
+            </div>
           </div>
           
           {/* Footer */}
-          <div className="p-6">
+          <div className="p-5 border-t border-white/20">
             <button 
               onClick={onClose}
-              className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded font-medium transition-colors"
+              className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-lg font-medium transition-colors"
             >
               Close
             </button>

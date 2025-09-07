@@ -12,6 +12,8 @@ import {
 } from "wagmi/actions";
 import { wagmiConfig } from "@/lib/wagmi";
 import { ALCHEMY_RPC_URL } from "../../shared/config";
+import { useWaitForTransactionReceipt } from "wagmi";
+import { useMintDetails } from "@coinbase/onchainkit/nft";
 
 const SCATTER_API_URL = "https://api.scatter.art/v1";
 const COLLECTION_SLUG = "academic-angels";
@@ -30,7 +32,19 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
   const { isConnected, address: wagmiAddress } = useAccount();
   const { switchChainAsync } = useSwitchChain();
 
-  const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f" as const;
+  const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f" as `0x${string}`;
+
+  // Wagmi transaction confirmation hook
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash: txHash as `0x${string}` | undefined,
+  });
+
+  // OnchainKit mint details hook
+  const { data: mintDetails, isLoading: isMintDetailsLoading, error: mintDetailsError } = useMintDetails({
+    contractAddress: ANGEL_CONTRACT,
+    takerAddress: wagmiAddress,
+    tokenId: "1", // Use tokenId 1 for minting details
+  });
   
   // Log contract configuration on component mount
   console.log("Academic Angels Contract configured:", ANGEL_CONTRACT);
@@ -74,34 +88,14 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
     },
   ] as const;
 
-  async function getPricePer(): Promise<bigint> {
-    try {
-      const fee: bigint = await readContract(wagmiConfig, {
-        address: ANGEL_CONTRACT,
-        abi: abiMintFee,
-        functionName: "mintFee",
-        chainId: baseChain.id,
-        authorizationList: [],
-      });
-      console.log("Mint fee retrieved:", fee.toString());
-      return fee;
-    } catch (error) {
-      console.log("mintFee() failed, trying price():", error);
+  function getPricePer(): bigint {
+    if (mintDetails?.price) {
+      // Convert price from ETH to wei
+      const priceInWei = BigInt(Math.floor(parseFloat(mintDetails.price.amount) * 1e18));
+      console.log("Price from OnchainKit:", mintDetails.price.amount, "ETH");
+      return priceInWei;
     }
-    try {
-      const price: bigint = await readContract(wagmiConfig, {
-        address: ANGEL_CONTRACT,
-        abi: abiPrice,
-        functionName: "price",
-        chainId: baseChain.id,
-        authorizationList: [],
-      });
-      console.log("Price retrieved:", price.toString());
-      return price;
-    } catch (error) {
-      console.log("price() failed:", error);
-    }
-    console.log("No price function found, using 0");
+    console.log("No price found in mint details, using 0");
     return 0n;
   }
 
@@ -111,14 +105,21 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
       if (chainId !== baseChain.id) {
         await switchChainAsync({ chainId: baseChain.id });
       }
+
+      // Check if user is eligible to mint
+      if (mintDetails && !mintDetails.isEligibleToMint) {
+        throw new Error("You are not eligible to mint this NFT");
+      }
+
       setMinting(true);
       setTxHash(null);
 
-      // Log contract address for verification
-      console.log("Attempting to mint from contract:", ANGEL_CONTRACT);
-      console.log("Contract address verified:", ANGEL_CONTRACT);
+      console.log("Starting improved wagmi mint process...");
+      console.log("Wallet address:", wagmiAddress);
+      console.log("Quantity:", quantity);
+      console.log("Mint details:", mintDetails);
 
-      const pricePer = await getPricePer();
+      const pricePer = getPricePer();
       const totalValue = pricePer * BigInt(quantity);
       
       console.log("Mint attempt:", {
@@ -129,66 +130,25 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
         chainId: baseChain.id
       });
 
-      // Try mint(quantity)
+      // Use wagmi writeContract action with proper error handling
       try {
-        console.log("Attempting mint with quantity:", quantity);
         const hash = await writeContract(wagmiConfig, {
           address: ANGEL_CONTRACT,
           abi: abiMintQty,
           functionName: "mint",
           args: [BigInt(quantity)],
           value: totalValue > 0n ? totalValue : undefined,
-          chainId: baseChain.id,
-          account: wagmiAddress,
           chain: baseChain,
+          account: wagmiAddress!,
         });
         console.log("Mint transaction submitted:", hash);
         setTxHash(hash);
-        await waitForTransactionReceipt(wagmiConfig, { hash });
-        console.log("Mint transaction confirmed!");
-        return;
       } catch (error) {
-        console.error("Mint with quantity failed:", error);
-        // Don't continue to fallback if it's a user rejection
-        if (error instanceof Error && error.message.includes("User rejected")) {
-          throw error;
-        }
-      }
-
-      // Fallback: call mint() multiple times
-      console.log("Trying fallback minting method...");
-      for (let i = 0; i < quantity; i++) {
-        try {
-          console.log(`Fallback mint attempt ${i + 1}/${quantity}`);
-          const hash = await writeContract(wagmiConfig, {
-            address: ANGEL_CONTRACT,
-            abi: abiMint,
-            functionName: "mint",
-            args: [],
-            value: pricePer > 0n ? pricePer : undefined,
-            chainId: baseChain.id,
-            account: wagmiAddress,
-            chain: baseChain,
-          });
-          console.log(`Fallback mint ${i + 1} transaction submitted:`, hash);
-          setTxHash(hash);
-          await waitForTransactionReceipt(wagmiConfig, { hash });
-          console.log(`Fallback mint ${i + 1} confirmed!`);
-        } catch (error) {
-          console.error(`Mint attempt ${i + 1} failed:`, error);
-          // Don't re-throw user rejections in fallback
-          if (error instanceof Error && error.message.includes("User rejected")) {
-            throw error;
-          }
-          // For other errors, continue with next attempt
-          if (i === quantity - 1) {
-            throw new Error(`All ${quantity} mint attempts failed. Last error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-          }
-        }
+        console.error("Mint failed:", error);
+        alert(`Mint failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     } catch (e) {
-      console.error("Mint failed", e);
-      // Keep user in app - don't redirect to external sites
+      console.error("Mint preparation failed", e);
       alert(`Mint failed: ${e instanceof Error ? e.message : 'Unknown error'}`);
     } finally {
       setMinting(false);
@@ -358,14 +318,35 @@ export function MembershipModal({ isOpen, onClose }: MembershipModalProps) {
                 </CardContent>
               </Card>
 
-              <div className="flex">
+              <div className="flex flex-col gap-2">
                 <Button
                   onClick={handleMint}
-                  disabled={minting || !isConnected}
+                  disabled={minting || isConfirming || !isConnected || isMintDetailsLoading || (mintDetails && !mintDetails.isEligibleToMint)}
                   className="w-full bg-white text-black hover:bg-gray-200 disabled:bg-gray-500 disabled:text-gray-300 disabled:cursor-not-allowed"
                 >
-                  {minting ? "Minting..." : `Mint ${quantity}`}
+                  {isMintDetailsLoading ? "Loading..." : minting ? "Minting..." : isConfirming ? "Confirming..." : isConfirmed ? "Minted!" : (mintDetails && !mintDetails.isEligibleToMint) ? "Not Eligible" : `Mint ${quantity}`}
                 </Button>
+                {mintDetailsError && (
+                  <div className="text-red-400 text-sm text-center">
+                    Error loading mint details: {mintDetailsError.message}
+                  </div>
+                )}
+                {mintDetails && (
+                  <div className="text-white/70 text-sm text-center">
+                    Price: {mintDetails.price?.amount || "0"} {mintDetails.price?.currency || "ETH"}
+                    {mintDetails.maxMintsPerWallet && ` • Max ${mintDetails.maxMintsPerWallet} per wallet`}
+                    {!mintDetails.isEligibleToMint && (
+                      <div className="text-red-400 mt-1">
+                        You are not eligible to mint this NFT
+                      </div>
+                    )}
+                  </div>
+                )}
+                {isConfirmed && (
+                  <div className="text-green-400 text-sm text-center">
+                    ✅ Successfully minted {quantity} NFT{quantity > 1 ? 's' : ''}!
+                  </div>
+                )}
               </div>
 
               {/* Benefits */}
