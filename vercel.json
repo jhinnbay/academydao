@@ -1,8 +1,11 @@
 {
   "buildCommand": "npm run build:client",
   "outputDirectory": "dist/spa",
-  "framework": null,
-  "redirects": [],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/.well-known/farcaster.json",
