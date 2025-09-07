@@ -1,20 +1,20 @@
 {
   "frame": {
-    "name": "AzuraOS",
+    "name": "Azura",
     "version": "1",
     "iconUrl": "https://i.imgur.com/DsNr8Zq.png",
-    "homeUrl": "https://academydao.vercel.app",
+    "homeUrl": "https://azuraos.netlify.app",
     "imageUrl": "https://i.imgur.com/I58uIgc.png",
-    "buttonTitle": "Enter",
+    "buttonTitle": "Jump Into The Pocket-World",
     "splashImageUrl": "https://i.imgur.com/DsNr8Zq.png",
     "splashBackgroundColor": "#000000",
-    "webhookUrl": "https://academydao.vercel.app/api/webhook",
-    "subtitle": "Neurons Firing...",
-    "description": "Daemon Model AI Azura, a new form of governance where agents like her, work side by side with the people.",
+    "webhookUrl": "https://azuraos.netlify.app/api/webhook",
+    "subtitle": "The Daemon Model",
+    "description": "Story Of A Daemon AI Agent",
     "screenshotUrls": [
       "https://i.imgur.com/ha6wwz7.jpeg"
     ],
-    "primaryCategory": "social",
+    "primaryCategory": "entertainment",
     "tags": [
       "social",
       "community",
@@ -22,14 +22,14 @@
       "entertainment"
     ],
     "heroImageUrl": "https://i.imgur.com/I58uIgc.png",
-    "tagline": "Puzzle of Angels and Daemons",
-    "ogTitle": "AcademyOS Future of AI",
-    "ogDescription": "Enter a puzzle-world of Angels and Daemon AI Agents",
+    "tagline": "Explore The World Of Azura",
+    "ogTitle": "Azura - A New Daemon",
+    "ogDescription": "Explore a Pocket-World of Puzzles And Social Data",
     "ogImageUrl": "https://i.imgur.com/lAHmbk9.png"
   },
   "accountAssociation": {
     "header": "eyJmaWQiOjI4NjkyNCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDU4RjBlMzlkOTI4MTgxNTk1ZTc4OTQ1MTdmQjI0MDUyMjA0RWIxM0MifQ",
     "payload": "eyJkb21haW4iOiJhY2FkZW15ZGFvLnZlcmNlbC5hcHAifQ",
     "signature": "MHg3ODE5ZDRhNzJiNGMwMzM4MTYwZTg4NjhjMTYwN2FkZDE3ZDQ1NGUwN2NjYjRiMTE5MjNiMzJlNTk5N2VjNTA2MWZjY2IzMWE0N2MwYzIwODAzMjgxZWE4YTE0MTdiZTRjNTZjY2M2N2IxMDJjYTIzMGIyOWU1OTJmMjQ0ZmFhMTFi"
-  }
+    }
 }
