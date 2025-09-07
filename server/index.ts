@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
+import { config } from "dotenv";
 import { handleDemo } from "./routes/demo";
 import { handleFarcasterProfile } from "./routes/neynar-profile";
 import { handleFriendsLeaderboard, handleFollowUser } from "./routes/friends-leaderboard";
+
+// Load environment variables
+config();
 
 export function createServer() {
   const app = express();
