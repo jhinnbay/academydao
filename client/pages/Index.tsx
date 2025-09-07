@@ -1034,14 +1034,10 @@ export default function Index() {
                   />
                 </div>
                 <h2
-                  className="text-white font-sans font-bold drop-shadow-lg"
-                  style={{
-                    fontSize: "24px",
-                    lineHeight: "1.1",
-                    letterSpacing: "-0.02em",
-                  }}
+                  className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg"
+                  style={{ fontSize: "16px" }}
                 >
-                  Daemon Response
+                  {">"} DAEMON RESPONSE
                 </h2>
               </div>
 
@@ -1132,14 +1128,10 @@ export default function Index() {
             <div className="mb-4">
               <div>
                 <h3
-                  className="font-sans font-bold text-white mb-2"
-                  style={{
-                    fontSize: "clamp(1rem, 1.8vw, 1.25rem)",
-                    lineHeight: "1.3",
-                    fontWeight: "700",
-                  }}
+                  className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg mb-2"
+                  style={{ fontSize: "16px" }}
                 >
-                  Rediscover Yourself
+                  {">"} REDISCOVER YOURSELF
                 </h3>
                 <div className="space-y-3">
                   {/* Action Guidance */}
