@@ -1,6 +1,7 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:client",
   "outputDirectory": "dist/spa",
+  "framework": null,
   "redirects": [],
   "rewrites": [
     {
