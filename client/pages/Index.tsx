@@ -1015,11 +1015,11 @@ export default function Index() {
           {/* Daemon Response Section */}
           <div
             data-section="daemon-response"
-            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl rounded overflow-hidden scroll-snap-start transition-all duration-1000 ${
+            className={`backdrop-blur-md min-h-[400px] p-6 shadow-2xl overflow-hidden scroll-snap-start transition-all duration-1000 ${
               showResponse ? "rainbow-glow" : ""
             }`}
             style={{
-              backgroundColor: "rgba(30, 30, 30, 0.1)",
+              backgroundColor: "rgba(0, 0, 0, 0.8)",
               border: "1px solid rgba(255, 255, 255, 0.2)",
             }}
           >
@@ -1046,9 +1046,9 @@ export default function Index() {
               </div>
 
               {showResponse && (
-                <div className="border border-white/20 p-5 mb-5 bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden">
+                <div className="border border-white/20 p-5 mb-5 bg-black backdrop-blur-sm overflow-hidden">
                   <div
-                    className="bg-white/10 backdrop-blur-md p-4 font-cartograph text-left rounded border border-white/20 shadow-lg overflow-hidden"
+                    className="bg-black p-4 font-cartograph text-left border border-white/20 shadow-lg overflow-hidden"
                     style={{
                       fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                       lineHeight: "1.6",
@@ -1076,7 +1076,7 @@ export default function Index() {
               )}
 
               {/* Terminal-style Action Buttons */}
-              <div className="border border-white/30 bg-white/10 backdrop-blur-lg p-3 rounded-lg shadow-2xl overflow-hidden">
+              <div className="border border-white/30 bg-black backdrop-blur-lg p-3 shadow-2xl overflow-hidden">
                 <div
                   className="font-cartograph space-y-1"
                   style={{
@@ -1128,7 +1128,7 @@ export default function Index() {
           </div>
 
           {/* Rediscover Yourself Section - Moved to bottom */}
-          <div className="mt-8 border border-white/30 rounded bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-lg p-6 shadow-xl overflow-hidden">
+          <div className="mt-8 border border-white/30 bg-black backdrop-blur-lg p-6 shadow-xl overflow-hidden">
             <div className="mb-4">
               <div>
                 <h3
