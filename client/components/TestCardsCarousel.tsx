@@ -8,7 +8,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import { Brain, Bot, ClipboardList } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Brain, Bot, ClipboardList, X } from "lucide-react";
 import { SoundEffects } from "@/lib/soundEffects";
 
 type TestCardsCarouselProps = {
@@ -23,6 +24,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
   onStartDaemon,
 }) => {
   const [api, setApi] = useState<CarouselApi | null>(null);
+  const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false);
 
   useEffect(() => {
     if (!api) return;
@@ -46,7 +48,8 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         icon: ClipboardList,
         cta: "Open Surveys",
         onClick: () => {
-          // Research Survey disabled - do nothing
+          setIsSurveyModalOpen(true);
+          SoundEffects.playCompleteSound();
         },
       },
       {
@@ -127,6 +130,37 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         {/* Arrows removed per request */}
       </Carousel>
 
+      {/* Survey Modal */}
+      <Dialog open={isSurveyModalOpen} onOpenChange={setIsSurveyModalOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] bg-black border border-white/20">
+          <DialogHeader className="flex flex-row items-center justify-between">
+            <DialogTitle className="text-white font-cartograph text-lg">
+              Research Surveys
+            </DialogTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSurveyModalOpen(false)}
+              className="text-white hover:bg-white/10"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </DialogHeader>
+          <div className="mt-4">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSdzfT7shcx77U5-mim79ofoBD1t8O0jyAD1E0Ei2fiKj0bG7w/viewform?embedded=true"
+              width="100%"
+              height="600"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+              className="rounded"
+            >
+              Loading…
+            </iframe>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
