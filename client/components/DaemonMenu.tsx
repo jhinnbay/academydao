@@ -17,7 +17,8 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
   const { address, isConnected } = useAccount();
 
   const AZURAOS_CONTRACT = "0x30b3d29062e82c36a9a0ba8dc83eed5fcdba3b07";
-  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+  // Use public RPC endpoint instead of API key
+  const ALCHEMY_RPC = "https://mainnet.base.org";
 
   const fetchAzuraBalance = async (walletAddress: string) => {
     try {

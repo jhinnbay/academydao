@@ -12,7 +12,7 @@ export const getServerConfig = () => {
   }
   
   return {
-    ALCHEMY_RPC_URL: process.env.ALCHEMY_RPC_URL || "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk",
+    ALCHEMY_RPC_URL: process.env.ALCHEMY_RPC_URL,
     NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
   };
 };

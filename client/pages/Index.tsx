@@ -169,7 +169,8 @@ export default function Index() {
 
   // Angels ownership state and fetch logic
   const ANGEL_CONTRACT = "0x39f259b58a9ab02d42bc3df5836ba7fc76a8880f";
-  const ALCHEMY_RPC = "https://base-mainnet.g.alchemy.com/v2/M6AanXXKdE1UMHdXC4Qqk";
+  // Use public RPC endpoint instead of API key
+  const ALCHEMY_RPC = "https://mainnet.base.org";
   const ANGELS_TARGET = 3;
   const [angelsOwned, setAngelsOwned] = useState<number | null>(null);
 
