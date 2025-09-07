@@ -23,22 +23,48 @@ export function FriendsLeaderboard({
     setIsLoading(true);
 
     try {
-      // Get current user's FID from Farcaster context
+      // Get current user's FID from Farcaster context with better error handling
       const anySdk: any = sdk as any;
       const context = anySdk?.context || (window as any)?.__FARCASTER_MINIAPP_CONTEXT || null;
       const fcUser = (context as any)?.user ?? (context as any)?.viewer ?? null;
-      const currentUserFid = fcUser?.fid || fcUser?.id || 1; // fallback to 1 if not found
+      
+      // More robust FID extraction
+      let currentUserFid = 1; // fallback to 1
+      if (fcUser) {
+        try {
+          // Handle different possible FID locations and Proxy objects
+          const fidCandidates = [fcUser.fid, fcUser.id, fcUser.user?.fid, fcUser.user?.id];
+          for (const candidate of fidCandidates) {
+            if (candidate !== undefined && candidate !== null) {
+              const fidValue = typeof candidate === 'object' && 'valueOf' in candidate 
+                ? candidate.valueOf() 
+                : candidate;
+              const parsedFid = Number(fidValue);
+              if (!isNaN(parsedFid) && parsedFid > 0) {
+                currentUserFid = parsedFid;
+                break;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn("Could not extract FID from user object, using fallback:", e);
+        }
+      }
 
-      // Call the real API to get relevant token holders
+      console.log("Fetching AzuraOS token holders for contract:", contractAddress, "with viewerFid:", currentUserFid);
+
+      // Call the API to get top AzuraOS token holders
       const response = await fetch(
-        `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}`
+        `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}&t=${Date.now()}`
       );
       
       if (!response.ok) {
-        throw new Error("Failed to fetch friends leaderboard");
+        const errorText = await response.text();
+        throw new Error(`Failed to fetch friends leaderboard: ${response.status} - ${errorText}`);
       }
 
       const data: FriendsLeaderboardResponse = await response.json();
+      console.log("Received leaderboard data:", data);
       setFriends(data.friends);
     } catch (err: any) {
       console.error("Error fetching friends leaderboard:", err);
@@ -89,7 +115,7 @@ export function FriendsLeaderboard({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
-        <div className="relative bg-black border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full">
+        <div className="relative bg-black border-2 border-white shadow-2xl overflow-hidden flex flex-col max-h-full">
           {/* Header */}
           <div className="relative flex-shrink-0 p-6 text-center">
             <h2 className="text-white font-sans font-bold text-2xl mb-2">
@@ -116,19 +142,45 @@ export function FriendsLeaderboard({
                 {friends.map((friend, index) => (
                   <div
                     key={friend.fid}
-                    className="flex items-center justify-between p-4 rounded-lg bg-white/5 border border-white/10"
+                    className="flex items-center justify-between p-4 bg-white/5 border-2 border-white/20"
                   >
-                    <div className="flex-1">
-                      <div className="text-white font-medium text-lg">
-                        @{friend.username}
+                    <div className="flex items-center space-x-4 flex-1">
+                      {/* Rank indicator */}
+                      <div className="flex-shrink-0 w-8 h-8 bg-white text-black font-bold text-sm flex items-center justify-center">
+                        {index + 1}
                       </div>
-                      <div className="text-white/60 text-sm">
-                        {friend.tokenBalance}M $AzuraOS
+                      
+                      {/* Avatar */}
+                      <div className="flex-shrink-0">
+                        {friend.pfpUrl ? (
+                          <img 
+                            src={friend.pfpUrl} 
+                            alt={friend.displayName}
+                            className="w-12 h-12 border-2 border-white object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 border-2 border-white bg-white/10 flex items-center justify-center text-white text-sm font-bold">
+                            {friend.displayName?.charAt(0)?.toUpperCase() || friend.username?.charAt(0)?.toUpperCase() || '?'}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* User info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-white font-medium text-lg truncate">
+                          @{friend.username}
+                        </div>
+                        <div className="text-white/60 text-sm truncate">
+                          {friend.displayName}
+                        </div>
+                        <div className="text-green-400 text-sm font-mono">
+                          {friend.tokenBalance?.toLocaleString()} $AZURA
+                        </div>
                       </div>
                     </div>
                     
                     <button 
-                      className="px-6 py-2 bg-white text-black hover:bg-gray-200 rounded font-medium transition-colors"
+                      className="px-6 py-2 bg-white text-black hover:bg-gray-200 font-medium transition-colors border-2 border-white"
                       onClick={async () => {
                         try {
                           // Get current user's FID from Farcaster context
