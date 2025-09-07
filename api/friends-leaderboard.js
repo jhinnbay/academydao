@@ -1,7 +1,5 @@
-import { config } from "dotenv";
-
-// Load environment variables
-config();
+// No need for dotenv in Vercel serverless functions
+// Environment variables are automatically available
 
 // Hardcoded top AzuraOS holders with their FIDs and token balances
 const TOP_AZURAOS_HOLDERS = [
@@ -38,7 +36,7 @@ async function fetchNeynarUserData(fids, apiKey) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
