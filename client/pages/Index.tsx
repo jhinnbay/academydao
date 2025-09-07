@@ -1037,36 +1037,60 @@ export default function Index() {
                   className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg"
                   style={{ fontSize: "16px" }}
                 >
-                  {">"} DAEMON RESPONSE
+                  {">"} AZURA RESPONSE
                 </h2>
               </div>
 
               {showResponse && (
-                <div className="border border-white/20 p-5 mb-5 bg-black backdrop-blur-sm overflow-hidden">
-                  <div
-                    className="bg-black p-4 font-cartograph text-left border border-white/20 shadow-lg overflow-hidden"
-                    style={{
-                      fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-                      lineHeight: "1.6",
-                      fontWeight: "400",
-                      color: "#b0b0b0",
-                    }}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center">
-                        <span className="animate-pulse">
-                          Generating response...
-                        </span>
-                        <span className="ml-2 w-2 h-5 bg-azura-white animate-pulse"></span>
-                      </div>
-                    ) : (
-                      <div>
-                        {displayedResponse}
-                        {isTyping && (
-                          <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
-                        )}
-                      </div>
-                    )}
+                <div className="border border-white/20 p-4 mb-5 bg-black backdrop-blur-sm overflow-hidden font-cartograph text-left shadow-lg">
+                  {/* AI Agent Status */}
+                  <div className="mb-4 space-y-1">
+                    <div className="text-green-400 text-sm">
+                      ✓ AI Agent: Online
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ Model: Daemon Azura v2.1
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ Token Pool: 100 available
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ✓ AgentKit: Connected
+                    </div>
+                    <div className="text-green-400 text-sm">
+                      ⚡ Ready for onchain actions
+                    </div>
+                  </div>
+                  
+                  {/* Terminal Prompt and Response */}
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="text-blue-400 text-sm mb-2">
+                      Azura@daemon: ~$
+                    </div>
+                    <div
+                      className="text-white/90"
+                      style={{
+                        fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
+                        lineHeight: "1.6",
+                        fontWeight: "400",
+                      }}
+                    >
+                      {isGenerating ? (
+                        <div className="flex items-center">
+                          <span className="animate-pulse">
+                            Generating response...
+                          </span>
+                          <span className="ml-2 w-2 h-5 bg-white animate-pulse"></span>
+                        </div>
+                      ) : (
+                        <div>
+                          {displayedResponse}
+                          {isTyping && (
+                            <span className="w-2 h-5 bg-white animate-pulse inline-block ml-1"></span>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
