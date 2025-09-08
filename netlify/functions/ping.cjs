@@ -1,5 +1,5 @@
 // Netlify function for ping endpoint
-export const handler = async (event, context) => {
+exports.handler = async (event, context) => {
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',

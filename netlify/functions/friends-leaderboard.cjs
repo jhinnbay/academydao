@@ -7,7 +7,7 @@ const TOP_AZURAOS_HOLDERS = [
   { fid: 99, username: "jesse.base.eth", tokenBalance: 1170000 },
 ];
 
-export const handler = async (event, context) => {
+exports.handler = async (event, context) => {
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
