@@ -8,12 +8,6 @@
   node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/.well-known/farcaster.json"
-  to = "/well-known/farcaster.json"
-  status = 200
-  force = true
-
-[[redirects]]
   force = true
   from = "/api/friends-leaderboard"
   status = 200

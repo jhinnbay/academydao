@@ -102,7 +102,7 @@ export function IQTestModal({ isOpen, onClose }: IQTestModalProps) {
   }, [score]);
 
   const handleShare = async () => {
-    const embedUrl = "https://farcaster.xyz/miniapps/m4oAYtwigRmz/academy";
+    const embedUrl = "azuraos.netlify.app";
     const intent = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(embedUrl)}`;
     try {
       const anySdk: any = sdk as any;

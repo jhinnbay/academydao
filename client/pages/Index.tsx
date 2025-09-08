@@ -352,8 +352,8 @@ export default function Index() {
 
 
   const handleThanksAzura = async () => {
-    const shareText = "I'm Earning Daemon Credits With $AzuraOS, Is She The Model Who's Been Murdering The Robots?…";
-    const embedUrl = "https://farcaster.xyz/miniapps/m4oAYtwigRmz/academy";
+    const shareText = "I'm Earning $DAEMON Credits With Azura, Is She The Model Who's Been Murdering The Robots?…";
+    const embedUrl = "azuraos.netlify.app";
     
     try {
       const anySdk: any = sdk as any;
