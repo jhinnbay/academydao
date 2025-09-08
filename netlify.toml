@@ -5,7 +5,6 @@
   environment = { SECRETS_SCAN_ENABLED = "false" }
 
 [functions]
-  external_node_modules = ["express"]
   node_bundler = "esbuild"
 
 [[redirects]]
