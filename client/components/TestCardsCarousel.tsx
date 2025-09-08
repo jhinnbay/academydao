@@ -130,22 +130,14 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
 
       {/* Survey Modal */}
       <Dialog open={isSurveyModalOpen} onOpenChange={setIsSurveyModalOpen}>
-        <DialogContent className="max-w-5xl max-h-[95vh] w-[95vw] bg-black border border-white/20">
-          <DialogHeader className="flex flex-row items-center justify-between">
+        <DialogContent className="max-w-6xl max-h-[98vh] w-[98vw] bg-black border border-white/20 p-0 overflow-hidden">
+          <DialogHeader className="flex flex-row items-center justify-between p-6 pb-4">
             <DialogTitle className="text-white font-cartograph text-lg">
               Research Surveys
             </DialogTitle>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsSurveyModalOpen(false)}
-              className="text-white hover:bg-white/10"
-            >
-              <X className="w-4 h-4" />
-            </Button>
           </DialogHeader>
-          <div className="mt-4 flex-1 min-h-0">
-            <div className="w-full h-full min-h-[70vh] relative">
+          <div className="flex-1 px-6 pb-6 min-h-0">
+            <div className="w-full h-[75vh] min-h-[500px] relative">
               <iframe
                 src="https://docs.google.com/forms/d/e/1FAIpQLSdzfT7shcx77U5-mim79ofoBD1t8O0jyAD1E0Ei2fiKj0bG7w/viewform?embedded=true"
                 width="100%"
@@ -156,7 +148,8 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
                 className="rounded-lg"
                 style={{
                   filter: 'invert(1) hue-rotate(180deg)',
-                  backgroundColor: 'transparent'
+                  backgroundColor: 'transparent',
+                  minHeight: '500px'
                 }}
               >
                 Loading…
