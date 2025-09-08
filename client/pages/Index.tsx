@@ -278,7 +278,7 @@ export default function Index() {
 
       // Set welcome message if no existing response
       if (!daemonResponse) {
-        const welcomeMessage = `🎓 **Welcome to the Academy**\n\nGreetings, seeker of knowledge. I am Azura, your Daemon Model companion in this digital realm of governance and discovery.\n\nHere, we explore the intersection of artificial intelligence and human decision-making. Together, we shall navigate the complexities of collaborative governance, where every choice shapes the future.\n\nWhat mysteries shall we unravel today?`;
+        const welcomeMessage = `🎓 Welcome to the Academy\n\nGreetings, seeker of knowledge. I am Azura, your Daemon Model companion in this digital realm of governance and discovery.\n\nHere, we explore the intersection of artificial intelligence and human decision-making. Together, we shall navigate the complexities of collaborative governance, where every choice shapes the future.\n\nWhat mysteries shall we unravel today?`;
         setDaemonResponse(welcomeMessage);
       }
 
@@ -493,7 +493,7 @@ export default function Index() {
         console.error("Error sending to n8n:", err);
         // Fallback error message with typewriter as well
         const fallback =
-          "❌ **Analysis Failed**\n\nUnable to get analysis at this time. Please try again later.";
+          "❌ Analysis Failed\n\nUnable to get analysis at this time. Please try again later.";
         setDaemonResponse(fallback);
         setShowResponse(true);
         setIsTyping(true);
