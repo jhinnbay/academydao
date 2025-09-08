@@ -8,19 +8,31 @@ const RetroMusicPlayer = () => {
   const [volume, setVolume] = useState(0.7);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Real track data
-  const currentTrack = "Your Dream";
-  const audioSrc =
-    "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a";
+  // Playlist data
+  const playlist = [
+    {
+      title: "New Track",
+      src: "/audio/new-track.mp3", // Add your .mp3 file here
+      artist: "Unknown Artist"
+    },
+    {
+      title: "Your Dream",
+      src: "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a",
+      artist: "Unknown Artist"
+    }
+  ];
+
+  const currentTrack = playlist[currentTrackIndex];
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     // Set audio source
-    audio.src = audioSrc;
+    audio.src = currentTrack.src;
     audio.volume = volume;
 
     const updateTime = () => setCurrentTime(audio.currentTime);
@@ -88,7 +100,7 @@ const RetroMusicPlayer = () => {
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, [audioSrc]);
+  }, [currentTrack.src]);
 
   // Handle volume changes
   useEffect(() => {
@@ -133,6 +145,18 @@ const RetroMusicPlayer = () => {
     setCurrentTime(newTime);
   };
 
+  const skipToNext = () => {
+    const nextIndex = (currentTrackIndex + 1) % playlist.length;
+    setCurrentTrackIndex(nextIndex);
+    setCurrentTime(0);
+  };
+
+  const skipToPrevious = () => {
+    const prevIndex = currentTrackIndex === 0 ? playlist.length - 1 : currentTrackIndex - 1;
+    setCurrentTrackIndex(prevIndex);
+    setCurrentTime(0);
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
@@ -159,7 +183,7 @@ const RetroMusicPlayer = () => {
           {/* Track Info */}
           <div className="flex-1 min-w-0">
             <div className="text-xs truncate font-bold text-white/90">
-              {currentTrack}
+              {currentTrack.title}
             </div>
             <div className="text-xs text-white/60">
               {formatTime(currentTime)} / {formatTime(duration)}
@@ -183,7 +207,10 @@ const RetroMusicPlayer = () => {
 
           {/* Controls */}
           <div className="flex items-center space-x-2">
-            <button className="p-1 border border-white/40 hover:bg-white hover:text-black transition-colors duration-300 rounded">
+            <button 
+              onClick={skipToPrevious}
+              className="p-1 border border-white/40 hover:bg-white hover:text-black transition-colors duration-300 rounded"
+            >
               <SkipBack size={14} />
             </button>
 
@@ -194,7 +221,10 @@ const RetroMusicPlayer = () => {
               {isPlaying ? <Pause size={14} /> : <Play size={14} />}
             </button>
 
-            <button className="p-1 border border-white/40 hover:bg-white hover:text-black transition-colors duration-300 rounded">
+            <button 
+              onClick={skipToNext}
+              className="p-1 border border-white/40 hover:bg-white hover:text-black transition-colors duration-300 rounded"
+            >
               <SkipForward size={14} />
             </button>
           </div>
