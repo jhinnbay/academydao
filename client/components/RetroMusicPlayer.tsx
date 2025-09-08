@@ -11,15 +11,30 @@ const RetroMusicPlayer = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Playlist data
+  // Playlist data - Your uploaded tracks!
   const playlist = [
     {
-      title: "Your Track Name", // Update this with the actual track name
-      src: "/audio/new-track.mp3", // Add your .mp3 file here
-      artist: "Artist Name" // Update this with the actual artist name
+      title: "New Track", // Your first track (as requested)
+      src: "/audio/new-track.mp3",
+      artist: "Unknown Artist"
     },
     {
-      title: "Your Dream",
+      title: "Track 1",
+      src: "/audio/1079004965.mp3",
+      artist: "Unknown Artist"
+    },
+    {
+      title: "Track 2", 
+      src: "/audio/487531845.mp3",
+      artist: "Unknown Artist"
+    },
+    {
+      title: "Track 3",
+      src: "/audio/972137699.mp3",
+      artist: "Unknown Artist"
+    },
+    {
+      title: "Your Dream", // Original track
       src: "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a",
       artist: "Unknown Artist"
     }
