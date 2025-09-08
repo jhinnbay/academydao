@@ -14,7 +14,12 @@ const RetroMusicPlayer = () => {
   // Playlist data - Your uploaded tracks!
   const playlist = [
     {
-      title: "New Track", // Your first track (as requested)
+      title: "Track 2", // Now first track
+      src: "/audio/487531845.mp3",
+      artist: "Unknown Artist"
+    },
+    {
+      title: "New Track",
       src: "/audio/new-track.mp3",
       artist: "Unknown Artist"
     },
@@ -24,17 +29,12 @@ const RetroMusicPlayer = () => {
       artist: "Unknown Artist"
     },
     {
-      title: "Track 2", 
-      src: "/audio/487531845.mp3",
-      artist: "Unknown Artist"
-    },
-    {
       title: "Track 3",
       src: "/audio/972137699.mp3",
       artist: "Unknown Artist"
     },
     {
-      title: "Your Dream", // Original track
+      title: "Original Track", // Removed "Your Dream" title
       src: "https://cdn.builder.io/o/assets%2F6f2aebc9bb734d979c603aa774a20c1a%2Fd2ece2d5791240589d71a6ba4873382a?alt=media&token=ec30df64-2a6f-45eb-a093-156dda894874&apiKey=6f2aebc9bb734d979c603aa774a20c1a",
       artist: "Unknown Artist"
     }
