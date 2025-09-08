@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { Trophy, X } from "lucide-react";
+import { Trophy, X, RefreshCw } from "lucide-react";
 import { sdk } from "@farcaster/miniapp-sdk";
 
 interface FriendsLeaderboardProps {
@@ -17,7 +17,13 @@ export function FriendsLeaderboard({
 }: FriendsLeaderboardProps) {
   const { isFarcaster, username } = useFarcasterUser();
   const [friends, setFriends] = useState<FriendData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
   const fetchFriendsLeaderboard = async () => {
+    setIsLoading(true);
+    setError(null);
+    
     try {
       // Get current user's FID from Farcaster context with better error handling
       const anySdk: any = sdk as any;
@@ -47,9 +53,9 @@ export function FriendsLeaderboard({
         }
       }
 
-      console.log("Fetching AzuraOS token holders for contract:", contractAddress, "with viewerFid:", currentUserFid);
+      console.log("Fetching live AzuraOS token balances for contract:", contractAddress, "with viewerFid:", currentUserFid);
 
-      // Call the API to get top AzuraOS token holders
+      // Call the API to get live AzuraOS token holders
       const response = await fetch(
         `/api/friends-leaderboard?viewerFid=${currentUserFid}&contractAddress=${contractAddress}&t=${Date.now()}`
       );
@@ -60,11 +66,26 @@ export function FriendsLeaderboard({
       }
 
       const data: FriendsLeaderboardResponse = await response.json();
-      console.log("Received leaderboard data:", data);
-      setFriends(data.friends);
+      console.log("Received live leaderboard data:", data);
+      
+      // Check if there's an error about missing configuration
+      if ((data as any).error) {
+        if ((data as any).error.includes("NEYNAR_API_KEY")) {
+          setError("Live token balance fetching is not configured. Please set up the NEYNAR_API_KEY environment variable.");
+        } else if ((data as any).error.includes("ALCHEMY_RPC_URL")) {
+          setError("Live token balance fetching is not configured. Please set up the ALCHEMY_RPC_URL environment variable.");
+        } else {
+          setError((data as any).error);
+        }
+      } else {
+        setFriends(data.friends);
+      }
     } catch (err: any) {
       console.error("Error fetching friends leaderboard:", err);
+      setError(err.message || "Failed to load leaderboard data");
       setFriends([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,15 +113,54 @@ export function FriendsLeaderboard({
               <div className="flex items-center justify-center gap-3">
                 <Trophy className="w-5 h-5 text-white" />
                 <h2 className="text-white font-sans font-bold text-xl">
-                  Leaderboard
+                  Live Leaderboard
                 </h2>
+                <button
+                  onClick={fetchFriendsLeaderboard}
+                  disabled={isLoading}
+                  className="p-1 hover:bg-white/10 rounded transition-colors disabled:opacity-50"
+                  title="Refresh live data"
+                >
+                  <RefreshCw className={`w-4 h-4 text-white/60 ${isLoading ? 'animate-spin' : ''}`} />
+                </button>
               </div>
               <div className="w-28 h-0.5 bg-white/50 mx-auto mt-2" />
+              <div className="text-xs text-white/40 mt-1">
+                Live AzuraOS token balances from Base network
+              </div>
             </div>
           </div>
 
           <div className="relative flex-1 overflow-y-auto p-5 space-y-4">
-            {friends.map((friend, index) => (
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="text-white/60 text-center">
+                  <div className="animate-spin w-8 h-8 border-2 border-white/30 border-t-white rounded-full mx-auto mb-4"></div>
+                  <div>Loading live token balances...</div>
+                </div>
+              </div>
+            ) : error ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="text-red-400 text-center">
+                  <div className="mb-2">⚠️ Error loading leaderboard</div>
+                  <div className="text-sm text-white/60 mb-4">{error}</div>
+                  <button 
+                    onClick={fetchFriendsLeaderboard}
+                    className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm rounded transition-colors"
+                  >
+                    Retry
+                  </button>
+                </div>
+              </div>
+            ) : friends.length === 0 ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="text-white/60 text-center">
+                  <div className="mb-2">No token holders found</div>
+                  <div className="text-sm">Try refreshing the leaderboard</div>
+                </div>
+              </div>
+            ) : (
+              friends.map((friend, index) => (
               <div
                 key={friend.fid}
                 className="bg-black border border-white/30 rounded-lg p-4 hover:border-white/50 transition-all duration-200"
@@ -115,7 +175,7 @@ export function FriendsLeaderboard({
                         className="w-12 h-12 border-2 border-white/30 object-cover rounded"
                       />
                     ) : (
-                      <div className="w-12 h-12 border-2 border-white/30 bg-white/10 flex items-center justify-center text-white text-sm font-bold rounded">
+                      <div className="w-12 h-12 border-2 border-white/30 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold rounded">
                         {friend.displayName?.charAt(0)?.toUpperCase() || friend.username?.charAt(0)?.toUpperCase() || '?'}
                       </div>
                     )}
@@ -129,6 +189,11 @@ export function FriendsLeaderboard({
                     <div className="text-white/60 text-sm mb-1 truncate">
                       @{friend.username}
                     </div>
+                    {friend.address && (
+                      <div className="text-white/40 text-xs mb-1 truncate font-mono">
+                        {friend.address.slice(0, 6)}...{friend.address.slice(-4)}
+                      </div>
+                    )}
                     <div className="flex items-center gap-1">
                       <div className="text-green-400 font-mono font-bold text-sm">
                         {(friend.tokenBalance / 1000000).toFixed(1)}M
@@ -183,7 +248,8 @@ export function FriendsLeaderboard({
                   </div>
                 </div>
               </div>
-            ))}
+              ))
+            )}
           </div>
           
           {/* Footer with Close Button */}
