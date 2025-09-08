@@ -7,6 +7,7 @@ import { IQTestModal } from "@/components/IQTestModal";
 import { DaemonMenu } from "@/components/DaemonMenu";
 import RetroMusicPlayer from "@/components/RetroMusicPlayer";
 import TestCardsCarousel from "@/components/TestCardsCarousel";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useAccount } from "wagmi";
 import { sdk } from "@farcaster/miniapp-sdk";
 import { useTokenDetails } from "@coinbase/onchainkit/nft";
@@ -1125,18 +1126,50 @@ export default function Index() {
                   >
                     {">"} DECISION
                   </button>
-                  <button
-                    className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
-                    style={{ color: "#b0b0b0" }}
-                    onMouseEnter={(e) =>
-                      ((e.target as HTMLElement).style.color = "#ffffff")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.target as HTMLElement).style.color = "#b0b0b0")
-                    }
-                  >
-                    {">"} VIEW PROP
-                  </button>
+                  
+                  {/* VIEW PROP with Experiments Accordion */}
+                  <div className="space-y-1">
+                    <button
+                      className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
+                      style={{ color: "#b0b0b0" }}
+                      onMouseEnter={(e) =>
+                        ((e.target as HTMLElement).style.color = "#ffffff")
+                      }
+                      onMouseLeave={(e) =>
+                        ((e.target as HTMLElement).style.color = "#b0b0b0")
+                      }
+                    >
+                      {">"} VIEW PROP
+                    </button>
+                    
+                    {/* Experiments Accordion */}
+                    <div className="ml-4 mt-2">
+                      <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="experiments" className="border-none">
+                          <AccordionTrigger className="text-xs text-white/60 hover:text-white py-1 px-2 hover:bg-white/5 rounded">
+                            Active Topics
+                          </AccordionTrigger>
+                          <AccordionContent className="pb-2">
+                            <div className="space-y-1 pl-2">
+                              <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                                • Experiment Alpha
+                              </div>
+                              <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                                • Experiment Beta
+                              </div>
+                              <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                                • Experiment Gamma
+                              </div>
+                              <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                                • Experiment Delta
+                              </div>
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    </div>
+                  </div>
+                  
                   <button
                     className="block w-full text-left hover:bg-white/10 hover:backdrop-blur-sm rounded-lg p-2 transition-all duration-300"
                     style={{ color: "#b0b0b0" }}
