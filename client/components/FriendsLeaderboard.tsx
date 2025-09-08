@@ -83,38 +83,38 @@ export function FriendsLeaderboard({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-black backdrop-blur-2xl border-2 border-white/20 w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
+      <div className="bg-black backdrop-blur-2xl border-2 border-white/20 w-full max-w-sm sm:max-w-md md:max-w-lg max-h-[85vh] overflow-hidden shadow-2xl">
         {/* Modal Header */}
-        <div className="flex items-center justify-center p-6 border-b-2 border-white/20 bg-black backdrop-blur-lg">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-white/30 flex-shrink-0 bg-white/10 flex items-center justify-center">
-              <Trophy className="w-5 h-5 text-white" />
+        <div className="flex items-center justify-center p-4 sm:p-6 border-b-2 border-white/20 bg-black backdrop-blur-lg">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 border-2 border-white/30 flex-shrink-0 bg-white/10 flex items-center justify-center">
+              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <h2 className="text-white font-sans text-xl font-bold">
+            <h2 className="text-white font-sans text-lg sm:text-xl font-bold">
               $AZURA TOP HOLDERS
             </h2>
           </div>
         </div>
         
         {/* Content */}
-        <div className="p-6 bg-black backdrop-blur-sm">
-          <div className="space-y-3">
+        <div className="p-3 sm:p-6 bg-black backdrop-blur-sm">
+          <div className="space-y-2 sm:space-y-3">
             {friends.map((friend, index) => (
                 <div
                   key={friend.fid}
                   className="bg-white/5 border-2 border-white/20 hover:bg-white/10 hover:border-white/30 transition-all duration-200"
                 >
-                  <div className="flex items-center p-4 gap-4">
+                  <div className="flex items-center p-3 sm:p-4 gap-3 sm:gap-4">
                     {/* Avatar */}
                     <div className="flex-shrink-0">
                       {friend.pfpUrl ? (
                         <img 
                           src={friend.pfpUrl} 
                           alt={friend.displayName}
-                          className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-white/30 object-cover"
+                          className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-white/30 object-cover"
                         />
                       ) : (
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 border-2 border-white/30 bg-white/10 flex items-center justify-center text-white text-sm font-bold">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-white/30 bg-white/10 flex items-center justify-center text-white text-xs sm:text-sm font-bold">
                           {friend.displayName?.charAt(0)?.toUpperCase() || friend.username?.charAt(0)?.toUpperCase() || '?'}
                         </div>
                       )}
@@ -122,14 +122,14 @@ export function FriendsLeaderboard({
                     
                     {/* User info - mobile optimized */}
                     <div className="flex-1 min-w-0">
-                      <div className="text-white font-bold text-sm sm:text-base mb-1 truncate">
+                      <div className="text-white font-bold text-xs sm:text-sm mb-1 truncate">
                         {friend.displayName}
                       </div>
-                      <div className="text-white/60 text-xs sm:text-sm mb-1 truncate">
+                      <div className="text-white/60 text-xs mb-1 truncate">
                         @{friend.username}
                       </div>
                       <div className="flex items-center gap-1">
-                        <div className="text-green-400 font-mono font-bold text-sm">
+                        <div className="text-green-400 font-mono font-bold text-xs sm:text-sm">
                           {(friend.tokenBalance / 1000000).toFixed(1)}M
                         </div>
                         <div className="text-white/50 text-xs">
@@ -141,7 +141,7 @@ export function FriendsLeaderboard({
                     {/* Follow button - mobile optimized */}
                     <div className="flex-shrink-0">
                       <button 
-                        className="px-3 py-2 sm:px-4 sm:py-2 bg-white text-black hover:bg-gray-200 font-medium text-sm transition-colors border-2 border-white"
+                        className="px-2 py-1.5 sm:px-3 sm:py-2 bg-white text-black hover:bg-gray-200 font-medium text-xs sm:text-sm transition-colors border-2 border-white"
                         onClick={async () => {
                           try {
                             // Get current user's FID from Farcaster context
@@ -187,10 +187,10 @@ export function FriendsLeaderboard({
         </div>
         
         {/* Footer with Close Button */}
-        <div className="p-6 border-t-2 border-white/20">
+        <div className="p-4 sm:p-6 border-t-2 border-white/20">
           <button 
             onClick={onClose}
-            className="w-full py-3 bg-white/10 hover:bg-white/20 border-2 border-white/30 text-white font-medium transition-colors"
+            className="w-full py-2 sm:py-3 bg-white/10 hover:bg-white/20 border-2 border-white/30 text-white font-medium transition-colors text-sm sm:text-base"
           >
             Close
           </button>
