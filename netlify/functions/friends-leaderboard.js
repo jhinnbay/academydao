@@ -33,7 +33,7 @@ async function fetchNeynarUserData(fids, apiKey) {
   }
 }
 
-module.exports = async function handler(req, res) {
+exports.handler = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -94,5 +94,3 @@ module.exports = async function handler(req, res) {
     res.status(500).json({ error: err?.message || "Unknown error" });
   }
 };
-
-module.exports = { handler };
