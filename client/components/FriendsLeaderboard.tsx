@@ -87,11 +87,9 @@ export function FriendsLeaderboard({
         {/* Modal Header */}
         <div className="flex items-center justify-center p-4 sm:p-6 border-b-2 border-white/20 bg-black backdrop-blur-lg">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 border-2 border-white/30 flex-shrink-0 bg-white/10 flex items-center justify-center">
-              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            </div>
+            <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-white flex-shrink-0" />
             <h2 className="text-white font-sans text-lg sm:text-xl font-bold">
-              $AZURA TOP HOLDERS
+              LEADERBOARD
             </h2>
           </div>
         </div>
