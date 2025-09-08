@@ -1147,17 +1147,17 @@ export default function Index() {
                         {">"} VIEW PROP
                       </AccordionTrigger>
                       <AccordionContent className="pb-2">
-                        <div className="space-y-1 pl-4">
-                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                        <div className="space-y-1 pl-4 text-left">
+                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors text-left">
                             • Experiment Alpha
                           </div>
-                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors text-left">
                             • Experiment Beta
                           </div>
-                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors text-left">
                             • Experiment Gamma
                           </div>
-                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors">
+                          <div className="text-xs text-white/80 hover:text-white py-1 px-2 hover:bg-white/5 rounded cursor-pointer transition-colors text-left">
                             • Experiment Delta
                           </div>
                         </div>
