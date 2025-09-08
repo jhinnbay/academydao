@@ -88,13 +88,6 @@ export function FriendsLeaderboard({
       <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
         <div className="relative bg-black border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full">
           <div className="relative flex-shrink-0 p-5 border-b border-white/20 bg-black/80">
-            <button
-              onClick={onClose}
-              aria-label="Close"
-              className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
-            >
-              <X size={18} />
-            </button>
             <div className="text-center">
               <div className="flex items-center justify-center gap-3">
                 <Trophy className="w-5 h-5 text-white" />
@@ -191,6 +184,16 @@ export function FriendsLeaderboard({
                 </div>
               </div>
             ))}
+          </div>
+          
+          {/* Footer with Close Button */}
+          <div className="p-5 border-t border-white/20">
+            <button 
+              onClick={onClose}
+              className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium transition-colors rounded"
+            >
+              Close
+            </button>
           </div>
         </div>
       </div>
