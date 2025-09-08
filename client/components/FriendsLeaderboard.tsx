@@ -83,7 +83,7 @@ export function FriendsLeaderboard({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-black backdrop-blur-2xl border-2 border-white/20 w-full max-w-sm sm:max-w-md md:max-w-lg max-h-[85vh] overflow-hidden shadow-2xl">
+      <div className="bg-black backdrop-blur-2xl border-2 border-white/20 w-full h-full max-h-[95vh] overflow-hidden shadow-2xl">
         {/* Modal Header */}
         <div className="flex items-center justify-center p-4 sm:p-6 border-b-2 border-white/20 bg-black backdrop-blur-lg">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -95,7 +95,7 @@ export function FriendsLeaderboard({
         </div>
         
         {/* Content */}
-        <div className="p-3 sm:p-6 bg-black backdrop-blur-sm">
+        <div className="flex-1 p-3 sm:p-6 bg-black backdrop-blur-sm overflow-y-auto">
           <div className="space-y-2 sm:space-y-3">
             {friends.map((friend, index) => (
                 <div
