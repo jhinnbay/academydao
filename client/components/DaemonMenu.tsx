@@ -93,7 +93,7 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
             </button>
             <div className="text-center">
               <h2 className="text-white font-sans font-bold text-xl">
-                AzuraOS Daemon Credits
+                Daemon Credits
               </h2>
               <div className="w-28 h-0.5 bg-white/50 mx-auto mt-2" />
             </div>
@@ -133,10 +133,10 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               </div>
             </div>
 
-            {/* Available credits */}
+            {/* Current Balance */}
             <div className="text-center py-3 border-t border-white/20">
               <p className="text-sm text-white font-medium">
-                Available Daemon Credits: {
+                Current Balance: {
                   isLoadingBalance 
                     ? "Loading..." 
                     : azuraBalance !== null 

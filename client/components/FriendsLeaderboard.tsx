@@ -92,7 +92,7 @@ export function FriendsLeaderboard({
               <div className="flex items-center justify-center gap-3">
                 <Trophy className="w-5 h-5 text-white" />
                 <h2 className="text-white font-sans font-bold text-xl">
-                  LEADERBOARD
+                  Leaderboard
                 </h2>
               </div>
               <div className="w-28 h-0.5 bg-white/50 mx-auto mt-2" />
