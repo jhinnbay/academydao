@@ -14,9 +14,9 @@ const RetroMusicPlayer = () => {
   // Playlist data
   const playlist = [
     {
-      title: "New Track",
+      title: "Your Track Name", // Update this with the actual track name
       src: "/audio/new-track.mp3", // Add your .mp3 file here
-      artist: "Unknown Artist"
+      artist: "Artist Name" // Update this with the actual artist name
     },
     {
       title: "Your Dream",
