@@ -276,6 +276,12 @@ export default function Index() {
       // Play generation sound
       SoundEffects.playGenerateSound();
 
+      // Set welcome message if no existing response
+      if (!daemonResponse) {
+        const welcomeMessage = `🎓 **Welcome to the Academy**\n\nGreetings, seeker of knowledge. I am Azura, your Daemon Model companion in this digital realm of governance and discovery.\n\nHere, we explore the intersection of artificial intelligence and human decision-making. Together, we shall navigate the complexities of collaborative governance, where every choice shapes the future.\n\nWhat mysteries shall we unravel today?`;
+        setDaemonResponse(welcomeMessage);
+      }
+
       // Simulate generation delay
       setTimeout(() => {
         setIsGenerating(false);
@@ -284,14 +290,14 @@ export default function Index() {
         // Type out the response with sound effects
         let currentText = "";
         SoundEffects.typeWithSound(
-          daemonResponse,
+          daemonResponse || "Welcome to the Academy. I am Azura, your Daemon Model companion.",
           (char, isComplete) => {
             if (!isComplete) {
               currentText += char;
               debouncedSetDisplayedResponse(currentText);
             } else {
               // Ensure final text is displayed immediately
-              setDisplayedResponse(daemonResponse);
+              setDisplayedResponse(daemonResponse || "Welcome to the Academy. I am Azura, your Daemon Model companion.");
               setIsTyping(false);
             }
           },

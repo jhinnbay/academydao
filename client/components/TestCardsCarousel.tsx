@@ -68,9 +68,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
           "Engage the daemon to probe scenarios and harvest insights for your research.",
         icon: Bot,
         cta: "Launch Daemon",
-        onClick: () => {
-          // Launch Daemon disabled - do nothing
-        },
+        onClick: onStartDaemon,
       },
     ],
     [onOpenIQ, onOpenSurveys, onStartDaemon],
@@ -132,7 +130,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
 
       {/* Survey Modal */}
       <Dialog open={isSurveyModalOpen} onOpenChange={setIsSurveyModalOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] bg-black border border-white/20">
+        <DialogContent className="max-w-5xl max-h-[95vh] w-[95vw] bg-black border border-white/20">
           <DialogHeader className="flex flex-row items-center justify-between">
             <DialogTitle className="text-white font-cartograph text-lg">
               Research Surveys
@@ -146,18 +144,24 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
               <X className="w-4 h-4" />
             </Button>
           </DialogHeader>
-          <div className="mt-4">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSdzfT7shcx77U5-mim79ofoBD1t8O0jyAD1E0Ei2fiKj0bG7w/viewform?embedded=true"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
-              className="rounded"
-            >
-              Loading…
-            </iframe>
+          <div className="mt-4 flex-1 min-h-0">
+            <div className="w-full h-full min-h-[70vh] relative">
+              <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSdzfT7shcx77U5-mim79ofoBD1t8O0jyAD1E0Ei2fiKj0bG7w/viewform?embedded=true"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                marginHeight="0"
+                marginWidth="0"
+                className="rounded-lg"
+                style={{
+                  filter: 'invert(1) hue-rotate(180deg)',
+                  backgroundColor: 'transparent'
+                }}
+              >
+                Loading…
+              </iframe>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

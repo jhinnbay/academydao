@@ -85,9 +85,9 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
             {/* Main explanation */}
             <div className="text-xs text-gray-300 leading-relaxed">
               <p className="mb-2">
-              AzuraOS is a Daemon Model AI Agent producing cognitive enhancements through a sophisticated layer known as the Daemon Layer, containing rich-datasets and parallels it's decision-making matrix in multiple experiments. Azura leverages 40% of daemon tokens powering the ecosystem. Neurological processings sent through a time-base horizon empower users to interact with other users, holders of a minimum of 10,000 $AzuraOS receive rewards.
+              AzuraOS is a Daemon Model AI Agent with cognitive enhancements through the Daemon Layer. Azura leverages 40% of daemon tokens powering the ecosystem. Holders of 10,000+ $AzuraOS receive rewards.
               </p>
-              <p className="mb-3">Unused credit allocations disintergrate and refresh Daily.</p>
+              <p className="mb-3">Unused credits refresh daily.</p>
             </div>
 
             {/* Two column layout */}
