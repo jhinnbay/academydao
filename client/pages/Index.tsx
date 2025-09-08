@@ -309,12 +309,12 @@ export default function Index() {
   );
 
   // Initialize with the response already displayed only on mount if not actively processing
-  // modified to include daemonResponse
+  // modified to include daemonResponse - but only if we're not in the middle of a typewriter effect
   useEffect(() => {
-    if (!isTyping && !isGenerating && showResponse && daemonResponse) {
+    if (!isTyping && !isGenerating && showResponse && daemonResponse && displayedResponse === "") {
       setDisplayedResponse(daemonResponse);
     }
-  }, [daemonResponse, isTyping, isGenerating, showResponse]);
+  }, [daemonResponse, isTyping, isGenerating, showResponse, displayedResponse]);
 
   // Enhanced scroll management with smooth scrolling
   useEffect(() => {
