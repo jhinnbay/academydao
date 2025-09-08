@@ -19,11 +19,6 @@ const RetroMusicPlayer = () => {
       artist: "Unknown Artist"
     },
     {
-      title: "New Track",
-      src: "/audio/new-track.mp3",
-      artist: "Unknown Artist"
-    },
-    {
       title: "Track 1",
       src: "/audio/1079004965.mp3",
       artist: "Unknown Artist"
