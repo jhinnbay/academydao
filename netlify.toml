@@ -16,6 +16,18 @@
 
 [[redirects]]
   force = true
-  from = "/api/*"
+  from = "/api/friends-leaderboard"
   status = 200
-  to = "/.netlify/functions/api/:splat"
+  to = "/.netlify/functions/friends-leaderboard"
+
+[[redirects]]
+  force = true
+  from = "/api/ping"
+  status = 200
+  to = "/.netlify/functions/ping"
+
+[[redirects]]
+  force = true
+  from = "/api/webhook"
+  status = 200
+  to = "/.netlify/functions/webhook"
