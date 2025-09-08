@@ -147,16 +147,16 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
             </div>
 
             {/* CTAs */}
-            <div className="flex gap-2 justify-end">
+            <div className="space-y-2">
               <Button
                 onClick={() => setIsLeaderboardOpen(true)}
-                className="bg-white text-black hover:bg-gray-200"
+                className="w-full bg-white text-black hover:bg-gray-200"
               >
                 Leaderboard
               </Button>
               <Button
                 onClick={onClose}
-                className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
+                className="w-full bg-white/10 hover:bg-white/20 border border-white/30 text-white"
               >
                 Thanks, Got it!
               </Button>
