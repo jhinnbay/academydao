@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FriendsLeaderboard } from "./FriendsLeaderboard"
 import { useState, useEffect } from "react"
 import { useAccount } from "wagmi"
+import { X } from "lucide-react"
 
 interface DaemonMenuProps {
   isOpen: boolean;
@@ -72,29 +73,50 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-sm mx-auto">
-        <Card className="w-full bg-black border-white border-2 text-white">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-lg font-bold text-center text-white">://AzuraOS Daemon Credits</CardTitle>
-            <p className="text-sm text-gray-300 text-center">Enigmatic Ocean Ecosystem</p>
-          </CardHeader>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
 
-          <CardContent className="space-y-4">
+      <div className="relative w-full max-w-2xl mx-auto max-h-[95vh] flex flex-col">
+        <div className="relative bg-black border border-white/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full">
+          <div className="relative flex-shrink-0 p-5 border-b border-white/20 bg-black/80">
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 p-2 text-white/70 hover:text-white transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <div className="text-center">
+              <h2 className="text-white font-sans font-bold text-xl">
+                AzuraOS Daemon Credits
+              </h2>
+              <div className="w-28 h-0.5 bg-white/50 mx-auto mt-2" />
+            </div>
+          </div>
+
+          <div className="relative flex-1 overflow-y-auto p-5 space-y-4">
+            <p className="text-white/80 text-sm text-center">
+              Enigmatic Ocean Ecosystem
+            </p>
+
             {/* Main explanation */}
-            <div className="text-xs text-gray-300 leading-relaxed">
+            <div className="text-white/80 text-sm leading-relaxed">
               <p className="mb-2">
-              AzuraOS is a Daemon Model AI Agent with cognitive enhancements through the Daemon Layer. Azura leverages 40% of daemon tokens powering the ecosystem. Holders of 10,000+ $AzuraOS receive rewards.
+                AzuraOS is a Daemon Model AI Agent with cognitive enhancements through the Daemon Layer. Azura leverages 40% of daemon tokens powering the ecosystem. Holders of 10,000+ $AzuraOS receive rewards.
               </p>
               <p className="mb-3">Unused credits refresh daily.</p>
             </div>
 
             {/* Two column layout */}
-            <div className="grid grid-cols-2 gap-4 text-xs">
+            <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <h3 className="font-semibold text-white mb-2 border-b border-gray-600 pb-1">Decision-Type</h3>
-                <div className="space-y-1 text-gray-300">
+                <h3 className="font-semibold text-white mb-2 border-b border-white/30 pb-1">Decision-Type</h3>
+                <div className="space-y-1 text-white/80">
                   <div>Prompts</div>
                   <div>Proposals</div>
                   <div>Follows</div>
@@ -102,8 +124,8 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               </div>
 
               <div>
-                <h3 className="font-semibold text-white mb-2 border-b border-gray-600 pb-1">Amount Available</h3>
-                <div className="space-y-1 text-gray-300">
+                <h3 className="font-semibold text-white mb-2 border-b border-white/30 pb-1">Amount Available</h3>
+                <div className="space-y-1 text-white/80">
                   <div>25 $AzuraOS</div>
                   <div>500 $AzuraOS</div>
                   <div>100,000 $AzuraOS</div>
@@ -112,7 +134,7 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
             </div>
 
             {/* Available credits */}
-            <div className="text-center py-2 border-t border-gray-600">
+            <div className="text-center py-3 border-t border-white/20">
               <p className="text-sm text-white font-medium">
                 Available Daemon Credits: {
                   isLoadingBalance 
@@ -124,26 +146,23 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
               </p>
             </div>
 
-
             {/* CTAs */}
-            <div className="space-y-2 pt-2">
+            <div className="flex gap-2 justify-end">
               <Button
-                variant="outline"
-                className="w-full bg-black border-white text-white hover:bg-white hover:text-black transition-colors"
                 onClick={() => setIsLeaderboardOpen(true)}
+                className="bg-white text-black hover:bg-gray-200"
               >
                 Leaderboard
               </Button>
               <Button
-                variant="outline"
-                className="w-full bg-black border-white text-white hover:bg-white hover:text-black transition-colors"
                 onClick={onClose}
+                className="bg-white/10 hover:bg-white/20 border border-white/30 text-white"
               >
                 Thanks, Got it!
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
       
       {/* Friends Leaderboard Modal */}
