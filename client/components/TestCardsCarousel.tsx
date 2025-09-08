@@ -130,27 +130,30 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
 
       {/* Survey Modal */}
       <Dialog open={isSurveyModalOpen} onOpenChange={setIsSurveyModalOpen}>
-        <DialogContent className="max-w-6xl max-h-[98vh] w-[98vw] bg-black border border-white/20 p-0 overflow-hidden">
-          <DialogHeader className="flex flex-row items-center justify-between p-6 pb-4">
+        <DialogContent className="max-w-5xl max-h-[90vh] w-[95vw] bg-black border border-white/20 p-0 overflow-hidden">
+          <DialogHeader className="flex flex-row items-center justify-between p-6 pb-4 border-b border-white/20">
             <DialogTitle className="text-white font-cartograph text-lg">
               Research Surveys
             </DialogTitle>
           </DialogHeader>
-          <div className="flex-1 px-6 pb-6 min-h-0">
-            <div className="w-full h-[75vh] min-h-[500px] relative">
+          <div className="flex-1 p-6 min-h-0 flex flex-col">
+            <div className="w-full h-[600px] max-h-[70vh] relative border border-white/20 rounded-lg overflow-hidden bg-white">
               <iframe
                 src="https://docs.google.com/forms/d/e/1FAIpQLSdzfT7shcx77U5-mim79ofoBD1t8O0jyAD1E0Ei2fiKj0bG7w/viewform?embedded=true"
                 width="100%"
-                height="100%"
+                height="600"
                 frameBorder="0"
                 marginHeight="0"
                 marginWidth="0"
-                className="rounded-lg"
+                className="w-full h-full absolute top-0 left-0"
                 style={{
                   filter: 'invert(1) hue-rotate(180deg)',
                   backgroundColor: 'transparent',
-                  minHeight: '500px'
+                  border: 'none',
+                  display: 'block',
+                  minHeight: '600px'
                 }}
+                title="Research Survey Form"
               >
                 Loading…
               </iframe>

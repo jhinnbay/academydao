@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FriendsLeaderboardResponse, FriendData } from "@shared/api";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
-import { Trophy, X } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { sdk } from "@farcaster/miniapp-sdk";
 
 interface FriendsLeaderboardProps {
@@ -85,21 +85,15 @@ export function FriendsLeaderboard({
     >
       <div className="bg-black backdrop-blur-2xl border border-white/20 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl">
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/20 bg-black backdrop-blur-lg">
+        <div className="flex items-center justify-center p-6 border-b border-white/20 bg-black backdrop-blur-lg">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30 flex-shrink-0">
-              <Trophy className="w-full h-full text-yellow-400 p-1" />
+            <div className="w-8 h-8 rounded-lg overflow-hidden border border-white/30 flex-shrink-0 bg-white/10 flex items-center justify-center">
+              <Trophy className="w-5 h-5 text-white" />
             </div>
             <h2 className="text-white font-sans text-xl font-bold">
               $AZURA TOP HOLDERS
             </h2>
           </div>
-          <button
-            onClick={onClose}
-            className="text-white/70 hover:text-white transition-colors"
-          >
-            <X size={18} />
-          </button>
         </div>
         
         {/* Content */}
@@ -190,6 +184,16 @@ export function FriendsLeaderboard({
                 </div>
               ))}
           </div>
+        </div>
+        
+        {/* Footer with Close Button */}
+        <div className="p-6 border-t border-white/20">
+          <button 
+            onClick={onClose}
+            className="w-full py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-lg font-medium transition-colors"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>
