@@ -1,25 +1,31 @@
 // Farcaster webhook handler for mini-app interactions
-module.exports = async function handler(req, res) {
+export const handler = async (event, context) => {
   // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
   }
 
   try {
     console.log('Webhook received:', {
-      method: req.method,
-      headers: req.headers,
-      body: req.body
+      method: event.httpMethod,
+      headers: event.headers,
+      body: event.body
     });
 
     // Handle different webhook events
-    if (req.method === 'POST') {
-      const { type, data } = req.body || {};
+    if (event.httpMethod === 'POST') {
+      const body = event.body ? JSON.parse(event.body) : {};
+      const { type, data } = body;
       
       switch (type) {
         case 'user_joined':
@@ -35,26 +41,42 @@ module.exports = async function handler(req, res) {
           console.log('Unknown webhook event:', type, data);
       }
 
-      res.status(200).json({ 
-        success: true, 
-        message: 'Webhook received successfully',
-        timestamp: new Date().toISOString()
-      });
-    } else if (req.method === 'GET') {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ 
+          success: true, 
+          message: 'Webhook received successfully',
+          timestamp: new Date().toISOString()
+        }),
+      };
+    } else if (event.httpMethod === 'GET') {
       // Health check endpoint
-      res.status(200).json({ 
-        status: 'healthy',
-        service: 'Azura Webhook',
-        timestamp: new Date().toISOString()
-      });
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ 
+          status: 'healthy',
+          service: 'Azura Webhook',
+          timestamp: new Date().toISOString()
+        }),
+      };
     } else {
-      res.status(405).json({ error: 'Method not allowed' });
+      return {
+        statusCode: 405,
+        headers,
+        body: JSON.stringify({ error: 'Method not allowed' }),
+      };
     }
   } catch (error) {
     console.error('Webhook error:', error);
-    res.status(500).json({ 
-      error: 'Internal server error',
-      message: error.message 
-    });
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ 
+        error: 'Internal server error',
+        message: error.message 
+      }),
+    };
   }
 };

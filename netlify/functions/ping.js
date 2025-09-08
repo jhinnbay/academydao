@@ -1,15 +1,24 @@
 // Netlify function for ping endpoint
-module.exports = async function handler(req, res) {
+export const handler = async (event, context) => {
   // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: '',
+    };
   }
 
   const ping = process.env.PING_MESSAGE ?? "ping";
-  res.status(200).json({ message: ping });
+  return {
+    statusCode: 200,
+    headers,
+    body: JSON.stringify({ message: ping }),
+  };
 };
