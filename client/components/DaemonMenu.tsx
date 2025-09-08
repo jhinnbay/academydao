@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FriendsLeaderboard } from "./FriendsLeaderboard"
 import { useState, useEffect } from "react"
 import { useAccount } from "wagmi"
-import { X } from "lucide-react"
+import { X, Trophy } from "lucide-react"
 
 interface DaemonMenuProps {
   isOpen: boolean;
@@ -150,8 +150,9 @@ export function DaemonMenu({ isOpen, onClose, onThanksAzura }: DaemonMenuProps) 
             <div className="space-y-2">
               <Button
                 onClick={() => setIsLeaderboardOpen(true)}
-                className="w-full bg-white text-black hover:bg-gray-200"
+                className="w-full bg-white text-black hover:bg-gray-200 flex items-center justify-center gap-2"
               >
+                <Trophy className="w-4 h-4" />
                 Leaderboard
               </Button>
               <Button

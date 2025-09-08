@@ -44,7 +44,7 @@ export const TestCardsCarousel: React.FC<TestCardsCarouselProps> = ({
         id: "surveys",
         title: "Research Surveys",
         description:
-          "Contribute signal to the Academy. Complete targeted surveys that refine Azura's models.",
+          "Fill out surveys to help us improve your experiece with Azura.",
         icon: ClipboardList,
         cta: "Open Surveys",
         onClick: () => {

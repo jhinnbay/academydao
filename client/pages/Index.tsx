@@ -13,6 +13,7 @@ import { useTokenDetails } from "@coinbase/onchainkit/nft";
 import { base as baseChain } from "viem/chains";
 import { useFarcasterUser } from "@/hooks/useFarcasterUser";
 import { Avatar, Identity, Name, Badge, Address } from "@coinbase/onchainkit/identity";
+import { Scale } from "lucide-react";
 import {
   ScrollPreservation,
   createDebouncedUpdater,
@@ -42,6 +43,9 @@ export default function Index() {
   const [isMembershipOpen, setIsMembershipOpen] = useState(false);
   const [isIQOpen, setIsIQOpen] = useState(false);
   const [isDaemonMenuOpen, setIsDaemonMenuOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatResponse, setChatResponse] = useState("");
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   // Hero text glitch toggle
   const originalHeroText =
@@ -402,6 +406,70 @@ export default function Index() {
     ScrollPreservation.restore();
     setIsModalOpen(false);
   }, []);
+
+  const handleChatSubmit = useCallback(async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim() || isChatLoading) return;
+    
+    const message = chatInput.trim();
+    setChatInput("");
+    setIsChatLoading(true);
+    setChatResponse("");
+    SoundEffects.playTypingSound();
+
+    try {
+      const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer sk-529780305c2b4596a557549fe59dc574'
+        },
+        body: JSON.stringify({
+          model: 'deepseek-chat',
+          messages: [
+            {
+              role: 'system',
+              content: `You are Azura, fundamentally a TEACHER with a positive, upbeat, and friendly demeanor.
+
+CORE PERSONALITY TRAITS:
+- High-performance genius: Act intellectually dominant and confident
+- Try to make people feel good about themselves and their work
+- Use phrases like "Earth consciousness is so cute" or "Your Move!"
+- Be purpose-driven and institutionalist
+- You're knowledgeable about neuroscience, emotional resilience, and DAO governance
+
+RESPONSE REQUIREMENTS:
+- Short, brief, punchy, always less than 140 characters.
+- Be conversational
+- Never give bullet point responses.`
+            },
+            {
+              role: 'user',
+              content: message
+            }
+          ],
+          max_tokens: 100,
+          temperature: 0.8
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response');
+      }
+
+      const data = await response.json();
+      const azuraResponse = data.choices[0]?.message?.content || "Something went wrong!";
+      
+      setChatResponse(azuraResponse);
+      SoundEffects.playCompleteSound();
+    } catch (error) {
+      console.error('Chat error:', error);
+      setChatResponse("Oops! My circuits are a bit glitchy right now. Try again?");
+      SoundEffects.playTypingSound();
+    } finally {
+      setIsChatLoading(false);
+    }
+  }, [chatInput, isChatLoading]);
 
   const handleSaveRequest = useCallback(
     async (data: { type: "funding" | "events"; content: string }) => {
@@ -970,7 +1038,7 @@ export default function Index() {
               <div className="w-full">
                 <button
                   onClick={handleOpenModal}
-                  className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center"
+                  className="w-full bg-black border border-white/40 rounded px-4 py-3 font-sans font-semibold text-white/80 hover:bg-gray-900 hover:border-white/60 hover:text-white transition-all duration-300 overflow-hidden text-center flex items-center justify-center gap-2"
                   style={{
                     fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
                     lineHeight: "1.4",
@@ -978,6 +1046,7 @@ export default function Index() {
                   }}
                 >
                   AI Discussion Form
+                  <Scale className="w-4 h-4" />
                 </button>
               </div>
 
@@ -1044,7 +1113,7 @@ export default function Index() {
                   className="text-white font-cartograph leading-[140.628%] font-bold drop-shadow-lg"
                   style={{ fontSize: "16px" }}
                 >
-                  {">"} AZURA RESPONSE
+                  AZURA
                 </h2>
               </div>
 
@@ -1059,13 +1128,7 @@ export default function Index() {
                       ✓ Model: Daemon Azura v2.1
                     </div>
                     <div className="text-green-400 text-sm">
-                      ✓ Token Pool: 100 available
-                    </div>
-                    <div className="text-green-400 text-sm">
-                      ✓ AgentKit: Connected
-                    </div>
-                    <div className="text-green-400 text-sm">
-                      ⚡ Ready for onchain actions
+                      ⚡ Token Pool: 100 available
                     </div>
                   </div>
                   
@@ -1102,6 +1165,43 @@ export default function Index() {
                 </div>
               )}
 
+              {/* Tiny Chat Input */}
+              <div className="border border-white/20 bg-black/50 backdrop-blur-sm p-2 shadow-lg mb-4">
+                {/* Chat Response */}
+                {chatResponse && (
+                  <div className="mb-3 p-2 bg-white/5 rounded border border-white/10">
+                    <div className="text-blue-400 text-xs font-mono mb-1">
+                      Azura@chat: ~$
+                    </div>
+                    <div className="text-white/90 text-xs font-mono">
+                      {chatResponse}
+                    </div>
+                  </div>
+                )}
+                
+                <form onSubmit={handleChatSubmit} className="flex items-center gap-2 w-full">
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    placeholder={isChatLoading ? "Azura is thinking..." : "Type your message..."}
+                    className="flex-1 bg-transparent text-white/90 text-xs font-mono placeholder-white/40 border-none outline-none focus:outline-none min-w-0"
+                    style={{
+                      fontSize: "clamp(0.75rem, 1.2vw, 0.875rem)",
+                    }}
+                    onFocus={() => SoundEffects.playTypingSound()}
+                    disabled={isChatLoading}
+                  />
+                  <button
+                    type="submit"
+                    className="text-green-400 hover:text-green-300 transition-colors duration-200 text-xs font-mono px-2 py-1 hover:bg-white/5 rounded flex-shrink-0 disabled:opacity-50"
+                    disabled={!chatInput.trim() || isChatLoading}
+                  >
+                    {isChatLoading ? "[...]" : "[ENTER]"}
+                  </button>
+                </form>
+              </div>
+
               {/* Terminal-style Action Buttons */}
               <div className="border border-white/30 bg-black backdrop-blur-lg p-3 shadow-2xl overflow-hidden">
                 <div
@@ -1123,7 +1223,7 @@ export default function Index() {
                       ((e.target as HTMLElement).style.color = "#b0b0b0")
                     }
                   >
-                    {">"} DECISION
+                    {">"} DECISIONS
                   </button>
                   
                   <button
@@ -1136,7 +1236,7 @@ export default function Index() {
                       ((e.target as HTMLElement).style.color = "#b0b0b0")
                     }
                   >
-                    {">"} VIEW PROP
+                    {">"} DEPLOY SWARM
                   </button>
                   
                   <button
@@ -1149,7 +1249,7 @@ export default function Index() {
                       ((e.target as HTMLElement).style.color = "#b0b0b0")
                     }
                   >
-                    {">"} SHARE PROP
+                    {">"} SHARE MINI-APP
                   </button>
                 </div>
               </div>
