@@ -94,3 +94,5 @@ module.exports = async function handler(req, res) {
     res.status(500).json({ error: err?.message || "Unknown error" });
   }
 };
+
+module.exports = { handler };
