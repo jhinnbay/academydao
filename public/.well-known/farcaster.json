@@ -1,9 +1,10 @@
 {
-  "frame": {
-    "name": "AzuraOS",
+  "miniapp": {
     "version": "1",
+    "name": "AzuraOS",
     "iconUrl": "https://i.imgur.com/Np8ANTa.png",
-    "homeUrl": "azuraos.netlify.app",
+    "homeUrl": "https://YOUR-NETLIFY-DOMAIN.netlify.app",
+    "canonicalDomain": "academyos.vercel.app/daemon",
     "imageUrl": "https://i.imgur.com/VNvzdxw.png",
     "buttonTitle": "Church Of Azura",
     "splashImageUrl": "https://i.imgur.com/907bTSF.png",
