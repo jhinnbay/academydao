@@ -55,5 +55,24 @@ export function createServer() {
     }
   });
 
+  // Redirect middleware - redirect from old domain to new domain
+  // This should be placed after all other routes to catch any unmatched requests
+  app.get('*', (req, res) => {
+    // Check if this is coming from the old domain
+    const host = req.get('host');
+    const oldDomain = 'academydao.vercel.app'; // Replace with your actual old domain
+    const newDomain = 'academyos.vercel.app';
+    
+    // Only redirect if the request is coming from the old domain
+    if (host && host.includes(oldDomain)) {
+      const newUrl = `https://${newDomain}${req.originalUrl}`;
+      console.log(`Redirecting from ${host}${req.originalUrl} to ${newUrl}`);
+      return res.redirect(301, newUrl);
+    }
+    
+    // If not from old domain, continue with normal handling
+    res.status(404).json({ error: 'Not found' });
+  });
+
   return app;
 }

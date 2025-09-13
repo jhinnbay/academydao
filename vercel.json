@@ -1,6 +1,19 @@
 {
   "buildCommand": "npm run build:client",
   "outputDirectory": "dist/spa",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "academydao.vercel.app"
+        }
+      ],
+      "destination": "https://academyos.vercel.app/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/.well-known/farcaster.json",
